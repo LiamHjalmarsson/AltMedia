@@ -40,6 +40,7 @@ export interface FormForm extends Struct.ComponentSchema {
   };
   attributes: {
     button: Schema.Attribute.Component<'ui.button', false>;
+    columns: Schema.Attribute.Integer;
     description: Schema.Attribute.Text;
     inputs: Schema.Attribute.Component<'form.input', true>;
     title: Schema.Attribute.String;
@@ -52,6 +53,10 @@ export interface FormInput extends Struct.ComponentSchema {
     displayName: 'Input';
   };
   attributes: {
+    column_span: Schema.Attribute.Enumeration<
+      ['full', 'half', 'two-thirds', 'one-third']
+    > &
+      Schema.Attribute.DefaultTo<'half'>;
     input_type: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     name: Schema.Attribute.String;

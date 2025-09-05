@@ -9,3 +9,5 @@ export type Size = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type AlignContent = "left" | "center" | "right";
 
 export type InputType = "input" | "textarea" | "select";
+
+export type ColumnSpan = "full" | "half" | "two-thirds" | "one-third";

@@ -19,7 +19,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 							fields: ["label", "url", "variant", "is_external"],
 						},
 						form: {
-							fields: ["title", "description"],
+							fields: ["title", "description", "columns"],
 							populate: {
 								inputs: {
 									fields: [
@@ -31,6 +31,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 										"input_type",
 										"rows",
 										"options",
+										"column_span",
 									],
 								},
 								button: {

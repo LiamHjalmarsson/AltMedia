@@ -11,6 +11,9 @@
     "description": {
       "type": "text"
     },
+    "columns": {
+      "type": "integer"
+    },
     "inputs": {
       "type": "component",
       "component": "form.input",

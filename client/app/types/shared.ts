@@ -1,4 +1,4 @@
-import type { ButtonType, InputType, Variant } from "./enums";
+import type { ButtonType, ColumnSpan, InputType, Variant } from "./enums";
 
 export interface Image {
 	id: number;
@@ -65,11 +65,13 @@ export interface Input {
 	options?: {};
 	rows?: number;
 	input_type?: string;
+	column_span: ColumnSpan;
 }
 
 export interface Form {
 	title: string;
 	description: string;
 	inputs: Input[];
+	columns: number;
 	button: Button;
 }

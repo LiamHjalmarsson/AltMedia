@@ -64,6 +64,16 @@
           ]
         }
       }
+    },
+    "column_span": {
+      "type": "enumeration",
+      "default": "half",
+      "enum": [
+        "full",
+        "half",
+        "two-thirds",
+        "one-third"
+      ]
     }
   },
   "config": {}
