@@ -1,19 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-
-const btn = ref<HTMLButtonElement | null>(null);
-
-const bg = ref<HTMLElement | null>(null);
-
-const { element, bg: bgRef } = useHoverAnimation();
-
-element.value = btn.value;
-
-bgRef.value = bg.value;
+const { element: button, bg } = useHoverAnimation();
 </script>
 
 <template>
-	<button ref="btn" v-bind="$attrs" class="relative font-bold py-xs px-xxl cursor-pointer overflow-hidden">
+	<button ref="button" v-bind="$attrs" class="relative font-bold py-xs px-xxl cursor-pointer">
 		<span class="relative z-10">
 			<slot />
 		</span>

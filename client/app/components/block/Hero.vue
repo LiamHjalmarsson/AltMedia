@@ -23,7 +23,7 @@ const textAlign = computed(() => {
 					class="flex flex-col space-y-xl max-w-5xl"
 					:class="[!block.has_form ? textAlign : '', !block.has_form ? 'pr-xxl' : '']">
 					<h1
-						class="text-heading-lg sm:text-heading-xl md:text-heading-xxl lg:text-heading-3xl xl:text-heading-4xl text-light font-bold tracking-tight leading-tight">
+						class="text-heading-lg sm:text-heading-xl md:text-heading-xxl lg:text-heading-xxxl xl:text-heading-xxxxl text-light font-bold tracking-tight leading-tight">
 						{{ block.title }}
 					</h1>
 
@@ -33,7 +33,7 @@ const textAlign = computed(() => {
 						{{ block.description }}
 					</p>
 
-					<div v-if="block.links" class="mt-xl space-y-lg sm:space-x-xxl w-fit">
+					<div v-if="block.links" class="mt-md space-y-lg sm:space-x-xxl w-fit">
 						<template v-for="link in block.links">
 							<ButtonLink :variant="link.variant" :to="link.url" class="max-sm:w-full max-sm:text-center">
 								{{ link.label }}

@@ -6,19 +6,15 @@ export function useHoverAnimation() {
 
 	const bg = ref<HTMLElement | null>(null);
 
-	let isAnimating = false;
-
 	function initAnimation() {
 		if (!element.value || !bg.value) {
 			return;
 		}
 
-		const animateHover = (toRight = true) => {
+		const onHover = (toRight = true) => {
 			if (!bg.value) return;
 
 			gsap.killTweensOf(bg.value);
-
-			isAnimating = true;
 
 			const leftValue = toRight ? "calc(100% - 2.5rem)" : 0;
 
@@ -38,9 +34,6 @@ export function useHoverAnimation() {
 					boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
 					duration: 0.2,
 					ease: "power2.inOut",
-					onComplete: () => {
-						isAnimating = false;
-					},
 				});
 		};
 
@@ -49,8 +42,6 @@ export function useHoverAnimation() {
 
 			gsap.killTweensOf(bg.value);
 
-			isAnimating = true;
-
 			gsap.timeline({ overwrite: "auto" }).to(bg.value, {
 				width: "100%",
 				scale: 1.1,
@@ -58,15 +49,12 @@ export function useHoverAnimation() {
 				left: 0,
 				duration: 0.2,
 				ease: "power2.out",
-				onComplete: () => {
-					isAnimating = false;
-				},
 			});
 		};
 
-		element.value.addEventListener("mouseenter", () => animateHover(true));
+		element.value.addEventListener("mouseenter", () => onHover(true));
 
-		element.value.addEventListener("mouseleave", () => animateHover(false));
+		element.value.addEventListener("mouseleave", () => onHover(false));
 
 		element.value.addEventListener("click", animateClick);
 	}
