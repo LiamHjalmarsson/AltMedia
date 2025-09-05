@@ -6,7 +6,7 @@ const { footer } = storeToRefs(globalStore);
 
 <template>
 	<Container>
-		<div class="bg-bg-dark rounded-xl text-light p-2xl shadow-2xl">
+		<div class="bg-bg-dark rounded-xl text-light p-xxl shadow-xxl">
 			<div class="flex w-full max-md:flex-col max-md:space-y-xl justify-between items-center">
 				<div>
 					<h3

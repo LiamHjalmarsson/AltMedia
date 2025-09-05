@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<button ref="btn" v-bind="$attrs" class="relative font-bold py-xs px-2xl cursor-pointer">
+	<button ref="btn" v-bind="$attrs" class="relative font-bold py-xs px-xxl cursor-pointer">
 		<span class="relative z-10">
 			<slot />
 		</span>

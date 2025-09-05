@@ -7,9 +7,9 @@ const { footer, contact } = storeToRefs(globalStore);
 <template>
 	<Cta />
 
-	<footer class="p-2xl bg-dark text-light">
+	<footer class="p-xxl bg-dark text-light">
 		<Container>
-			<nav aria-label="Footer" class="mb-2xl flex max-md:space-y-lg max-md:flex-col justify-between items-start">
+			<nav aria-label="Footer" class="mb-xxl flex max-md:space-y-lg max-md:flex-col justify-between items-start">
 				<div
 					v-for="link in footer?.footer_columns"
 					:key="link.title"

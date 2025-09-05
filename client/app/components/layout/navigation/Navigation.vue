@@ -18,7 +18,7 @@ function toggleMenu() {
 <template>
 	<header v-if="header" ref="headerRef" class="fixed p-lg z-50 w-full flex justify-center items-center">
 		<div
-			class="w-[95%] lg:w-[80%] max-w-[1000px] px-md rounded-xl bg-light/10 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl">
+			class="w-[95%] lg:w-[80%] max-w-[1000px] px-md rounded-xl bg-light/10 bg-clip-padding backdrop-filter backdrop-blur-xxl shadow-xl">
 			<nav class="flex items-center justify-between" aria-label="main navigation">
 				<NuxtLink to="/" aria-label="Home">
 					<NuxtImg
