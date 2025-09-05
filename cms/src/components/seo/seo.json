@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_seo_seos",
+  "info": {
+    "displayName": "Seo"
+  },
+  "options": {},
+  "attributes": {
+    "meta_title": {
+      "type": "string"
+    },
+    "meta_description": {
+      "type": "text"
+    },
+    "meta_image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "meta_cannical_url": {
+      "type": "string"
+    },
+    "prevent_index": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "config": {}
+}

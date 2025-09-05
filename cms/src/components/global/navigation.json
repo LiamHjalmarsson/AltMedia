@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_global_navigations",
+  "info": {
+    "displayName": "Navigation"
+  },
+  "options": {},
+  "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "links": {
+      "type": "component",
+      "component": "global.menu-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

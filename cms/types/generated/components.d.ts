@@ -1,0 +1,151 @@
+import type { Schema, Struct } from '@strapi/strapi';
+
+export interface BlockCta extends Struct.ComponentSchema {
+  collectionName: 'components_block_ctas';
+  info: {
+    displayName: 'Cta';
+  };
+  attributes: {
+    buttons: Schema.Attribute.Component<'ui.button', true>;
+    description: Schema.Attribute.Text;
+    links: Schema.Attribute.Component<'ui.link', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface GlobalContact extends Struct.ComponentSchema {
+  collectionName: 'components_global_contacts';
+  info: {
+    displayName: 'Contact';
+  };
+  attributes: {
+    email: Schema.Attribute.Email;
+    phone: Schema.Attribute.String;
+    social_medias: Schema.Attribute.Component<'global.social-media', true>;
+  };
+}
+
+export interface GlobalFooter extends Struct.ComponentSchema {
+  collectionName: 'components_global_footers';
+  info: {
+    displayName: 'Footer';
+  };
+  attributes: {
+    cta: Schema.Attribute.Component<'block.cta', false>;
+    footer_columns: Schema.Attribute.Component<'global.footer-column', true>;
+  };
+}
+
+export interface GlobalFooterColumn extends Struct.ComponentSchema {
+  collectionName: 'components_global_footer_columns';
+  info: {
+    displayName: 'Footer Column';
+  };
+  attributes: {
+    links: Schema.Attribute.Component<'global.menu-link', true>;
+    title: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface GlobalMenuLink extends Struct.ComponentSchema {
+  collectionName: 'components_global_menu_links';
+  info: {
+    displayName: 'Menu Link';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface GlobalNavigation extends Struct.ComponentSchema {
+  collectionName: 'components_global_navigations';
+  info: {
+    displayName: 'Navigation';
+  };
+  attributes: {
+    links: Schema.Attribute.Component<'global.menu-link', true>;
+    logo: Schema.Attribute.Media<'images' | 'files'>;
+  };
+}
+
+export interface GlobalSocialMedia extends Struct.ComponentSchema {
+  collectionName: 'components_global_social_medias';
+  info: {
+    displayName: 'Social Media';
+  };
+  attributes: {
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    url: Schema.Attribute.String;
+  };
+}
+
+export interface SeoSeo extends Struct.ComponentSchema {
+  collectionName: 'components_seo_seos';
+  info: {
+    displayName: 'Seo';
+  };
+  attributes: {
+    meta_cannical_url: Schema.Attribute.String;
+    meta_description: Schema.Attribute.Text;
+    meta_image: Schema.Attribute.Media<'images' | 'files'>;
+    meta_title: Schema.Attribute.String;
+    prevent_index: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface UiButton extends Struct.ComponentSchema {
+  collectionName: 'components_ui_buttons';
+  info: {
+    displayName: 'Button';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']>;
+    variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
+  };
+}
+
+export interface UiIcon extends Struct.ComponentSchema {
+  collectionName: 'components_ui_icons';
+  info: {
+    displayName: 'Icon';
+  };
+  attributes: {
+    icon_name: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    is_image: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface UiLink extends Struct.ComponentSchema {
+  collectionName: 'components_ui_links';
+  info: {
+    displayName: 'Link';
+  };
+  attributes: {
+    is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    url: Schema.Attribute.String;
+    variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
+  };
+}
+
+declare module '@strapi/strapi' {
+  export module Public {
+    export interface ComponentSchemas {
+      'block.cta': BlockCta;
+      'global.contact': GlobalContact;
+      'global.footer': GlobalFooter;
+      'global.footer-column': GlobalFooterColumn;
+      'global.menu-link': GlobalMenuLink;
+      'global.navigation': GlobalNavigation;
+      'global.social-media': GlobalSocialMedia;
+      'seo.seo': SeoSeo;
+      'ui.button': UiButton;
+      'ui.icon': UiIcon;
+      'ui.link': UiLink;
+    }
+  }
+}

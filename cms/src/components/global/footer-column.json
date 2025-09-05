@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_global_footer_columns",
+  "info": {
+    "displayName": "Footer Column"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "links": {
+      "type": "component",
+      "component": "global.menu-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

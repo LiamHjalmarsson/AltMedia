@@ -26,5 +26,12 @@ export default defineNuxtConfig({
 	typescript: {
 		typeCheck: true,
 	},
+
+	image: {
+		dir: "public/images",
+		strapi: {
+			baseURL: process.env.STRAPI_URL || "http://localhost:1337",
+		},
+	},
 });
 

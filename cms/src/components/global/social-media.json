@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_global_social_medias",
+  "info": {
+    "displayName": "Social Media"
+  },
+  "options": {},
+  "attributes": {
+    "url": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "component",
+      "component": "ui.icon",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

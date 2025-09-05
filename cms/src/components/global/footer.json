@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_global_footers",
+  "info": {
+    "displayName": "Footer"
+  },
+  "options": {},
+  "attributes": {
+    "cta": {
+      "type": "component",
+      "component": "block.cta",
+      "repeatable": false
+    },
+    "footer_columns": {
+      "type": "component",
+      "component": "global.footer-column",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}
