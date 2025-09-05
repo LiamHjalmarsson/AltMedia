@@ -1,4 +1,4 @@
-import type { ButtonType, Variant } from "./enums";
+import type { ButtonType, InputType, Variant } from "./enums";
 
 export interface Image {
 	id: number;
@@ -7,8 +7,9 @@ export interface Image {
 	width: number;
 	height: number;
 	url: string;
-	provider: string;
-	alternativeText: string;
+	provider?: string;
+	alternativeText?: string;
+	caption?: string;
 	formats?: [];
 }
 
@@ -53,4 +54,22 @@ export interface Contact {
 	email: string;
 	phone: string;
 	social_medias?: SocialMedia[];
+}
+
+export interface Input {
+	label: string;
+	name: string;
+	placeholder: string;
+	required: boolean;
+	type: InputType;
+	options?: {};
+	rows?: number;
+	input_type?: string;
+}
+
+export interface Form {
+	title: string;
+	description: string;
+	inputs: Input[];
+	button: Button;
 }

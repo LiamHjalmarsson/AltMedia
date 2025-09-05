@@ -47,6 +47,10 @@
       "component": "ui.link",
       "repeatable": true
     },
+    "has_form": {
+      "type": "boolean",
+      "default": false
+    },
     "form": {
       "type": "component",
       "conditions": {
@@ -61,9 +65,6 @@
       },
       "component": "form.form",
       "repeatable": false
-    },
-    "has_form": {
-      "type": "boolean"
     }
   },
   "config": {}

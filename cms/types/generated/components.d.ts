@@ -27,7 +27,7 @@ export interface BlockHero extends Struct.ComponentSchema {
     >;
     description: Schema.Attribute.Text;
     form: Schema.Attribute.Component<'form.form', false>;
-    has_form: Schema.Attribute.Boolean;
+    has_form: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     links: Schema.Attribute.Component<'ui.link', true>;
     title: Schema.Attribute.String;
   };
