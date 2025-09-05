@@ -13,6 +13,17 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockFeaturedServices extends Struct.ComponentSchema {
+  collectionName: 'components_block_featured_services';
+  info: {
+    displayName: 'Featured Services';
+  };
+  attributes: {
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+  };
+}
+
 export interface BlockHero extends Struct.ComponentSchema {
   collectionName: 'components_block_heroes';
   info: {
@@ -162,6 +173,19 @@ export interface UiButton extends Struct.ComponentSchema {
   };
 }
 
+export interface UiHeading extends Struct.ComponentSchema {
+  collectionName: 'components_ui_headings';
+  info: {
+    displayName: 'Heading';
+  };
+  attributes: {
+    align_content: Schema.Attribute.Enumeration<['left', 'right', 'center']>;
+    has_link: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    link: Schema.Attribute.Component<'ui.link', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface UiIcon extends Struct.ComponentSchema {
   collectionName: 'components_ui_icons';
   info: {
@@ -191,6 +215,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'block.cta': BlockCta;
+      'block.featured-services': BlockFeaturedServices;
       'block.hero': BlockHero;
       'form.form': FormForm;
       'form.input': FormInput;
@@ -202,6 +227,7 @@ declare module '@strapi/strapi' {
       'global.social-media': GlobalSocialMedia;
       'seo.seo': SeoSeo;
       'ui.button': UiButton;
+      'ui.heading': UiHeading;
       'ui.icon': UiIcon;
       'ui.link': UiLink;
     }

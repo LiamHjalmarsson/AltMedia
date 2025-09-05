@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_ui_headings",
+  "info": {
+    "displayName": "Heading"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "align_content": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right",
+        "center"
+      ]
+    },
+    "has_link": {
+      "type": "boolean",
+      "default": false
+    },
+    "link": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "has_link"
+            },
+            true
+          ]
+        }
+      },
+      "component": "ui.link",
+      "repeatable": false,
+      "required": false
+    }
+  },
+  "config": {}
+}

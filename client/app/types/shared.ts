@@ -1,4 +1,4 @@
-import type { ButtonType, ColumnSpan, InputType, Variant } from "./enums";
+import type { AlignContent, ButtonType, ColumnSpan, InputType, Variant } from "./enums";
 
 export interface Image {
 	id: number;
@@ -74,4 +74,11 @@ export interface Form {
 	inputs: Input[];
 	columns: number;
 	button: Button;
+}
+
+export interface Heading {
+	title: string;
+	alignContent?: AlignContent;
+	has_link: boolean;
+	link: Link;
 }
