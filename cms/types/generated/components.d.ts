@@ -13,6 +13,56 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockHero extends Struct.ComponentSchema {
+  collectionName: 'components_block_heroes';
+  info: {
+    displayName: 'Hero';
+  };
+  attributes: {
+    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    colored_words: Schema.Attribute.JSON;
+    cover: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    description: Schema.Attribute.Text;
+    form: Schema.Attribute.Component<'form.form', false>;
+    has_form: Schema.Attribute.Boolean;
+    links: Schema.Attribute.Component<'ui.link', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface FormForm extends Struct.ComponentSchema {
+  collectionName: 'components_form_forms';
+  info: {
+    displayName: 'Form';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'ui.button', false>;
+    description: Schema.Attribute.Text;
+    inputs: Schema.Attribute.Component<'form.input', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface FormInput extends Struct.ComponentSchema {
+  collectionName: 'components_form_inputs';
+  info: {
+    displayName: 'Input';
+  };
+  attributes: {
+    input_type: Schema.Attribute.String;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String;
+    options: Schema.Attribute.JSON;
+    placeholder: Schema.Attribute.String;
+    required: Schema.Attribute.Boolean;
+    rows: Schema.Attribute.Integer;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'select']>;
+  };
+}
+
 export interface GlobalContact extends Struct.ComponentSchema {
   collectionName: 'components_global_contacts';
   info: {
@@ -136,6 +186,9 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'block.cta': BlockCta;
+      'block.hero': BlockHero;
+      'form.form': FormForm;
+      'form.input': FormInput;
       'global.contact': GlobalContact;
       'global.footer': GlobalFooter;
       'global.footer-column': GlobalFooterColumn;

@@ -1,0 +1,70 @@
+{
+  "collectionName": "components_form_inputs",
+  "info": {
+    "displayName": "Input"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "input",
+        "textarea",
+        "select"
+      ]
+    },
+    "options": {
+      "type": "json",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "select"
+          ]
+        }
+      }
+    },
+    "rows": {
+      "type": "integer",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "textarea"
+          ]
+        }
+      }
+    },
+    "input_type": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "input"
+          ]
+        }
+      }
+    }
+  },
+  "config": {}
+}
