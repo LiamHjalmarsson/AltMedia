@@ -29,12 +29,10 @@ const { onEnter, onLeave } = useCollapse();
 						v-for="link in header?.links"
 						:key="link.label"
 						class="transition-opacity duration-500 relative">
-						<NuxtLink
-							:to="link.url"
-							@click="emit('close')"
-							class="block font-semibold text-lg text-center px-md py-xs">
-							{{ link.label }}
-						</NuxtLink>
+						<MenuLink
+							:link
+							class="px-md py-xxs block font-semibold text-lg text-center w-full"
+							@click="emit('close')" />
 					</li>
 				</ul>
 			</div>
