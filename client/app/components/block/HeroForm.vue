@@ -9,7 +9,7 @@ const { form } = defineProps<{ form: Form }>();
 		<div
 			class="absolute -top-6 left-1/2 w-[600px] h-[600px] -translate-x-1/2 rounded-full opacity-50 blur-3xl gradient-ring" />
 
-		<div class="w-full rounded-xxl p-xs border border-light/10 overflow-hidden sm:w-[480px] max-lg:hidden">
+		<div class="w-full rounded-2xl p-xs border border-light/10 overflow-hidden sm:w-[480px] max-lg:hidden">
 			<div
 				class="rounded-xl border border-light/10 bg-light/10 p-lg shadow-xxl backdrop-blur-lg backdrop-saturate-100 h-full">
 				<h2 class="text-heading-md text-light font-bold">
