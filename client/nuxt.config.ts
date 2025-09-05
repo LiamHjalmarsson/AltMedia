@@ -39,11 +39,11 @@ export default defineNuxtConfig({
 			path: "~/components",
 			pathPrefix: false,
 		},
-		{
-			path: "~/components/blocks",
-			pathPrefix: false,
-			global: true,
-		},
+		// {
+		// 	path: "~/components/blocks",
+		// 	pathPrefix: false,
+		// 	global: true,
+		// },
 	],
 });
 
