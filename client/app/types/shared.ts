@@ -1,3 +1,5 @@
+import type { ButtonType, Variant } from "./enums";
+
 export interface Image {
 	id: number;
 	documentId: string;
@@ -6,21 +8,22 @@ export interface Image {
 	height: number;
 	url: string;
 	provider: string;
+	alternativeText: string;
 	formats?: [];
 }
 
 export interface Button {
 	id: number;
 	label: string;
-	variant: string;
-	type: string;
+	variant: Variant;
+	type: ButtonType;
 }
 
 export interface Link {
 	id: number;
 	label: string;
 	url: string;
-	variant: string;
+	variant: Variant;
 	is_external: boolean;
 }
 

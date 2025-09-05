@@ -39,5 +39,7 @@ useSeoMeta({
 		<main class="grow">
 			<slot />
 		</main>
+
+		<Footer />
 	</div>
 </template>
