@@ -21,7 +21,8 @@
       "components": [
         "block.featured-services",
         "block.list",
-        "block.featured-offers"
+        "block.featured-offers",
+        "block.full-section"
       ]
     }
   }
