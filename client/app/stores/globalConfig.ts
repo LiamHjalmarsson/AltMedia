@@ -1,5 +1,5 @@
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { GlobalConfig } from "~/types/singels/globalConfig";
+import type { GlobalConfig } from "~/types/content/singles";
 
 export const useGlobalStore = defineStore("global-config", () => {
 	const globalConfig = ref<GlobalConfig | null>(null);

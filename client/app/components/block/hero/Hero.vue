@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Hero } from "~/types/blocks/hero";
+import type { Hero } from "~/types/content/blocks";
 
 const { block } = defineProps<{ block: Hero }>();
 

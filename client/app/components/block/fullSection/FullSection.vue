@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { FullSectionBlock } from "~/types/blocks/fullSection";
+import type { FullSectionBlock } from "~/types/content/blocks";
 
 const props = defineProps<{ block: FullSectionBlock }>();
 

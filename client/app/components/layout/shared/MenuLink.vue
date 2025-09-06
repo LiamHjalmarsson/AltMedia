@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MenuLink } from "~/types/singels/globalConfig";
+import type { MenuLink } from "~/types/content/singles";
 
 defineProps<{ link: MenuLink }>();
 </script>

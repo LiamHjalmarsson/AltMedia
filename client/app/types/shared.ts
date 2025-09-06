@@ -13,6 +13,12 @@ export interface Image {
 	formats?: [];
 }
 
+export interface Icon {
+	icon_name: string;
+	is_image: boolean;
+	image?: Image;
+}
+
 export interface Button {
 	id: number;
 	label: string;
@@ -35,12 +41,6 @@ export interface Seo {
 	meta_canonical_url: string;
 	prevent_index: boolean;
 	meta_image?: Image;
-}
-
-export interface Icon {
-	icon_name: string;
-	is_image: boolean;
-	image?: Image;
 }
 
 export interface SocialMedia {

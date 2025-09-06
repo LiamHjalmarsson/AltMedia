@@ -18,3 +18,14 @@ export interface Service {
 	icon: Icon;
 	subservices: Subservice[];
 }
+
+export interface Offer {
+	id: number;
+	title: string;
+	description?: string;
+	icon?: Icon;
+	features?: string[];
+	is_populare: boolean;
+	start_price: number;
+	month_price: number;
+}

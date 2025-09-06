@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ListItem } from "~/types/blocks/list";
+import type { ListItem } from "~/types/content/blocks";
 
 defineProps<{
 	item: ListItem;

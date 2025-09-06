@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FeaturedService } from "~/types/blocks/featured";
+import type { FeaturedService } from "~/types/content/blocks";
 
 const { service } = defineProps<{ service: FeaturedService }>();
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Offer } from "~/types/collections/offer";
+import type { Offer } from "~/types/content/collections";
 
 const { offer } = defineProps<{ offer: Offer }>();
 </script>

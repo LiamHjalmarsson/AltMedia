@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FeaturedServicesBlock } from "~/types/blocks/featured";
+import type { FeaturedServicesBlock } from "~/types/content/blocks";
 import FeaturedServiceListItem from "./FeaturedServiceListItem.vue";
 
 defineProps<{ block: FeaturedServicesBlock }>();

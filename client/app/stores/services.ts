@@ -1,5 +1,5 @@
 import type { Strapi5ResponseMany } from "@nuxtjs/strapi";
-import type { Service } from "~/types/collections/service";
+import type { Service } from "~/types/content/collections";
 
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);

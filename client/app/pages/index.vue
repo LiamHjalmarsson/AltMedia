@@ -4,8 +4,8 @@ import FullSection from "~/components/block/fullSection/FullSection.vue";
 import List from "~/components/block/list/list.vue";
 import FeaturedOffers from "~/components/block/offer/FeaturedOffers.vue";
 import FeaturedServiceList from "~/components/block/service/featured/FeaturedServiceList.vue";
-import type { Blocks } from "~/types/blocks/blocks";
-import type { HomePage } from "~/types/singels/homePage";
+import type { Blocks } from "~/types/content/blocks";
+import type { HomePage } from "~/types/content/singles";
 
 const { findOne } = useStrapi();
 
