@@ -6,10 +6,12 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "default": "Om "
     },
     "subtitle": {
-      "type": "string"
+      "type": "string",
+      "default": "Vad vi gjort"
     },
     "subservices": {
       "type": "relation",

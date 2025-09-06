@@ -194,8 +194,9 @@ export interface SectionsIntroduction extends Struct.ComponentSchema {
       'oneToMany',
       'api::subservice.subservice'
     >;
-    subtitle: Schema.Attribute.String;
-    title: Schema.Attribute.String;
+    subtitle: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'Vad vi gjort'>;
+    title: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Om '>;
   };
 }
 

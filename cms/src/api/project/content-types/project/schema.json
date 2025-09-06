@@ -33,14 +33,6 @@
       "relation": "oneToMany",
       "target": "api::service.service"
     },
-    "subservices": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::subservice.subservice"
-    },
-    "description": {
-      "type": "blocks"
-    },
     "hero": {
       "type": "component",
       "component": "block.hero",
