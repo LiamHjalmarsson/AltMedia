@@ -5,7 +5,7 @@ import type { AlignContent } from "../enums";
 import type { Form } from "../shared";
 import type { Offer, Service } from "./collections";
 
-export type Blocks = HeroBlock | FeaturedServicesBlock | ListBlock | FeaturedOffersBlock;
+export type Blocks = HeroBlock | FeaturedServicesBlock | ListBlock | FeaturedOffersBlock | FullSectionBlock;
 
 export interface Hero {
 	id: number;
@@ -42,7 +42,7 @@ export interface FeaturedOffersBlock {
 }
 
 export interface FullSectionBlock {
-	__component: "block.featured-services";
+	__component: "block.full-section";
 	id: number;
 	title: string;
 	content: BlockNode[];
