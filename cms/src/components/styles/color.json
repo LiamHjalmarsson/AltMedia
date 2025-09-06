@@ -1,0 +1,51 @@
+{
+  "collectionName": "components_styles_colors",
+  "info": {
+    "displayName": "color"
+  },
+  "options": {},
+  "attributes": {
+    "is_hex": {
+      "type": "boolean",
+      "default": false
+    },
+    "type": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "is_hex"
+            },
+            false
+          ]
+        }
+      },
+      "default": "primary",
+      "enum": [
+        "primary",
+        "secondary",
+        "tertiary",
+        "ghost"
+      ]
+    },
+    "is_dark_text": {
+      "type": "boolean",
+      "default": false
+    },
+    "hex": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "is_hex"
+            },
+            true
+          ]
+        }
+      }
+    }
+  },
+  "config": {}
+}

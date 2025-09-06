@@ -35,6 +35,20 @@ export interface BlockFeaturedServices extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockFullSection extends Struct.ComponentSchema {
+  collectionName: 'components_block_full_sections';
+  info: {
+    displayName: 'Full Section';
+  };
+  attributes: {
+    color: Schema.Attribute.Component<'styles.color', false>;
+    content: Schema.Attribute.Blocks;
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    link: Schema.Attribute.Component<'ui.link', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlockHero extends Struct.ComponentSchema {
   collectionName: 'components_block_heroes';
   info: {
@@ -183,6 +197,22 @@ export interface SeoSeo extends Struct.ComponentSchema {
   };
 }
 
+export interface StylesColor extends Struct.ComponentSchema {
+  collectionName: 'components_styles_colors';
+  info: {
+    displayName: 'color';
+  };
+  attributes: {
+    hex: Schema.Attribute.String;
+    is_dark_text: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_hex: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    type: Schema.Attribute.Enumeration<
+      ['primary', 'secondary', 'tertiary', 'ghost']
+    > &
+      Schema.Attribute.DefaultTo<'primary'>;
+  };
+}
+
 export interface UiButton extends Struct.ComponentSchema {
   collectionName: 'components_ui_buttons';
   info: {
@@ -251,6 +281,7 @@ declare module '@strapi/strapi' {
       'block.cta': BlockCta;
       'block.featured-offers': BlockFeaturedOffers;
       'block.featured-services': BlockFeaturedServices;
+      'block.full-section': BlockFullSection;
       'block.hero': BlockHero;
       'block.list': BlockList;
       'form.form': FormForm;
@@ -262,6 +293,7 @@ declare module '@strapi/strapi' {
       'global.navigation': GlobalNavigation;
       'global.social-media': GlobalSocialMedia;
       'seo.seo': SeoSeo;
+      'styles.color': StylesColor;
       'ui.button': UiButton;
       'ui.card': UiCard;
       'ui.heading': UiHeading;
