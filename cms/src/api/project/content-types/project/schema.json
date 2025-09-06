@@ -46,7 +46,8 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.full-section"
+        "block.full-section",
+        "block.info"
       ]
     }
   }
