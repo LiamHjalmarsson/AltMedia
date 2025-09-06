@@ -19,7 +19,7 @@
         "files"
       ]
     },
-    "meta_cannical_url": {
+    "meta_canonical_url": {
       "type": "string"
     },
     "prevent_index": {

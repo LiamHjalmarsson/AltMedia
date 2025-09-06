@@ -1,7 +1,19 @@
 <script lang="ts" setup>
 import type { Form } from "~/types/shared";
 
+const emit = defineEmits(["submit"]);
+
 const { form } = defineProps<{ form: Form }>();
+
+const gridStyle = computed(() => ({
+	gridTemplateColumns: `repeat(${form.columns}, minmax(0, 1fr))`,
+}));
+
+function onSubmit(e: Event) {
+	e.preventDefault();
+
+	emit("submit");
+}
 </script>
 
 <template>
@@ -20,11 +32,7 @@ const { form } = defineProps<{ form: Form }>();
 					{{ form.description }}
 				</p>
 
-				<form
-					class="grid gap-lg"
-					:style="{
-						gridTemplateColumns: `repeat(${form.columns}, minmax(0, 1fr))`,
-					}">
+				<form @submit="onSubmit" class="grid gap-lg" :style="gridStyle">
 					<FormField
 						v-for="input in form.inputs"
 						:key="input.name"

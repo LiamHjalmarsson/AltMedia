@@ -15,6 +15,12 @@
       "type": "component",
       "component": "block.hero",
       "repeatable": false
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.featured-services"
+      ]
     }
   }
 }

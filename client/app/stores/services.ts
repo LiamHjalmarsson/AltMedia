@@ -7,7 +7,11 @@ export const useServiceStore = defineStore("services", () => {
 	const { find } = useStrapi();
 
 	async function fetchServices(title?: string | null) {
-		const params: any = {};
+		const params: {
+			filters?: {
+				title: { $eqi: string };
+			};
+		} = {};
 
 		if (title) {
 			params.filters = {

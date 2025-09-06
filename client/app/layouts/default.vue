@@ -25,7 +25,7 @@ useSeoMeta({
 	ogTitle: seo.value?.meta_title,
 	ogDescription: seo.value?.meta_description,
 	ogImage: seo.value?.meta_image?.url,
-	ogUrl: seo.value?.meta_cannical_url,
+	ogUrl: seo.value?.meta_canonical_url,
 
 	twitterTitle: seo.value?.meta_title,
 	twitterDescription: seo.value?.meta_description,

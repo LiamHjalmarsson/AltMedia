@@ -153,7 +153,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
     displayName: 'Seo';
   };
   attributes: {
-    meta_cannical_url: Schema.Attribute.String;
+    meta_canonical_url: Schema.Attribute.String;
     meta_description: Schema.Attribute.Text;
     meta_image: Schema.Attribute.Media<'images' | 'files'>;
     meta_title: Schema.Attribute.String;

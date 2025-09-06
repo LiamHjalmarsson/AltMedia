@@ -18,6 +18,11 @@
       "type": "uid",
       "targetField": "title"
     },
+    "subservices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subservice.subservice"
+    },
     "description": {
       "type": "text"
     },
@@ -25,11 +30,6 @@
       "type": "component",
       "component": "ui.icon",
       "repeatable": false
-    },
-    "subservices": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::subservice.subservice"
     }
   }
 }

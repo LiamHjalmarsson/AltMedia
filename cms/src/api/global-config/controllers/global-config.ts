@@ -46,7 +46,7 @@ export default factories.createCoreController("api::global-config.global-config"
 					},
 				},
 				seo: {
-					fields: ["meta_title", "meta_description", "meta_cannical_url", "prevent_index"],
+					fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],
 					populate: {
 						meta_image: {
 							fields: ["url"],

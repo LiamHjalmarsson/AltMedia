@@ -12,3 +12,7 @@ export interface Hero {
 	has_form: boolean;
 	form: Form;
 }
+
+export interface HeroBlock extends Hero {
+	__component: "block.hero";
+}

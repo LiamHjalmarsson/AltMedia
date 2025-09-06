@@ -32,7 +32,7 @@ export interface Seo {
 	id: number;
 	meta_title: string;
 	meta_description: string;
-	meta_cannical_url: string;
+	meta_canonical_url: string;
 	prevent_index: boolean;
 	meta_image?: Image;
 }
@@ -78,7 +78,7 @@ export interface Form {
 
 export interface Heading {
 	title: string;
-	alignContent?: AlignContent;
+	align_content?: AlignContent;
 	has_link: boolean;
 	link: Link;
 }
