@@ -69,6 +69,20 @@ export interface BlockHero extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockInfo extends Struct.ComponentSchema {
+  collectionName: 'components_block_infos';
+  info: {
+    displayName: 'Info';
+  };
+  attributes: {
+    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    button: Schema.Attribute.Component<'ui.button', false>;
+    content: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
 export interface BlockList extends Struct.ComponentSchema {
   collectionName: 'components_block_lists';
   info: {
@@ -300,6 +314,7 @@ declare module '@strapi/strapi' {
       'block.featured-services': BlockFeaturedServices;
       'block.full-section': BlockFullSection;
       'block.hero': BlockHero;
+      'block.info': BlockInfo;
       'block.list': BlockList;
       'form.form': FormForm;
       'form.input': FormInput;
