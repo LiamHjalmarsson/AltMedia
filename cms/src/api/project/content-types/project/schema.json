@@ -41,10 +41,19 @@
     "description": {
       "type": "blocks"
     },
+    "hero": {
+      "type": "component",
+      "component": "block.hero",
+      "repeatable": false
+    },
+    "introduction": {
+      "type": "component",
+      "component": "sections.introduction",
+      "repeatable": false
+    },
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.hero",
         "block.full-section"
       ]
     }

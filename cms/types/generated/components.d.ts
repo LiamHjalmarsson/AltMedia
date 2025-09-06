@@ -183,6 +183,22 @@ export interface GlobalSocialMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface SectionsIntroduction extends Struct.ComponentSchema {
+  collectionName: 'components_sections_introductions';
+  info: {
+    displayName: 'Introduction';
+  };
+  attributes: {
+    description: Schema.Attribute.Blocks;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SeoSeo extends Struct.ComponentSchema {
   collectionName: 'components_seo_seos';
   info: {
@@ -292,6 +308,7 @@ declare module '@strapi/strapi' {
       'global.menu-link': GlobalMenuLink;
       'global.navigation': GlobalNavigation;
       'global.social-media': GlobalSocialMedia;
+      'sections.introduction': SectionsIntroduction;
       'seo.seo': SeoSeo;
       'styles.color': StylesColor;
       'ui.button': UiButton;
