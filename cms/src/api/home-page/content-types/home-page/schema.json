@@ -19,7 +19,8 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.featured-services"
+        "block.featured-services",
+        "block.list"
       ]
     }
   }

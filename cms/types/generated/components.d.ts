@@ -44,6 +44,17 @@ export interface BlockHero extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockList extends Struct.ComponentSchema {
+  collectionName: 'components_block_lists';
+  info: {
+    displayName: 'List';
+  };
+  attributes: {
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    items: Schema.Attribute.Component<'ui.card', true>;
+  };
+}
+
 export interface FormForm extends Struct.ComponentSchema {
   collectionName: 'components_form_forms';
   info: {
@@ -173,6 +184,18 @@ export interface UiButton extends Struct.ComponentSchema {
   };
 }
 
+export interface UiCard extends Struct.ComponentSchema {
+  collectionName: 'components_ui_cards';
+  info: {
+    displayName: 'Card';
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface UiHeading extends Struct.ComponentSchema {
   collectionName: 'components_ui_headings';
   info: {
@@ -217,6 +240,7 @@ declare module '@strapi/strapi' {
       'block.cta': BlockCta;
       'block.featured-services': BlockFeaturedServices;
       'block.hero': BlockHero;
+      'block.list': BlockList;
       'form.form': FormForm;
       'form.input': FormInput;
       'global.contact': GlobalContact;
@@ -227,6 +251,7 @@ declare module '@strapi/strapi' {
       'global.social-media': GlobalSocialMedia;
       'seo.seo': SeoSeo;
       'ui.button': UiButton;
+      'ui.card': UiCard;
       'ui.heading': UiHeading;
       'ui.icon': UiIcon;
       'ui.link': UiLink;
