@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FeaturedServicesBlock } from "~/types/content/blocks";
-import FeaturedServiceListItem from "./FeaturedServiceListItem.vue";
+import FeaturedServicesBlockItem from "./FeaturedServicesBlockItem.vue";
 
 defineProps<{ block: FeaturedServicesBlock }>();
 </script>
@@ -15,7 +15,7 @@ defineProps<{ block: FeaturedServicesBlock }>();
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
 			<Grid class="grid grid-cols-1 md:grid-cols-3">
-				<FeaturedServiceListItem v-for="service in block.services" :key="service.id" :service="service" />
+				<FeaturedServicesBlockItem v-for="service in block.services" :key="service.id" :service="service" />
 			</Grid>
 		</Container>
 	</Section>

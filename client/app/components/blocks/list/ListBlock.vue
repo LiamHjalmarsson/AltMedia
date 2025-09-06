@@ -13,7 +13,7 @@ defineProps<{ block: List }>();
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
 			<Grid class="md:grid-cols-1">
-				<ListItem v-for="(item, i) in block.items" :key="item.id" :item :number="i + 1" />
+				<ListBlockItem v-for="(item, i) in block.items" :key="item.id" :item :number="i + 1" />
 			</Grid>
 		</Container>
 	</Section>

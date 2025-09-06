@@ -44,13 +44,13 @@ function toggleMenu() {
 
 				<NavigationLinks />
 
-				<BurgerMenu :is-menu-open="isMenuOpen" @toggle="toggleMenu" :theme />
+				<NavgationBurger :is-menu-open="isMenuOpen" @toggle="toggleMenu" :theme />
 			</nav>
 		</div>
 	</header>
 
 	<Teleport to="body">
-		<MobilMenu
+		<NavigationDropdown
 			:is-menu-open="isMenuOpen"
 			@close="isMenuOpen = false"
 			:class="theme === 'dark' ? 'text-light' : 'text-dark'" />

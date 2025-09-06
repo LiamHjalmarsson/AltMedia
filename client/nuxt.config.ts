@@ -40,10 +40,9 @@ export default defineNuxtConfig({
 			pathPrefix: false,
 		},
 		{
-			path: "~/components/RichTextBlocks",
+			path: "~/components/richtextBlocks",
 			pathPrefix: false,
 			global: true,
 		},
 	],
 });
-

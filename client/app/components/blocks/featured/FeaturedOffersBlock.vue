@@ -12,7 +12,7 @@ defineProps<{ block: FeaturedOffersBlock }>();
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-xl xl:mb-2xl" />
 			<Grid class="md:grid-cols-3">
-				<FeaturedOffersItem v-for="offer in block.offers" :key="offer.id" :offer />
+				<FeaturedOffersBlockItem v-for="offer in block.offers" :key="offer.id" :offer />
 			</Grid>
 		</Container>
 	</Section>
