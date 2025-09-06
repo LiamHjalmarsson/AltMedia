@@ -5,7 +5,7 @@ export interface FullSectionBlock {
 	__component: "block.featured-services";
 	id: number;
 	title: string;
-	contnet: BlockNode[];
+	content: BlockNode[];
 	cover: Image;
 	link: Link;
 	color: Color;

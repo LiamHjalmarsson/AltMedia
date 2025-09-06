@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
+import FullSection from "~/components/block/fullSection/FullSection.vue";
 import List from "~/components/block/list/list.vue";
 import FeaturedOffers from "~/components/block/offer/FeaturedOffers.vue";
 import FeaturedServiceList from "~/components/block/service/featured/FeaturedServiceList.vue";
@@ -22,6 +23,7 @@ const componentMap: Record<string, any> = {
 	"block.featured-services": FeaturedServiceList,
 	"block.list": List,
 	"block.featured-offers": FeaturedOffers,
+	"block.full-section": FullSection,
 };
 </script>
 
