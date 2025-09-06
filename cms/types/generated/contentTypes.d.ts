@@ -437,6 +437,37 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
+  collectionName: 'offers';
+  info: {
+    displayName: 'Offer';
+    pluralName: 'offers';
+    singularName: 'offer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    features: Schema.Attribute.JSON;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    is_populare: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'> &
+      Schema.Attribute.Private;
+    month_price: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    start_price: Schema.Attribute.Integer;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -1040,6 +1071,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::global-config.global-config': ApiGlobalConfigGlobalConfig;
       'api::home-page.home-page': ApiHomePageHomePage;
+      'api::offer.offer': ApiOfferOffer;
       'api::service.service': ApiServiceService;
       'api::subservice.subservice': ApiSubserviceSubservice;
       'api::tag.tag': ApiTagTag;
