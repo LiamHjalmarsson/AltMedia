@@ -18,10 +18,10 @@ const textAlign = computed(() => {
 <template>
 	<Section class="hero bg-dark text-light overflow-hidden relative min-h-screen">
 		<Container class="flex items-centerrelative z-10">
-			<div class="flex w-full" :class="[!block.has_form ? textAlign : '', !block.has_form ? 'gap-xxl' : '']">
+			<div class="flex w-full" :class="[!block.has_form ? textAlign : '', block.has_form ? 'gap-xxl' : '']">
 				<div
 					class="flex flex-col space-y-xl max-w-5xl"
-					:class="[!block.has_form ? textAlign : '', !block.has_form ? 'pr-xxl' : '']">
+					:class="[!block.has_form ? textAlign : '', block.has_form ? 'pr-xxl' : '']">
 					<h1
 						class="text-heading-lg sm:text-heading-xl md:text-heading-xxl lg:text-heading-xxxl xl:text-heading-xxxxl text-light font-bold tracking-tight leading-tight">
 						{{ block.title }}
