@@ -82,3 +82,10 @@ export interface Heading {
 	has_link: boolean;
 	link: Link;
 }
+
+export interface Color {
+	is_hex: boolean;
+	type: Variant;
+	is_dark_text: boolean;
+	hex: string;
+}
