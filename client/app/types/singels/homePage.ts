@@ -1,4 +1,4 @@
-import type { Blocks } from "../blocks/enums";
+import type { Blocks } from "../blocks/blocks";
 import type { Hero } from "../blocks/hero";
 
 export interface HomePage {

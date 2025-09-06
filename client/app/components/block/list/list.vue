@@ -9,7 +9,7 @@ defineProps<{ block: List }>();
 		<Container>
 			<Heading
 				:title="block.heading.title"
-				:alignContent="block.heading.align_content"
+				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
 			<Grid class="md:grid-cols-1">

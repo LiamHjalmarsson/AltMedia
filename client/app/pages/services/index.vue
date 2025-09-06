@@ -9,7 +9,7 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 <template>
 	<Section>
 		<Container>
-			<Heading :has_link="false" title="Våra tjänster" align-content="center" class="mt-xxl" />
+			<Heading :has_link="false" title="Våra tjänster" align_content="center" class="mt-xxl" />
 		</Container>
 	</Section>
 </template>

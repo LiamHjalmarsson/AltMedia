@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-	<div class="grid grid-cols-2 gap-xxl items-center w-full group">
+	<div class="grid grid-cols-2 gap-xxl items-center w-full group overflow-hidden">
 		<div :class="number % 2 === 0 ? 'md:order-2' : 'md:order-1'">
 			<div class="flex items-center">
 				<span
@@ -24,12 +24,12 @@ defineProps<{
 			<StrapiBlocksText v-if="item.content?.length" :nodes="item.content || []" class="text-lg" />
 		</div>
 
-		<div :class="number % 2 === 0 ? 'md:order-1' : 'md:order-2'" class="overflow-hidden rounded-xl">
+		<div :class="number % 2 === 0 ? 'md:order-1' : 'md:order-2'" class="overflow-hidden rounded-2xl">
 			<NuxtImg
 				v-if="item.icon && item.icon.is_image"
 				:src="item.icon.image?.url"
 				:alt="item.icon.image?.alternativeText || ''"
-				class="w-full rounded-xl group-hover:scale-110 transition duration-300" />
+				class="w-full rounded-xl group-hover:scale-110 transition duration-300 object-cover max-h-[550px]" />
 		</div>
 	</div>
 </template>

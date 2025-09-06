@@ -13,6 +13,17 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockFeaturedOffers extends Struct.ComponentSchema {
+  collectionName: 'components_block_featured_offers';
+  info: {
+    displayName: 'Featured Offers';
+  };
+  attributes: {
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
+  };
+}
+
 export interface BlockFeaturedServices extends Struct.ComponentSchema {
   collectionName: 'components_block_featured_services';
   info: {
@@ -238,6 +249,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'block.cta': BlockCta;
+      'block.featured-offers': BlockFeaturedOffers;
       'block.featured-services': BlockFeaturedServices;
       'block.hero': BlockHero;
       'block.list': BlockList;

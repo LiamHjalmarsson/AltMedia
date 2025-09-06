@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import type { FeaturedServices } from "~/types/collections/service";
-
+import type { FeaturedServicesBlock } from "~/types/blocks/featured";
 import FeaturedServiceListItem from "./FeaturedServiceListItem.vue";
 
-defineProps<{ block: FeaturedServices }>();
+defineProps<{ block: FeaturedServicesBlock }>();
 </script>
 
 <template>
@@ -11,7 +10,7 @@ defineProps<{ block: FeaturedServices }>();
 		<Container>
 			<Heading
 				:title="block.heading.title"
-				:align-content="block.heading.align_content"
+				:align_content="block.heading.align_content"
 				:has_link="false"
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 

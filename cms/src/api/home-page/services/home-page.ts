@@ -95,6 +95,39 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 								},
 							},
 						},
+						"block.featured-offers": {
+							populate: {
+								fields: ["id"],
+								heading: {
+									fields: ["title", "align_content", "has_link"],
+									populate: {
+										link: {
+											fields: ["label", "url", "variant", "is_external"],
+										},
+									},
+								},
+								offers: {
+									fields: [
+										"title",
+										"description",
+										"features",
+										"is_populare",
+										"start_price",
+										"month_price",
+									],
+									populate: {
+										icon: {
+											fields: ["icon_name", "is_image"],
+											populate: {
+												image: {
+													fields: ["formats", "name", "width", "height", "url", "provider"],
+												},
+											},
+										},
+									},
+								},
+							},
+						},
 					},
 				},
 			},

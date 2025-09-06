@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
 import List from "~/components/block/list/list.vue";
+import FeaturedOffers from "~/components/block/offer/FeaturedOffers.vue";
 import FeaturedServiceList from "~/components/block/service/featured/FeaturedServiceList.vue";
-import type { Blocks } from "~/types/blocks/enums";
+import type { Blocks } from "~/types/blocks/blocks";
 import type { HomePage } from "~/types/singels/homePage";
 
 const { findOne } = useStrapi();
@@ -20,6 +21,7 @@ const blocks = computed<Blocks[]>(() => dataResponse?.value?.data.blocks ?? []);
 const componentMap: Record<string, any> = {
 	"block.featured-services": FeaturedServiceList,
 	"block.list": List,
+	"block.featured-offers": FeaturedOffers,
 };
 </script>
 

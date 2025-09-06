@@ -20,7 +20,8 @@
       "type": "dynamiczone",
       "components": [
         "block.featured-services",
-        "block.list"
+        "block.list",
+        "block.featured-offers"
       ]
     }
   }
