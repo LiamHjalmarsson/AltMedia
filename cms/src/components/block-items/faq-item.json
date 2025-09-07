@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_items_faq_items",
+  "info": {
+    "displayName": "Faq Item"
+  },
+  "options": {},
+  "attributes": {
+    "question": {
+      "type": "string",
+      "required": true
+    },
+    "answer": {
+      "type": "blocks",
+      "required": true
+    }
+  },
+  "config": {}
+}

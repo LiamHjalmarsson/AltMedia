@@ -1,5 +1,16 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlockItemsFaqItem extends Struct.ComponentSchema {
+  collectionName: 'components_block_items_faq_items';
+  info: {
+    displayName: 'Faq Item';
+  };
+  attributes: {
+    answer: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    question: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface BlockCta extends Struct.ComponentSchema {
   collectionName: 'components_block_ctas';
   info: {
@@ -10,6 +21,17 @@ export interface BlockCta extends Struct.ComponentSchema {
     description: Schema.Attribute.Text;
     links: Schema.Attribute.Component<'ui.link', true>;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface BlockFaq extends Struct.ComponentSchema {
+  collectionName: 'components_block_faqs';
+  info: {
+    displayName: 'Faq';
+  };
+  attributes: {
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    items: Schema.Attribute.Component<'block-items.faq-item', true>;
   };
 }
 
@@ -242,7 +264,7 @@ export interface SeoSeo extends Struct.ComponentSchema {
 export interface StylesColor extends Struct.ComponentSchema {
   collectionName: 'components_styles_colors';
   info: {
-    displayName: 'color';
+    displayName: 'Color';
   };
   attributes: {
     hex: Schema.Attribute.String;
@@ -320,7 +342,9 @@ export interface UiLink extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'block-items.faq-item': BlockItemsFaqItem;
       'block.cta': BlockCta;
+      'block.faq': BlockFaq;
       'block.featured-offers': BlockFeaturedOffers;
       'block.featured-projects': BlockFeaturedProjects;
       'block.featured-services': BlockFeaturedServices;
