@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HeroBlock from "./hero/HeroBlock.vue";
-import FeaturedServicesBlock from "./featured/FeaturedServicesBlock.vue";
-import FeaturedOffersBlock from "./featured/FeaturedOffersBlock.vue";
+import FeaturedServicesBlock from "./featured/services/FeaturedServicesBlock.vue";
+import FeaturedOffersBlock from "./featured/offers/FeaturedOffersBlock.vue";
 import ListBlock from "./list/ListBlock.vue";
 import FullSectionBlock from "./fullSection/FullSectionBlock.vue";
 import type { Blocks } from "~/types/content/blocks";
@@ -16,5 +16,6 @@ defineProps<{ blocks: Blocks[] }>();
 		<FeaturedOffersBlock v-if="block.__component === 'block.featured-offers'" :block="block" />
 		<ListBlock v-if="block.__component === 'block.list'" :block="block" />
 		<FullSectionBlock v-if="block.__component === 'block.full-section'" :block="block" />
+		<FeaturedProjectsBlock v-if="block.__component === 'block.featured-projects'" :block="block" />
 	</template>
 </template>

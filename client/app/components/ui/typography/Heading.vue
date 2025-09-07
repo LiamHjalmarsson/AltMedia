@@ -22,5 +22,9 @@ const alignClass = computed(() => {
 			class="text-heading-lg md:text-heading-xl lg:text-heading-xxl xl:text-heading-xxxl 2xl:text-heading-xxxxl font-semibold tracking-tight font-heading">
 			{{ title }}
 		</h2>
+
+		<ButtonLink v-if="has_link" :to="link.url">
+			{{ link.label }} <Icon name="material-symbols:arrow-forward" />
+		</ButtonLink>
 	</div>
 </template>

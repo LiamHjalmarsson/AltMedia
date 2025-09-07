@@ -3,9 +3,15 @@ import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
 import type { Form } from "../shared";
-import type { Offer, Service } from "./collections";
+import type { Offer, Project, Service } from "./collections";
 
-export type Blocks = HeroBlock | FeaturedServicesBlock | ListBlock | FeaturedOffersBlock | FullSectionBlock;
+export type Blocks =
+	| HeroBlock
+	| FeaturedServicesBlock
+	| ListBlock
+	| FeaturedOffersBlock
+	| FullSectionBlock
+	| FeaturedProjectsBlock;
 
 export interface Hero {
 	id: number;
@@ -76,4 +82,18 @@ export interface InfoBlock {
 	button: Button;
 	content: BlockNode[];
 	reverse: boolean;
+}
+
+export interface FeaturedProject {
+	id: number;
+	title: string;
+	slug: string;
+	cover: Image;
+}
+
+export interface FeaturedProjectsBlock {
+	__component: "block.featured-projects";
+	id: number;
+	heading: Heading;
+	projects: FeaturedProject[];
 }
