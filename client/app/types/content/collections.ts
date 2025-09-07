@@ -1,5 +1,6 @@
-import type { Icon } from "../shared";
+import type { Icon, Image, Introduction } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
+import type { Blocks, FullSectionBlock, Hero, InfoBlock } from "./blocks";
 
 export interface Subservice {
 	id: number;
@@ -29,3 +30,16 @@ export interface Offer {
 	start_price: number;
 	month_price: number;
 }
+
+export interface Project {
+	id: number;
+	title: string;
+	slug: string;
+	cover: Image;
+	services: Service[];
+	hero: Hero;
+	introdunction: Introduction;
+	blocks: ProjectBlocks[];
+}
+
+export type ProjectBlocks = FullSectionBlock | InfoBlock;

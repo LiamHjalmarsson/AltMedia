@@ -1,4 +1,4 @@
-import type { Heading, Icon } from "../shared";
+import type { Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
@@ -66,4 +66,14 @@ export interface List {
 
 export interface ListBlock extends List {
 	__component: "block.list";
+}
+
+export interface InfoBlock {
+	__component: "block.info";
+	id: number;
+	image: Image;
+	align_content: AlignContent;
+	button: Button;
+	content: BlockNode[];
+	reverse: boolean;
 }

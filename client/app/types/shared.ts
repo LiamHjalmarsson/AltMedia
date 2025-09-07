@@ -1,3 +1,4 @@
+import type { Subservice } from "./content/collections";
 import type { AlignContent, ButtonType, ColumnSpan, InputType, Variant } from "./enums";
 
 export interface Image {
@@ -88,4 +89,11 @@ export interface Color {
 	type: Variant;
 	is_dark_text: boolean;
 	hex: string;
+}
+
+export interface Introduction {
+	title: string;
+	subtitle: string;
+	description: string;
+	subservices: Subservice[];
 }

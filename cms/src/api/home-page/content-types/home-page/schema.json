@@ -22,7 +22,8 @@
         "block.featured-services",
         "block.list",
         "block.featured-offers",
-        "block.full-section"
+        "block.full-section",
+        "block.featured-projects"
       ]
     }
   }
