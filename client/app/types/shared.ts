@@ -1,5 +1,5 @@
 import type { Subservice } from "./content/collections";
-import type { AlignContent, ButtonType, ColumnSpan, InputType, Variant } from "./enums";
+import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Variant } from "./enums";
 
 export interface Image {
 	id: number;
@@ -25,6 +25,10 @@ export interface Button {
 	label: string;
 	variant: Variant;
 	type: ButtonType;
+	size: Size;
+	icon: Icon;
+	icon_is_postion_right: boolean;
+	aria_label: string;
 }
 
 export interface Link {

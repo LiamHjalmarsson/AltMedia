@@ -300,8 +300,8 @@ export interface UiButton extends Struct.ComponentSchema {
   attributes: {
     aria_label: Schema.Attribute.String;
     icon: Schema.Attribute.Component<'ui.icon', false>;
-    icon_position: Schema.Attribute.Enumeration<['left', 'right']> &
-      Schema.Attribute.DefaultTo<'right'>;
+    icon_is_postion_right: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     size: Schema.Attribute.Enumeration<['xm', 'xs', 'sm', 'md', 'lg', 'xl']> &
       Schema.Attribute.DefaultTo<'md'>;

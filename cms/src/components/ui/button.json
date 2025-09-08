@@ -45,13 +45,9 @@
       "component": "ui.icon",
       "repeatable": false
     },
-    "icon_position": {
-      "type": "enumeration",
-      "default": "right",
-      "enum": [
-        "left",
-        "right"
-      ]
+    "icon_is_postion_right": {
+      "type": "boolean",
+      "default": true
     },
     "aria_label": {
       "type": "string"
