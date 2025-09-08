@@ -36,6 +36,17 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockFeaturedArticles extends Struct.ComponentSchema {
+  collectionName: 'components_block_featured_articles';
+  info: {
+    displayName: 'Featured Articles';
+  };
+  attributes: {
+    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+  };
+}
+
 export interface BlockFeaturedOffers extends Struct.ComponentSchema {
   collectionName: 'components_block_featured_offers';
   info: {
@@ -346,6 +357,7 @@ declare module '@strapi/strapi' {
       'block-items.faq-item': BlockItemsFaqItem;
       'block.cta': BlockCta;
       'block.faq': BlockFaq;
+      'block.featured-articles': BlockFeaturedArticles;
       'block.featured-offers': BlockFeaturedOffers;
       'block.featured-projects': BlockFeaturedProjects;
       'block.featured-services': BlockFeaturedServices;
