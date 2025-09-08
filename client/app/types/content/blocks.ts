@@ -3,7 +3,7 @@ import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
 import type { Form } from "../shared";
-import type { Offer, Project, Service } from "./collections";
+import type { Offer, Service } from "./collections";
 
 export type Blocks =
 	| HeroBlock
@@ -11,7 +11,8 @@ export type Blocks =
 	| ListBlock
 	| FeaturedOffersBlock
 	| FullSectionBlock
-	| FeaturedProjectsBlock;
+	| FeaturedProjectsBlock
+	| FaqBlock;
 
 export interface Hero {
 	id: number;

@@ -42,7 +42,7 @@ const textAlign = computed(() => {
 					</div>
 				</div>
 
-				<HeroBlockForm v-if="block.has_form" :form="block.form" />
+				<HeroForm v-if="block.has_form" :form="block.form" />
 			</div>
 		</Container>
 

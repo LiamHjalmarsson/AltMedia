@@ -11,7 +11,7 @@ const { block } = defineProps<{ block: FeaturedProjectsBlock }>();
 			</div>
 
 			<div class="flex space-x-lg">
-				<FeaturedProjectsBlockItem v-for="project in block.projects" :key="project.id" :project />
+				<ProjectsItem v-for="project in block.projects" :key="project.id" :project />
 			</div>
 		</Container>
 	</Section>
