@@ -24,7 +24,8 @@
         "block.featured-offers",
         "block.full-section",
         "block.featured-projects",
-        "block.faq"
+        "block.faq",
+        "block.featured-articles"
       ]
     }
   }

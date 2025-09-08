@@ -97,3 +97,17 @@ export interface FeaturedProjectsBlock {
 	heading: Heading;
 	projects: FeaturedProject[];
 }
+
+export interface FaqItem {
+	id: number;
+	question: string;
+	answer: BlockNode[];
+}
+
+export interface FaqBlock {
+	__component: "block.faq";
+	id: number;
+	heading: Heading;
+	items: FaqItem[];
+	icon: Icon;
+}
