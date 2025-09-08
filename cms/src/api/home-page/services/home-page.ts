@@ -187,6 +187,27 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 								},
 							},
 						},
+						"block.featured-articles": {
+							populate: {
+								fields: ["id"],
+								heading: {
+									fields: ["title", "align_content", "has_link"],
+									populate: {
+										link: {
+											fields: ["label", "url", "variant", "is_external"],
+										},
+									},
+								},
+								articles: {
+									fields: ["title", "slug", "date", "description"],
+									populate: {
+										cover: {
+											fields: ["formats", "name", "width", "height", "url", "provider"],
+										},
+									},
+								},
+							},
+						},
 					},
 				},
 			},
