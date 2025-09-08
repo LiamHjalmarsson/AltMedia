@@ -357,8 +357,14 @@ export interface UiLink extends Struct.ComponentSchema {
     displayName: 'Link';
   };
   attributes: {
+    aria_label: Schema.Attribute.String;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    icon_is_postion_right: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
     is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
+    size: Schema.Attribute.Enumeration<['xm', 'xs', 'sm', 'md', 'lg', 'xl']> &
+      Schema.Attribute.DefaultTo<'md'>;
     url: Schema.Attribute.String;
     variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
   };

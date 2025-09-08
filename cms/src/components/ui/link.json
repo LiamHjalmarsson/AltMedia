@@ -1,27 +1,42 @@
 {
-  "collectionName": "components_ui_links",
-  "info": {
-    "displayName": "Link"
-  },
-  "options": {},
-  "attributes": {
-    "label": {
-      "type": "string"
-    },
-    "url": {
-      "type": "string"
-    },
-    "variant": {
-      "type": "enumeration",
-      "enum": [
-        "primary",
-        "secondary"
-      ]
-    },
-    "is_external": {
-      "type": "boolean",
-      "default": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_ui_links",
+	"info": {
+		"displayName": "Link"
+	},
+	"options": {},
+	"attributes": {
+		"label": {
+			"type": "string"
+		},
+		"url": {
+			"type": "string"
+		},
+		"variant": {
+			"type": "enumeration",
+			"enum": ["primary", "secondary"]
+		},
+		"is_external": {
+			"type": "boolean",
+			"default": false
+		},
+		"size": {
+			"type": "enumeration",
+			"default": "md",
+			"enum": ["xm", "xs", "sm", "md", "lg", "xl"]
+		},
+		"icon": {
+			"type": "component",
+			"component": "ui.icon",
+			"repeatable": false
+		},
+		"icon_is_postion_right": {
+			"type": "boolean",
+			"default": true
+		},
+		"aria_label": {
+			"type": "string"
+		}
+	},
+	"config": {}
 }
+
