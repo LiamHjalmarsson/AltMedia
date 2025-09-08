@@ -31,6 +31,7 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.Component<'ui.heading', false>;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
     items: Schema.Attribute.Component<'block-items.faq-item', true>;
   };
 }
