@@ -6,22 +6,55 @@
   "options": {},
   "attributes": {
     "label": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "variant": {
       "type": "enumeration",
+      "default": "primary",
       "enum": [
         "primary",
-        "secondary"
+        "secondary",
+        "tertiary",
+        "ghost"
       ]
     },
     "type": {
       "type": "enumeration",
+      "default": "button",
       "enum": [
         "button",
         "submit",
         "reset"
       ]
+    },
+    "size": {
+      "type": "enumeration",
+      "default": "md",
+      "enum": [
+        "xm",
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "icon": {
+      "type": "component",
+      "component": "ui.icon",
+      "repeatable": false
+    },
+    "icon_position": {
+      "type": "enumeration",
+      "default": "right",
+      "enum": [
+        "left",
+        "right"
+      ]
+    },
+    "aria_label": {
+      "type": "string"
     }
   },
   "config": {}

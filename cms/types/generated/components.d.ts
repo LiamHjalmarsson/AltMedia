@@ -18,7 +18,10 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
   attributes: {
     buttons: Schema.Attribute.Component<'ui.button', true>;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 500;
+      }>;
     links: Schema.Attribute.Component<'ui.link', true>;
     title: Schema.Attribute.String;
   };
@@ -295,9 +298,19 @@ export interface UiButton extends Struct.ComponentSchema {
     displayName: 'Button';
   };
   attributes: {
-    label: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']>;
-    variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
+    aria_label: Schema.Attribute.String;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    icon_position: Schema.Attribute.Enumeration<['left', 'right']> &
+      Schema.Attribute.DefaultTo<'right'>;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    size: Schema.Attribute.Enumeration<['xm', 'xs', 'sm', 'md', 'lg', 'xl']> &
+      Schema.Attribute.DefaultTo<'md'>;
+    type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']> &
+      Schema.Attribute.DefaultTo<'button'>;
+    variant: Schema.Attribute.Enumeration<
+      ['primary', 'secondary', 'tertiary', 'ghost']
+    > &
+      Schema.Attribute.DefaultTo<'primary'>;
   };
 }
 

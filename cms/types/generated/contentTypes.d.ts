@@ -497,9 +497,10 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    features: Schema.Attribute.JSON;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
+    features: Schema.Attribute.JSON & Schema.Attribute.Required;
+    icon: Schema.Attribute.Component<'ui.icon', false> &
+      Schema.Attribute.Required;
     is_populare: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'> &
@@ -507,7 +508,7 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
     month_price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     start_price: Schema.Attribute.Integer;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

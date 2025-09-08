@@ -9,7 +9,9 @@
       "type": "string"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "minLength": 500,
+      "unique": false
     },
     "buttons": {
       "type": "component",
