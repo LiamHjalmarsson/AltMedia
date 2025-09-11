@@ -218,8 +218,8 @@ export interface GlobalMenuLink extends Struct.ComponentSchema {
     displayName: 'Menu Link';
   };
   attributes: {
-    label: Schema.Attribute.String;
-    url: Schema.Attribute.String;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
