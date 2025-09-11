@@ -12,11 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "service": {
       "type": "relation",
@@ -30,6 +32,24 @@
     },
     "content": {
       "type": "blocks"
+    },
+    "hero": {
+      "type": "component",
+      "component": "block.hero",
+      "repeatable": false
+    },
+    "introduction": {
+      "type": "component",
+      "component": "sections.introduction",
+      "repeatable": false
+    },
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "block.list",
+        "block.info",
+        "block.full-section"
+      ]
     }
   }
 }
