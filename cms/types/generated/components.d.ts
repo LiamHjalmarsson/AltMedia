@@ -173,6 +173,8 @@ export interface FormInput extends Struct.ComponentSchema {
     placeholder: Schema.Attribute.String;
     required: Schema.Attribute.Boolean;
     rows: Schema.Attribute.Integer;
+    select_multiple: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     type: Schema.Attribute.Enumeration<['input', 'textarea', 'select']>;
   };
 }

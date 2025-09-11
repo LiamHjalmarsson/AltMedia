@@ -74,6 +74,20 @@
         "two-thirds",
         "one-third"
       ]
+    },
+    "select_multiple": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "select"
+          ]
+        }
+      },
+      "default": false
     }
   },
   "config": {}
