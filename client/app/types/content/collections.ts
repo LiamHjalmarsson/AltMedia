@@ -1,23 +1,19 @@
 import type { Icon, Image, Introduction } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
-import type { Blocks, FullSectionBlock, Hero, InfoBlock } from "./blocks";
+import type { Blocks, FullSectionBlock, Hero, InfoBlock, ListBlock } from "./blocks";
 
-export interface Subservice {
+export interface Article {
 	id: number;
 	title: string;
 	slug: string;
-	content: BlockNode[];
-	service: Service;
-	tags: string[];
-}
-
-export interface Service {
-	id: number;
-	title: string;
-	slug: string;
-	description: string;
-	icon: Icon;
-	subservices: Subservice[];
+	cover: Image;
+	description?: string;
+	published_date: Date;
+	reading_time_minutes: number;
+	services: Service[];
+	hero?: Hero;
+	introdunction?: Introduction;
+	blocks?: collectionBlocks[];
 }
 
 export interface Offer {
@@ -37,9 +33,37 @@ export interface Project {
 	slug: string;
 	cover: Image;
 	services: Service[];
-	hero: Hero;
-	introdunction: Introduction;
-	blocks: ProjectBlocks[];
+	client?: string;
+	date?: Date;
+	hero?: Hero;
+	introdunction?: Introduction;
+	blocks?: collectionBlocks[];
 }
 
-export type ProjectBlocks = FullSectionBlock | InfoBlock;
+export interface Service {
+	id: number;
+	title: string;
+	slug: string;
+	subservices: Subservice[];
+	description: string;
+	icon: Icon;
+}
+
+export interface Subservice {
+	id: number;
+	title: string;
+	slug: string;
+	service?: Service;
+	tags?: Tag[];
+	content: BlockNode[];
+	hero?: Hero;
+	introduction?: Introduction;
+	blocks?: collectionBlocks[];
+}
+
+export interface Tag {
+	id: number;
+	title: string;
+}
+
+export type collectionBlocks = FullSectionBlock | InfoBlock | ListBlock;

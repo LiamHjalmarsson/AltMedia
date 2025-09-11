@@ -1,5 +1,5 @@
-import type { Button, Contact, Image, Seo, Link } from "../shared";
-import type { Blocks, Hero } from "./blocks";
+import type { Button, Image, Seo, Link, Icon } from "../shared";
+import type { Blocks, Cta, Hero } from "./blocks";
 
 export interface GlobalConfig {
 	id: number;
@@ -20,6 +20,8 @@ export interface HomePage {
 	blocks: Blocks[];
 }
 
+// Components
+
 export interface MenuLink {
 	id: number;
 	label: string;
@@ -30,6 +32,20 @@ export interface Navigation {
 	id: number;
 	logo?: Image;
 	links: MenuLink[];
+	aria_label: string;
+}
+
+export interface SocialMedia {
+	id: number;
+	url: string;
+	icon: Icon;
+}
+
+export interface Contact {
+	id: number;
+	email: string;
+	phone: string;
+	social_medias?: SocialMedia[];
 }
 
 export interface FooterColumn {
@@ -39,15 +55,8 @@ export interface FooterColumn {
 	links: MenuLink[];
 }
 
-export interface FooterCta {
-	title: string;
-	description: string;
-	buttons?: Button[];
-	links?: Link[];
-}
-
 export interface Footer {
 	id: number;
-	cta?: FooterCta;
+	cta?: Cta;
 	footer_columns?: FooterColumn[];
 }

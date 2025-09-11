@@ -1,5 +1,17 @@
+import type { Block } from "typescript";
 import type { Subservice } from "./content/collections";
 import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Variant } from "./enums";
+
+// Image
+
+export interface ImageFormat {
+	name: string;
+	url: string;
+	width: number;
+	height: number;
+	size: number;
+	path?: string | null;
+}
 
 export interface Image {
 	id: number;
@@ -11,13 +23,46 @@ export interface Image {
 	provider?: string;
 	alternativeText?: string;
 	caption?: string;
-	formats?: [];
+	formats?: {
+		thumbnail?: ImageFormat;
+		small?: ImageFormat;
+		medium?: ImageFormat;
+		large?: ImageFormat;
+	};
+}
+
+// UI
+
+export interface Link {
+	id: number;
+	label: string;
+	url: string;
+	variant: Variant;
+	is_external: boolean;
+	size: Size;
+	icon: Icon;
+	icon_is_postion_right: boolean;
+	aria_label: string;
 }
 
 export interface Icon {
-	icon_name: string;
 	is_image: boolean;
+	icon_name?: string;
 	image?: Image;
+}
+
+export interface Heading {
+	title: string;
+	align_content: AlignContent;
+	has_link: boolean;
+	link: Link;
+}
+
+export interface Card {
+	id: number;
+	title: string;
+	content: Block[];
+	icon: Icon;
 }
 
 export interface Button {
@@ -31,35 +76,36 @@ export interface Button {
 	aria_label: string;
 }
 
-export interface Link {
-	id: number;
-	label: string;
-	url: string;
-	variant: Variant;
-	is_external: boolean;
+//  Styles
+
+export interface Color {
+	is_hex: boolean;
+	type?: Variant;
+	hex?: string;
+	is_dark_text: boolean;
 }
+
+// Seo
 
 export interface Seo {
 	id: number;
 	meta_title: string;
 	meta_description: string;
+	meta_image: Image;
 	meta_canonical_url: string;
 	prevent_index: boolean;
-	meta_image?: Image;
 }
 
-export interface SocialMedia {
-	id: number;
-	url: string;
-	icon?: Icon;
+// Sections
+
+export interface Introduction {
+	title: string;
+	subtitle: string;
+	description: string;
+	subservices: Subservice[];
 }
 
-export interface Contact {
-	id: number;
-	email: string;
-	phone: string;
-	social_medias?: SocialMedia[];
-}
+// Form
 
 export interface Input {
 	label: string;
@@ -79,25 +125,4 @@ export interface Form {
 	inputs: Input[];
 	columns: number;
 	button: Button;
-}
-
-export interface Heading {
-	title: string;
-	align_content?: AlignContent;
-	has_link: boolean;
-	link: Link;
-}
-
-export interface Color {
-	is_hex: boolean;
-	type: Variant;
-	is_dark_text: boolean;
-	hex: string;
-}
-
-export interface Introduction {
-	title: string;
-	subtitle: string;
-	description: string;
-	subservices: Subservice[];
 }
