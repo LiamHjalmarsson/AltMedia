@@ -199,7 +199,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 									},
 								},
 								articles: {
-									fields: ["title", "slug", "date", "description"],
+									fields: ["title", "slug", "published_date", "description"],
 									populate: {
 										cover: {
 											fields: ["formats", "name", "width", "height", "url", "provider"],

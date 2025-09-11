@@ -391,7 +391,6 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    date: Schema.Attribute.Date;
     description: Schema.Attribute.Text;
     hero: Schema.Attribute.Component<'block.hero', false>;
     introduction: Schema.Attribute.Component<'sections.introduction', false>;
@@ -401,7 +400,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
+    published_date: Schema.Attribute.Date;
     publishedAt: Schema.Attribute.DateTime;
+    reading_time_min: Schema.Attribute.Integer;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
@@ -527,10 +528,12 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
   attributes: {
     blocks: Schema.Attribute.DynamicZone<['block.full-section', 'block.info']>;
+    client: Schema.Attribute.String;
     cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
     hero: Schema.Attribute.Component<'block.hero', false>;
     introduction: Schema.Attribute.Component<'sections.introduction', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;

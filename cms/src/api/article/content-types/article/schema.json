@@ -31,6 +31,17 @@
     "description": {
       "type": "text"
     },
+    "published_date": {
+      "type": "date"
+    },
+    "reading_time_min": {
+      "type": "integer"
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
+    },
     "hero": {
       "type": "component",
       "component": "block.hero",
@@ -41,9 +52,6 @@
       "component": "sections.introduction",
       "repeatable": false
     },
-    "date": {
-      "type": "date"
-    },
     "blocks": {
       "type": "dynamiczone",
       "components": [
@@ -51,11 +59,6 @@
         "block.list",
         "block.info"
       ]
-    },
-    "services": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::service.service"
     }
   }
 }

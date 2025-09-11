@@ -33,6 +33,12 @@
       "relation": "oneToMany",
       "target": "api::service.service"
     },
+    "client": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
     "hero": {
       "type": "component",
       "component": "block.hero",
