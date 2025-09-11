@@ -5,19 +5,6 @@
   },
   "options": {},
   "attributes": {
-    "icon_name": {
-      "type": "string",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "is_image"
-            },
-            false
-          ]
-        }
-      }
-    },
     "image": {
       "type": "media",
       "conditions": {
@@ -36,6 +23,19 @@
         "files",
         "videos"
       ]
+    },
+    "icon_name": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "is_image"
+            },
+            false
+          ]
+        }
+      }
     },
     "is_image": {
       "type": "boolean",

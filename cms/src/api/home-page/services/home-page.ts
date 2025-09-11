@@ -13,7 +13,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 					fields: ["title", "description", "colored_words", "align_content", "has_form"],
 					populate: {
 						cover: {
-							fields: ["alternativeText", "caption", "width", "height", "url", "provider"],
+							fields: ["alternativeText", "caption", "width", "height", "url", "provider", "formats"],
 						},
 						links: {
 							fields: ["label", "url", "variant", "is_external"],

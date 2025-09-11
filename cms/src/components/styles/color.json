@@ -29,10 +29,6 @@
         "ghost"
       ]
     },
-    "is_dark_text": {
-      "type": "boolean",
-      "default": false
-    },
     "hex": {
       "type": "string",
       "conditions": {
@@ -45,6 +41,10 @@
           ]
         }
       }
+    },
+    "is_dark_text": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

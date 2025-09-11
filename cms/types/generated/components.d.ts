@@ -243,8 +243,9 @@ export interface GlobalSocialMedia extends Struct.ComponentSchema {
     displayName: 'Social Media';
   };
   attributes: {
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    url: Schema.Attribute.String;
+    icon: Schema.Attribute.Component<'ui.icon', false> &
+      Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -335,10 +336,11 @@ export interface UiHeading extends Struct.ComponentSchema {
     displayName: 'Heading';
   };
   attributes: {
-    align_content: Schema.Attribute.Enumeration<['left', 'right', 'center']>;
+    align_content: Schema.Attribute.Enumeration<['left', 'right', 'center']> &
+      Schema.Attribute.DefaultTo<'left'>;
     has_link: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     link: Schema.Attribute.Component<'ui.link', false>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 

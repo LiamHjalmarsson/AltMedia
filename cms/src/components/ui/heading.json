@@ -6,10 +6,12 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "align_content": {
       "type": "enumeration",
+      "default": "left",
       "enum": [
         "left",
         "right",
