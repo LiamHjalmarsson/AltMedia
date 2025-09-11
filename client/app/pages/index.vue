@@ -17,7 +17,7 @@ const blocks = computed<Blocks[]>(() => dataResponse?.value?.data.blocks ?? []);
 </script>
 
 <template>
-	<HeroBlock :block="hero" />
+	<Hero :block="hero" />
 
 	<BlocksRenderer :blocks="blocks" />
 </template>

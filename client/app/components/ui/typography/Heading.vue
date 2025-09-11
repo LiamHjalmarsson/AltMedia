@@ -23,8 +23,8 @@ const alignClass = computed(() => {
 			{{ title }}
 		</h2>
 
-		<ButtonLink v-if="has_link" :to="link.url">
-			{{ link.label }} <Icon name="material-symbols:arrow-forward" />
+		<ButtonLink v-if="has_link" :to="link?.url">
+			{{ link?.label }} <Icon name="material-symbols:arrow-forward" />
 		</ButtonLink>
 	</div>
 </template>

@@ -55,7 +55,7 @@ export interface Heading {
 	title: string;
 	align_content: AlignContent;
 	has_link: boolean;
-	link: Link;
+	link?: Link;
 }
 
 export interface Card {
