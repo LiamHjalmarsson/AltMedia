@@ -1,10 +1,14 @@
-import type { Strapi5ResponseMany } from "@nuxtjs/strapi";
-import type { Service } from "~/types/content/collections";
+import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
+import type { Service, Subservice } from "~/types/content/collections";
 
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
-	const { find } = useStrapi();
+	const currentService = ref<Service>();
+
+	const currentSubService = ref<Subservice>();
+
+	const { find, findOne } = useStrapi();
 
 	async function fetchServices(title?: string | null) {
 		const params: {
@@ -26,5 +30,21 @@ export const useServiceStore = defineStore("services", () => {
 		return services.value;
 	}
 
-	return { services, fetchServices };
+	async function fetchService(id: string) {
+		const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", id);
+
+		currentService.value = result.data;
+
+		return currentService.value;
+	}
+
+	async function fetchSubService(id: string) {
+		const result: Strapi5ResponseSingle<Subservice> = await findOne<Subservice>("subservices", id);
+
+		currentSubService.value = result.data;
+
+		return currentService.value;
+	}
+
+	return { services, currentService, currentSubService, fetchServices, fetchService, fetchSubService };
 });
