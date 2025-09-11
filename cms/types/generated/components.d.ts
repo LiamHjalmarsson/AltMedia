@@ -229,6 +229,7 @@ export interface GlobalNavigation extends Struct.ComponentSchema {
     displayName: 'Navigation';
   };
   attributes: {
+    aria_label: Schema.Attribute.String;
     links: Schema.Attribute.Component<'global.menu-link', true>;
     logo: Schema.Attribute.Media<'images' | 'files'>;
   };
