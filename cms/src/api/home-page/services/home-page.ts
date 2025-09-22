@@ -111,7 +111,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 										"title",
 										"description",
 										"features",
-										"is_populare",
+										"is_popular",
 										"start_price",
 										"month_price",
 									],

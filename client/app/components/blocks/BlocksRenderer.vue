@@ -13,5 +13,6 @@ defineProps<{ blocks: Blocks[] }>();
 		<FullSection v-if="block.__component === 'block.full-section'" :block="block" />
 		<Projects v-if="block.__component === 'block.featured-projects'" :block="block" />
 		<Faq v-if="block.__component === 'block.faq'" :block="block" />
+		<Articles v-else-if="block.__component === 'block.featured-articles'" :block="block" />
 	</template>
 </template>

@@ -7,7 +7,7 @@ const { block } = defineProps<{ block: FeaturedProjectsBlock }>();
 	<Section>
 		<Container>
 			<div class="flex justify-between items-center mb-sm md:mb-md lg:mb-lg xl:mb-xl">
-				<Heading :title="block.heading.title" :alignContent="block.heading.align_content" />
+				<Heading v-bind="block.heading" />
 			</div>
 
 			<div class="flex space-x-lg">

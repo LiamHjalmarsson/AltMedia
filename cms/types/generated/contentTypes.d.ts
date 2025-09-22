@@ -502,7 +502,7 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
     features: Schema.Attribute.JSON & Schema.Attribute.Required;
     icon: Schema.Attribute.Component<'ui.icon', false> &
       Schema.Attribute.Required;
-    is_populare: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_popular: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'> &
       Schema.Attribute.Private;

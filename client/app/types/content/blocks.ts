@@ -99,7 +99,7 @@ export interface FeaturedArticle {
 	cover: Image;
 }
 
-export interface FeaturedAriclesBlock {
+export interface FeaturedArticlesBlock {
 	__component: "block.featured-articles";
 	id: number;
 	heading: Heading;
@@ -140,6 +140,6 @@ export type Blocks =
 	| FullSectionBlock
 	| FeaturedProjectsBlock
 	| FaqBlock
-	| FeaturedAriclesBlock
+	| FeaturedArticlesBlock
 	| InfoBlock
 	| CtaBlock;

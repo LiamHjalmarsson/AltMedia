@@ -304,7 +304,7 @@ export interface UiButton extends Struct.ComponentSchema {
   attributes: {
     aria_label: Schema.Attribute.String;
     icon: Schema.Attribute.Component<'ui.icon', false>;
-    icon_is_postion_right: Schema.Attribute.Boolean &
+    icon_is_position_right: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     size: Schema.Attribute.Enumeration<['xm', 'xs', 'sm', 'md', 'lg', 'xl']> &
@@ -364,7 +364,7 @@ export interface UiLink extends Struct.ComponentSchema {
   attributes: {
     aria_label: Schema.Attribute.String;
     icon: Schema.Attribute.Component<'ui.icon', false>;
-    icon_is_postion_right: Schema.Attribute.Boolean &
+    icon_is_position_right: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;

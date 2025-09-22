@@ -12,7 +12,7 @@ export interface Article {
 	reading_time_minutes: number;
 	services: Service[];
 	hero?: Hero;
-	introdunction?: Introduction;
+	introduction?: Introduction;
 	blocks?: collectionBlocks[];
 }
 
@@ -22,7 +22,7 @@ export interface Offer {
 	description?: string;
 	icon?: Icon;
 	features?: string[];
-	is_populare: boolean;
+	is_popular: boolean;
 	start_price: number;
 	month_price: number;
 }
@@ -36,7 +36,7 @@ export interface Project {
 	client?: string;
 	date?: Date;
 	hero?: Hero;
-	introdunction?: Introduction;
+	introduction?: Introduction;
 	blocks?: collectionBlocks[];
 }
 

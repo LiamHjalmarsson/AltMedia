@@ -30,14 +30,14 @@ function onToggle(id: number) {
 			</h4>
 			<button
 				:id="`faq-title-${item.id}`"
-				class="text-left flex justify-between items-center focus:outline-none"
+				class="text-left flex justify-between items-center focus:outline-none cursor-pointer"
 				:aria-expanded="activeId === item.id"
 				:aria-controls="`faq-answer-${item.id}`"
 				type="button">
 				<Icon
 					name="heroicons:chevron-down"
 					:class="[
-						'text-heading-xs transition-transform duration-300',
+						'text-heading-xs transition-transform duration-300 cursor-pointer',
 						activeId === item.id ? 'rotate-180' : '',
 					]" />
 			</button>

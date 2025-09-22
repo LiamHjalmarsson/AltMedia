@@ -17,14 +17,15 @@ const alignClass = computed(() => {
 </script>
 
 <template>
-	<div :class="alignClass">
+	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
 		<h2
 			class="text-heading-lg md:text-heading-xl lg:text-heading-xxl xl:text-heading-xxxl 2xl:text-heading-xxxxl font-semibold tracking-tight font-heading">
 			{{ title }}
 		</h2>
 
-		<ButtonLink v-if="has_link" :to="link?.url">
-			{{ link?.label }} <Icon name="material-symbols:arrow-forward" />
+		<ButtonLink v-if="has_link && link?.url" :to="link.url">
+			{{ link.label }}
+			<Icon name="material-symbols:arrow-forward" />
 		</ButtonLink>
 	</div>
 </template>

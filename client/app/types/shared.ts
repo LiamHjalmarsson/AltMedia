@@ -41,7 +41,7 @@ export interface Link {
 	is_external: boolean;
 	size: Size;
 	icon: Icon;
-	icon_is_postion_right: boolean;
+	icon_is_position_right: boolean;
 	aria_label: string;
 }
 
@@ -54,7 +54,7 @@ export interface Icon {
 export interface Heading {
 	title: string;
 	align_content: AlignContent;
-	has_link: boolean;
+	has_link?: boolean;
 	link?: Link;
 }
 
@@ -72,7 +72,7 @@ export interface Button {
 	type: ButtonType;
 	size: Size;
 	icon: Icon;
-	icon_is_postion_right: boolean;
+	icon_is_position_right: boolean;
 	aria_label: string;
 }
 

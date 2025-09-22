@@ -11,7 +11,7 @@ const toggleAnswer = (id: number) => {
 </script>
 
 <template>
-	<Section class="bg-secondary-disabled/50">
+	<Section>
 		<Container class="flex justify-between space-x-xxl">
 			<div>
 				<Heading :title="block.heading.title" :alignContent="block.heading.align_content" />

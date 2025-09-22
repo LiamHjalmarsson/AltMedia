@@ -5,7 +5,7 @@ const { offer } = defineProps<{ offer: Offer }>();
 </script>
 
 <template>
-	<Card class="p-lg relative" :class="offer.is_populare ? 'scale-105 border border-primary' : ''">
+	<Card class="p-lg relative" :class="offer.is_popular ? 'scale-105 border border-primary' : ''">
 		<div class="mx-auto my-lg">
 			<NuxtImg
 				v-if="offer.icon?.is_image"
@@ -41,7 +41,7 @@ const { offer } = defineProps<{ offer: Offer }>();
 		<ButtonLink to="/contact" class="mx-auto text-sm"> Välj {{ offer.title }} </ButtonLink>
 
 		<div
-			v-if="offer.is_populare"
+			v-if="offer.is_popular"
 			class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-lg py-xs shadow-2xl shadow-primary bg-primary rounded-full text-light font-semibold text-xs">
 			Mest populär
 		</div>

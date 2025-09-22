@@ -3,23 +3,23 @@ import gsap from "gsap";
 export function useCollapse() {
 	let isAnimating = false;
 
-	function prefersReduceMotion() {
-		return import.meta.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	function prefersReduce() {
+		return process.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	}
 
-	function onEnter(element: Element, done: () => void) {
+	function onEnter(el: Element, done: gsap.Callback) {
 		if (isAnimating) {
 			return;
 		}
 
 		isAnimating = true;
 
-		const target = element as HTMLElement;
+		const target = el as HTMLElement;
 
-		const height = target.scrollHeight;
-
-		if (prefersReduceMotion()) {
+		if (prefersReduce()) {
 			target.style.height = "auto";
+
+			target.style.opacity = "1";
 
 			isAnimating = false;
 
@@ -28,20 +28,20 @@ export function useCollapse() {
 			return;
 		}
 
-		gsap.set(target, {
-			height: 0,
-			overflow: "hidden",
-		});
+		target.style.height = "0px";
+
+		const height = target.scrollHeight;
+
+		gsap.set(target, { height: 0, opacity: 0, overflow: "hidden", immediateRender: true });
 
 		gsap.to(target, {
 			height,
-			duration: 0.4,
+			opacity: 1,
+			duration: 0.3,
 			ease: "power3.out",
+			overwrite: "auto",
 			onComplete: () => {
-				gsap.set(target, {
-					height: "auto",
-					clearProps: "overflow",
-				});
+				gsap.set(target, { height: "auto", clearProps: "overflow" });
 
 				isAnimating = false;
 
@@ -50,19 +50,19 @@ export function useCollapse() {
 		});
 	}
 
-	function onLeave(element: Element, done: () => void) {
+	function onLeave(el: Element, done: gsap.Callback) {
 		if (isAnimating) {
 			return;
 		}
 
 		isAnimating = true;
 
-		const target = element as HTMLElement;
+		const target = el as HTMLElement;
 
-		const height = target.scrollHeight;
-
-		if (prefersReduceMotion()) {
+		if (prefersReduce()) {
 			target.style.height = "0px";
+
+			target.style.opacity = "0";
 
 			isAnimating = false;
 
@@ -71,20 +71,15 @@ export function useCollapse() {
 			return;
 		}
 
-		gsap.set(target, {
-			height,
-			overflow: "hidden",
-		});
-
 		gsap.to(target, {
 			height: 0,
+			opacity: 0,
 			duration: 0.4,
 			ease: "power3.in",
+			overwrite: "auto",
 			onComplete: () => {
-				gsap.set(target, { clearProps: "height,overflow" });
-
+				gsap.set(target, { clearProps: "all" });
 				isAnimating = false;
-
 				done();
 			},
 		});

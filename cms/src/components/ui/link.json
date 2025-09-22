@@ -29,7 +29,7 @@
 			"component": "ui.icon",
 			"repeatable": false
 		},
-		"icon_is_postion_right": {
+		"icon_is_position_right": {
 			"type": "boolean",
 			"default": true
 		},
