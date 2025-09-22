@@ -36,7 +36,7 @@ export interface Hero {
 	id: number;
 	title: string;
 	description: string;
-	colored_words: {};
+	colored_words: Record<string, string>;
 	cover: Image[];
 	align_content: AlignContent;
 	links: Link[];

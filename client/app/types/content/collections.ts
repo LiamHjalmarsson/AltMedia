@@ -9,7 +9,7 @@ export interface Article {
 	cover: Image;
 	description?: string;
 	published_date: Date;
-	reading_time_minutes: number;
+	reading_time_min: number;
 	services: Service[];
 	hero?: Hero;
 	introduction?: Introduction;

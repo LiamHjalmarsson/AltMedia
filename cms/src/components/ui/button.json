@@ -22,7 +22,7 @@
 		"size": {
 			"type": "enumeration",
 			"default": "md",
-			"enum": ["xm", "xs", "sm", "md", "lg", "xl"]
+			"enum": ["xss", "xs", "sm", "md", "lg", "xl"]
 		},
 		"icon": {
 			"type": "component",
