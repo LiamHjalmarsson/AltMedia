@@ -31,7 +31,8 @@ const slug = computed(() => `/articles/${article.slug}`);
 
 				<div class="mt-auto flex items-center justify-between pt-sm">
 					<div class="text-xs text-dark-gray">
-						<span v-if="article.published_date">{{ article.published_date }}</span>
+						<div v-if="article.published_date">{{ article.published_date }}</div>
+						<div v-if="article.reading_time_min">{{ article.reading_time_min }} min</div>
 					</div>
 
 					<ReadMoreButton class="ml-auto" />

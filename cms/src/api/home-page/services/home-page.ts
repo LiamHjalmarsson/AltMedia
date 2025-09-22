@@ -3,68 +3,24 @@
  */
 
 import { factories } from "@strapi/strapi";
+import { headingPopulate, heroPopulate, iconPopulate } from "../../../utils/populate";
 
 export default factories.createCoreService("api::home-page.home-page", ({ strapi }) => ({
 	async getHomePage() {
 		return strapi.service("api::home-page.home-page").find({
 			fields: ["id", "documentId"],
 			populate: {
-				hero: {
-					fields: ["title", "description", "colored_words", "align_content", "has_form"],
-					populate: {
-						cover: {
-							fields: ["alternativeText", "caption", "width", "height", "url", "provider", "formats"],
-						},
-						links: {
-							fields: ["label", "url", "variant", "is_external"],
-						},
-						form: {
-							fields: ["title", "description", "columns"],
-							populate: {
-								inputs: {
-									fields: [
-										"label",
-										"name",
-										"placeholder",
-										"required",
-										"type",
-										"input_type",
-										"rows",
-										"options",
-										"column_span",
-									],
-								},
-								button: {
-									fields: ["label", "variant", "type"],
-								},
-							},
-						},
-					},
-				},
+				hero: heroPopulate,
 				blocks: {
 					on: {
 						"block.featured-services": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								services: {
 									fields: ["title", "slug", "description"],
 									populate: {
-										icon: {
-											fields: ["icon_name", "is_image"],
-											populate: {
-												image: {
-													fields: ["formats", "name", "width", "height", "url", "provider"],
-												},
-											},
-										},
+										icon: iconPopulate,
 									},
 								},
 							},
@@ -72,25 +28,11 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 						"block.list": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								items: {
 									fields: ["title", "content"],
 									populate: {
-										icon: {
-											fields: ["icon_name", "is_image"],
-											populate: {
-												image: {
-													fields: ["formats", "name", "width", "height", "url", "provider"],
-												},
-											},
-										},
+										icon: iconPopulate,
 									},
 								},
 							},
@@ -98,14 +40,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 						"block.featured-offers": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								offers: {
 									fields: [
 										"title",
@@ -116,14 +51,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 										"month_price",
 									],
 									populate: {
-										icon: {
-											fields: ["icon_name", "is_image"],
-											populate: {
-												image: {
-													fields: ["formats", "name", "width", "height", "url", "provider"],
-												},
-											},
-										},
+										icon: iconPopulate,
 									},
 								},
 							},
@@ -145,14 +73,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 						"block.featured-projects": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								projects: {
 									fields: ["title", "slug"],
 									populate: {
@@ -166,40 +87,19 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 						"block.faq": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								items: {
 									fields: ["question", "answer"],
 								},
-								icon: {
-									fields: ["icon_name", "is_image"],
-									populate: {
-										image: {
-											fields: ["formats", "name", "width", "height", "url", "provider"],
-										},
-									},
-								},
+								icon: iconPopulate,
 							},
 						},
 						"block.featured-articles": {
 							populate: {
 								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link"],
-									populate: {
-										link: {
-											fields: ["label", "url", "variant", "is_external"],
-										},
-									},
-								},
+								heading: headingPopulate,
 								articles: {
-									fields: ["title", "slug", "published_date", "description"],
+									fields: ["title", "slug", "published_date", "description", "reading_time_min"],
 									populate: {
 										cover: {
 											fields: ["formats", "name", "width", "height", "url", "provider"],
