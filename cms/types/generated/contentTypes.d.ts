@@ -531,10 +531,6 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
       [
         'block.cta',
         'block.faq',
-        'block.featured-articles',
-        'block.featured-offers',
-        'block.featured-projects',
-        'block.featured-services',
         'block.full-section',
         'block.hero',
         'block.info',
