@@ -4,14 +4,12 @@
 
 import { factories } from "@strapi/strapi";
 import {
-	featuredArticlesBlockPopulate,
 	fullSectionPopulateBlock,
-	heroPopulate,
-	listPopulateBlock,
-	faqBlockPopulate,
-	featuredServicesBlockPopulate,
-	featuredOffersBlockPopulate,
-	featuredProjectsBlockPopulate,
+	imagePopulate,
+	linkPopulate,
+	formPopulate,
+	headingPopulate,
+	iconPopulate,
 } from "../../../utils/populate";
 
 export default factories.createCoreService("api::home-page.home-page", ({ strapi }) => ({
@@ -35,4 +33,87 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 		});
 	},
 }));
+
+export const heroPopulate = {
+	fields: ["title", "description", "colored_words", "align_content", "has_form"],
+	populate: {
+		cover: imagePopulate,
+		links: linkPopulate,
+		form: formPopulate,
+	},
+};
+
+export const featuredServicesBlockPopulate = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		services: {
+			fields: ["title", "slug", "description"],
+			populate: {
+				icon: iconPopulate,
+			},
+		},
+	},
+};
+
+export const listPopulateBlock = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		items: {
+			fields: ["title", "content"],
+			populate: {
+				icon: iconPopulate,
+			},
+		},
+	},
+};
+
+export const featuredOffersBlockPopulate = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		offers: {
+			fields: ["title", "description", "features", "is_popular", "start_price", "month_price"],
+			populate: { icon: iconPopulate },
+		},
+	},
+};
+
+export const featuredProjectsBlockPopulate = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		projects: {
+			fields: ["title", "slug"],
+			populate: {
+				cover: imagePopulate,
+			},
+		},
+	},
+};
+
+export const faqBlockPopulate = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		items: {
+			fields: ["question", "answer"],
+		},
+		icon: iconPopulate,
+	},
+};
+
+export const featuredArticlesBlockPopulate = {
+	populate: {
+		fields: ["id"],
+		heading: headingPopulate,
+		articles: {
+			fields: ["title", "slug", "published_date", "description"],
+			populate: {
+				cover: imagePopulate,
+			},
+		},
+	},
+};
 
