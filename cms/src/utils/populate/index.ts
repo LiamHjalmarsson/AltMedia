@@ -12,4 +12,6 @@ export * from "./forms/form";
 
 // blocks
 export * from "./blocks/fullSection";
+export * from "./blocks/introduction";
+export * from "./blocks/info";
 export * from "./blocks/list";

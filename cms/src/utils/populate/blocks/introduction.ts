@@ -1,7 +1,7 @@
 export const introductionBlockPopulate = {
 	populate: {
 		fields: ["id", "title", "subtitle", "description"],
-		sub_services: {
+		subservices: {
 			fields: ["title", "content"],
 			populate: {
 				tags: {
