@@ -1,4 +1,6 @@
-import { iconPopulate, linkPopulate, imagePopulate } from "./ui";
+import { iconPopulate } from "./ui/icon";
+import { imagePopulate } from "./ui/image";
+import { linkPopulate } from "./ui/link";
 
 export const seoPopulate = {
 	fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],

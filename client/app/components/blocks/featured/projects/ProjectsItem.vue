@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted } from "vue";
 import gsap from "gsap";
 import type { FeaturedProject } from "~/types/content/blocks";
 
@@ -8,105 +8,43 @@ const { project } = defineProps<{ project: FeaturedProject }>();
 const projectRootElement = ref<HTMLElement | null>(null);
 
 onMounted(() => {
-	nextTick(() => {
-		if (!projectRootElement.value) {
-			return;
+	if (!projectRootElement.value) return;
+
+	const ctx = gsap.context(() => {
+		const projectImageElement = projectRootElement.value?.querySelector(".project-img") as HTMLElement | null;
+		const projectTitleElement = projectRootElement.value?.querySelector(".project-title") as HTMLElement | null;
+
+		if (!projectImageElement || !projectTitleElement) return;
+
+		// initial state (flyttat hit från mounted)
+		gsap.set(projectImageElement, { scale: 1, filter: "blur(0px)", opacity: 1, willChange: "transform, filter" });
+		gsap.set(projectTitleElement, { opacity: 0, y: 20, willChange: "opacity, transform" });
+		gsap.set(projectRootElement.value, { scaleX: 1, willChange: "transform" });
+
+		let tl: gsap.core.Timeline | null = null;
+
+		function onEnter() {
+			tl?.kill();
+			tl = gsap.timeline({ overwrite: "auto" });
+			tl.to(projectImageElement, { scale: 1.05, filter: "blur(10px)", duration: 0.3, ease: "power2.out" }, 0)
+				.to(projectTitleElement, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0)
+				.to(projectRootElement.value, { scaleX: 1.05, duration: 0.3, ease: "power2.out" }, 0);
 		}
 
-		const projectImageElement = projectRootElement.value.querySelector(".project-img") as HTMLElement | null;
-
-		const projectTitleElement = projectRootElement.value.querySelector(".project-title") as HTMLElement | null;
-
-		if (!projectImageElement || !projectTitleElement) {
-			return;
+		function onLeave() {
+			tl?.kill();
+			tl = gsap.timeline({ overwrite: "auto" });
+			tl.to(projectImageElement, { scale: 1, filter: "blur(0px)", duration: 0.3, ease: "power2.inOut" }, 0)
+				.to(projectTitleElement, { opacity: 0, y: 20, duration: 0.3, ease: "power2.inOut" }, 0)
+				.to(projectRootElement.value, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }, 0);
 		}
 
-		gsap.set(projectImageElement, { scale: 1, filter: "blur(0px)", opacity: 1 });
+		projectRootElement.value?.addEventListener("mouseenter", onEnter);
+		projectRootElement.value?.addEventListener("mouseleave", onLeave);
+	}, projectRootElement);
 
-		gsap.set(projectTitleElement, { opacity: 0, y: 20 });
-
-		gsap.set(projectRootElement.value, { flexGrow: 1 });
-
-		let projectAnimationTimeline: gsap.core.Timeline | null = null;
-
-		function onMouseEnter() {
-			projectAnimationTimeline?.kill();
-
-			projectAnimationTimeline = gsap.timeline({ overwrite: "auto" });
-
-			projectAnimationTimeline
-				.to(
-					projectImageElement,
-					{
-						scale: 1.05,
-						filter: "blur(10px)",
-						duration: 0.3,
-						ease: "power2.out",
-					},
-					0
-				)
-				.to(
-					projectTitleElement,
-					{
-						opacity: 1,
-						y: 0,
-						duration: 0.4,
-						ease: "power2.out",
-					},
-					0
-				)
-				.to(
-					projectRootElement.value,
-					{
-						flexGrow: 2,
-						duration: 0.3,
-						ease: "power2.out",
-					},
-					0
-				);
-		}
-
-		function onMouseLeave() {
-			projectAnimationTimeline?.kill();
-
-			projectAnimationTimeline = gsap.timeline({ overwrite: "auto" });
-
-			projectAnimationTimeline
-				.to(
-					projectImageElement,
-					{
-						scale: 1,
-						filter: "blur(0px)",
-						duration: 0.3,
-						ease: "power2.inOut",
-					},
-					0
-				)
-				.to(
-					projectTitleElement,
-					{
-						opacity: 0,
-						y: 20,
-						duration: 0.3,
-						ease: "power2.inOut",
-					},
-					0
-				)
-				.to(
-					projectRootElement.value,
-					{
-						flexGrow: 1,
-						duration: 0.3,
-						ease: "power2.inOut",
-					},
-					0
-				);
-		}
-
-		projectRootElement.value.addEventListener("mouseenter", onMouseEnter);
-
-		projectRootElement.value.addEventListener("mouseleave", onMouseLeave);
-	});
+	// cleanup
+	return () => ctx.revert();
 });
 </script>
 

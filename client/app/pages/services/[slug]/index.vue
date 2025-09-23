@@ -1,33 +1,21 @@
 <script setup lang="ts">
+import { useServiceStore } from "~/stores/services";
+
 const route = useRoute();
-
 const serviceStore = useServiceStore();
+const { services, currentService } = storeToRefs(serviceStore);
 
-const { services } = storeToRefs(serviceStore);
-
-await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
-
-const selected = computed(() => route.params.slug as string | null);
-
-const currentService = computed(() => services.value.find((service) => service.slug === selected.value));
+await useAsyncData("service", () => serviceStore.fetchService(route.params.slug as string), { server: true });
 </script>
 
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra tjänster" align-content="center" class="mt-2xl" />
+			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
 
 			<Filter :services="services" />
 
-			<div v-if="currentService" class="mb-2xl">
-				<Grid class="grid-cols-2 mt-lg">
-					<SubServiceCard
-						v-for="sub_service in currentService.subservices"
-						:key="sub_service.id"
-						:sub_service
-						:service="currentService" />
-				</Grid>
-			</div>
+			<ServiceDetails v-if="currentService" :service="currentService" />
 		</Container>
 	</Section>
 </template>
