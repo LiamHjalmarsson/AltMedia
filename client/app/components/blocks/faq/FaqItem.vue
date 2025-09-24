@@ -25,7 +25,7 @@ function onToggle(id: number) {
 			<span class="text-heading-sm lg:text-heading-md font-semibold font-heading text-secondary">
 				{{ number }}
 			</span>
-			<h4 class="text-heading-2xs md:text-heading-xs font-semibold flex-1 pl-lg">
+			<h4 class="text-heading-2xs md:text-heading-xs flex-1 pl-lg">
 				{{ item.question }}
 			</h4>
 			<button

@@ -41,19 +41,15 @@ export const useServiceStore = defineStore("services", () => {
 	}
 
 	async function fetchService(slug: string) {
-		loading.value = false;
+		const res: Strapi5ResponseMany<Service> = await find<Service>("services", {
+			filters: { slug: { $eq: slug } },
+		});
 
-		try {
-			const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", slug);
+		console.log(res.data);
 
-			currentService.value = result.data;
+		currentService.value = res.data?.[0] ?? null;
 
-			return currentService.value;
-		} catch (error) {
-			console.error("Failed to fetch", error);
-		} finally {
-			loading.value = false;
-		}
+		return currentService.value;
 	}
 
 	async function fetchSubService(slug: string) {

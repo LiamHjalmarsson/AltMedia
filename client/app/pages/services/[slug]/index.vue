@@ -2,10 +2,20 @@
 import { useServiceStore } from "~/stores/services";
 
 const route = useRoute();
+
 const serviceStore = useServiceStore();
+
 const { services, currentService } = storeToRefs(serviceStore);
 
-await useAsyncData("service", () => serviceStore.fetchService(route.params.slug as string), { server: true });
+await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
+
+watch(
+	() => route.params.slug,
+	async (slug) => {
+		await serviceStore.fetchService(slug as string);
+	},
+	{ immediate: true }
+);
 </script>
 
 <template>
@@ -13,7 +23,7 @@ await useAsyncData("service", () => serviceStore.fetchService(route.params.slug 
 		<Container>
 			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
 
-			<Filter :services="services" />
+			<Filter :services="services" base-path="/services" />
 
 			<ServiceDetails v-if="currentService" :service="currentService" />
 		</Container>

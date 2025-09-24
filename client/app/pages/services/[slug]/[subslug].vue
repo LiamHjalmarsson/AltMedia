@@ -3,15 +3,25 @@ const serviceStore = useServiceStore();
 
 const route = useRoute();
 
-await useAsyncData("project", () => serviceStore.fetchService(route.params.slug as string), { server: true });
-
 const { currentSubService } = storeToRefs(serviceStore);
+
+watch(
+	() => route.params.subslug,
+	async (subslug) => {
+		if (typeof subslug === "string") {
+			await serviceStore.fetchSubService(subslug);
+		} else {
+			serviceStore.currentSubService = null;
+		}
+	},
+	{ immediate: true }
+);
 </script>
 
 <template>
-	<Hero :block="currentSubService?.hero" />
+	<Hero v-if="currentSubService?.hero" :block="currentSubService.hero" />
 
-	<Introduction :Introduction="currentSubService?.introduction" />
+	<Introduction v-if="currentSubService?.introduction" :block="currentSubService.introduction" />
 
-	<BlocksRenderer :blocks="currentSubService?.blocks" />
+	<BlocksRenderer v-if="currentSubService?.blocks" :blocks="currentSubService.blocks" />
 </template>

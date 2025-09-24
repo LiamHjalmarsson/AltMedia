@@ -11,7 +11,7 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 		<Container>
 			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
 
-			<Filter :services="services" />
+			<Filter :services basePath="/services" />
 
 			<div v-for="(service, i) in services" :key="service.id" class="mb-xxl">
 				<div>
