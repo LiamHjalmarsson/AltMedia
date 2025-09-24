@@ -44,7 +44,7 @@ function toggleMenu() {
 
 				<NavigationLinks />
 
-				<NavgationBurger :is-menu-open="isMenuOpen" @toggle="toggleMenu" :theme />
+				<NavigationBurger :is-menu-open="isMenuOpen" @toggle="toggleMenu" :theme />
 			</nav>
 		</div>
 	</header>

@@ -1,11 +1,15 @@
 <script setup lang="ts">
-import type { Size } from "~/types/enums";
+import type { Size, Variant } from "~/types/enums";
 
 const props = withDefaults(
 	defineProps<{
 		size?: Size;
+		variant?: Variant;
 	}>(),
-	{ size: "md" }
+	{
+		size: "md",
+		variant: "primary",
+	}
 );
 
 const sizeClass: Partial<Record<Size, string>> = {
@@ -18,7 +22,7 @@ const sizeClass: Partial<Record<Size, string>> = {
 
 <template>
 	<div
-		class="flex justify-center items-center rounded-full border shadow-lg bg-light/10 text-primary"
+		class="flex justify-center items-center rounded-full border shadow-lg bg-light/10 text-primary transition duration-300"
 		:class="sizeClass[props.size]">
 		<slot />
 	</div>

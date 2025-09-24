@@ -95,6 +95,7 @@ export interface FeaturedArticle {
 	title: string;
 	slug: string;
 	published_date: string;
+	reading_time_min?: string;
 	description: string;
 	cover: Image;
 }
