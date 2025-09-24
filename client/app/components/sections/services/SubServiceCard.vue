@@ -20,6 +20,7 @@ defineProps<{
 					</span>
 				</div>
 			</div>
+
 			<div v-if="sub_service.content" class="mt-md">
 				<StrapiBlocksText :nodes="sub_service.content" />
 			</div>
