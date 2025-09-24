@@ -21,7 +21,7 @@ watch(
 <template>
 	<Hero v-if="currentSubService?.hero" :block="currentSubService.hero" />
 
-	<Introduction v-if="currentSubService?.introduction" :block="currentSubService.introduction" />
+	<SubserviceIntroduction v-if="currentSubService" :subservice="currentSubService" />
 
 	<BlocksRenderer v-if="currentSubService?.blocks" :blocks="currentSubService.blocks" />
 </template>
