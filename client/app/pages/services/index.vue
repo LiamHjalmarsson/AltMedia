@@ -11,14 +11,10 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 		<Container>
 			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
 
-			<Filter :services basePath="/services" />
+			<Filter :services="services" base-path="/services" />
 
-			<div v-for="(service, i) in services" :key="service.id" class="mb-xxl">
-				<div>
-					<h2 class="font-bold text-heading-xl">
-						{{ service.title }}
-					</h2>
-				</div>
+			<div v-for="service in services" :key="service.id" class="mb-xxl">
+				<h2 class="font-bold text-heading-xl">{{ service.title }}</h2>
 				<Grid class="grid-cols-3 mt-lg">
 					<SubServiceCard
 						v-for="sub_service in service.subservices"

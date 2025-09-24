@@ -10,13 +10,22 @@ export const useProjectStore = defineStore("projects", () => {
 
 	const { find, findOne } = useStrapi();
 
-	async function fetchProjects() {
+	async function fetchProjects(service?: string | null) {
 		loading.value = true;
-
 		try {
-			const res: Strapi5ResponseMany<Project> = await find("projects");
+			const params: any = {};
 
-			projects.value = res.data;
+			if (service) {
+				params.filters = {
+					services: {
+						title: { $eqi: service },
+					},
+				};
+			}
+
+			const result: Strapi5ResponseMany<Project> = await find<Project>("projects", params);
+
+			projects.value = result.data ?? [];
 
 			return projects.value;
 		} catch (error) {
@@ -25,20 +34,13 @@ export const useProjectStore = defineStore("projects", () => {
 			loading.value = false;
 		}
 	}
-
-	async function fetchProjectBySlug(slug: string) {
+	async function fetchProject(slug: string) {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<Project> = await findOne("projects", {
-				filters: {
-					slug: {
-						$eq: slug,
-					},
-				},
-			});
+			const result: Strapi5ResponseSingle<Project> = await findOne<Project>("projects", slug);
 
-			currentProject.value = res.data;
+			currentProject.value = result.data;
 
 			return currentProject.value;
 		} catch (error) {
@@ -48,5 +50,5 @@ export const useProjectStore = defineStore("projects", () => {
 		}
 	}
 
-	return { projects, currentProject, loading, fetchProjects, fetchProjectBySlug };
+	return { projects, currentProject, loading, fetchProjects, fetchProject };
 });

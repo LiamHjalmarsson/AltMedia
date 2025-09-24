@@ -3,15 +3,27 @@ const route = useRoute();
 
 const projectStore = useProjectStore();
 
-await useAsyncData("project", () => projectStore.fetchProjectBySlug(route.params.slug as string), { server: true });
-
 const { currentProject } = storeToRefs(projectStore);
+
+watch(
+	() => route.params.slug,
+	async (slug) => {
+		if (typeof slug === "string") {
+			await projectStore.fetchProject(slug);
+		}
+	},
+	{ immediate: true }
+);
 </script>
 
 <template>
-	<Hero :block="currentProject?.hero" />
+	<Section>
+		<Container>
+			<Hero v-if="currentProject?.hero" :block="currentProject.hero" />
 
-	<Introduction v-if="currentProject?.introduction" :block="currentProject.introduction" />
+			<Introduction v-if="currentProject?.introduction" :block="currentProject.introduction" />
 
-	<BlocksRenderer :blocks="currentProject?.blocks || []" />
+			<BlocksRenderer v-if="currentProject?.blocks" :blocks="currentProject.blocks" />
+		</Container>
+	</Section>
 </template>
