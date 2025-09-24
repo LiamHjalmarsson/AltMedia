@@ -1,6 +1,7 @@
-import type { Icon, Image, Introduction } from "../shared";
+import type { Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, FullSectionBlock, Hero, InfoBlock, ListBlock } from "./blocks";
+import type { SocialMedia } from "./singles";
 
 export interface Article {
 	id: number;
@@ -64,6 +65,25 @@ export interface Subservice {
 export interface Tag {
 	id: number;
 	title: string;
+}
+
+export interface Page {
+	id: number;
+	title: string;
+	slug: string;
+	blocks: Blocks[];
+	seo?: Seo;
+}
+
+export interface TeamMember {
+	firstname: string;
+	lastname: string;
+	roles: string[];
+	bio?: string;
+	photo?: ImageFormat;
+	email?: string;
+	phone?: string;
+	social_medias?: SocialMedia[];
 }
 
 export type collectionBlocks = FullSectionBlock | InfoBlock | ListBlock;

@@ -20,19 +20,18 @@ export interface HomePage {
 	blocks: Blocks[];
 }
 
-// Components
-
 export interface MenuLink {
 	id: number;
 	label: string;
 	url: string;
+	aria_label?: string;
 }
 
 export interface Navigation {
 	id: number;
 	logo?: Image;
 	links: MenuLink[];
-	aria_label: string;
+	aria_label?: string;
 }
 
 export interface SocialMedia {
@@ -43,15 +42,15 @@ export interface SocialMedia {
 
 export interface Contact {
 	id: number;
-	email: string;
-	phone: string;
+	email?: string;
+	phone?: string;
 	social_medias?: SocialMedia[];
 }
 
 export interface FooterColumn {
 	id: number;
 	title: string;
-	url: string;
+	url?: string;
 	links: MenuLink[];
 }
 

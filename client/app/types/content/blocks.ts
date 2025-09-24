@@ -35,8 +35,8 @@ export interface InfoBlock {
 export interface Hero {
 	id: number;
 	title: string;
-	description: string;
-	colored_words: Record<string, string>;
+	description?: string;
+	colored_words?: Record<string, string>;
 	cover: Image[];
 	align_content: AlignContent;
 	links: Link[];
