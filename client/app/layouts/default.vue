@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const globalStore = useGlobalStore();
 
-await useAsyncData("global", () => globalStore.fetchGlobal(), { server: true });
+await useAsyncData("global", () => globalStore.fetchGlobalConfig(), { server: true });
 
 const { globalConfig, seo } = storeToRefs(globalStore);
 
@@ -10,13 +10,15 @@ useHead({
 
 	htmlAttrs: { lang: "sv" },
 
-	link: [
-		{
-			rel: "icon",
-			type: "image/x-icon",
-			href: globalConfig.value?.favicon.url,
-		},
-	],
+	link: globalConfig.value?.favicon
+		? [
+				{
+					rel: "icon",
+					type: "image/x-icon",
+					href: globalConfig.value?.favicon.url,
+				},
+			]
+		: null,
 });
 
 useSeoMeta({

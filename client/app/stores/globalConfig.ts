@@ -4,14 +4,28 @@ import type { GlobalConfig } from "~/types/content/singles";
 export const useGlobalStore = defineStore("global-config", () => {
 	const globalConfig = ref<GlobalConfig | null>(null);
 
+	const loading = ref(false);
+
 	const { findOne } = useStrapi();
 
-	async function fetchGlobal() {
-		const res: Strapi5ResponseSingle<GlobalConfig> = await findOne("global-config");
+	async function fetchGlobalConfig() {
+		if (globalConfig.value) {
+			return;
+		}
 
-		globalConfig.value = res.data;
+		loading.value = true;
 
-		return globalConfig.value;
+		try {
+			const res: Strapi5ResponseSingle<GlobalConfig> = await findOne("global-config");
+
+			globalConfig.value = res.data;
+
+			return globalConfig.value;
+		} catch (error) {
+			console.error("Failed to fetch global config:", error);
+		} finally {
+			loading.value = false;
+		}
 	}
 
 	const header = computed(() => globalConfig.value?.navigation);
@@ -22,5 +36,5 @@ export const useGlobalStore = defineStore("global-config", () => {
 
 	const contact = computed(() => globalConfig.value?.contact);
 
-	return { globalConfig, header, footer, seo, contact, fetchGlobal };
+	return { globalConfig, header, footer, seo, contact, loading, fetchGlobalConfig };
 });

@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
 import type { Blocks } from "~/types/content/blocks";
-import type { HomePage } from "~/types/content/singles";
 
-const { findOne } = useStrapi();
+const homeStore = useHomeStore();
 
-const { data: dataResponse } = await useAsyncData<Strapi5ResponseSingle<HomePage>>(
-	"home-page",
-	() => findOne("home-page"),
-	{ server: true }
-);
+await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
 
-const hero = computed(() => dataResponse.value?.data.hero ?? null);
+const { homePage } = storeToRefs(homeStore);
 
-const blocks = computed<Blocks[]>(() => dataResponse?.value?.data.blocks ?? []);
+const hero = computed(() => homePage.value?.hero ?? null);
+
+const blocks = computed<Blocks[]>(() => homePage?.value?.blocks ?? []);
 </script>
 
 <template>

@@ -4,47 +4,73 @@ import type { Service, Subservice } from "~/types/content/collections";
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
-	const currentService = ref<Service>();
+	const currentService = ref<Service | null>(null);
 
-	const currentSubService = ref<Subservice>();
+	const currentSubService = ref<Subservice | null>(null);
+
+	const loading = ref(false);
 
 	const { find, findOne } = useStrapi();
 
 	async function fetchServices(title?: string | null) {
-		const params: {
-			filters?: {
-				title: { $eqi: string };
-			};
-		} = {};
+		loading.value = true;
 
-		if (title) {
-			params.filters = {
-				title: { $eqi: title },
-			};
+		try {
+			const params: {
+				filters?: {
+					title: { $eqi: string };
+				};
+			} = {};
+
+			if (title) {
+				params.filters = {
+					title: { $eqi: title },
+				};
+			}
+
+			const result: Strapi5ResponseMany<Service> = await find<Service>("services", params);
+
+			services.value = result.data || [];
+
+			return services.value;
+		} catch (error) {
+			console.error("Failed to fetch services:", error);
+		} finally {
+			loading.value = false;
 		}
-
-		const result: Strapi5ResponseMany<Service> = await find<Service>("services", params);
-
-		services.value = result.data || [];
-
-		return services.value;
 	}
 
-	async function fetchService(id: string) {
-		const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", id);
+	async function fetchService(slug: string) {
+		loading.value = false;
 
-		currentService.value = result.data;
+		try {
+			const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", slug);
 
-		return currentService.value;
+			currentService.value = result.data;
+
+			return currentService.value;
+		} catch (error) {
+			console.error("Failed to fetch", error);
+		} finally {
+			loading.value = false;
+		}
 	}
 
-	async function fetchSubService(id: string) {
-		const result: Strapi5ResponseSingle<Subservice> = await findOne<Subservice>("subservices", id);
+	async function fetchSubService(slug: string) {
+		loading.value = false;
 
-		currentSubService.value = result.data;
+		try {
+			const result: Strapi5ResponseSingle<Subservice> = await findOne<Subservice>("subservices", slug);
 
-		return currentService.value;
+			currentSubService.value = result.data;
+
+			return currentService.value;
+		} catch (error) {
+			console.error("Failed to fetch", error);
+		} finally {
+			loading.value = false;
+		}
 	}
 
-	return { services, currentService, currentSubService, fetchServices, fetchService, fetchSubService };
+	return { services, currentService, currentSubService, loading, fetchServices, fetchService, fetchSubService };
 });
