@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { element: button, bg } = useHoverAnimation();
+const { element: button, backgroundColor } = useHoverAnimation();
 </script>
 
 <template>
@@ -7,6 +7,6 @@ const { element: button, bg } = useHoverAnimation();
 		<span class="relative z-10">
 			<slot />
 		</span>
-		<span ref="bg" class="absolute top-0 left-0 h-full w-10 bg-primary rounded-full" />
+		<span ref="backgroundColor" class="absolute top-0 left-0 h-full w-10 bg-primary rounded-full" />
 	</button>
 </template>

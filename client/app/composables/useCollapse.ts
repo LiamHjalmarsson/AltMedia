@@ -4,17 +4,17 @@ export function useCollapse() {
 	let isAnimating = false;
 
 	function prefersReduce() {
-		return process.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+		return import.meta.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	}
 
-	function onEnter(el: Element, done: gsap.Callback) {
+	function onEnter(element: Element, done: gsap.Callback) {
 		if (isAnimating) {
 			return;
 		}
 
 		isAnimating = true;
 
-		const target = el as HTMLElement;
+		const target = element as HTMLElement;
 
 		if (prefersReduce()) {
 			target.style.height = "auto";
@@ -50,14 +50,14 @@ export function useCollapse() {
 		});
 	}
 
-	function onLeave(el: Element, done: gsap.Callback) {
+	function onLeave(element: Element, done: gsap.Callback) {
 		if (isAnimating) {
 			return;
 		}
 
 		isAnimating = true;
 
-		const target = el as HTMLElement;
+		const target = element as HTMLElement;
 
 		if (prefersReduce()) {
 			target.style.height = "0px";

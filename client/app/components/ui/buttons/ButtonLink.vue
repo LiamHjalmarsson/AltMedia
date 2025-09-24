@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { to, external = false } = defineProps<{ to: string; external?: boolean }>();
 
-const { element: linkWrapper, bg } = useHoverAnimation();
+const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 </script>
 
 <template>
@@ -11,6 +11,6 @@ const { element: linkWrapper, bg } = useHoverAnimation();
 				<slot />
 			</span>
 		</NuxtLink>
-		<span ref="bg" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
+		<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
 	</div>
 </template>
