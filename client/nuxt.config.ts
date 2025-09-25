@@ -30,7 +30,7 @@ export default defineNuxtConfig({
 	image: {
 		dir: "public/images",
 		strapi: {
-			baseURL: process.env.STRAPI_URL || "http://localhost:1337",
+			baseURL: import.meta.env.STRAPI_URL || "http://localhost:1337",
 		},
 	},
 
