@@ -29,15 +29,11 @@ export const usePageStore = defineStore("pages", () => {
 	async function fetchPageBySlug(slug: string) {
 		loading.value = true;
 		try {
-			const res: Strapi5ResponseSingle<Page> = await findOne("pages", {
-				filters: {
-					slug: {
-						$eq: slug,
-					},
-				},
-			});
+			const result: Strapi5ResponseSingle<Page> = await findOne<Page>("pages", slug);
 
-			currentPage.value = res.data;
+			currentPage.value = result.data;
+
+			console.log(currentPage.value);
 
 			return currentPage.value;
 		} catch (error) {

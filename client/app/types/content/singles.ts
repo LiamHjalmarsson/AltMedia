@@ -1,4 +1,4 @@
-import type { Button, Image, Seo, Link, Icon } from "../shared";
+import type { Button, Image, Seo, Link, Icon, Form } from "../shared";
 import type { Blocks, Cta, Hero } from "./blocks";
 
 export interface GlobalConfig {
@@ -9,7 +9,7 @@ export interface GlobalConfig {
 	navigation: Navigation;
 	footer: Footer;
 	seo?: Seo;
-	contact?: Contact;
+	contact?: ContactDetails;
 }
 
 export interface HomePage {
@@ -40,11 +40,20 @@ export interface SocialMedia {
 	icon: Icon;
 }
 
-export interface Contact {
+export interface ContactDetails {
 	id: number;
 	email?: string;
 	phone?: string;
 	social_medias?: SocialMedia[];
+}
+
+export interface Contact {
+	id: number;
+	documentId: string;
+	title: string;
+	slug: string;
+	form?: Form;
+	seo?: Seo;
 }
 
 export interface FooterColumn {

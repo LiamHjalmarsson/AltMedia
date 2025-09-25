@@ -13,28 +13,24 @@ const emit = defineEmits<{
 }>();
 
 const route = useRoute();
+
 const router = useRouter();
 
 const selectedSlug = computed(() => {
 	if (props.basePath === "/services") {
-		return route.params.slug as string | null;
+		return (route.query.service as string) ?? (route.params.slug as string) ?? null;
 	}
-	if (props.basePath === "/projects" || props.basePath === "/articles") {
-		return (route.query.service as string) ?? null;
-	}
-	return props.selected ?? null;
+	return (route.query.service as string) ?? props.selected ?? null;
 });
 
 function onClick(service: Service) {
 	if (props.basePath === "/services") {
-		// navigate to /services/:slug
 		if (selectedSlug.value === service.slug) {
 			router.push({ path: props.basePath });
 		} else {
 			router.push({ path: `${props.basePath}/${service.slug}` });
 		}
 	} else {
-		// emit slug for projects & articles (not title anymore)
 		emit("filterByService", service.slug);
 	}
 }

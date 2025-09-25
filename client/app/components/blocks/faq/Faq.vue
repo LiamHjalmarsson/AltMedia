@@ -14,7 +14,7 @@ const toggleAnswer = (id: number) => {
 	<Section>
 		<Container class="flex justify-between space-x-xxl">
 			<div>
-				<Heading :title="block.heading.title" :alignContent="block.heading.align_content" />
+				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 				<div class="mt-xl overflow-hidden rounded-xl">
 					<NuxtImg
 						v-if="block.icon.is_image"

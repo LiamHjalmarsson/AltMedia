@@ -31,6 +31,8 @@ export const useArticleStore = defineStore("articles", () => {
 			return articles.value;
 		} catch (error) {
 			console.error("Failed to fetch articles:", error);
+
+			articles.value = [];
 		} finally {
 			loading.value = false;
 		}
