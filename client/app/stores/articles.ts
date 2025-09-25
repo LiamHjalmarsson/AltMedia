@@ -10,13 +10,23 @@ export const useArticleStore = defineStore("articles", () => {
 
 	const { find, findOne } = useStrapi();
 
-	async function fetchArticles() {
+	async function fetchArticles(service?: string | null) {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseMany<Article> = await find("articles");
+			const params: any = {};
 
-			articles.value = res.data;
+			if (service) {
+				params.filters = {
+					services: {
+						slug: { $eqi: service },
+					},
+				};
+			}
+
+			const res: Strapi5ResponseMany<Article> = await find<Article>("articles", params);
+
+			articles.value = res.data || [];
 
 			return articles.value;
 		} catch (error) {
@@ -30,15 +40,9 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<Article> = await findOne("articles", {
-				filters: {
-					slug: {
-						$eq: slug,
-					},
-				},
-			});
+			const result: Strapi5ResponseSingle<Article> = await findOne<Article>("articles", slug);
 
-			currentArticle.value = res.data;
+			currentArticle.value = result.data;
 
 			return currentArticle.value;
 		} catch (error) {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const projectStore = useProjectStore();
+const articleStore = useArticleStore();
 
 const serviceStore = useServiceStore();
 
@@ -7,18 +7,21 @@ const route = useRoute();
 
 const router = useRouter();
 
-const { projects } = storeToRefs(projectStore);
+const { articles } = storeToRefs(articleStore);
 
 const { services } = storeToRefs(serviceStore);
 
 const selected = ref<string | null>((route.query.service as string) ?? null);
 
-await useAsyncData("projects", () => projectStore.fetchProjects(selected.value), { server: true, watch: [selected] });
+await useAsyncData("articles", () => articleStore.fetchArticles(selected.value), {
+	server: true,
+	watch: [selected],
+});
 
 await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
 
-function onFilterCategory(slug: string) {
-	selected.value = selected.value === slug ? null : slug;
+function onFilterCategory(title: string) {
+	selected.value = selected.value === title ? null : title;
 
 	router.push({
 		query: { service: selected.value || undefined },
@@ -29,16 +32,16 @@ function onFilterCategory(slug: string) {
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra projekt" class="mt-xxl" align_content="center" />
+			<Heading title="Våra artiklar" class="mt-xxl" align_content="center" />
 
 			<Filter
 				:services="services"
-				base-path="/projects"
 				:selected="selected"
-				@filterByService="onFilterCategory" />
+				@filterByService="onFilterCategory"
+				base-path="/articles" />
 
 			<Grid class="grid-cols-3 gap-xxl mt-xl">
-				<ProjectCard v-for="project in projects" :key="project.id" :project="project" />
+				<ArticleCard v-for="article in articles" :key="article.id" :article="article" />
 			</Grid>
 		</Container>
 	</Section>

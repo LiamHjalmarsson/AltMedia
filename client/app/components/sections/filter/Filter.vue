@@ -9,33 +9,33 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits<{
-	(e: "filterByService", title: string): void;
+	(e: "filterByService", slug: string): void;
 }>();
 
 const route = useRoute();
 const router = useRouter();
 
-// computed selection based on mode
 const selectedSlug = computed(() => {
 	if (props.basePath === "/services") {
 		return route.params.slug as string | null;
 	}
-	if (props.basePath === "/projects") {
+	if (props.basePath === "/projects" || props.basePath === "/articles") {
 		return (route.query.service as string) ?? null;
 	}
 	return props.selected ?? null;
 });
 
-// handle click
 function onClick(service: Service) {
 	if (props.basePath === "/services") {
+		// navigate to /services/:slug
 		if (selectedSlug.value === service.slug) {
 			router.push({ path: props.basePath });
 		} else {
 			router.push({ path: `${props.basePath}/${service.slug}` });
 		}
-	} else if (props.basePath === "/projects") {
-		emit("filterByService", service.title);
+	} else {
+		// emit slug for projects & articles (not title anymore)
+		emit("filterByService", service.slug);
 	}
 }
 </script>
@@ -50,19 +50,19 @@ function onClick(service: Service) {
 				class="flex flex-col items-center group cursor-pointer">
 				<IconWrapper
 					class="border-primary bg-primary-disabled/50 shadow-primary/40 transition group-hover:bg-primary group-hover:scale-110 duration-300"
-					:class="
-						selectedSlug === service.slug || selectedSlug === service.title ? 'scale-110 bg-primary' : ''
-					">
+					:class="selectedSlug === service.slug ? 'scale-110 bg-primary' : ''">
 					<Icon
 						v-if="service.icon?.icon_name"
 						:name="service.icon.icon_name"
 						size="30"
 						class="text-primary group-hover:text-light transition" />
 				</IconWrapper>
+
 				<p class="mt-xs text-md font-semibold text-primary">{{ service.title }}</p>
+
 				<span
 					class="mt-xs h-0.5 bg-primary transition-all duration-300"
-					:class="selectedSlug === service.slug || selectedSlug === service.title ? 'w-6' : 'w-0'"
+					:class="selectedSlug === service.slug ? 'w-6' : 'w-0'"
 					aria-hidden="true" />
 			</button>
 		</nav>

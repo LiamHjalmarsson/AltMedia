@@ -10,7 +10,6 @@
     },
     "description": {
       "type": "text",
-      "minLength": 500,
       "unique": false
     },
     "buttons": {

@@ -18,10 +18,7 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
   attributes: {
     buttons: Schema.Attribute.Component<'ui.button', true>;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        minLength: 500;
-      }>;
+    description: Schema.Attribute.Text;
     links: Schema.Attribute.Component<'ui.link', true>;
     title: Schema.Attribute.String;
   };

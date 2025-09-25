@@ -12,13 +12,14 @@ export const useProjectStore = defineStore("projects", () => {
 
 	async function fetchProjects(service?: string | null) {
 		loading.value = true;
+
 		try {
 			const params: any = {};
 
 			if (service) {
 				params.filters = {
 					services: {
-						title: { $eqi: service },
+						slug: { $eqi: service },
 					},
 				};
 			}
