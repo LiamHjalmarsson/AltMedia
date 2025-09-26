@@ -1,112 +1,151 @@
 <script setup lang="ts">
-import { ref, watch, provide, onMounted, onBeforeUnmount, inject, computed } from "vue";
-import gsap from "gsap";
+import { ref, computed } from "vue";
 
-const props = defineProps<{
-	modelValue?: string | number | (string | number)[];
-	multiple?: boolean;
-}>();
+const steps = [
+	{ id: 1, title: "Välj projekt typ" },
+	{ id: 2, title: "Beskriv projektet" },
+	{ id: 3, title: "Välj tillägg" },
+	{ id: 4, title: "Bekräfta & pris" },
+];
 
-const emit = defineEmits(["update:modelValue"]);
+const currentStep = ref(1);
 
-const isOpen = ref(false);
+const progress = computed(() => (currentStep.value / steps.length) * 100);
 
-const dropdownRef = ref<HTMLDivElement | null>(null);
-
-const optionsRef = ref<HTMLDivElement | null>(null);
-
-provide("selectValue", (value: string | number) => selectValue(value));
-
-provide("currentValue", props.modelValue);
-
-const selectedOptions = computed(() => {
-	if (Array.isArray(props.modelValue)) {
-		return props.modelValue;
-	}
-	return props.modelValue ? [props.modelValue] : [];
+const formData = ref({
+	projectType: null as string | null,
+	summary: "",
+	extras: [] as string[],
+	totalPrice: 0,
 });
 
-function selectValue(value: string | number) {
-	if (props.multiple) {
-		const options = Array.isArray(props.modelValue) ? [...props.modelValue] : [];
-
-		if (options.includes(value)) {
-			emit(
-				"update:modelValue",
-				options.filter((option) => option !== value)
-			);
-		} else {
-			emit("update:modelValue", [...options, value]);
-		}
-	} else {
-		emit("update:modelValue", value);
-	}
+function nextStep() {
+	if (currentStep.value < steps.length) currentStep.value++;
 }
 
-function toggle() {
-	isOpen.value = !isOpen.value;
+function prevStep() {
+	if (currentStep.value > 1) currentStep.value--;
 }
 
-function handleClickOutside(e: MouseEvent) {
-	if (dropdownRef.value && !dropdownRef.value.contains(e.target as Node)) {
-		isOpen.value = false;
-	}
+function submitForm() {
+	console.log("Form submitted", formData.value);
 }
-
-onMounted(() => {
-	document.addEventListener("click", handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-	document.removeEventListener("click", handleClickOutside);
-});
-
-watch(isOpen, (open) => {
-	if (!optionsRef.value) {
-		return;
-	}
-
-	if (open) {
-		gsap.fromTo(
-			optionsRef.value,
-			{ height: 0, opacity: 0 },
-			{ height: "auto", opacity: 1, duration: 0.3, ease: "power3.out" }
-		);
-	} else {
-		gsap.to(optionsRef.value, {
-			height: 0,
-			opacity: 0,
-			duration: 0.3,
-			ease: "power2.inOut",
-		});
-	}
-});
 </script>
 
 <template>
-	<div ref="dropdownRef" class="relative w-full">
-		<button
-			type="button"
-			class="w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border cursor-pointer text-start flex items-center justify-between"
-			@click="toggle">
-			<slot name="label">Välj tjänst</slot>
-		</button>
-
-		<div
-			ref="optionsRef"
-			class="absolute left-0 top-10 mt-sm w-full overflow-hidden rounded-lg border border-light/10 backdrop-blur-lg shadow-lg z-10 h-0 opacity-0">
-			<div class="flex flex-col max-h-64 overflow-y-auto">
-				<slot />
+	<Section>
+		<Container>
+			<div class="mb-xl text-center">
+				<Heading title="Starta ett projekt" align_content="center" />
+				<p class="text-lg text-dark-gray mt-sm">
+					Fyll i stegen nedan och se en offert med prisförslag i realtid.
+				</p>
 			</div>
-		</div>
 
-		<div v-if="selectedOptions.length" class="mt-sm px-2xs space-x-xs">
-			<button
-				v-for="option in selectedOptions"
-				:key="option"
-				class="text-sm text-light-gray px-sm py-2xs rounded-full bg-primary">
-				{{ option }}
-			</button>
-		</div>
-	</div>
+			<div class="w-full h-2 rounded-full bg-light/20 mb-2xl overflow-hidden">
+				<div
+					class="h-2 bg-gradient-to-r from-primary to-secondary transition-all duration-500"
+					:style="{ width: progress + '%' }" />
+			</div>
+
+			<Grid class="grid-cols-3 gap-2xl items-start">
+				<!-- Steps (left) -->
+				<div class="col-span-2 space-y-2xl">
+					<div
+						v-if="currentStep === 1"
+						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						<h2 class="text-heading-md font-bold">1. Välj projekt typ</h2>
+						<Grid class="grid-cols-2 gap-lg">
+							<button
+								v-for="type in ['Webbplats', 'E-handel', 'Branding', 'Annat']"
+								:key="type"
+								@click="formData.projectType = type"
+								:class="[
+									'p-lg rounded-xl border text-center transition cursor-pointer font-semibold',
+									formData.projectType === type
+										? 'border-primary bg-primary/10 text-primary'
+										: 'border-light/20 hover:border-primary/60',
+								]">
+								{{ type }}
+							</button>
+						</Grid>
+					</div>
+
+					<div
+						v-if="currentStep === 2"
+						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						<h2 class="text-heading-md font-bold">2. Beskriv projektet</h2>
+						<Textarea
+							v-model="formData.summary"
+							placeholder="Berätta om ditt projekt: mål, funktioner, innehåll..."
+							rows="6"
+							class="w-full" />
+					</div>
+
+					<div
+						v-if="currentStep === 3"
+						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						<h2 class="text-heading-md font-bold">3. Välj tillägg</h2>
+						<div class="grid grid-cols-2 gap-md">
+							<label
+								v-for="extra in ['SEO-optimering', 'Supportpaket', 'Hosting', 'Contentproduktion']"
+								:key="extra"
+								class="flex items-center gap-sm p-md border rounded-lg cursor-pointer transition hover:border-primary/60">
+								<input type="checkbox" :value="extra" v-model="formData.extras" />
+								<span>{{ extra }}</span>
+							</label>
+						</div>
+					</div>
+
+					<div
+						v-if="currentStep === 4"
+						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						<h2 class="text-heading-md font-bold">4. Bekräfta & skicka</h2>
+						<p>
+							Granska detaljerna i sammanfattningen till höger. Klicka på
+							<b>Skicka</b> för att skicka in din förfrågan.
+						</p>
+					</div>
+
+					<!-- Navigation -->
+					<div class="flex justify-between items-center pt-lg">
+						<Button v-if="currentStep > 1" variant="ghost" @click="prevStep"> Tillbaka </Button>
+
+						<Button v-if="currentStep < steps.length" variant="primary" class="ml-auto" @click="nextStep">
+							Nästa
+						</Button>
+
+						<Button v-else variant="primary" class="ml-auto" @click="submitForm"> Skicka </Button>
+					</div>
+				</div>
+
+				<!-- Summary (right) -->
+				<aside class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light shadow-lg space-y-lg">
+					<h3 class="text-heading-md font-bold">Sammanfattning</h3>
+
+					<div class="space-y-sm text-dark-gray">
+						<p>
+							<strong>Projekt typ:</strong>
+							<span>{{ formData.projectType || "Ej valt" }}</span>
+						</p>
+						<p>
+							<strong>Beskrivning:</strong>
+							<span>{{ formData.summary || "Ej ifyllt" }}</span>
+						</p>
+						<p>
+							<strong>Tillägg:</strong>
+							<span v-if="formData.extras.length">
+								{{ formData.extras.join(", ") }}
+							</span>
+							<span v-else>Inga valda</span>
+						</p>
+					</div>
+
+					<div class="border-t border-light/20 pt-lg">
+						<p class="text-heading-md font-bold text-primary">Totalpris: {{ formData.totalPrice }} SEK</p>
+					</div>
+				</aside>
+			</Grid>
+		</Container>
+	</Section>
 </template>

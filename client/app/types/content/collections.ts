@@ -20,12 +20,14 @@ export interface Article {
 export interface Offer {
 	id: number;
 	title: string;
+	slug?: string;
 	description?: string;
 	icon?: Icon;
 	features?: string[];
 	is_popular: boolean;
 	start_price: number;
 	month_price: number;
+	subservices: Subservice[];
 }
 
 export interface Project {
@@ -56,6 +58,8 @@ export interface Subservice {
 	slug: string;
 	service?: Service;
 	tags?: Tag[];
+	price_once?: number | null;
+	price_month?: number | null;
 	content: BlockNode[];
 	hero?: Hero;
 	introduction?: Introduction;
@@ -84,6 +88,21 @@ export interface TeamMember {
 	email?: string;
 	phone?: string;
 	social_medias?: SocialMedia[];
+}
+
+export interface StartProject {
+	id: number;
+	title: string;
+	description: string;
+	steps: Step[];
+	offers: Offer[];
+	subservices: Subservice[];
+}
+
+export interface Step {
+	id: number;
+	title: string;
+	description?: string;
 }
 
 export type collectionBlocks = FullSectionBlock | InfoBlock | ListBlock;

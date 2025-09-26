@@ -176,6 +176,17 @@ export interface FormInput extends Struct.ComponentSchema {
   };
 }
 
+export interface FormStep extends Struct.ComponentSchema {
+  collectionName: 'components_form_steps';
+  info: {
+    displayName: 'step';
+  };
+  attributes: {
+    description: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface GlobalContact extends Struct.ComponentSchema {
   collectionName: 'components_global_contacts';
   info: {
@@ -388,6 +399,7 @@ declare module '@strapi/strapi' {
       'block.list': BlockList;
       'form.form': FormForm;
       'form.input': FormInput;
+      'form.step': FormStep;
       'global.contact': GlobalContact;
       'global.footer': GlobalFooter;
       'global.footer-column': GlobalFooterColumn;

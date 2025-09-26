@@ -4,6 +4,8 @@ import type { Service, Subservice } from "~/types/content/collections";
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
+	const subservices = ref<Subservice[]>([]);
+
 	const currentService = ref<Service | null>(null);
 
 	const currentSubService = ref<Subservice | null>(null);
@@ -53,6 +55,24 @@ export const useServiceStore = defineStore("services", () => {
 		}
 	}
 
+	async function fetchSubServices() {
+		loading.value = true;
+
+		try {
+			const result: Strapi5ResponseMany<Subservice> = await find<Subservice>("subservices");
+
+			subservices.value = result.data ?? [];
+		} catch (error) {
+			console.error("Failed to fetch subservices:", error);
+
+			subservices.value = [];
+		} finally {
+			loading.value = false;
+		}
+
+		return subservices.value;
+	}
+
 	async function fetchSubService(slug: string) {
 		loading.value = false;
 
@@ -69,5 +89,15 @@ export const useServiceStore = defineStore("services", () => {
 		}
 	}
 
-	return { services, currentService, currentSubService, loading, fetchServices, fetchService, fetchSubService };
+	return {
+		services,
+		currentService,
+		subservices,
+		currentSubService,
+		loading,
+		fetchServices,
+		fetchService,
+		fetchSubServices,
+		fetchSubService,
+	};
 });

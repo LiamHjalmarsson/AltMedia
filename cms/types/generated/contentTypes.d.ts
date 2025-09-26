@@ -539,7 +539,12 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     month_price: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'title'>;
     start_price: Schema.Attribute.Integer;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -670,14 +675,21 @@ export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    heading: Schema.Attribute.Component<'ui.heading', false>;
+    description: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::start-a-project.start-a-project'
     > &
       Schema.Attribute.Private;
+    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     publishedAt: Schema.Attribute.DateTime;
+    steps: Schema.Attribute.Component<'form.step', true>;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -695,6 +707,8 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    addon_in_project: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     blocks: Schema.Attribute.DynamicZone<
       ['block.list', 'block.info', 'block.full-section']
     >;
@@ -710,6 +724,8 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
       'api::subservice.subservice'
     > &
       Schema.Attribute.Private;
+    price_month: Schema.Attribute.Integer;
+    price_once: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     service: Schema.Attribute.Relation<'oneToOne', 'api::service.service'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
