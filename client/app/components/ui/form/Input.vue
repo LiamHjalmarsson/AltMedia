@@ -20,6 +20,6 @@ function handleInput(event: Event) {
 		:value="modelValue"
 		@input="handleInput"
 		:class="[
-			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl bg-dark-gray/10 border-light/5 border',
+			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border',
 		]" />
 </template>

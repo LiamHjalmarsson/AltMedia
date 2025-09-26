@@ -14,6 +14,6 @@ function handleClick() {
 
 <template>
 	<div @click="handleClick" class="px-md py-xs cursor-pointer hover:bg-light/20 transition flex items-center">
-		<slot>{{ optionProps.value }}</slot>
+		<slot>{{ value }}</slot>
 	</div>
 </template>

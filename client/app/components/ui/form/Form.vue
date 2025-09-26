@@ -14,9 +14,9 @@ const gridStyle = computed(() => ({
 function onSubmit(event: Event) {
 	event.preventDefault();
 
-	const formEl = event.target as HTMLFormElement;
+	const formElement = event.target as HTMLFormElement;
 
-	const formData = new FormData(formEl);
+	const formData = new FormData(formElement);
 
 	emit("update:modelValue", Object.fromEntries(formData.entries()));
 }
@@ -46,8 +46,8 @@ function onSubmit(event: Event) {
 				:required="input.required" />
 
 			<Select v-else-if="input.type === 'select'" :id="input.name" :name="input.name">
-				<SelectOption v-for="opt in input.options || []" :key="opt" :value="opt">
-					{{ opt }}
+				<SelectOption v-for="option in input.options || []" :key="option" :value="option">
+					{{ option }}
 				</SelectOption>
 			</Select>
 		</FormField>

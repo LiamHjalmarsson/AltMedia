@@ -20,6 +20,6 @@ function handleTextarea(e: Event) {
 		:value="modelValue"
 		@input="handleTextarea"
 		:class="[
-			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl bg-dark-gray/10 border-light/5 border text-start cursor-pointer',
+			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl  border-light/5 border text-start cursor-pointer',
 		]" />
 </template>

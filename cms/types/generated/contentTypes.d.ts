@@ -656,6 +656,34 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
+  collectionName: 'start_a_projects';
+  info: {
+    displayName: 'Start a project';
+    pluralName: 'start-a-projects';
+    singularName: 'start-a-project';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::start-a-project.start-a-project'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
   collectionName: 'subservices';
   info: {
@@ -1267,6 +1295,7 @@ declare module '@strapi/strapi' {
       'api::page.page': ApiPagePage;
       'api::project.project': ApiProjectProject;
       'api::service.service': ApiServiceService;
+      'api::start-a-project.start-a-project': ApiStartAProjectStartAProject;
       'api::subservice.subservice': ApiSubserviceSubservice;
       'api::tag.tag': ApiTagTag;
       'api::team.team': ApiTeamTeam;

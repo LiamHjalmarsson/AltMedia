@@ -15,36 +15,38 @@ function handleSubmit(data: Record<string, any>) {
 <template>
 	<Section class="min-h-[80vh]">
 		<Container>
-			<Grid class="grid-cols-3 gap-2xl">
-				<div class="col-span-2 pr-2xl">
-					<Heading :title="contact?.form?.title || 'Kontakta oss'" />
+			<Grid class="grid-cols-3 gap-xxl">
+				<Card class="col-span-2 pr-xxl">
+					<div class="p-xxl">
+						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" />
 
-					<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">
-						{{ contact.form.description }}
-					</p>
+						<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">
+							{{ contact.form.description }}
+						</p>
 
-					<Form v-if="contact?.form" :form="contact.form" @submit="handleSubmit" class="mt-lg" />
-				</div>
+						<Form v-if="contact?.form" :form="contact.form" @submit="handleSubmit" class="mt-lg" />
+					</div>
+				</Card>
 
-				<div class="flex flex-col justify-start items-center text-center">
-					<div>
+				<div class="flex flex-col">
+					<Card class="w-full p-lg">
 						<h3 class="text-heading-md font-bold">Kontakta</h3>
 
-						<div class="flex justify-center items-center mt-md gap-xs" v-if="globalStore.contact?.phone">
+						<div class="flex items-center mt-md gap-xs" v-if="globalStore.contact?.phone">
 							<Icon name="mdi:phone" />
 							<span>{{ globalStore.contact.phone }}</span>
 						</div>
 
-						<div class="flex justify-center items-center mt-md gap-xs" v-if="globalStore.contact?.email">
+						<div class="flex items-center mt-md gap-xs" v-if="globalStore.contact?.email">
 							<Icon name="mdi:email" />
 							<span>{{ globalStore.contact.email }}</span>
 						</div>
-					</div>
+					</Card>
 
-					<div class="mt-xl" v-if="globalStore.contact?.social_medias?.length">
+					<Card class="mt-xl w-full p-lg" v-if="globalStore.contact?.social_medias?.length">
 						<h3 class="text-heading-md font-semibold mb-md">Följ oss</h3>
 
-						<div class="flex justify-center items-center gap-md">
+						<div class="flex gap-md">
 							<NuxtLink
 								v-for="socialMedia in globalStore.contact.social_medias"
 								:key="socialMedia.id"
@@ -55,7 +57,7 @@ function handleSubmit(data: Record<string, any>) {
 								</IconWrapper>
 							</NuxtLink>
 						</div>
-					</div>
+					</Card>
 				</div>
 			</Grid>
 		</Container>

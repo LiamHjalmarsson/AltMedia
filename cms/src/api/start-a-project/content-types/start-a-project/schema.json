@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "start_a_projects",
+  "info": {
+    "singularName": "start-a-project",
+    "pluralName": "start-a-projects",
+    "displayName": "Start a project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "ui.heading",
+      "repeatable": false
+    }
+  }
+}

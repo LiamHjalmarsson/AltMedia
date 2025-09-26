@@ -87,14 +87,14 @@ watch(isOpen, (open) => {
 	<div ref="dropdownRef" class="relative w-full">
 		<button
 			type="button"
-			class="w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl bg-dark-gray/10 border-light/5 border cursor-pointer text-start flex items-center justify-between"
+			class="w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border cursor-pointer text-start flex items-center justify-between"
 			@click="toggle">
 			<slot name="label">Välj tjänst</slot>
 		</button>
 
 		<div
 			ref="optionsRef"
-			class="absolute left-0 top-10 mt-sm w-full overflow-hidden rounded-lg border border-light/10 bg-dark backdrop-blur-lg shadow-lg z-10 h-0 opacity-0">
+			class="absolute left-0 top-10 mt-sm w-full overflow-hidden rounded-lg border border-light/10 backdrop-blur-lg shadow-lg z-10 h-0 opacity-0">
 			<div class="flex flex-col max-h-64 overflow-y-auto">
 				<slot />
 			</div>
