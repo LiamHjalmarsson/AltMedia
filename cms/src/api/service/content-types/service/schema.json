@@ -30,6 +30,11 @@
       "type": "component",
       "component": "ui.icon",
       "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
+      "repeatable": false
     }
   }
 }

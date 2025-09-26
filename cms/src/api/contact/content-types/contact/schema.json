@@ -11,13 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
-    },
     "form": {
       "type": "component",
       "component": "form.form",

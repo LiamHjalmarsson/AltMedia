@@ -55,6 +55,11 @@
         "block.full-section",
         "block.info"
       ]
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
+      "repeatable": false
     }
   }
 }
