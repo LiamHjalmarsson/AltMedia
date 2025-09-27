@@ -1,8 +1,8 @@
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Contact } from "~/types/content/singles";
+import type { ContactPage } from "~/types/content/singles";
 
 export const useContactStore = defineStore("contact", () => {
-	const contact = ref<Contact | null>(null);
+	const contact = ref<ContactPage | null>(null);
 
 	const loading = ref(false);
 
@@ -11,7 +11,7 @@ export const useContactStore = defineStore("contact", () => {
 	async function fetchContact() {
 		loading.value = true;
 		try {
-			const res: Strapi5ResponseSingle<Contact> = await findOne<Contact>("contact");
+			const res: Strapi5ResponseSingle<ContactPage> = await findOne<ContactPage>("contact");
 
 			contact.value = res.data;
 

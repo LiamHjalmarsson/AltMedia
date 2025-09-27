@@ -1,22 +1,21 @@
-import type { Button, Image, Seo, Link, Icon, Form } from "../shared";
+import type { Image, Seo, Icon, Form, BaseEntity } from "../shared";
 import type { Blocks, Cta, Hero } from "./blocks";
 
-export interface GlobalConfig {
-	id: number;
-	documentId: string;
+export interface GlobalConfig extends BaseEntity {
 	site_name: string;
-	favicon: Image;
+	favicon: {
+		id: number;
+		documentId: string;
+		url: string;
+	};
 	navigation: Navigation;
 	footer: Footer;
 	seo?: Seo;
 	contact?: ContactDetails;
 }
 
-export interface HomePage {
-	id: number;
-	documentId: string;
+export interface HomePage extends BaseEntity {
 	hero: Hero;
-
 	blocks: Blocks[];
 }
 
@@ -29,9 +28,9 @@ export interface MenuLink {
 
 export interface Navigation {
 	id: number;
+	aria_label?: string;
 	logo?: Image;
 	links: MenuLink[];
-	aria_label?: string;
 }
 
 export interface SocialMedia {
@@ -47,12 +46,8 @@ export interface ContactDetails {
 	social_medias?: SocialMedia[];
 }
 
-export interface Contact {
-	id: number;
-	documentId: string;
-	title: string;
-	slug: string;
-	form?: Form;
+export interface ContactPage extends BaseEntity {
+	form: Form;
 	seo?: Seo;
 }
 

@@ -3,7 +3,12 @@ import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
 import type { Form } from "../shared";
-import type { Offer, Service } from "./collections";
+import type { Article, Offer, Project, Service } from "./collections";
+
+export interface BlockBase {
+	__component: string;
+	id: number;
+}
 
 export interface ListItem {
 	id: number;
@@ -37,10 +42,10 @@ export interface Hero {
 	title: string;
 	description?: string;
 	colored_words?: Record<string, string>;
-	cover: Image[];
 	align_content: AlignContent;
-	links: Link[];
+	cover: Image[];
 	has_form: boolean;
+	links?: Link[];
 	form?: Form;
 }
 
@@ -53,14 +58,12 @@ export interface FullSectionBlock {
 	id: number;
 	title: string;
 	content: BlockNode[];
-	cover: Image;
-	link: Link;
-	color: Color;
+	cover?: Image | null;
+	link?: Link | null;
+	color?: Color | null;
 }
 
-export type FeaturedService = Pick<Service, "id" | "title" | "slug" | "description" | "icon"> & {
-	documentId: string;
-};
+export type FeaturedService = Pick<Service, "id" | "documentId" | "title" | "slug" | "description" | "icon">;
 
 export interface FeaturedServicesBlock {
 	__component: "block.featured-services";
@@ -69,12 +72,7 @@ export interface FeaturedServicesBlock {
 	services: FeaturedService[];
 }
 
-export interface FeaturedProject {
-	id: number;
-	title: string;
-	slug: string;
-	cover: Image;
-}
+export type FeaturedProject = Pick<Project, "id" | "documentId" | "title" | "slug" | "cover">;
 
 export interface FeaturedProjectsBlock {
 	__component: "block.featured-projects";
@@ -90,15 +88,10 @@ export interface FeaturedOffersBlock {
 	offers: Offer[];
 }
 
-export interface FeaturedArticle {
-	id: number;
-	title: string;
-	slug: string;
-	published_date: string;
-	reading_time_min?: string;
-	description: string;
-	cover: Image;
-}
+export type FeaturedArticle = Pick<
+	Article,
+	"id" | "documentId" | "title" | "slug" | "published_date" | "reading_time_min" | "description" | "cover"
+>;
 
 export interface FeaturedArticlesBlock {
 	__component: "block.featured-articles";
@@ -133,14 +126,14 @@ export interface CtaBlock extends Cta {
 	__component: "block.cta";
 }
 
+export type MarketingBlocks = HeroBlock | CtaBlock | FullSectionBlock;
+
+export type CollectionBlocks = InfoBlock | ListBlock | FaqBlock;
+
 export type Blocks =
-	| HeroBlock
+	| MarketingBlocks
+	| CollectionBlocks
 	| FeaturedServicesBlock
-	| ListBlock
-	| FeaturedOffersBlock
-	| FullSectionBlock
 	| FeaturedProjectsBlock
-	| FaqBlock
 	| FeaturedArticlesBlock
-	| InfoBlock
-	| CtaBlock;
+	| FeaturedOffersBlock;
