@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import type { Offer, Subservice } from "~/types/content/collections";
+
 const props = defineProps<{
-	subservices: any[];
-	currentOffer: any | null;
+	subservices: Subservice[];
+	currentOffer: Offer | null;
 	selectedIds: Set<number>;
 }>();
 
 const emit = defineEmits<{
-	(e: "toggle", sub: any): void;
+	(e: "toggle", sub: Subservice): void;
 }>();
 
-function isIncluded(sub: any) {
-	return props.currentOffer?.subservices?.some((s: any) => s.id === sub.id);
+function isIncluded(subService: Subservice) {
+	return props.currentOffer?.subservices?.some((sub: Subservice) => sub.id === subService.id);
 }
 </script>
 
@@ -32,12 +34,12 @@ function isIncluded(sub: any) {
 					<div>
 						<p class="font-semibold text-dark">{{ sub.title }}</p>
 						<p class="text-xs text-dark-gray mt-1 line-clamp-2">
-							{{ sub.description || "Ingen beskrivning tillagd." }}
+							{{ sub.content || "Ingen beskrivning tillagd." }}
 						</p>
 					</div>
 					<input
 						type="checkbox"
-						class="w-4 h-4 accent-primary mt-1"
+						class="w-4 h-4 accent-primary mt-xs"
 						:checked="selectedIds.has(sub.id) || isIncluded(sub)"
 						:disabled="isIncluded(sub)"
 						@change="emit('toggle', sub)" />

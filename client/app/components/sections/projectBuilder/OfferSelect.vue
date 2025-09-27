@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { Offer } from "~/types/content/collections";
+
 const props = defineProps<{
-	offers: any[];
+	offers: Offer[];
 	loading: boolean;
 	currentOfferId: number | null | undefined;
 }>();
 
 const emit = defineEmits<{
-	(e: "select", offer: any): void;
+	(e: "select", offer: Offer): void;
 }>();
 </script>
 
