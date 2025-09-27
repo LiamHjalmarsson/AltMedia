@@ -18,7 +18,7 @@ const { block } = defineProps<{ block: FeaturedProjectsBlock }>();
 					ref="projectRootElement"
 					class="overflow-hidden rounded-xl shadow-2xl relative flex-1 min-w-0">
 					<NuxtLink
-						:to="`/projects/${project.slug}`"
+						:to="`/projekt/${project.slug}`"
 						class="relative w-full h-[200px] md:h-[300px] lg:h-[400px] flex items-center justify-center">
 						<div class="project-img absolute inset-0 w-full h-full">
 							<NuxtImg

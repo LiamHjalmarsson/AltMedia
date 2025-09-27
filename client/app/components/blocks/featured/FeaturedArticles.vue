@@ -13,7 +13,7 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 
 			<Grid class="md:grid-cols-3">
 				<Card v-for="article in block.articles" :key="article.id" class="overflow-hidden">
-					<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
+					<NuxtLink :to="`/artiklar/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<div class="h-40 overflow-hidden">
 							<NuxtImg
 								:src="article.cover.url"

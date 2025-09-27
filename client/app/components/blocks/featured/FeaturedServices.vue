@@ -16,7 +16,7 @@ defineProps<{ block: FeaturedServicesBlock }>();
 			<Grid class="grid grid-cols-1 md:grid-cols-3">
 				<Card v-for="service in block.services" :key="service.id" class="h-full relative overflow-hidden">
 					<NuxtLink
-						:to="`/services/${service.slug}`"
+						:to="`/tjänster/${service.slug}`"
 						class="w-full h-full"
 						:aria-label="`Läs mer om ${service.title}`">
 						<div class="flex flex-col justify-between relative z-10 p-lg lg:p-xl h-full">

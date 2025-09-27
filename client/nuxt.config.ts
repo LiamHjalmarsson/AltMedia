@@ -45,4 +45,30 @@ export default defineNuxtConfig({
 			global: true,
 		},
 	],
+
+	hooks: {
+		"pages:extend"(pages) {
+			pages.forEach((page) => {
+				if (page.path.startsWith("/services")) {
+					page.path = page.path.replace("/services", "/tjanster");
+				}
+
+				if (page.path.startsWith("/projects")) {
+					page.path = page.path.replace("/projects", "/projekt");
+				}
+
+				if (page.path.startsWith("/articles")) {
+					page.path = page.path.replace("/articles", "/artiklar");
+				}
+
+				if (page.path.startsWith("/contact")) {
+					page.path = page.path.replace("/contact", "/kontakt");
+				}
+
+				if (page.path.startsWith("/startProject")) {
+					page.path = page.path.replace("/startProject", "/starta-projekt");
+				}
+			});
+		},
+	},
 });
