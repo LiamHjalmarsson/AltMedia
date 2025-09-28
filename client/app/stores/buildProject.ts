@@ -57,7 +57,6 @@ export const useBuildProjectStore = defineStore("buildProject", () => {
 
 		selectedSubIds.value = next;
 	}
-
 	const offers = computed<Offer[]>(() => buildProject.value?.offers || []);
 
 	const subservices = computed<Subservice[]>(() => buildProject.value?.subservices || []);

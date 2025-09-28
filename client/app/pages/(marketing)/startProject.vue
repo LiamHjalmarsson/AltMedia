@@ -7,7 +7,6 @@ const { buildProject, currentOffer, selectedSubs, totalOnce, totalMonthly, selec
 await useAsyncData("buildProject", () => buildProjectStore.fetchBuildProject(), { server: true });
 
 const currentStep = ref(1);
-
 const formData = ref({ summary: "" });
 
 function nextStep() {
@@ -69,7 +68,14 @@ function prevStep() {
 						:total-monthly="totalMonthly" />
 
 					<div class="flex justify-between items-center pt-xl border-t border-light/20">
-						<Button v-if="currentStep > 1" variant="ghost" @click="prevStep">Tillbaka</Button>
+						<button
+							v-if="currentStep > 1"
+							@click="prevStep"
+							class="inline-flex items-center px-md py-sm rounded-full text-dark-gray text-sm font-medium">
+							<Icon name="lucide:arrow-left" size="18" class="mr-xs" />
+							Tillbaka
+						</button>
+
 						<Button
 							v-if="currentStep < (buildProject?.steps?.length || 4)"
 							:disabled="currentStep === 1 && !currentOffer"
@@ -77,8 +83,12 @@ function prevStep() {
 							class="ml-auto"
 							@click="nextStep">
 							Nästa
+							<Icon name="lucide:arrow-right" size="18" class="ml-xs" />
 						</Button>
-						<Button v-else variant="primary" class="ml-auto">Skicka</Button>
+						<Button v-else variant="primary" class="ml-auto">
+							Skicka
+							<Icon name="lucide:send" size="18" class="ml-xs" />
+						</Button>
 					</div>
 				</div>
 

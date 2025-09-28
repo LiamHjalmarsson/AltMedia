@@ -1,58 +1,57 @@
 <script setup lang="ts">
-import type { Offer, Subservice } from "~/types/content/collections";
+import type { Subservice, Offer } from "~/types/content/collections";
 
-const props = defineProps<{
+defineProps<{
 	subservices: Subservice[];
-	currentOffer: Offer | null;
 	selectedIds: Set<number>;
+	currentOffer: Offer | null;
 }>();
 
 const emit = defineEmits<{
 	(e: "toggle", sub: Subservice): void;
 }>();
 
-function isIncluded(subService: Subservice) {
-	return props.currentOffer?.subservices?.some((sub: Subservice) => sub.id === subService.id);
+function toggleSub(sub: Subservice) {
+	emit("toggle", sub);
 }
 </script>
 
 <template>
-	<div class="space-y-lg">
-		<h2 class="text-heading-md font-bold">2. Tillägg</h2>
+	<div class="space-y-xl">
+		<h2 class="text-heading-lg font-bold text-center">2. Välj tillägg</h2>
 
-		<div class="grid grid-cols-2 gap-lg">
-			<label
+		<Grid class="md:grid-cols-2 gap-xl">
+			<div
 				v-for="sub in subservices"
 				:key="sub.id"
-				class="group flex flex-col justify-between rounded-2xl border p-lg shadow-sm transition cursor-pointer hover:shadow-md"
+				@click="toggleSub(sub)"
+				class="group relative cursor-pointer rounded-2xl border shadow-md p-lg transition hover:shadow-lg"
 				:class="[
-					selectedIds.has(sub.id) || isIncluded(sub)
-						? 'border-primary bg-primary/5'
-						: 'border-light/20 hover:border-primary/40',
+					selectedIds.has(sub.id) || currentOffer?.subservices?.some((s) => s.id === sub.id)
+						? 'border-primary ring-2 ring-primary/50 bg-primary/5'
+						: 'border-light/20 bg-white',
 				]">
-				<div class="flex items-start justify-between gap-md">
-					<div>
-						<p class="font-semibold text-dark">{{ sub.title }}</p>
-						<p class="text-xs text-dark-gray mt-1 line-clamp-2">
-							{{ sub.content || "Ingen beskrivning tillagd." }}
-						</p>
-					</div>
-					<input
-						type="checkbox"
-						class="w-4 h-4 accent-primary mt-xs"
-						:checked="selectedIds.has(sub.id) || isIncluded(sub)"
-						:disabled="isIncluded(sub)"
-						@change="emit('toggle', sub)" />
+				<div class="flex flex-col space-y-sm">
+					<h3 class="text-heading-sm font-semibold">{{ sub.title }}</h3>
+
+					<p v-if="sub.price_once || sub.price_month" class="text-sm text-dark-gray">
+						<span v-if="sub.price_once">+ {{ sub.price_once }} kr engångs</span>
+						<span v-if="sub.price_month"> · {{ sub.price_month }} kr/mån</span>
+					</p>
+
+					<p
+						v-if="currentOffer?.subservices?.some((s) => s.id === sub.id)"
+						class="text-xs text-green-600 font-semibold">
+						Ingår i paketet
+					</p>
 				</div>
 
-				<div class="mt-md text-sm font-medium">
-					<span v-if="isIncluded(sub)" class="text-primary font-semibold">Ingår</span>
-					<span v-else>
-						<span v-if="sub.price_once" class="text-dark">+ {{ sub.price_once }} kr</span>
-						<span v-if="sub.price_month" class="ml-sm text-dark-gray">/ {{ sub.price_month }} kr/mån</span>
-					</span>
+				<div
+					v-if="selectedIds.has(sub.id)"
+					class="absolute top-3 right-3 bg-primary text-light w-sm h-sm rounded-full">
+					<Icon name="lucide:check" size="16" />
 				</div>
-			</label>
-		</div>
+			</div>
+		</Grid>
 	</div>
 </template>
