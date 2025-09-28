@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import type { FeaturedOffersBlock } from "~/types/content/blocks";
 
-defineProps<{ block: FeaturedOffersBlock }>();
+const { block } = defineProps<{ block: FeaturedOffersBlock }>();
+
+const buildProjectStore = useBuildProjectStore();
 </script>
 
 <template>
@@ -11,6 +13,7 @@ defineProps<{ block: FeaturedOffersBlock }>();
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-xl xl:mb-2xl" />
+
 			<Grid class="md:grid-cols-3">
 				<Card
 					v-for="offer in block.offers"
@@ -33,11 +36,7 @@ defineProps<{ block: FeaturedOffersBlock }>();
 
 					<div class="mb-md flex-1">
 						<h3 class="text-heading-md font-bold text-center px-lg">{{ offer.title }}</h3>
-
-						<p class="mt-md px-lg text-sm text-dark-gray text-center">
-							{{ offer.description }}
-						</p>
-
+						<p class="mt-md px-lg text-sm text-dark-gray text-center">{{ offer.description }}</p>
 						<p class="mt-md text-center text-xxl font-extrabold text-primary">
 							{{ offer.start_price ? offer.start_price + " kr" : "Kontakta oss" }}
 						</p>
@@ -53,7 +52,16 @@ defineProps<{ block: FeaturedOffersBlock }>();
 						</ul>
 					</div>
 
-					<ButtonLink to="/contact" class="mx-auto text-sm"> Välj {{ offer.title }} </ButtonLink>
+					<Button
+						@click="
+							() => {
+								buildProjectStore.setCurrentOffer(offer.id);
+								navigateTo('/starta-projekt');
+							}
+						"
+						class="mx-auto text-sm">
+						Välj {{ offer.title }}
+					</Button>
 
 					<div
 						v-if="offer.is_popular"

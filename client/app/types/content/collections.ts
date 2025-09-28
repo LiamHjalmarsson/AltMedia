@@ -85,7 +85,7 @@ export interface TeamMember extends BaseEntity {
 	social_medias?: SocialMedia[];
 }
 
-export interface StartProject extends BaseEntity {
+export interface BuildProject extends BaseEntity {
 	title: string;
 	description: string;
 	steps: Step[];
