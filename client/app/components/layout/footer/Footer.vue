@@ -5,8 +5,6 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<Cta />
-
 	<footer class="p-xxl bg-dark text-light mt-xxl">
 		<Container>
 			<nav aria-label="Footer" class="mb-xxl flex max-md:space-y-lg max-md:flex-col justify-between items-start">

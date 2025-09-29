@@ -1,34 +1,22 @@
 <script setup lang="ts">
 const globalStore = useGlobalStore();
-
 await useAsyncData("global", () => globalStore.fetchGlobalConfig(), { server: true });
-
 const { globalConfig, seo } = storeToRefs(globalStore);
 
 useHead({
 	title: globalConfig.value?.site_name,
-
 	htmlAttrs: { lang: "sv" },
-
 	link: globalConfig.value?.favicon
-		? [
-				{
-					rel: "icon",
-					type: "image/x-icon",
-					href: globalConfig.value?.favicon.url,
-				},
-			]
+		? [{ rel: "icon", type: "image/x-icon", href: globalConfig.value?.favicon.url }]
 		: null,
 });
 
 useSeoMeta({
 	description: seo.value?.meta_description,
-
 	ogTitle: seo.value?.meta_title,
 	ogDescription: seo.value?.meta_description,
 	ogImage: seo.value?.meta_image?.url,
 	ogUrl: seo.value?.meta_canonical_url,
-
 	twitterTitle: seo.value?.meta_title,
 	twitterDescription: seo.value?.meta_description,
 	twitterImage: seo.value?.meta_image?.url,
@@ -43,8 +31,6 @@ useSeoMeta({
 		<main class="grow">
 			<slot />
 		</main>
-
-		<Cta />
 
 		<Footer />
 	</div>
