@@ -6,9 +6,7 @@ defineProps<{
 	currentOfferId: number | null;
 }>();
 
-const emit = defineEmits<{
-	(e: "select", offerId: number): void;
-}>();
+const emit = defineEmits(["select"]);
 
 function handleSelect(offerId: number) {
 	emit("select", offerId);

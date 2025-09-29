@@ -8,9 +8,7 @@ const props = defineProps<{
 	selected?: string | null;
 }>();
 
-const emit = defineEmits<{
-	(e: "filterByService", slug: string): void;
-}>();
+const emit = defineEmits(["filterByService"]);
 
 const route = useRoute();
 

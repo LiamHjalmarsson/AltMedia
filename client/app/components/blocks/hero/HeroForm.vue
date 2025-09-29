@@ -9,8 +9,8 @@ const gridStyle = computed(() => ({
 	gridTemplateColumns: `repeat(${form.columns}, minmax(0, 1fr))`,
 }));
 
-function onSubmit(e: Event) {
-	e.preventDefault();
+function onSubmit(event: Event) {
+	event.preventDefault();
 
 	emit("submit");
 }

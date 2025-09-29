@@ -9,9 +9,7 @@ defineProps<{
 	isMenuOpen: boolean;
 }>();
 
-const emit = defineEmits<{
-	(e: "close"): void;
-}>();
+const emit = defineEmits(["close"]);
 
 const { onEnter, onLeave } = useCollapse();
 </script>

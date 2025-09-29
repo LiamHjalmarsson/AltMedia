@@ -7,9 +7,7 @@ defineProps<{
 	currentOffer: Offer | null;
 }>();
 
-const emit = defineEmits<{
-	(e: "toggle", sub: Subservice): void;
-}>();
+const emit = defineEmits(["toggle"]);
 
 function toggleSub(sub: Subservice) {
 	emit("toggle", sub);
