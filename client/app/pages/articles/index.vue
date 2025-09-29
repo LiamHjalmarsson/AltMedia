@@ -38,7 +38,7 @@ function onFilterCategory(title: string) {
 				:services="services"
 				:selected="selected"
 				@filterByService="onFilterCategory"
-				base-path="/articles" />
+				base-path="/artiklar" />
 
 			<Grid class="grid-cols-3 gap-xxl mt-xl">
 				<ArticleCard v-for="article in articles" :key="article.id" :article="article" />

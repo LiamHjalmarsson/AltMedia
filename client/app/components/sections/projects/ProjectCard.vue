@@ -3,7 +3,7 @@ import type { Project } from "~/types/content/collections";
 
 const { project } = defineProps<{ project: Project }>();
 
-const slug = computed(() => `/projects/${project.slug}`);
+const slug = computed(() => `/projekt/${project.slug}`);
 </script>
 
 <template>

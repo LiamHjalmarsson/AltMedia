@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useServiceStore } from "~/stores/services";
-
 const route = useRoute();
 
 const serviceStore = useServiceStore();
@@ -23,7 +21,7 @@ watch(
 		<Container>
 			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
 
-			<Filter :services="services" base-path="/services" />
+			<Filter :services="services" base-path="/tjänster" />
 
 			<ServiceDetails v-if="currentService" :service="currentService" />
 		</Container>

@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 		"pages:extend"(pages) {
 			pages.forEach((page) => {
 				if (page.path.startsWith("/services")) {
-					page.path = page.path.replace("/services", "/tjanster");
+					page.path = page.path.replace("/services", "/tjänster");
 				}
 
 				if (page.path.startsWith("/projects")) {

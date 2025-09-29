@@ -4,7 +4,7 @@ import type { Service } from "~/types/content/collections";
 
 const props = defineProps<{
 	services: Service[];
-	basePath: "/services" | "/projects" | "/articles";
+	basePath: "/tjänster" | "/projekt" | "/artiklar";
 	selected?: string | null;
 }>();
 
@@ -15,14 +15,14 @@ const route = useRoute();
 const router = useRouter();
 
 const selectedSlug = computed(() => {
-	if (props.basePath === "/services") {
+	if (props.basePath === "/tjänster") {
 		return (route.query.service as string) ?? (route.params.slug as string) ?? null;
 	}
 	return (route.query.service as string) ?? props.selected ?? null;
 });
 
 function onClick(service: Service) {
-	if (props.basePath === "/services") {
+	if (props.basePath === "/tjänster") {
 		if (selectedSlug.value === service.slug) {
 			router.push({ path: props.basePath });
 		} else {
