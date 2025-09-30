@@ -21,7 +21,7 @@ defineProps<{
 						<li v-for="(subService, i) in block.subservices" :key="subService.id" class="font-semibold">
 							<NuxtLink
 								v-if="subService.service?.slug"
-								:to="`/tjänster/${subService.service.slug}`"
+								:to="`/services/${subService.service.slug}`"
 								class="flex items-center">
 								<span
 									class="w-6 h-6 flex justify-center items-center text-heading-sm font-semibold font-heading text-primary p-sm border border-primary bg-primary-disabled rounded-full">

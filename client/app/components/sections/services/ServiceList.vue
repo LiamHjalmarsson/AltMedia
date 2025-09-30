@@ -6,7 +6,7 @@ defineProps<{ services: Service[] }>();
 
 <template>
 	<Grid class="grid-cols-3">
-		<NuxtLink v-for="service in services" :key="service.id" :to="`/tjänster/${service.slug}`">
+		<NuxtLink v-for="service in services" :key="service.id" :to="`/services/${service.slug}`">
 			<Card class="p-lg h-full flex flex-col justify-between">
 				<Icon
 					v-if="service.icon?.icon_name"

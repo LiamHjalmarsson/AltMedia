@@ -68,7 +68,7 @@ onMounted(() => {
 					:key="project.id"
 					:ref="(element) => setRef(element as HTMLElement, index)"
 					class="overflow-hidden rounded-xl shadow-2xl relative h-64">
-					<NuxtLink :to="`/projekt/${project.slug}`" class="flex justify-center items-center w-full h-full">
+					<NuxtLink :to="`/projects/${project.slug}`" class="flex justify-center items-center w-full h-full">
 						<div class="absolute inset-0 w-full h-full">
 							<NuxtImg
 								v-if="project.cover?.url"

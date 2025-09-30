@@ -8,7 +8,7 @@ defineProps<{
 </script>
 
 <template>
-	<NuxtLink :to="`/tjänster/${service.slug}/${sub_service.slug}`" class="h-full flex">
+	<NuxtLink :to="`/services/${service.slug}/${sub_service.slug}`" class="h-full flex">
 		<Card class="w-full lg:hover:shadow-2xl p-xl">
 			<div class="flex justify-between items-start mb-md">
 				<h3 class="font-semibold text-heading-md text-dark group-hover:text-primary">

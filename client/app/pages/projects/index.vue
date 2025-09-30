@@ -33,7 +33,7 @@ function onFilterCategory(slug: string) {
 
 			<Filter
 				:services="services"
-				base-path="/projekt"
+				base-path="/projects"
 				:selected="selected"
 				@filterByService="onFilterCategory" />
 

@@ -6,7 +6,7 @@ defineProps<{ article: Article }>();
 
 <template>
 	<Card class="overflow-hidden">
-		<NuxtLink :to="`/artiklar/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
+		<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 			<div class="h-40 overflow-hidden">
 				<NuxtImg
 					v-if="article.cover?.url"
