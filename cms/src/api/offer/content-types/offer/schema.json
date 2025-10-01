@@ -17,7 +17,8 @@
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "description": {
       "type": "text",
@@ -38,7 +39,8 @@
       "default": false
     },
     "start_price": {
-      "type": "integer"
+      "type": "integer",
+      "required": true
     },
     "month_price": {
       "type": "integer"

@@ -12,11 +12,14 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "subservices": {
       "type": "relation",
@@ -24,12 +27,14 @@
       "target": "api::subservice.subservice"
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "icon": {
       "type": "component",
       "component": "ui.icon",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "seo": {
       "type": "component",

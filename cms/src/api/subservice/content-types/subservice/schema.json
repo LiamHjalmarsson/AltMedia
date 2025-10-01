@@ -30,35 +30,11 @@
       "relation": "oneToMany",
       "target": "api::tag.tag"
     },
-    "addon_in_project": {
-      "type": "boolean",
-      "default": false
-    },
     "price_once": {
-      "type": "integer",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "addon_in_project"
-            },
-            true
-          ]
-        }
-      }
+      "type": "integer"
     },
     "price_month": {
-      "type": "integer",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "addon_in_project"
-            },
-            true
-          ]
-        }
-      }
+      "type": "integer"
     },
     "content": {
       "type": "blocks"

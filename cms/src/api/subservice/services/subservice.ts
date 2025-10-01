@@ -15,7 +15,7 @@ export default factories.createCoreService("api::subservice.subservice", ({ stra
 	async getAllSubservices(sanitizedQuery) {
 		return strapi.service("api::subservice.subservice").find({
 			...sanitizedQuery,
-			fields: ["id", "title", "slug", "content", "addon_in_project", "price_once", "price_month"],
+			fields: ["id", "title", "slug", "content", "price_once", "price_month"],
 			populate: {
 				tags: {
 					fields: ["title"],
