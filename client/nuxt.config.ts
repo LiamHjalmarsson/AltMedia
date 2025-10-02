@@ -27,20 +27,13 @@ export default defineNuxtConfig({
 		typeCheck: true,
 	},
 
-	image: {
-		dir: "public/images",
-		strapi: {
-			baseURL: import.meta.env.STRAPI_URL || "http://localhost:1337",
-		},
-	},
-
 	components: [
 		{
 			path: "~/components",
 			pathPrefix: false,
 		},
 		{
-			path: "~/components/richtextBlocks",
+			path: "~/components/blocks/strapiContentBlocks",
 			pathPrefix: false,
 			global: true,
 		},
