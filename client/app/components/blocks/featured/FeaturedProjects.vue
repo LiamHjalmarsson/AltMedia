@@ -14,6 +14,7 @@ const setRef = (element: HTMLElement | null, index: number) => {
 onMounted(() => {
 	nextTick(() => {
 		const cards = projectRefs.value;
+
 		if (!cards.length) {
 			return;
 		}
@@ -27,9 +28,11 @@ onMounted(() => {
 				return;
 			}
 
-			gsap.set(title, { opacity: 0, y: 20 });
+			gsap.set(title, { opacity: 0, y: 20, pointerEvents: "none" });
 
 			card.addEventListener("mouseenter", () => {
+				gsap.killTweensOf([cards, title]);
+
 				cards.forEach((c, j) => {
 					gsap.to(c, {
 						flex: j === i ? "3 1 0%" : "1 1 0%",
@@ -38,17 +41,29 @@ onMounted(() => {
 					});
 				});
 
-				gsap.to(title, { opacity: 1, y: 0, duration: 0.4 });
+				gsap.to(title, {
+					opacity: 1,
+					y: 0,
+					duration: 0.4,
+					ease: "power2.out",
+				});
 			});
 
 			card.addEventListener("mouseleave", () => {
+				gsap.killTweensOf([cards, title]);
+
 				gsap.to(cards, {
 					flex: "1 1 0%",
 					duration: 0.5,
 					ease: "power2.inOut",
 				});
 
-				gsap.to(title, { opacity: 0, y: 20, duration: 0.3 });
+				gsap.to(title, {
+					opacity: 0,
+					y: 20,
+					duration: 0.3,
+					ease: "power2.in",
+				});
 			});
 		});
 	});
