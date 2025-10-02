@@ -27,10 +27,10 @@ function toggleMenu() {
 	<header
 		v-if="header"
 		ref="headerRef"
-		class="fixed p-lg z-50 w-full flex justify-center items-center"
+		class="fixed p-xl z-50 w-full flex justify-center items-center"
 		:class="theme === 'dark' ? 'text-light' : 'text-dark'">
 		<div
-			class="w-[95%] lg:w-[80%] max-w-[1000px] px-md rounded-xl bg-light/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl">
+			class="w-[95%] py-lg lg:w-[80%] max-w-[1000px] px-md rounded-xl bg-light/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl">
 			<nav class="flex items-center justify-between" aria-label="main navigation">
 				<NuxtLink to="/" aria-label="Home">
 					<NuxtImg

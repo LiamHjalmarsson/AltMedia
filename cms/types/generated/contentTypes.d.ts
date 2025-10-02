@@ -468,7 +468,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiContactContact extends Struct.SingleTypeSchema {
   collectionName: 'contacts';
   info: {
-    displayName: 'Contact';
+    displayName: 'Contact Page';
     pluralName: 'contacts';
     singularName: 'contact';
   };
@@ -552,7 +552,8 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    hero: Schema.Attribute.Component<'block.hero', false>;
+    hero: Schema.Attribute.Component<'block.hero', false> &
+      Schema.Attribute.Required;
     hero_form: Schema.Attribute.Component<'form.form', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -724,7 +725,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
 export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
   collectionName: 'start_a_projects';
   info: {
-    displayName: 'Start a project';
+    displayName: 'Start a project Page';
     pluralName: 'start-a-projects';
     singularName: 'start-a-project';
   };
@@ -735,7 +736,7 @@ export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.String;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -744,12 +745,13 @@ export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     publishedAt: Schema.Attribute.DateTime;
-    steps: Schema.Attribute.Component<'form.step', true>;
+    steps: Schema.Attribute.Component<'form.step', true> &
+      Schema.Attribute.Required;
     subservices: Schema.Attribute.Relation<
       'oneToMany',
       'api::subservice.subservice'
     >;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

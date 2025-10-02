@@ -7,6 +7,10 @@ const { contact } = storeToRefs(contactStore);
 
 await useAsyncData("contact", () => contactStore.fetchContact(), { server: true });
 
+definePageMeta({
+	layout: "custom",
+});
+
 function handleSubmit(data: Record<string, any>) {
 	console.log("Form submitted:", data);
 }
@@ -18,7 +22,7 @@ function handleSubmit(data: Record<string, any>) {
 			<Grid class="grid-cols-3 gap-xxl">
 				<Card class="col-span-2 pr-xxl">
 					<div class="p-xxl">
-						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" />
+						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" align_content="left" />
 
 						<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">
 							{{ contact.form.description }}

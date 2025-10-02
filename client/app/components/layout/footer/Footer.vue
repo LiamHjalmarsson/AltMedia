@@ -5,7 +5,7 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<footer class="p-xxl bg-dark text-light mt-xxl">
+	<footer class="p-xxl bg-dark text-light">
 		<Container>
 			<nav aria-label="Footer" class="mb-xxl flex max-md:space-y-lg max-md:flex-col justify-between items-start">
 				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column="column" />

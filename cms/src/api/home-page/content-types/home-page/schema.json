@@ -14,7 +14,8 @@
     "hero": {
       "type": "component",
       "component": "block.hero",
-      "repeatable": false
+      "repeatable": false,
+      "required": true
     },
     "hero_form": {
       "type": "component",

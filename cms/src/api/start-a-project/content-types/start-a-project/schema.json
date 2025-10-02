@@ -1,37 +1,39 @@
 {
-	"kind": "singleType",
-	"collectionName": "start_a_projects",
-	"info": {
-		"singularName": "start-a-project",
-		"pluralName": "start-a-projects",
-		"displayName": "Start a project"
-	},
-	"options": {
-		"draftAndPublish": true
-	},
-	"pluginOptions": {},
-	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"description": {
-			"type": "string"
-		},
-		"steps": {
-			"type": "component",
-			"component": "form.step",
-			"repeatable": true
-		},
-		"offers": {
-			"type": "relation",
-			"relation": "oneToMany",
-			"target": "api::offer.offer"
-		},
-		"subservices": {
-			"type": "relation",
-			"relation": "oneToMany",
-			"target": "api::subservice.subservice"
-		}
-	}
+  "kind": "singleType",
+  "collectionName": "start_a_projects",
+  "info": {
+    "singularName": "start-a-project",
+    "pluralName": "start-a-projects",
+    "displayName": "Start a project Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "steps": {
+      "type": "component",
+      "component": "form.step",
+      "repeatable": true,
+      "required": true
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offer.offer"
+    },
+    "subservices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subservice.subservice"
+    }
+  }
 }
-

@@ -8,7 +8,7 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 	<Section>
 		<Container>
 			<div class="mb-sm md:mb-md lg:mb-lg xl:mb-xl">
-				<Heading v-bind="block.heading" />
+				<Heading v-bind="block.heading" :align_content="block.heading.align_content" />
 			</div>
 
 			<Grid class="md:grid-cols-3">

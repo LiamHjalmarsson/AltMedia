@@ -52,7 +52,7 @@ export interface Link {
 }
 
 export interface Heading {
-	id: number;
+	id?: number;
 	title: string;
 	align_content: AlignContent;
 	has_link?: boolean;

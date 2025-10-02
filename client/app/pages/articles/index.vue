@@ -32,7 +32,7 @@ function onFilterCategory(title: string) {
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra artiklar" class="mt-xxl" />
+			<Heading title="Våra artiklar" class="mt-xxl" align_content="center" />
 
 			<Filter
 				:services="services"

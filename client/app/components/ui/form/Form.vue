@@ -46,9 +46,9 @@ function onSubmit(event: Event) {
 				:required="input.required" />
 
 			<Select v-else-if="input.type === 'select'" :id="input.name" :name="input.name">
-				<SelectOption v-for="option in input.options || []" :key="option" :value="option">
+				<Option v-for="option in input.options || []" :key="option" :value="option">
 					{{ option }}
-				</SelectOption>
+				</Option>
 			</Select>
 		</FormField>
 
