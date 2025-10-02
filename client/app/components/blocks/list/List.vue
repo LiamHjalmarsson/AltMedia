@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import StrapiBlocksText from "nuxt-strapi-blocks-renderer";
 import type { List } from "~/types/content/blocks";
 
 defineProps<{ block: List }>();
