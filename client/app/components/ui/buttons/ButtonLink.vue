@@ -7,7 +7,7 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 <template>
 	<div ref="linkWrapper" class="relative py-xs px-xxl w-fit cursor-pointer">
 		<NuxtLink :to="to || '/'" :target="external ? '_blank' : undefined" class="relative font-bold z-10">
-			<span class="relative z-10">
+			<span class="relative flex items-center z-10">
 				<slot />
 			</span>
 		</NuxtLink>

@@ -74,11 +74,10 @@ function prevStep() {
 
 					<div class="flex justify-between items-center pt-xl border-t border-light/20">
 						<button
-							v-if="currentStep > 1"
-							@click="prevStep"
-							class="inline-flex items-center px-md py-sm rounded-full text-dark-gray text-sm font-medium">
-							<Icon name="lucide:arrow-left" size="18" class="mr-xs" />
-							Tillbaka
+							type="button"
+							class="inline-flex items-center justify-center gap-sm px-lg py-sm rounded-xl font-semibold border transition border-primary text-primary bg-transparent hover:bg-primary/10 focus:ring-2 focus:ring-primary/50">
+							<Icon name="lucide:arrow-left" size="18" />
+							<span><slot>Tillbaka</slot></span>
 						</button>
 
 						<Button
