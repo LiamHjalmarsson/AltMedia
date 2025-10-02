@@ -15,57 +15,57 @@ function handleSelect(offerId: number) {
 
 <template>
 	<div class="space-y-xl">
-		<h2 class="text-heading-lg font-bold text-center">1. Välj ett paket</h2>
+		<h2 class="text-heading-lg font-bold text-center mb-lg">1. Välj ett paket</h2>
 
-		<Grid class="md:grid-cols-3 gap-2xl">
+		<Grid class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-xl">
 			<div
 				v-for="offer in offers"
 				:key="offer.id"
 				@click="handleSelect(offer.id)"
-				class="group relative cursor-pointer rounded-2xl p-xl border shadow-md transition hover:shadow-lg"
+				class="relative cursor-pointer rounded-2xl border shadow-md bg-white flex flex-col transition hover:shadow-xl"
 				:class="[
 					currentOfferId === offer.id
-						? 'border-primary ring-2 ring-primary bg-primary/5'
-						: 'border-light/20 bg-white',
+						? 'border-primary ring-2 ring-primary/40 bg-primary/5'
+						: 'border-light/30 hover:border-primary/40',
 				]">
 				<div
 					v-if="offer.is_popular"
-					class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-md py-xs bg-primary text-light text-xs font-semibold rounded-full shadow-md">
+					class="absolute -top-3 left-1/2 -translate-x-1/2 px-md py-xs bg-primary text-light text-xs font-semibold rounded-full shadow-md">
 					Mest populär
 				</div>
 
-				<div class="flex justify-center mb-lg">
+				<div class="flex flex-col items-center text-center p-lg border-b border-light/20">
 					<NuxtImg
 						v-if="offer.icon?.is_image && offer.icon.image?.url"
 						:src="offer.icon.image.url"
 						width="64"
 						height="64"
-						class="rounded-lg shadow-sm" />
+						class="rounded-lg shadow-sm mb-md" />
 					<Icon
 						v-else-if="offer.icon?.icon_name"
 						:name="offer.icon.icon_name"
 						size="40"
-						class="text-primary" />
+						class="text-primary mb-md" />
+
+					<h3 class="text-heading-md font-bold">{{ offer.title }}</h3>
+					<p class="text-sm text-dark-gray mt-xs">{{ offer.description }}</p>
 				</div>
 
-				<h3 class="text-heading-md font-bold text-center mb-sm">
-					{{ offer.title }}
-				</h3>
-
-				<p class="text-sm text-dark-gray text-center mb-md">
-					{{ offer.description }}
-				</p>
-
-				<p class="text-xl font-extrabold text-primary text-center mb-md">
-					{{ offer.start_price ? offer.start_price + " kr" : "Kontakta oss" }}
-				</p>
-
-				<ul class="space-y-xs text-sm text-dark-gray">
-					<li v-for="(feature, i) in offer.features" :key="i" class="flex items-center">
-						<Icon name="lucide:check-circle" size="16" class="text-green-500 mr-xs" />
+				<ul class="flex-1 p-lg space-y-sm">
+					<li v-for="(feature, i) in offer.features" :key="i" class="flex items-start text-sm text-dark-gray">
+						<Icon name="lucide:check-circle" size="16" class="text-green-500 mr-xs mt-[2px]" />
 						<span>{{ feature }}</span>
 					</li>
 				</ul>
+
+				<div class="p-lg border-t border-light/20 text-center">
+					<p class="text-xl font-extrabold text-primary mb-md">
+						{{ offer.start_price ? offer.start_price + " kr" : "Kontakta oss" }}
+						<span v-if="offer.month_price" class="block text-sm font-normal text-dark-gray">
+							{{ offer.month_price }} kr/mån
+						</span>
+					</p>
+				</div>
 			</div>
 		</Grid>
 	</div>
