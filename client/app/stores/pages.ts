@@ -33,8 +33,6 @@ export const usePageStore = defineStore("pages", () => {
 
 			currentPage.value = result.data;
 
-			console.log(currentPage.value);
-
 			return currentPage.value;
 		} catch (error) {
 			console.error("Failed to fetch page:", error);

@@ -7,8 +7,6 @@ await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true 
 
 const { homePage } = storeToRefs(homeStore);
 
-console.log(homePage.value);
-
 const hero = computed(() => homePage.value?.hero ?? null);
 
 const form = computed(() => homePage.value?.hero_form ?? null);

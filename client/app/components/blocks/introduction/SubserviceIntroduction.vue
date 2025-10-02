@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import type { Subservice } from "~/types/content/collections";
 
-const props = defineProps<{
+defineProps<{
 	subservice: Subservice;
 }>();
-
-console.log(props);
 </script>
 
 <template>

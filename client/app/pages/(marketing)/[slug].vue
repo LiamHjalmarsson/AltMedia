@@ -5,8 +5,6 @@ const pageStore = usePageStore();
 
 const { currentPage } = storeToRefs(pageStore);
 
-console.log(currentPage);
-
 watch(
 	() => route.params.slug,
 	async (slug) => {

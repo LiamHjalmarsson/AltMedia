@@ -51,11 +51,13 @@ const textColor = computed(() => {
 				{{ block.title }}
 			</h3>
 
-			<StrapiBlocksText
-				v-if="block.content?.length"
-				:nodes="block.content || []"
-				:class="textColor"
-				class="text-lg lg:text-xl font-medium leading-relaxed" />
+			<ClientOnly>
+				<StrapiBlocksText
+					v-if="block.content?.length"
+					:nodes="block.content || []"
+					:class="textColor"
+					class="text-lg lg:text-xl font-medium leading-relaxed" />
+			</ClientOnly>
 		</div>
 
 		<div v-if="block.link" class="absolute bottom-0 right-0 p-xxl m-xxl">
