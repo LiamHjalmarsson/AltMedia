@@ -7,6 +7,6 @@ const { element: button, backgroundColor } = useHoverAnimation();
 		<span class="relative z-10">
 			<slot />
 		</span>
-		<span ref="backgroundColor" class="absolute top-0 left-0 h-full w-10 bg-primary rounded-full" />
+		<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
 	</button>
 </template>
