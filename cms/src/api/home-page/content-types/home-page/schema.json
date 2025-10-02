@@ -16,6 +16,11 @@
       "component": "block.hero",
       "repeatable": false
     },
+    "hero_form": {
+      "type": "component",
+      "component": "form.form",
+      "repeatable": false
+    },
     "blocks": {
       "type": "dynamiczone",
       "components": [

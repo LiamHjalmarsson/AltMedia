@@ -18,6 +18,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 			fields: ["id", "documentId"],
 			populate: {
 				hero: heroPopulate,
+				hero_form: formPopulate,
 				blocks: {
 					on: {
 						"block.featured-services": featuredServicesBlockPopulate,
@@ -39,7 +40,6 @@ export const heroPopulate = {
 	populate: {
 		cover: imagePopulate,
 		links: linkPopulate,
-		form: formPopulate,
 	},
 };
 

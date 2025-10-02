@@ -50,21 +50,6 @@
     "has_form": {
       "type": "boolean",
       "default": false
-    },
-    "form": {
-      "type": "component",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "has_form"
-            },
-            true
-          ]
-        }
-      },
-      "component": "form.form",
-      "repeatable": false
     }
   },
   "config": {}

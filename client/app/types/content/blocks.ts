@@ -46,7 +46,6 @@ export interface Hero {
 	cover: Image[];
 	has_form: boolean;
 	links?: Link[];
-	form?: Form;
 }
 
 export interface HeroBlock extends Hero {

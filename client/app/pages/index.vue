@@ -9,11 +9,15 @@ const { homePage } = storeToRefs(homeStore);
 
 const hero = computed(() => homePage.value?.hero ?? null);
 
+const form = computed(() => homePage.value?.hero_form ?? null);
+
 const blocks = computed<Blocks[]>(() => homePage?.value?.blocks ?? []);
 </script>
 
 <template>
-	<Hero :block="hero" />
+	<Hero :block="hero">
+		<HeroForm v-if="form" :form="form" />
+	</Hero>
 
 	<BlocksRenderer :blocks="blocks" />
 </template>
