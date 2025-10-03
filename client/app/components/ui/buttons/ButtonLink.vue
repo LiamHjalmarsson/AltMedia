@@ -5,12 +5,16 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 </script>
 
 <template>
-	<div ref="linkWrapper" class="relative py-xs px-xxl w-fit cursor-pointer">
-		<NuxtLink :to="to || '/'" :target="external ? '_blank' : undefined" class="relative font-bold z-10">
-			<span class="relative flex items-center z-10">
+	<NuxtLink :to="to || '/'" :target="external ? '_blank' : undefined">
+		<div
+			ref="linkWrapper"
+			:to="to || '/'"
+			:target="external ? '_blank' : undefined"
+			class="relative py-xs px-xxl w-fit cursor-pointer">
+			<div class="relative font-bold z-10">
 				<slot />
-			</span>
-		</NuxtLink>
-		<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
-	</div>
+			</div>
+			<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
+		</div>
+	</NuxtLink>
 </template>
