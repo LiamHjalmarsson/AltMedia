@@ -10,7 +10,9 @@ defineProps({
 	<div class="h-screen flex justify-center items-center p-xxl">
 		<div class="text-center container">
 			<p class="font-bold text-primary text-[144px]">{{ error?.statusCode }}</p>
+
 			<h1 class="text-heading-4xl font-bold mb-xxl">Detta är inte sidan du letar efter!</h1>
+
 			<NuxtLink to="/" class="px-lg py-sm bg-primary font-bold text-lg text-white rounded-full"
 				>Ta mig tillbaks</NuxtLink
 			>
