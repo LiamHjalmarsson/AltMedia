@@ -1,42 +1,56 @@
 {
-	"collectionName": "components_ui_buttons",
-	"info": {
-		"displayName": "Button"
-	},
-	"options": {},
-	"attributes": {
-		"label": {
-			"type": "string",
-			"required": true
-		},
-		"variant": {
-			"type": "enumeration",
-			"default": "primary",
-			"enum": ["primary", "secondary", "tertiary", "ghost"]
-		},
-		"type": {
-			"type": "enumeration",
-			"default": "button",
-			"enum": ["button", "submit", "reset"]
-		},
-		"size": {
-			"type": "enumeration",
-			"default": "md",
-			"enum": ["xss", "xs", "sm", "md", "lg", "xl"]
-		},
-		"icon": {
-			"type": "component",
-			"component": "ui.icon",
-			"repeatable": false
-		},
-		"icon_is_position_right": {
-			"type": "boolean",
-			"default": true
-		},
-		"aria_label": {
-			"type": "string"
-		}
-	},
-	"config": {}
+  "collectionName": "components_ui_buttons",
+  "info": {
+    "displayName": "Button"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "variant": {
+      "type": "enumeration",
+      "default": "primary",
+      "enum": [
+        "primary",
+        "secondary",
+        "tertiary",
+        "ghost"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "default": "button",
+      "enum": [
+        "button",
+        "submit",
+        "reset"
+      ]
+    },
+    "size": {
+      "type": "enumeration",
+      "default": "md",
+      "enum": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    "icon": {
+      "type": "component",
+      "component": "ui.icon",
+      "repeatable": false
+    },
+    "icon_is_position_right": {
+      "type": "boolean",
+      "default": true
+    },
+    "aria_label": {
+      "type": "string"
+    }
+  },
+  "config": {}
 }
-

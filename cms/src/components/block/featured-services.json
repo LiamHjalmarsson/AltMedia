@@ -1,20 +1,21 @@
 {
-  "collectionName": "components_block_featured_services",
-  "info": {
-    "displayName": "Featured Services"
-  },
-  "options": {},
-  "attributes": {
-    "heading": {
-      "type": "component",
-      "component": "ui.heading",
-      "repeatable": false
-    },
-    "services": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::service.service"
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_featured_services",
+	"info": {
+		"displayName": "Featured Services"
+	},
+	"options": {},
+	"attributes": {
+		"heading": {
+			"type": "component",
+			"component": "ui.heading",
+			"repeatable": false
+		},
+		"services": {
+			"type": "relation",
+			"relation": "oneToMany",
+			"target": "api::service.service"
+		}
+	},
+	"config": {}
 }
+

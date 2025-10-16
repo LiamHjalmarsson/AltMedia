@@ -1,20 +1,21 @@
 {
-  "collectionName": "components_block_featured_offers",
-  "info": {
-    "displayName": "Featured Offers"
-  },
-  "options": {},
-  "attributes": {
-    "heading": {
-      "type": "component",
-      "component": "ui.heading",
-      "repeatable": false
-    },
-    "offers": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::offer.offer"
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_featured_offers",
+	"info": {
+		"displayName": "Featured Offers"
+	},
+	"options": {},
+	"attributes": {
+		"heading": {
+			"type": "component",
+			"component": "ui.heading",
+			"repeatable": false
+		},
+		"offers": {
+			"type": "relation",
+			"relation": "oneToMany",
+			"target": "api::offer.offer"
+		}
+	},
+	"config": {}
 }
+

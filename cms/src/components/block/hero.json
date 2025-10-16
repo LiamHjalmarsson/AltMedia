@@ -1,56 +1,48 @@
 {
-  "collectionName": "components_block_heroes",
-  "info": {
-    "displayName": "Hero"
-  },
-  "options": {},
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
-    "colored_words": {
-      "type": "json"
-    },
-    "cover": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "align_content": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "has_form"
-            },
-            false
-          ]
-        }
-      },
-      "enum": [
-        "left",
-        "center",
-        "right"
-      ]
-    },
-    "links": {
-      "type": "component",
-      "component": "ui.link",
-      "repeatable": true
-    },
-    "has_form": {
-      "type": "boolean",
-      "default": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_heroes",
+	"info": {
+		"displayName": "Hero"
+	},
+	"options": {},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"description": {
+			"type": "text"
+		},
+		"colored_words": {
+			"type": "json"
+		},
+		"cover": {
+			"type": "media",
+			"multiple": true,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		},
+		"align_content": {
+			"type": "enumeration",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "has_form"
+						},
+						false
+					]
+				}
+			},
+			"enum": ["left", "center", "right"]
+		},
+		"links": {
+			"type": "component",
+			"component": "ui.link",
+			"repeatable": true
+		},
+		"has_form": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"config": {}
 }
+

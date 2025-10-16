@@ -1,27 +1,28 @@
 {
-  "collectionName": "components_block_ctas",
-  "info": {
-    "displayName": "Cta"
-  },
-  "options": {},
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text",
-      "unique": false
-    },
-    "buttons": {
-      "type": "component",
-      "component": "ui.button",
-      "repeatable": true
-    },
-    "links": {
-      "type": "component",
-      "component": "ui.link",
-      "repeatable": true
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_ctas",
+	"info": {
+		"displayName": "Cta"
+	},
+	"options": {},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"description": {
+			"type": "text",
+			"unique": false
+		},
+		"buttons": {
+			"type": "component",
+			"component": "ui.button",
+			"repeatable": true
+		},
+		"links": {
+			"type": "component",
+			"component": "ui.link",
+			"repeatable": true
+		}
+	},
+	"config": {}
 }
+

@@ -1,46 +1,43 @@
 {
-  "collectionName": "components_ui_icons",
-  "info": {
-    "displayName": "Icon"
-  },
-  "options": {},
-  "attributes": {
-    "image": {
-      "type": "media",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "is_image"
-            },
-            true
-          ]
-        }
-      },
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ]
-    },
-    "icon_name": {
-      "type": "string",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "is_image"
-            },
-            false
-          ]
-        }
-      }
-    },
-    "is_image": {
-      "type": "boolean",
-      "default": true
-    }
-  },
-  "config": {}
+	"collectionName": "components_ui_icons",
+	"info": {
+		"displayName": "Icon"
+	},
+	"options": {},
+	"attributes": {
+		"image": {
+			"type": "media",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "is_image"
+						},
+						true
+					]
+				}
+			},
+			"multiple": false,
+			"allowedTypes": ["images", "files", "videos"]
+		},
+		"icon_name": {
+			"type": "string",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "is_image"
+						},
+						false
+					]
+				}
+			}
+		},
+		"is_image": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"config": {}
 }
+

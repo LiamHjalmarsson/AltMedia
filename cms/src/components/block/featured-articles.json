@@ -1,20 +1,21 @@
 {
-  "collectionName": "components_block_featured_articles",
-  "info": {
-    "displayName": "Featured Articles"
-  },
-  "options": {},
-  "attributes": {
-    "heading": {
-      "type": "component",
-      "component": "ui.heading",
-      "repeatable": false
-    },
-    "articles": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::article.article"
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_featured_articles",
+	"info": {
+		"displayName": "Featured Articles"
+	},
+	"options": {},
+	"attributes": {
+		"heading": {
+			"type": "component",
+			"component": "ui.heading",
+			"repeatable": false
+		},
+		"articles": {
+			"type": "relation",
+			"relation": "oneToMany",
+			"target": "api::article.article"
+		}
+	},
+	"config": {}
 }
+

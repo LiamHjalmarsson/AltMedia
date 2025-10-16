@@ -12,11 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "site_name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "favicon": {
       "type": "media",
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"

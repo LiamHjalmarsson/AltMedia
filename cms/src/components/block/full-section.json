@@ -1,36 +1,32 @@
 {
-  "collectionName": "components_block_full_sections",
-  "info": {
-    "displayName": "Full Section"
-  },
-  "options": {},
-  "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "content": {
-      "type": "blocks"
-    },
-    "cover": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
-    "link": {
-      "type": "component",
-      "component": "ui.link",
-      "repeatable": false
-    },
-    "color": {
-      "type": "component",
-      "component": "styles.color",
-      "repeatable": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_full_sections",
+	"info": {
+		"displayName": "Full Section"
+	},
+	"options": {},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"content": {
+			"type": "blocks"
+		},
+		"cover": {
+			"type": "media",
+			"multiple": false,
+			"allowedTypes": ["images", "files", "videos", "audios"]
+		},
+		"link": {
+			"type": "component",
+			"component": "ui.link",
+			"repeatable": false
+		},
+		"color": {
+			"type": "component",
+			"component": "styles.color",
+			"repeatable": false
+		}
+	},
+	"config": {}
 }
+

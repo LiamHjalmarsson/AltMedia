@@ -397,7 +397,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+    cover: Schema.Attribute.Media<'images' | 'files'> &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -509,7 +509,8 @@ export interface ApiGlobalConfigGlobalConfig extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    favicon: Schema.Attribute.Media<'images' | 'files'>;
+    favicon: Schema.Attribute.Media<'images' | 'files'> &
+      Schema.Attribute.Required;
     footer: Schema.Attribute.Component<'global.footer', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -520,7 +521,7 @@ export interface ApiGlobalConfigGlobalConfig extends Struct.SingleTypeSchema {
     navigation: Schema.Attribute.Component<'global.navigation', false>;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
-    site_name: Schema.Attribute.String;
+    site_name: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

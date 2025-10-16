@@ -1,25 +1,26 @@
 {
-  "collectionName": "components_block_faqs",
-  "info": {
-    "displayName": "Faq"
-  },
-  "options": {},
-  "attributes": {
-    "heading": {
-      "type": "component",
-      "component": "ui.heading",
-      "repeatable": false
-    },
-    "items": {
-      "type": "component",
-      "component": "block-items.faq-item",
-      "repeatable": true
-    },
-    "icon": {
-      "type": "component",
-      "component": "ui.icon",
-      "repeatable": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_block_faqs",
+	"info": {
+		"displayName": "Faq"
+	},
+	"options": {},
+	"attributes": {
+		"heading": {
+			"type": "component",
+			"component": "ui.heading",
+			"repeatable": false
+		},
+		"items": {
+			"type": "component",
+			"component": "block-items.faq-item",
+			"repeatable": true
+		},
+		"icon": {
+			"type": "component",
+			"component": "ui.icon",
+			"repeatable": false
+		}
+	},
+	"config": {}
 }
+

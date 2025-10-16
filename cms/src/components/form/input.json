@@ -1,94 +1,87 @@
 {
-  "collectionName": "components_form_inputs",
-  "info": {
-    "displayName": "Input"
-  },
-  "options": {},
-  "attributes": {
-    "label": {
-      "type": "string",
-      "required": true
-    },
-    "name": {
-      "type": "string"
-    },
-    "placeholder": {
-      "type": "string"
-    },
-    "required": {
-      "type": "boolean"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "input",
-        "textarea",
-        "select"
-      ]
-    },
-    "options": {
-      "type": "json",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "type"
-            },
-            "select"
-          ]
-        }
-      }
-    },
-    "rows": {
-      "type": "integer",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "type"
-            },
-            "textarea"
-          ]
-        }
-      }
-    },
-    "input_type": {
-      "type": "string",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "type"
-            },
-            "input"
-          ]
-        }
-      }
-    },
-    "column_span": {
-      "type": "enumeration",
-      "default": "half",
-      "enum": [
-        "full",
-        "half",
-        "two-thirds",
-        "one-third"
-      ]
-    },
-    "select_multiple": {
-      "type": "boolean",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "type"
-            },
-            "select"
-          ]
-        }
-      },
-      "default": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_form_inputs",
+	"info": {
+		"displayName": "Input"
+	},
+	"options": {},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"required": true
+		},
+		"name": {
+			"type": "string"
+		},
+		"placeholder": {
+			"type": "string"
+		},
+		"required": {
+			"type": "boolean",
+			"default": false
+		},
+		"type": {
+			"type": "enumeration",
+			"enum": ["input", "textarea", "select"]
+		},
+		"options": {
+			"type": "json",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "type"
+						},
+						"select"
+					]
+				}
+			}
+		},
+		"rows": {
+			"type": "integer",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "type"
+						},
+						"textarea"
+					]
+				}
+			}
+		},
+		"input_type": {
+			"type": "string",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "type"
+						},
+						"input"
+					]
+				}
+			}
+		},
+		"column_span": {
+			"type": "enumeration",
+			"default": "half",
+			"enum": ["full", "half", "two-thirds", "one-third"]
+		},
+		"select_multiple": {
+			"type": "boolean",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "type"
+						},
+						"select"
+					]
+				}
+			},
+			"default": false
+		}
+	},
+	"config": {}
 }
+

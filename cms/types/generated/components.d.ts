@@ -167,7 +167,7 @@ export interface FormInput extends Struct.ComponentSchema {
     name: Schema.Attribute.String;
     options: Schema.Attribute.JSON;
     placeholder: Schema.Attribute.String;
-    required: Schema.Attribute.Boolean;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     rows: Schema.Attribute.Integer;
     select_multiple: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
@@ -280,9 +280,9 @@ export interface SeoSeo extends Struct.ComponentSchema {
   };
   attributes: {
     meta_canonical_url: Schema.Attribute.String;
-    meta_description: Schema.Attribute.Text;
+    meta_description: Schema.Attribute.Text & Schema.Attribute.Required;
     meta_image: Schema.Attribute.Media<'images' | 'files'>;
-    meta_title: Schema.Attribute.String;
+    meta_title: Schema.Attribute.String & Schema.Attribute.Required;
     prevent_index: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
@@ -314,7 +314,7 @@ export interface UiButton extends Struct.ComponentSchema {
     icon_is_position_right: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     label: Schema.Attribute.String & Schema.Attribute.Required;
-    size: Schema.Attribute.Enumeration<['xss', 'xs', 'sm', 'md', 'lg', 'xl']> &
+    size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
       Schema.Attribute.DefaultTo<'md'>;
     type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']> &
       Schema.Attribute.DefaultTo<'button'>;
@@ -375,10 +375,12 @@ export interface UiLink extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<true>;
     is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
-    size: Schema.Attribute.Enumeration<['xxs', 'xs', 'sm', 'md', 'lg', 'xl']> &
+    size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
       Schema.Attribute.DefaultTo<'md'>;
     url: Schema.Attribute.String;
-    variant: Schema.Attribute.Enumeration<['primary', 'secondary']>;
+    variant: Schema.Attribute.Enumeration<
+      ['primary', 'secondary', 'tertiary', 'ghost']
+    >;
   };
 }
 
