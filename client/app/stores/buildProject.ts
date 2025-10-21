@@ -43,7 +43,7 @@ export const useBuildProjectStore = defineStore("buildProject", () => {
 
 		currentOffer.value = found;
 
-		selectedSubIds.value = new Set(found?.subservices?.map((s) => s.id) || []);
+		selectedSubIds.value = new Set(found?.subservices?.map((subservice) => subservice.id) || []);
 	}
 
 	function toggleSub(subservice: Subservice) {
@@ -57,11 +57,14 @@ export const useBuildProjectStore = defineStore("buildProject", () => {
 
 		selectedSubIds.value = next;
 	}
+
 	const offers = computed<Offer[]>(() => buildProject.value?.offers || []);
 
 	const subservices = computed<Subservice[]>(() => buildProject.value?.subservices || []);
 
-	const selectedSubs = computed<Subservice[]>(() => subservices.value.filter((s) => selectedSubIds.value.has(s.id)));
+	const selectedSubs = computed<Subservice[]>(() =>
+		subservices.value.filter((subservice) => selectedSubIds.value.has(subservice.id))
+	);
 
 	const totalOnce = computed(() => {
 		const base = currentOffer.value?.start_price || 0;

@@ -36,7 +36,7 @@ function onClick(service: Service) {
 
 <template>
 	<Container size="md">
-		<nav aria-label="Filter services" class="flex justify-between items-center space-x-xxl">
+		<nav aria-label="Filter services" class="flex justify-between items-center space-x-2xl">
 			<button
 				v-for="service in services"
 				:key="service.id"

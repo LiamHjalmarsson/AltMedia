@@ -10,11 +10,14 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 			ref="linkWrapper"
 			:to="to || '/'"
 			:target="external ? '_blank' : undefined"
-			class="relative py-xs px-xxl w-fit cursor-pointer">
+			class="relative py-xs px-2xl w-fit cursor-pointer">
 			<div class="relative font-bold z-10">
 				<slot />
 			</div>
-			<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 bg-primary rounded-full" />
+
+			<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 max-lg:hidden bg-primary rounded-full" />
+
+			<span class="absolute top-0 left-0 h-10 w-full bg-primary rounded-full lg:hidden" />
 		</div>
 	</NuxtLink>
 </template>

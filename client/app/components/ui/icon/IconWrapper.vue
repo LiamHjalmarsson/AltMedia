@@ -13,7 +13,7 @@ const props = withDefaults(
 );
 
 const sizeClass: Partial<Record<Size, string>> = {
-	sm: "w-8 h-8 p-xxs",
+	sm: "w-8 h-8 p-2xs",
 	md: "w-10 h-10 p-xs",
 	lg: "w-12 h-12 p-xs",
 	xl: "w-16 h-16 p-xs",

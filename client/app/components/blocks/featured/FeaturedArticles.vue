@@ -28,7 +28,7 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 								{{ article.title }}
 							</h3>
 
-							<div v-if="article.description" class="mt-xxs">
+							<div v-if="article.description" class="mt-2xs">
 								<p class="text-dark-gray line-clamp-3">
 									{{ article.description }}
 								</p>

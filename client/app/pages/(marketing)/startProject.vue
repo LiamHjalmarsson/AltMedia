@@ -30,13 +30,13 @@ function prevStep() {
 <template>
 	<Section>
 		<Container>
-			<div class="my-xxl text-center max-w-2xl mx-auto">
+			<div class="my-2xl text-center max-w-2xl mx-auto">
 				<Heading :title="buildProject?.title" align_content="center" />
 				<p class="text-base text-dark-gray mt-sm">{{ buildProject?.description }}</p>
 			</div>
 
-			<Grid class="grid-cols-3 gap-xxl items-start">
-				<div class="col-span-2 space-y-2xl pr-xxl">
+			<Grid class="grid-cols-3 gap-2xl items-start">
+				<div class="col-span-2 space-y-2xl pr-2xl">
 					<StepProgress
 						:progress="(currentStep / (buildProject?.steps?.length || 4)) * 100"
 						:steps="buildProject?.steps"

@@ -19,9 +19,9 @@ function handleSubmit(data: Record<string, any>) {
 <template>
 	<Section class="min-h-[80vh]">
 		<Container>
-			<Grid class="grid-cols-3 gap-xxl">
-				<Card class="col-span-2 pr-xxl">
-					<div class="p-xxl">
+			<Grid class="grid-cols-3 gap-2xl">
+				<Card class="col-span-2 pr-2xl">
+					<div class="p-2xl">
 						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" align_content="left" />
 
 						<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">

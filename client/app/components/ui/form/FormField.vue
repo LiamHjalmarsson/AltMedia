@@ -10,6 +10,6 @@ defineProps<{
 	<div>
 		<Label :for="id || label">{{ label }}</Label>
 		<slot />
-		<p v-if="error" class="mt-xxs text-xs text-error">{{ error }}</p>
+		<p v-if="error" class="mt-2xs text-xs text-error">{{ error }}</p>
 	</div>
 </template>

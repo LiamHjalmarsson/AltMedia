@@ -10,8 +10,8 @@ const content: BlockNode[] = props.block.content || [];
 </script>
 
 <template>
-	<Section class="py-xxl">
-		<Container>
+	<div class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<Grid :class="['items-center gap-xl', block.image?.url ? 'md:grid-cols-2' : 'md:grid-cols-1']">
 				<div v-if="block.image?.url" :class="block.reverse ? 'md:order-2' : 'md:order-1'">
 					<NuxtImg
@@ -34,6 +34,6 @@ const content: BlockNode[] = props.block.content || [];
 					<StrapiBlocksText v-if="content?.length" :nodes="content" class="mb-lg" />
 				</div>
 			</Grid>
-		</Container>
-	</Section>
+		</div>
+	</div>
 </template>

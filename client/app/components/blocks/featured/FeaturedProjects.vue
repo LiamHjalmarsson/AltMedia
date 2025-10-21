@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, nextTick } from "vue";
+import { ref, onMounted, nextTick, computed } from "vue";
 import gsap from "gsap";
 import type { FeaturedProjectsBlock } from "~/types/content/blocks";
 
@@ -11,22 +11,20 @@ const setRef = (element: HTMLElement | null, index: number) => {
 	if (element) projectRefs.value[index] = element;
 };
 
+const isDesktop = computed(() => window.matchMedia("(min-width: 1024px)").matches);
+
 onMounted(() => {
 	nextTick(() => {
-		const cards = projectRefs.value;
+		if (!isDesktop.value) return; // Disable GSAP animation on mobile
 
-		if (!cards.length) {
-			return;
-		}
+		const cards = projectRefs.value;
+		if (!cards.length) return;
 
 		gsap.set(cards, { flex: "1 1 0%" });
 
 		cards.forEach((card, i) => {
 			const title = card.querySelector(".project-title") as HTMLElement | null;
-
-			if (!title) {
-				return;
-			}
+			if (!title) return;
 
 			gsap.set(title, { opacity: 0, y: 20, pointerEvents: "none" });
 
@@ -77,24 +75,50 @@ onMounted(() => {
 				<Heading v-bind="block.heading" :align_content="block.heading.align_content" />
 			</div>
 
-			<div class="flex gap-lg min-w-0">
+			<!-- Desktop: Flex interactive layout -->
+			<div class="hidden lg:flex gap-lg min-w-0">
 				<div
 					v-for="(project, index) in block.projects"
 					:key="project.id"
 					:ref="(element) => setRef(element as HTMLElement, index)"
-					class="overflow-hidden rounded-xl shadow-2xl relative h-64">
+					class="overflow-hidden rounded-xl shadow-2xl relative h-64 flex-1 transition-all duration-300">
 					<NuxtLink :to="`/projects/${project.slug}`" class="flex justify-center items-center w-full h-full">
-						<div class="absolute inset-0 w-full h-full">
-							<NuxtImg
-								v-if="project.cover?.url"
-								:src="project.cover.url"
-								:alt="project.cover.alternativeText || ''"
-								class="object-cover w-full h-full" />
-						</div>
+						<NuxtImg
+							v-if="project.cover?.url"
+							:src="project.cover.url"
+							:alt="project.cover.alternativeText || ''"
+							class="object-cover w-full h-full" />
+
 						<h3
-							class="project-title text-heading-lg font-semibold font-heading absolute z-20 text-secondary">
+							class="project-title text-heading-lg font-semibold font-heading absolute z-20 text-secondary text-center px-md">
 							{{ project.title }}
 						</h3>
+					</NuxtLink>
+				</div>
+			</div>
+
+			<!-- Mobile: Responsive grid -->
+			<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
+				<div
+					v-for="(project, index) in block.projects"
+					:key="project.id"
+					:class="[
+						'overflow-hidden rounded-xl shadow-xl relative aspect-[4/3]',
+						// custom spans for variation
+						index % 5 === 0 ? 'col-span-2' : '',
+						index % 7 === 0 ? 'row-span-2' : '',
+					]">
+					<NuxtLink :to="`/projects/${project.slug}`" class="block w-full h-full">
+						<NuxtImg
+							v-if="project.cover?.url"
+							:src="project.cover.url"
+							:alt="project.cover.alternativeText || ''"
+							class="object-cover w-full h-full" />
+
+						<div
+							class="absolute inset-0 flex items-end justify-start p-sm bg-gradient-to-t from-black/60 to-transparent">
+							<h3 class="text-light text-sm sm:text-md font-semibold">{{ project.title }}</h3>
+						</div>
 					</NuxtLink>
 				</div>
 			</div>

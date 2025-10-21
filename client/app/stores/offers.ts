@@ -49,5 +49,6 @@ export const useOfferStore = defineStore("offers", () => {
 		currentOffer,
 		loading,
 		fetchOffers,
+		fetchOffer,
 	};
 });

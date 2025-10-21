@@ -3,17 +3,20 @@ import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, CollectionBlocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
 
-export interface Article extends BaseEntity {
+export interface ContentItem extends BaseEntity {
 	title: string;
 	slug: string;
-	description?: string;
-	published_date: Date;
-	reading_time_min?: number | null;
-	cover: Image;
-	services: RelatedService[];
 	hero?: Hero;
 	introduction?: Introduction;
 	blocks?: CollectionBlocks[];
+}
+
+export interface Article extends ContentItem {
+	published_date: Date;
+	reading_time_min?: number | null;
+	description?: string;
+	cover: Image;
+	services: RelatedService[];
 }
 
 export interface Offer extends BaseEntity {
@@ -30,16 +33,11 @@ export interface Offer extends BaseEntity {
 
 export type RelatedService = Pick<Service, "id" | "documentId" | "title" | "slug">;
 
-export interface Project extends BaseEntity {
-	title: string;
-	slug: string;
+export interface Project extends ContentItem {
 	cover: Image;
 	services: RelatedService[];
 	client?: string;
 	date?: Date;
-	hero?: Hero;
-	introduction?: Introduction;
-	blocks?: CollectionBlocks[];
 }
 
 export interface Service extends BaseEntity {
@@ -50,17 +48,12 @@ export interface Service extends BaseEntity {
 	subservices: Subservice[];
 }
 
-export interface Subservice extends BaseEntity {
-	title: string;
-	slug: string;
+export interface Subservice extends ContentItem {
 	content: BlockNode[];
 	tags?: Tag[];
 	service?: Service;
 	price_once?: number | null;
 	price_month?: number | null;
-	hero?: Hero;
-	introduction?: Introduction;
-	blocks?: CollectionBlocks[];
 }
 
 export interface Tag extends BaseEntity {

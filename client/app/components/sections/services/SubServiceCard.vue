@@ -16,7 +16,7 @@ defineProps<{
 				</h3>
 
 				<div v-if="sub_service.tags?.length" class="flex flex-wrap gap-xs text-xs font-medium text-dark-gray">
-					<span v-for="tag in sub_service.tags" :key="tag.title" class="px-xs py-xxs">
+					<span v-for="tag in sub_service.tags" :key="tag.title" class="px-xs py-2xs">
 						{{ tag.title }}
 					</span>
 				</div>

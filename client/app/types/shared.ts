@@ -50,6 +50,16 @@ export interface Link {
 	icon_is_position_right?: boolean;
 	aria_label?: string;
 }
+export interface Button {
+	id: number;
+	label: string;
+	variant: Variant;
+	type: ButtonType;
+	size?: Size;
+	icon?: Icon;
+	icon_is_position_right?: boolean;
+	aria_label?: string;
+}
 
 export interface Heading {
 	id?: number;
@@ -64,17 +74,6 @@ export interface Card {
 	title: string;
 	content: Block[];
 	icon: Icon;
-}
-
-export interface Button {
-	id: number;
-	label: string;
-	variant: Variant;
-	type: ButtonType;
-	size?: Size;
-	icon?: Icon;
-	icon_is_position_right?: boolean;
-	aria_label?: string;
 }
 
 export interface Color {

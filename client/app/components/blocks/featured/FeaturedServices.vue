@@ -5,15 +5,15 @@ defineProps<{ block: FeaturedServicesBlock }>();
 </script>
 
 <template>
-	<Section>
-		<Container>
+	<div class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:has_link="false"
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
-			<Grid class="grid grid-cols-1 md:grid-cols-3">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 				<Card v-for="service in block.services" :key="service.id" class="h-full relative overflow-hidden">
 					<NuxtLink
 						:to="`/services/${service.slug}`"
@@ -32,7 +32,8 @@ defineProps<{ block: FeaturedServicesBlock }>();
 							</IconWrapper>
 
 							<div class="flex-grow">
-								<h3 class="font-semibold text-heading-sm md:text-heading-md my-sm md:my-md">
+								<h3
+									class="font-semibold text-heading-sm md:text-heading-md my-sm md:my-md group-hover:text-primary duration-300">
 									{{ service.title }}
 								</h3>
 
@@ -48,7 +49,7 @@ defineProps<{ block: FeaturedServicesBlock }>();
 							class="absolute -bottom-6 -left-6 transition transform rounded-full w-4 h-4 group-hover:scale-[75] bg-gradient-to-tr from-primary/5 via-primary/10 to-primary/20 duration-300"></div>
 					</NuxtLink>
 				</Card>
-			</Grid>
-		</Container>
-	</Section>
+			</div>
+		</div>
+	</div>
 </template>

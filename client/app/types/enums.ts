@@ -4,7 +4,7 @@ export type ButtonType = "button" | "submit" | "reset";
 
 export type Theme = "light" | "dark";
 
-export type Size = "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
+export type Size = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 
 export type AlignContent = "left" | "center" | "right";
 

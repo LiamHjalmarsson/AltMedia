@@ -5,16 +5,18 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<footer class="p-xxl bg-dark text-light">
-		<Container>
-			<nav aria-label="Footer" class="mb-xxl flex max-md:space-y-lg max-md:flex-col justify-between items-start">
+	<footer class="p-xl xl:p-2xl bg-dark text-light">
+		<div class="mx-auto w-full h-full max-w-[1200px]">
+			<nav
+				aria-label="Footer"
+				class="mb-2xl flex max-md:space-y-lg max-md:flex-col justify-between items-center xl:items-start">
 				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column="column" />
 			</nav>
 
 			<div class="flex justify-between items-center">
 				<div class="w-1/4" />
 
-				<div class="text-center text-sm lg:text-md text-gray font-semibold w-2/4">
+				<div class="text-center text-sm lg:text-md text-gray font-semibold w-full xl:w-2/4">
 					© {{ new Date().getFullYear() }} Alt media. Alla rättigheter förbehållna.
 				</div>
 
@@ -26,6 +28,6 @@ const { footer, contact } = storeToRefs(globalStore);
 
 				<SocialLinks v-if="contact?.social_medias" :social-medias="contact.social_medias" />
 			</div>
-		</Container>
+		</div>
 	</footer>
 </template>

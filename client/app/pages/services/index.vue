@@ -9,11 +9,11 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
+			<Heading title="Våra tjänster" align_content="center" class="mt-2xl" />
 
 			<Filter :services="services" base-path="/services" />
 
-			<div v-for="service in services" :key="service.id" class="mb-xxl">
+			<div v-for="service in services" :key="service.id" class="mb-2xl">
 				<h2 class="font-bold text-heading-xl">{{ service.title }}</h2>
 				<Grid class="grid-cols-3 mt-lg">
 					<SubServiceCard

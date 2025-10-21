@@ -1,14 +1,9 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
 	image: any;
 }>();
 </script>
 
 <template>
-	<NuxtImg
-		class=""
-		:src="props.image.url"
-		:alt="props.image.alternativeText"
-		:width="props.image.width"
-		:height="props.image.height" />
+	<NuxtImg class="" :src="image.url" :alt="image.alternativeText" :width="image.width" :height="image.height" />
 </template>

@@ -2,13 +2,7 @@ import type { Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
-import type { Form } from "../shared";
 import type { Article, Offer, Project, Service } from "./collections";
-
-export interface BlockBase {
-	__component: string;
-	id: number;
-}
 
 export interface ListItem {
 	id: number;
@@ -17,14 +11,11 @@ export interface ListItem {
 	icon?: Icon;
 }
 
-export interface List {
+export interface ListBlock {
+	__component: "block.list";
 	id: number;
 	heading: Heading;
 	items: ListItem[];
-}
-
-export interface ListBlock extends List {
-	__component: "block.list";
 }
 
 export interface InfoBlock {

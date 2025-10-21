@@ -7,7 +7,7 @@ const { header } = storeToRefs(globalStore);
 <template>
 	<ul class="flex items-center max-lg:hidden">
 		<li v-for="link in header?.links" :key="link.label" class="relative group">
-			<MenuLink :link class="px-md py-xxs" />
+			<MenuLink :link class="px-md py-2xs" />
 		</li>
 	</ul>
 </template>

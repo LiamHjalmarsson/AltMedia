@@ -19,7 +19,7 @@ watch(
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra tjänster" align_content="center" class="mt-xxl" />
+			<Heading title="Våra tjänster" align_content="center" class="mt-2xl" />
 
 			<Filter :services="services" base-path="/services" />
 

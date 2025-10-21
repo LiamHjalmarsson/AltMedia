@@ -16,24 +16,29 @@ const textAlign = computed(() => {
 </script>
 
 <template>
-	<Section class="hero bg-dark text-light overflow-hidden relative min-h-screen">
-		<Container class="flex items-centerrelative z-10">
-			<div class="flex w-full" :class="[!block.has_form ? textAlign : '', block.has_form ? 'gap-xxl' : '']">
+	<section class="hero bg-dark text-light overflow-hidden relative min-h-screen flex justify-center items-center">
+		<div class="flex items-center relative z-10 p-sm xs:p-md md:p-lg lg:p-2xl">
+			<div
+				class="flex w-full items-center"
+				:class="[!block.has_form ? textAlign : '', block.has_form ? 'gap-2xl max-xl:flex-col' : '']">
 				<div
 					class="flex flex-col space-y-xl max-w-5xl"
-					:class="[!block.has_form ? textAlign : '', block.has_form ? 'pr-xxl' : '']">
+					:class="[
+						!block.has_form ? textAlign : '',
+						block.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : '',
+					]">
 					<h1
-						class="text-heading-lg sm:text-heading-xl md:text-heading-xxl lg:text-heading-xxxl xl:text-heading-xxxxl text-light font-bold tracking-tight leading-tight">
+						class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl text-light font-bold tracking-tight leading-tight">
 						{{ block.title }}
 					</h1>
 
 					<p
 						v-if="block.description"
-						class="text-sm sm:text-md md:text-lg lg:text-xl xl:text-xxl max-sm:text-center">
+						class="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl max-sm:text-center">
 						{{ block.description }}
 					</p>
 
-					<div v-if="block.links" class="mt-md space-y-lg sm:space-x-xxl w-fit">
+					<div v-if="block.links" class="mt-md space-y-lg sm:space-x-2xl w-fit">
 						<template v-for="link in block.links">
 							<ButtonLink :variant="link.variant" :to="link.url" class="max-sm:w-full max-sm:text-center">
 								{{ link.label }}
@@ -44,10 +49,15 @@ const textAlign = computed(() => {
 
 				<slot />
 			</div>
-		</Container>
-
-		<div v-if="block.cover" class="w-full absolute inset-0 h-full opacity-15">
-			<NuxtImg v-for="image in block.cover" :src="image.url" alt="" class="w-full h-full bg-cover" />
 		</div>
-	</Section>
+
+		<div v-if="block.cover" class="absolute inset-0 z-0">
+			<NuxtImg
+				v-for="image in block.cover"
+				:key="image.id"
+				:src="image.url"
+				alt=""
+				class="h-full w-full object-cover opacity-20" />
+		</div>
+	</section>
 </template>

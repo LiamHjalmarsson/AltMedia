@@ -16,7 +16,7 @@ export const useHomeStore = defineStore("home-page", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<HomePage> = await findOne("home-page");
+			const res: Strapi5ResponseSingle<HomePage> = await findOne<HomePage>("home-page");
 
 			homePage.value = res.data;
 

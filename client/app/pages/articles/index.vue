@@ -32,7 +32,7 @@ function onFilterCategory(title: string) {
 <template>
 	<Section>
 		<Container>
-			<Heading title="Våra artiklar" class="mt-xxl" align_content="center" />
+			<Heading title="Våra artiklar" class="mt-2xl" align_content="center" />
 
 			<Filter
 				:services="services"
@@ -40,7 +40,7 @@ function onFilterCategory(title: string) {
 				@filterByService="onFilterCategory"
 				base-path="/articles" />
 
-			<Grid class="grid-cols-3 gap-xxl mt-xl">
+			<Grid class="grid-cols-3 gap-2xl mt-xl">
 				<ArticleCard v-for="article in articles" :key="article.id" :article="article" />
 			</Grid>
 		</Container>

@@ -14,7 +14,7 @@ const buildProjectStore = useBuildProjectStore();
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-xl xl:mb-2xl" />
 
-			<Grid class="md:grid-cols-3">
+			<div class="grid md:grid-cols-3 gap-2xl">
 				<Card
 					v-for="offer in block.offers"
 					:key="offer.id"
@@ -37,7 +37,7 @@ const buildProjectStore = useBuildProjectStore();
 					<div class="mb-md flex-1">
 						<h3 class="text-heading-md font-bold text-center px-lg">{{ offer.title }}</h3>
 						<p class="mt-md px-lg text-sm text-dark-gray text-center">{{ offer.description }}</p>
-						<p class="mt-md text-center text-xxl font-extrabold text-primary">
+						<p class="mt-md text-center text-2xl font-extrabold text-primary">
 							{{ offer.start_price ? offer.start_price + " kr" : "Kontakta oss" }}
 						</p>
 
@@ -69,7 +69,7 @@ const buildProjectStore = useBuildProjectStore();
 						Mest populär
 					</div>
 				</Card>
-			</Grid>
+			</div>
 		</Container>
 	</Section>
 </template>

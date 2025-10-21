@@ -14,7 +14,7 @@ export const usePageStore = defineStore("pages", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseMany<Page> = await find("pages");
+			const res: Strapi5ResponseMany<Page> = await find<Page>("pages");
 
 			pages.value = res.data;
 

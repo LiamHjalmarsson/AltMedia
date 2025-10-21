@@ -44,10 +44,10 @@ const textColor = computed(() => {
 			aria-hidden="true"
 			class="absolute inset-0 h-full w-full object-cover opacity-10" />
 
-		<div class="text-light relative z-10 max-w-screen-md lg:max-w-screen-lg text-center mx-auto py-xxl px-md">
+		<div class="text-light relative z-10 max-w-screen-md lg:max-w-screen-lg text-center mx-auto py-2xl px-md">
 			<h3
 				v-if="block.title"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-xxl lg:text-heading-xxxl xl:text-heading-xxxxl font-bold font-heading text-secondary mb-xs">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold font-heading text-secondary mb-xs">
 				{{ block.title }}
 			</h3>
 
@@ -60,7 +60,7 @@ const textColor = computed(() => {
 			</ClientOnly>
 		</div>
 
-		<div v-if="block.link" class="absolute bottom-0 right-0 p-xxl m-xxl">
+		<div v-if="block.link" class="absolute bottom-0 right-0 p-2xl m-2xl">
 			<NuxtLink
 				:to="block.link.url"
 				class="inline-block bg-primary text-white px-lg py-md rounded-lg font-semibold">

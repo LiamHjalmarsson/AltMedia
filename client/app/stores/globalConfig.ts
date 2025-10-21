@@ -16,7 +16,7 @@ export const useGlobalStore = defineStore("global-config", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<GlobalConfig> = await findOne("global-config");
+			const res: Strapi5ResponseSingle<GlobalConfig> = await findOne<GlobalConfig>("global-config");
 
 			globalConfig.value = res.data;
 

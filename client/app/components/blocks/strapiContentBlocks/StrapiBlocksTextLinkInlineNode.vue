@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
 	url: string;
 }>();
 </script>
 
 <template>
-	<a :href="props.url" class="">
+	<a :href="url" class="">
 		<slot />
 	</a>
 </template>

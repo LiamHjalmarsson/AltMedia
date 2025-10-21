@@ -14,7 +14,7 @@ const emit = defineEmits(["toggle"]);
 		aria-label="Öppna meny"
 		:aria-expanded="isMenuOpen"
 		aria-controls="mobile-menu"
-		class="p-xs space-y-xxs rounded-md z-50 cursor-pointer lg:hidden"
+		class="p-xs space-y-2xs rounded-md z-50 cursor-pointer lg:hidden"
 		@click="emit('toggle')">
 		<span
 			:class="[

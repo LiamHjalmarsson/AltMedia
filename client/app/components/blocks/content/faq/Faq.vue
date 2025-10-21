@@ -12,8 +12,8 @@ const toggleAnswer = (id: number) => {
 
 <template>
 	<Section>
-		<Container class="flex justify-between space-x-xxl">
-			<div>
+		<Container class="flex max-lg:flex-col justify-between space-x-2xl">
+			<div class="w-full">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 				<div class="mt-xl overflow-hidden rounded-xl">
 					<NuxtImg
@@ -25,7 +25,7 @@ const toggleAnswer = (id: number) => {
 				</div>
 			</div>
 
-			<div class="flex flex-col flex-1 pl-xxl pt-xl">
+			<div class="flex flex-col flex-1 lg:pl-2xl pt-xl">
 				<FaqItem
 					v-for="(faq, i) in block.items"
 					:key="i"
