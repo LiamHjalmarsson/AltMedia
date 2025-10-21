@@ -2,13 +2,7 @@ import withNuxt from "./.nuxt/eslint.config.mjs";
 import tsParser from "@typescript-eslint/parser";
 
 export default withNuxt({
-	files: [
-		"app/**/*.{js,ts,vue}",
-		"utils/**/*.{js,ts}",
-		"types/**/*.{ts}",
-		"composables/**/*.{js,ts}",
-		"server/**/*.{js,ts}",
-	],
+	files: ["app/**/*.{js,ts,vue}"],
 	ignores: [],
 	languageOptions: {
 		ecmaVersion: "latest",
