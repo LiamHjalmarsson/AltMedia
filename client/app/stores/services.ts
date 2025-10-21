@@ -27,8 +27,6 @@ export const useServiceStore = defineStore("services", () => {
 			const result: Strapi5ResponseMany<Service> = await find<Service>("services", params);
 			services.value = result.data ?? [];
 		} catch (error) {
-			console.error("Failed to fetch services:", error);
-
 			services.value = [];
 		} finally {
 			loading.value = false;
@@ -47,8 +45,6 @@ export const useServiceStore = defineStore("services", () => {
 
 			return currentSubService.value;
 		} catch (error) {
-			console.error("Failed to fetch services:", error);
-
 			return null;
 		} finally {
 			loading.value = false;
@@ -63,8 +59,6 @@ export const useServiceStore = defineStore("services", () => {
 
 			subservices.value = result.data ?? [];
 		} catch (error) {
-			console.error("Failed to fetch subservices:", error);
-
 			subservices.value = [];
 		} finally {
 			loading.value = false;
@@ -83,7 +77,6 @@ export const useServiceStore = defineStore("services", () => {
 
 			return currentService.value;
 		} catch (error) {
-			console.error("Failed to fetch", error);
 		} finally {
 			loading.value = false;
 		}

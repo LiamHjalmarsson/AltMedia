@@ -14,13 +14,13 @@ const { theme, init, destroy } = useAutoHeaderContrast(headerRef, {
 	baseSelector: ".hero",
 });
 
-onMounted(init);
-
-onBeforeUnmount(destroy);
-
 function toggleMenu() {
 	isMenuOpen.value = !isMenuOpen.value;
 }
+
+onMounted(init);
+
+onBeforeUnmount(destroy);
 </script>
 
 <template>
@@ -44,14 +44,14 @@ function toggleMenu() {
 
 				<NavigationLinks />
 
-				<NavigationBurger :is-menu-open="isMenuOpen" @toggle="toggleMenu" :theme />
+				<NavigationBurger :isMenuOpen @toggle="toggleMenu" :theme />
 			</nav>
 		</div>
 	</header>
 
 	<Teleport to="body">
 		<NavigationDropdown
-			:is-menu-open="isMenuOpen"
+			:isMenuOpen
 			@close="isMenuOpen = false"
 			:class="theme === 'dark' ? 'text-light' : 'text-dark'" />
 	</Teleport>

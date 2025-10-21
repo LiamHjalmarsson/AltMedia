@@ -27,9 +27,7 @@ function prevStep() {
 	if (currentStep.value > 1) currentStep.value--;
 }
 
-function submitForm() {
-	console.log("Form submitted", formData.value);
-}
+function submitForm() {}
 </script>
 
 <template>

@@ -11,9 +11,7 @@ definePageMeta({
 	layout: "custom",
 });
 
-function handleSubmit(data: Record<string, any>) {
-	console.log("Form submitted:", data);
-}
+function handleSubmit(data: Record<string, any>) {}
 </script>
 
 <template>
