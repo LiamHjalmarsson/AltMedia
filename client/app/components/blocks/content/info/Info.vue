@@ -17,6 +17,10 @@ const content: BlockNode[] = props.block.content || [];
 					<NuxtImg
 						:src="block.image.url"
 						:alt="block.image.alternativeText || ''"
+						format="webp"
+						quality="85"
+						preload
+						loading="lazy"
 						class="w-full h-auto rounded-xl object-cover" />
 				</div>
 

@@ -15,12 +15,16 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 				<Card v-for="article in block.articles" :key="article.id" class="overflow-hidden">
 					<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<div class="h-40 overflow-hidden">
-							<!-- <NuxtImg
+							<NuxtImg
 								:src="article.cover.url"
-								alt=""
+								:alt="article.cover.alternativeText || ''"
+								sizes="100vw sm:50vw md:33vw"
+								format="webp"
+								quality="80"
+								placeholder
 								loading="lazy"
 								densities="x1 x2"
-								class="h-full w-full object-cover group-hover:scale-105 transition transform duration-300" /> -->
+								class="h-full w-full object-cover group-hover:scale-105 transition transform duration-300" />
 						</div>
 
 						<div class="flex flex-col justify-between flex-1 p-md">

@@ -15,16 +15,24 @@ const isDesktop = computed(() => window.matchMedia("(min-width: 1024px)").matche
 
 onMounted(() => {
 	nextTick(() => {
-		if (!isDesktop.value) return; // Disable GSAP animation on mobile
+		if (!isDesktop.value) {
+			return;
+		}
 
 		const cards = projectRefs.value;
-		if (!cards.length) return;
+
+		if (!cards.length) {
+			return;
+		}
 
 		gsap.set(cards, { flex: "1 1 0%" });
 
 		cards.forEach((card, i) => {
 			const title = card.querySelector(".project-title") as HTMLElement | null;
-			if (!title) return;
+
+			if (!title) {
+				return;
+			}
 
 			gsap.set(title, { opacity: 0, y: 20, pointerEvents: "none" });
 
@@ -75,7 +83,6 @@ onMounted(() => {
 				<Heading v-bind="block.heading" :align_content="block.heading.align_content" />
 			</div>
 
-			<!-- Desktop: Flex interactive layout -->
 			<div class="hidden lg:flex gap-lg min-w-0">
 				<div
 					v-for="(project, index) in block.projects"
@@ -87,6 +94,11 @@ onMounted(() => {
 							v-if="project.cover?.url"
 							:src="project.cover.url"
 							:alt="project.cover.alternativeText || ''"
+							sizes="100vw lg:33vw"
+							format="webp"
+							quality="80"
+							placeholder
+							loading="lazy"
 							class="object-cover w-full h-full" />
 
 						<h3
@@ -97,14 +109,12 @@ onMounted(() => {
 				</div>
 			</div>
 
-			<!-- Mobile: Responsive grid -->
 			<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
 				<div
 					v-for="(project, index) in block.projects"
 					:key="project.id"
 					:class="[
 						'overflow-hidden rounded-xl shadow-xl relative aspect-[4/3]',
-						// custom spans for variation
 						index % 5 === 0 ? 'col-span-2' : '',
 						index % 7 === 0 ? 'row-span-2' : '',
 					]">
@@ -113,6 +123,11 @@ onMounted(() => {
 							v-if="project.cover?.url"
 							:src="project.cover.url"
 							:alt="project.cover.alternativeText || ''"
+							sizes="100vw sm:50vw"
+							format="webp"
+							quality="80"
+							placeholder
+							loading="lazy"
 							class="object-cover w-full h-full" />
 
 						<div

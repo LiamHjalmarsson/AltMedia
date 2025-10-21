@@ -6,7 +6,7 @@ const props = defineProps<{ block: FullSectionBlock }>();
 
 const bgColor = computed(() => {
 	if (!props.block.color) {
-		return "bg-bg-dark";
+		return "bg-bg-dark text-light";
 	}
 
 	if (props.block.color.is_hex && props.block.color.hex) {
@@ -40,9 +40,12 @@ const textColor = computed(() => {
 		<NuxtImg
 			v-if="block.cover"
 			:src="block.cover.url"
-			alt=""
-			aria-hidden="true"
-			class="absolute inset-0 h-full w-full object-cover opacity-10" />
+			:alt="block.cover.alternativeText || ''"
+			sizes="100vw"
+			format="webp"
+			preload
+			loading="lazy"
+			class="object-cover opacity-10 absolute inset-0 h-full w-full" />
 
 		<div class="text-light relative z-10 max-w-screen-md lg:max-w-screen-lg text-center mx-auto py-2xl px-md">
 			<h3

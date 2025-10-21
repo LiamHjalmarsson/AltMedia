@@ -51,13 +51,17 @@ const textAlign = computed(() => {
 			</div>
 		</div>
 
-		<div v-if="block.cover" class="absolute inset-0 z-0">
+		<div v-if="block.cover" class="absolute inset-0 z-0 opacity-20">
 			<NuxtImg
-				v-for="image in block.cover"
-				:key="image.id"
-				:src="image.url"
-				alt=""
-				class="h-full w-full object-cover opacity-20" />
+				v-if="block.cover?.[0]?.url"
+				:src="block.cover[0].url"
+				:alt="block.cover[0].alternativeText || 'Hero background'"
+				sizes="100vw"
+				densities="x1 x2"
+				format="webp"
+				quality="85"
+				preload
+				class="absolute inset-0 w-full h-full object-cover object-center" />
 		</div>
 	</section>
 </template>

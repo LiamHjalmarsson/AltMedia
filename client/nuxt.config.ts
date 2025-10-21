@@ -19,6 +19,27 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
+	fonts: {
+		provider: "google",
+		defaults: {
+			weights: [400, 600],
+			styles: ["normal"],
+			subsets: ["latin", "latin-ext"],
+		},
+		families: [
+			{
+				name: "Quicksand",
+				provider: "google",
+				global: true,
+			},
+			{
+				name: "Montserrat",
+				provider: "google",
+				global: true,
+			},
+		],
+	},
+
 	vite: {
 		plugins: [tailwindcss()],
 	},
@@ -26,11 +47,6 @@ export default defineNuxtConfig({
 	typescript: {
 		typeCheck: true,
 	},
-
-	// strapi: {
-	// 	url: process.env.STRAPI_URL || "http://localhost:1337",
-	// 	prefix: "/api",
-	// },
 
 	components: [
 		{

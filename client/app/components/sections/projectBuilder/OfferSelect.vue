@@ -38,9 +38,16 @@ function handleSelect(offerId: number) {
 					<NuxtImg
 						v-if="offer.icon?.is_image && offer.icon.image?.url"
 						:src="offer.icon.image.url"
+						:alt="offer.icon.image.alternativeText || ''"
 						width="64"
 						height="64"
+						sizes="64px"
+						format="webp"
+						quality="80"
+						placeholder
+						loading="lazy"
 						class="rounded-lg shadow-sm mb-md" />
+
 					<Icon
 						v-else-if="offer.icon?.icon_name"
 						:name="offer.icon.icon_name"

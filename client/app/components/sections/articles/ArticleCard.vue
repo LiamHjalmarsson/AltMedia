@@ -11,7 +11,12 @@ defineProps<{ article: Article }>();
 				<NuxtImg
 					v-if="article.cover?.url"
 					:src="article.cover.url"
-					alt=""
+					:alt="article.cover.alternativeText || ''"
+					sizes="100vw sm:50vw md:33vw"
+					format="webp"
+					quality="80"
+					placeholder
+					loading="lazy"
 					class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />
 			</div>
 

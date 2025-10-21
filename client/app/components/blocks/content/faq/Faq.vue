@@ -12,20 +12,22 @@ const toggleAnswer = (id: number) => {
 
 <template>
 	<Section>
-		<Container class="flex max-lg:flex-col justify-between space-x-2xl">
-			<div class="w-full">
+		<Container class="flex max-lg:flex-col justify-between">
+			<div>
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
-				<div class="mt-xl overflow-hidden rounded-xl">
+				<div class="mt-xl overflow-hidden rounded-xl" v-if="block.icon.is_image">
 					<NuxtImg
-						v-if="block.icon.is_image"
 						:src="block.icon.image?.url"
-						:alt="block.icon.image?.alternativeText || ''"
-						width="500"
+						:alt="block.icon.image?.alternativeText || 'FAQ bakgrundsbild'"
+						quality="80"
+						width="450"
+						format="webp"
+						loading="lazy"
 						class="rounded-xl" />
 				</div>
 			</div>
 
-			<div class="flex flex-col flex-1 lg:pl-2xl pt-xl">
+			<div class="flex flex-col flex-1 lg:pl-2xl">
 				<FaqItem
 					v-for="(faq, i) in block.items"
 					:key="i"

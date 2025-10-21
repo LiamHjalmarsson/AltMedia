@@ -23,7 +23,15 @@ defineProps<{ block: FeaturedServicesBlock }>();
 							<IconWrapper
 								size="lg"
 								class="border-primary bg-primary-disabled/50 shadow-primary/40 relative">
-								<NuxtImg v-if="service.icon.is_image" :src="service.icon.image?.url" />
+								<NuxtImg
+									v-if="service.icon.is_image"
+									:src="service.icon.image?.url"
+									:alt="service.icon.image?.alternativeText || ''"
+									sizes="64px"
+									format="webp"
+									quality="80"
+									fit="contain"
+									loading="lazy" />
 								<Icon
 									v-else
 									:name="service.icon.icon_name || 'famicons:accessibility-sharp'"

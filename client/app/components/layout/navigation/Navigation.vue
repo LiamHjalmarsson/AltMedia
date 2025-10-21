@@ -35,11 +35,13 @@ onBeforeUnmount(destroy);
 				<NuxtLink to="/" aria-label="Home">
 					<NuxtImg
 						:src="header.logo?.url"
-						:width="header.logo?.width"
-						:height="header.logo?.height"
+						:alt="header.logo?.alternativeText || 'Alt Media logotyp'"
+						sizes="120px sm:150px md:180px"
 						format="webp"
-						quality="80"
-						:alt="header.logo?.alternativeText || ''" />
+						quality="85"
+						fit="contain"
+						placeholder
+						loading="eager" />
 				</NuxtLink>
 
 				<NavigationLinks />
