@@ -35,13 +35,13 @@ export default defineNuxtConfig({
 		routeRules: {
 			"/**": {
 				headers: {
-					// "Cache-Control": "public, max-age=31536000, immutable",
-					// "Content-Security-Policy":
-					// 	"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
-					// "Cross-Origin-Opener-Policy": "same-origin",
-					// "X-Frame-Options": "DENY",
-					// "Referrer-Policy": "strict-origin-when-cross-origin",
-					// "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+					"Cache-Control": "public, max-age=120, immutable",
+					"Content-Security-Policy":
+						"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
+					"Cross-Origin-Opener-Policy": "same-origin",
+					"X-Frame-Options": "DENY",
+					"Referrer-Policy": "strict-origin-when-cross-origin",
+					"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
 				},
 			},
 		},
