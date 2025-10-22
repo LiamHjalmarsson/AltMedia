@@ -55,7 +55,6 @@ export default defineNuxtConfig({
 		defaults: {
 			weights: [400, 600],
 			styles: ["normal"],
-			subsets: ["latin", "latin-ext"],
 		},
 		families: [
 			{
@@ -76,7 +75,14 @@ export default defineNuxtConfig({
 
 		build: {
 			cssCodeSplit: true,
-			rollupOptions: { treeshake: true },
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						vue: ["vue"],
+						gsap: ["gsap"],
+					},
+				},
+			},
 		},
 	},
 
