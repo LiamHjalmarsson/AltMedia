@@ -24,10 +24,11 @@ const buildProjectStore = useBuildProjectStore();
 						<NuxtImg
 							v-if="offer.icon?.is_image"
 							:src="offer.icon.image?.url"
-							sizes="80px"
+							:alt="offer.icon.image?.alternativeText || offer.title"
+							sizes="100vw sm:50vw md:33vw"
+							densities="x1 x2"
 							format="webp"
-							quality="80"
-							fit="contain"
+							quality="85"
 							placeholder
 							loading="lazy"
 							class="rounded-md" />

@@ -20,6 +20,9 @@ function onToggle(id: number) {
 	<Card
 		@click="onToggle(item.id)"
 		@keydown.enter.space="onToggle(item.id)"
+		role="button"
+		tabindex="0"
+		aria-label="Visa eller dölj svaret på frågan"
 		class="p-md cursor-pointer max-w-[750px] w-full">
 		<div class="flex items-center justify-between w-ful px-xs">
 			<span class="text-heading-sm lg:text-heading-md font-semibold font-heading text-secondary">
@@ -30,8 +33,9 @@ function onToggle(id: number) {
 			</h4>
 			<button
 				:id="`faq-title-${item.id}`"
-				class="text-left flex justify-between items-center focus:outline-none cursor-pointer"
+				class="text-left flex justify-between items-center focus:outline-none cursor-pointer focus-visible:outline-primary"
 				:aria-expanded="activeId === item.id"
+				:aria-label="`Expandera frågan: ${item.question}`"
 				:aria-controls="`faq-answer-${item.id}`"
 				type="button">
 				<Icon

@@ -25,11 +25,10 @@ defineProps<{ block: ListBlock }>();
 						<NuxtImg
 							v-if="item.icon?.is_image"
 							:src="item.icon.image?.url"
-							:alt="item.icon.image?.alternativeText || ''"
-							sizes="100vw sm:50vw md:600px"
+							:alt="item.icon.image?.alternativeText || item.title"
 							format="webp"
 							quality="85"
-							preload
+							placeholder
 							loading="lazy"
 							class="w-full h-full object-cover max-h-[520px] rounded-2xl scale-[1.02] group-hover:scale-100 transition-transform duration-700 ease-out" />
 					</div>
@@ -44,11 +43,10 @@ defineProps<{ block: ListBlock }>();
 							<NuxtImg
 								v-if="item.icon?.is_image"
 								:src="item.icon.image?.url"
-								:alt="item.icon.image?.alternativeText || ''"
-								sizes="100vw sm:50vw md:600px"
+								:alt="item.icon.image?.alternativeText || item.title"
 								format="webp"
 								quality="85"
-								preload
+								placeholder
 								loading="lazy"
 								class="w-full h-64 sm:h-80 object-cover" />
 

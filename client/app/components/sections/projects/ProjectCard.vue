@@ -16,7 +16,6 @@ const slug = computed(() => `/projects/${project.slug}`);
 					sizes="100vw sm:50vw md:33vw"
 					format="webp"
 					quality="80"
-					fit="cover"
 					placeholder
 					loading="lazy"
 					densities="x1 x2"

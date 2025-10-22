@@ -17,13 +17,13 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 						<div class="h-40 overflow-hidden">
 							<NuxtImg
 								:src="article.cover.url"
-								:alt="article.cover.alternativeText || ''"
+								:alt="article.cover.alternativeText || article.title"
 								sizes="100vw sm:50vw md:33vw"
+								densities="x1 x2"
 								format="webp"
-								quality="80"
+								quality="85"
 								placeholder
 								loading="lazy"
-								densities="x1 x2"
 								class="h-full w-full object-cover group-hover:scale-105 transition transform duration-300" />
 						</div>
 

@@ -13,16 +13,18 @@ const toggleAnswer = (id: number) => {
 <template>
 	<Section>
 		<Container class="flex max-lg:flex-col justify-between">
-			<div>
+			<div class="w-3/5 pr-2xl">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 				<div class="mt-xl overflow-hidden rounded-xl" v-if="block.icon.is_image">
 					<NuxtImg
 						:src="block.icon.image?.url"
-						:alt="block.icon.image?.alternativeText || 'FAQ bakgrundsbild'"
-						quality="80"
-						width="450"
+						:alt="block.icon.image?.alternativeText || ''"
 						format="webp"
+						quality="85"
+						placeholder
 						loading="lazy"
+						sizes="100vw sm:50vw md:500px"
+						densities="x1 x2"
 						class="rounded-xl" />
 				</div>
 			</div>

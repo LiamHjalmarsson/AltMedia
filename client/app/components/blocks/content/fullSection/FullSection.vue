@@ -41,10 +41,12 @@ const textColor = computed(() => {
 			v-if="block.cover"
 			:src="block.cover.url"
 			:alt="block.cover.alternativeText || ''"
-			sizes="100vw"
 			format="webp"
-			preload
+			quality="80"
+			placeholder
 			loading="lazy"
+			sizes="100vw"
+			densities="x1 x2"
 			class="object-cover opacity-10 absolute inset-0 h-full w-full" />
 
 		<div class="text-light relative z-10 max-w-screen-md lg:max-w-screen-lg text-center mx-auto py-2xl px-md">

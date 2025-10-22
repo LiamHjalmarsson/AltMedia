@@ -19,8 +19,10 @@ const content: BlockNode[] = props.block.content || [];
 						:alt="block.image.alternativeText || ''"
 						format="webp"
 						quality="85"
-						preload
+						placeholder
 						loading="lazy"
+						sizes="100vw sm:50vw md:600px"
+						densities="x1 x2"
 						class="w-full h-auto rounded-xl object-cover" />
 				</div>
 

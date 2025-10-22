@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { to, external = false } = defineProps<{ to: string; external?: boolean }>();
+const { to, external = false, ariaLabel } = defineProps<{ to: string; external?: boolean; ariaLabel?: string }>();
 
 const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 </script>
@@ -10,7 +10,9 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 			ref="linkWrapper"
 			:to="to || '/'"
 			:target="external ? '_blank' : undefined"
-			class="relative py-xs px-2xl w-fit cursor-pointer">
+			:rel="external ? 'noopener noreferrer' : undefined"
+			:aria-label="ariaLabel"
+			class="relative py-xs px-2xl w-fit cursor-pointer min-h-[44px] min-w-[44px]">
 			<div class="relative font-bold z-10">
 				<slot />
 			</div>

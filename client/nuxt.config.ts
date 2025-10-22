@@ -19,6 +19,17 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
+	app: {
+		head: {
+			link: [
+				{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com" },
+				{ rel: "dns-prefetch", href: "https://stable-benefit-bde0905312.strapiapp.com" },
+			],
+		},
+	},
+
+	nitro: { compressPublicAssets: true },
+
 	fonts: {
 		provider: "google",
 		defaults: {
@@ -42,6 +53,8 @@ export default defineNuxtConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
+
+		build: { cssCodeSplit: true, rollupOptions: { treeshake: true } },
 	},
 
 	typescript: {

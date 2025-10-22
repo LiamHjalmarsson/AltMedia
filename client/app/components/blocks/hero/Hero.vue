@@ -3,6 +3,28 @@ import type { Hero } from "~/types/content/blocks";
 
 const { block } = defineProps<{ block: Hero }>();
 
+const img = useImage();
+
+const backgroundStyle = computed(() => {
+	if (!block.cover?.length || !block.cover[0]?.url) {
+		return {};
+	}
+
+	const src = block.cover[0].url;
+
+	const optimized = img(src, {
+		format: "webp",
+		quality: 40,
+	});
+
+	return {
+		backgroundImage: `url('${optimized}')`,
+		backgroundSize: "cover",
+		backgroundPosition: "center",
+		backgroundRepeat: "no-repeat",
+	};
+});
+
 const textAlign = computed(() => {
 	switch (block.align_content) {
 		case "center":
@@ -51,17 +73,6 @@ const textAlign = computed(() => {
 			</div>
 		</div>
 
-		<div v-if="block.cover" class="absolute inset-0 z-0 opacity-20">
-			<NuxtImg
-				v-if="block.cover?.[0]?.url"
-				:src="block.cover[0].url"
-				:alt="block.cover[0].alternativeText || 'Hero background'"
-				sizes="100vw"
-				densities="x1 x2"
-				format="webp"
-				quality="85"
-				preload
-				class="absolute inset-0 w-full h-full object-cover object-center" />
-		</div>
+		<div v-if="block.cover" class="absolute inset-0 z-0 opacity-20" :style="backgroundStyle"></div>
 	</section>
 </template>

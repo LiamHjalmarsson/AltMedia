@@ -53,7 +53,7 @@ function onSubmit(event: Event) {
 		</FormField>
 
 		<div :style="{ gridColumn: '1 / -1' }" class="ml-auto mt-xl">
-			<Button :type="form.button?.type || 'submit'" :variant="form.button?.variant || 'primary'">
+			<Button type="submit" :variant="form.button?.variant || 'primary'">
 				{{ form.button?.label || "Skicka" }}
 			</Button>
 		</div>
