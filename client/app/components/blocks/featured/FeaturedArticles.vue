@@ -18,8 +18,10 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 							<NuxtImg
 								:src="article.cover.url"
 								:alt="article.cover.alternativeText || article.title"
-								sizes="100vw sm:50vw md:33vw"
 								densities="x1 x2"
+								width="600"
+								height="400"
+								sizes="100vw sm:50vw md:33vw"
 								format="webp"
 								quality="85"
 								placeholder

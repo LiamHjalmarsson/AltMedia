@@ -27,11 +27,13 @@ defineProps<{ block: FeaturedServicesBlock }>();
 									v-if="service.icon.is_image"
 									:src="service.icon.image?.url"
 									:alt="service.icon.image?.alternativeText || ''"
+									densities="x1 x2"
+									width="100"
+									height="100"
+									sizes="100vw sm:50vw md:33vw"
 									format="webp"
 									quality="85"
 									placeholder
-									sizes="80px"
-									densities="x1 x2"
 									loading="lazy" />
 								<Icon
 									v-else

@@ -19,7 +19,8 @@ function handleInput(event: Event) {
 		v-bind="$attrs"
 		:value="modelValue"
 		@input="handleInput"
+		:arial-label="$attrs['aria-label'] || $attrs.placeholder || $attrs.name"
 		:class="[
-			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border',
+			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border  focus-visible:outline-primary',
 		]" />
 </template>

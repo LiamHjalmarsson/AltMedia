@@ -25,8 +25,10 @@ const buildProjectStore = useBuildProjectStore();
 							v-if="offer.icon?.is_image"
 							:src="offer.icon.image?.url"
 							:alt="offer.icon.image?.alternativeText || offer.title"
-							sizes="100vw sm:50vw md:33vw"
 							densities="x1 x2"
+							width="100"
+							height="100"
+							sizes="100vw sm:50vw md:33vw"
 							format="webp"
 							quality="85"
 							placeholder

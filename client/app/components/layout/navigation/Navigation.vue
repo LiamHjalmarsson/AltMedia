@@ -36,11 +36,12 @@ onBeforeUnmount(destroy);
 					<NuxtImg
 						:src="header.logo?.url"
 						:alt="header.logo?.alternativeText || 'Alt Media logotyp'"
+						width="180"
+						height="30"
 						sizes="120px sm:150px md:180px"
 						format="webp"
 						quality="85"
 						fit="contain"
-						placeholder
 						loading="eager" />
 				</NuxtLink>
 

@@ -94,8 +94,10 @@ onMounted(() => {
 							v-if="project.cover?.url"
 							:src="project.cover.url"
 							:alt="project.cover.alternativeText || ''"
-							sizes="100vw sm:50vw md:33vw"
 							densities="x1 x2"
+							width="600"
+							height="400"
+							sizes="100vw sm:50vw md:33vw"
 							format="webp"
 							quality="85"
 							placeholder

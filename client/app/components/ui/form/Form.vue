@@ -27,6 +27,7 @@ function onSubmit(event: Event) {
 		<FormField
 			v-for="input in form.inputs"
 			:key="input.name"
+			:id="input.name"
 			:label="input.label"
 			:style="{ gridColumn: `span ${getGridSpan(input.column_span, form.columns)}` }">
 			<Input
