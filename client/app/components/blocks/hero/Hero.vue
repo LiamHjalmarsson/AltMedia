@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { Hero } from "~/types/content/blocks";
 
 const { block } = defineProps<{ block: Hero }>();
@@ -14,11 +14,12 @@ const backgroundStyle = computed(() => {
 
 	const optimized = img(src, {
 		format: "webp",
-		quality: 40,
+		quality: 50,
+		width: 1800,
 	});
 
 	return {
-		backgroundImage: `url('${optimized}')`,
+		backgroundImage: `linear-gradient(to bottom right, rgba(10,10,25,0.85), rgba(10,10,25,0.7)), url('${optimized}')`,
 		backgroundSize: "cover",
 		backgroundPosition: "center",
 		backgroundRepeat: "no-repeat",
@@ -28,31 +29,47 @@ const backgroundStyle = computed(() => {
 const textAlign = computed(() => {
 	switch (block.align_content) {
 		case "center":
-			return " justify-center items-center text-center";
+			return "items-center text-center";
 		case "right":
-			return " justify-end items-end text-right";
+			return "items-end text-right";
 		default:
-			return " justify-start items-start text-left";
+			return "items-start text-left";
 	}
 });
+
+function formatColoredWords(block: Hero): string {
+	let title = block.title;
+
+	if (block.colored_words) {
+		Object.entries(block.colored_words).forEach(([word, color]) => {
+			const regex = new RegExp(`\\b${word}\\b`, "gi");
+
+			title = title.replace(regex, `<span style="color:${color}">${word}</span>`);
+		});
+	}
+	return title;
+}
 </script>
 
 <template>
-	<section class="hero bg-dark text-light overflow-hidden relative min-h-screen flex justify-center items-center">
+	<section
+		class="hero bg-dark text-light overflow-hidden relative min-h-screen flex justify-center items-center"
+		:style="backgroundStyle">
+		<div class="absolute inset-0 z-0" />
+
 		<div class="flex items-center relative z-10 p-sm xs:p-md md:p-lg lg:p-2xl">
 			<div
 				class="flex w-full items-center"
 				:class="[!block.has_form ? textAlign : '', block.has_form ? 'gap-2xl max-xl:flex-col' : '']">
 				<div
-					class="flex flex-col space-y-xl max-w-5xl"
+					class="flex flex-col space-y-xl max-w-4xl"
 					:class="[
 						!block.has_form ? textAlign : '',
 						block.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : '',
 					]">
 					<h1
-						class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl text-light font-bold tracking-tight leading-tight">
-						{{ block.title }}
-					</h1>
+						class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl font-bold leading-tight tracking-tight"
+						v-html="formatColoredWords(block)"></h1>
 
 					<p
 						v-if="block.description"
@@ -60,19 +77,20 @@ const textAlign = computed(() => {
 						{{ block.description }}
 					</p>
 
-					<div v-if="block.links" class="mt-md space-y-lg sm:space-x-2xl w-fit">
-						<template v-for="link in block.links">
-							<ButtonLink :variant="link.variant" :to="link.url" class="max-sm:w-full max-sm:text-center">
-								{{ link.label }}
-							</ButtonLink>
-						</template>
+					<div v-if="block.links?.length" class="flex flex-wrap gap-md justify-center md:justify-start">
+						<ButtonLink
+							v-for="link in block.links"
+							:key="link.id"
+							:variant="link.variant"
+							:to="link.url"
+							:size="link.size || 'lg'">
+							{{ link.label }}
+						</ButtonLink>
 					</div>
 				</div>
-
-				<slot />
 			</div>
-		</div>
 
-		<div v-if="block.cover" class="absolute inset-0 z-0 opacity-20" :style="backgroundStyle"></div>
+			<slot v-if="block.has_form" />
+		</div>
 	</section>
 </template>

@@ -9,7 +9,8 @@ defineProps<{
 
 <template>
 	<NuxtLink :to="`/services/${service.slug}/${sub_service.slug}`" class="h-full flex">
-		<Card class="w-full lg:hover:shadow-2xl p-xl">
+		<div
+			class="w-full lg:hover:shadow-2xl p-xl flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
 			<div class="flex justify-between items-start mb-md">
 				<h3 class="font-semibold text-heading-md text-dark group-hover:text-primary">
 					{{ sub_service.title }}
@@ -29,6 +30,6 @@ defineProps<{
 			<div class="mt-auto ml-auto pt-md">
 				<ReadMoreButton />
 			</div>
-		</Card>
+		</div>
 	</NuxtLink>
 </template>

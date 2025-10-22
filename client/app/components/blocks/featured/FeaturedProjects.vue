@@ -30,22 +30,28 @@ onMounted(() => {
 		cards.forEach((card, i) => {
 			const title = card.querySelector(".project-title") as HTMLElement | null;
 
-			if (!title) {
+			const overlay = card.querySelector(".project-overlay") as HTMLElement | null;
+
+			if (!title || !overlay) {
 				return;
 			}
 
-			gsap.set(title, { opacity: 0, y: 20, pointerEvents: "none" });
+			gsap.set(title, { opacity: 0, y: 30, pointerEvents: "none" });
+
+			gsap.set(overlay, { opacity: 0 });
 
 			card.addEventListener("mouseenter", () => {
 				gsap.killTweensOf([cards, title]);
 
-				cards.forEach((c, j) => {
-					gsap.to(c, {
+				cards.forEach((card, j) => {
+					gsap.to(card, {
 						flex: j === i ? "3 1 0%" : "1 1 0%",
-						duration: 0.5,
+						duration: 0.15,
 						ease: "power2.out",
 					});
 				});
+
+				gsap.to(overlay, { opacity: 0.35, duration: 0.25, ease: "power2.out" });
 
 				gsap.to(title, {
 					opacity: 1,
@@ -60,16 +66,18 @@ onMounted(() => {
 
 				gsap.to(cards, {
 					flex: "1 1 0%",
-					duration: 0.5,
+					duration: 0.3,
 					ease: "power2.inOut",
 				});
 
 				gsap.to(title, {
 					opacity: 0,
 					y: 20,
-					duration: 0.3,
+					duration: 0.45,
 					ease: "power2.in",
 				});
+
+				gsap.to(overlay, { opacity: 0, duration: 0.2, ease: "power2.inOut" });
 			});
 		});
 	});
@@ -77,8 +85,8 @@ onMounted(() => {
 </script>
 
 <template>
-	<Section>
-		<Container>
+	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<div class="flex justify-between items-center mb-sm md:mb-md lg:mb-lg xl:mb-xl">
 				<Heading v-bind="block.heading" :align_content="block.heading.align_content" />
 			</div>
@@ -88,7 +96,7 @@ onMounted(() => {
 					v-for="(project, index) in block.projects"
 					:key="project.id"
 					:ref="(element) => setRef(element as HTMLElement, index)"
-					class="overflow-hidden rounded-xl shadow-2xl relative h-64 flex-1 transition-all duration-300">
+					class="overflow-hidden rounded-xl shadow-2xl relative h-96 flex-1 transition-all duration-300">
 					<NuxtLink :to="`/projects/${project.slug}`" class="flex justify-center items-center w-full h-full">
 						<NuxtImg
 							v-if="project.cover?.url"
@@ -103,6 +111,8 @@ onMounted(() => {
 							placeholder
 							loading="lazy"
 							class="object-cover w-full h-full" />
+
+						<div class="project-overlay absolute inset-0 bg-dark opacity-0 transition-opacity" />
 
 						<h3
 							class="project-title text-heading-lg font-semibold font-heading absolute z-20 text-secondary text-center px-md">
@@ -140,6 +150,6 @@ onMounted(() => {
 					</NuxtLink>
 				</div>
 			</div>
-		</Container>
-	</Section>
+		</div>
+	</section>
 </template>

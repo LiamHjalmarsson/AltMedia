@@ -5,7 +5,7 @@ defineProps<{ projects: Project[] }>();
 </script>
 
 <template>
-	<Grid class="grid-cols-3">
+	<div class="grid grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 		<ProjectCard v-for="project in projects" :key="project.id" :project="project" />
-	</Grid>
+	</div>
 </template>

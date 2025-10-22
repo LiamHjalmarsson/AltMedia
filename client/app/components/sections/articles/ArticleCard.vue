@@ -5,7 +5,7 @@ defineProps<{ article: Article }>();
 </script>
 
 <template>
-	<Card class="overflow-hidden">
+	<div class="overflow-hidden flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
 		<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 			<div class="h-40 overflow-hidden">
 				<NuxtImg
@@ -39,5 +39,5 @@ defineProps<{ article: Article }>();
 				</div>
 			</div>
 		</NuxtLink>
-	</Card>
+	</div>
 </template>

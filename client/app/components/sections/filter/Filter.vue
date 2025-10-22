@@ -35,22 +35,22 @@ function onClick(service: Service) {
 </script>
 
 <template>
-	<Container size="md">
+	<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1024px]">
 		<nav aria-label="Filter services" class="flex justify-between items-center space-x-2xl">
 			<button
 				v-for="service in services"
 				:key="service.id"
 				@click="onClick(service)"
 				class="flex flex-col items-center group cursor-pointer">
-				<IconWrapper
-					class="border-primary bg-primary-disabled/50 shadow-primary/40 transition group-hover:bg-primary group-hover:scale-110 duration-300"
+				<div
+					class="border-primary bg-primary-disabled/50 shadow-primary/40 group-hover:bg-primary group-hover:scale-110 flex justify-center items-center rounded-full border shadow-lg text-primary transition duration-300"
 					:class="selectedSlug === service.slug ? 'scale-110 bg-primary' : ''">
 					<Icon
 						v-if="service.icon?.icon_name"
 						:name="service.icon.icon_name"
 						size="30"
 						class="text-primary group-hover:text-light transition" />
-				</IconWrapper>
+				</div>
 
 				<p class="mt-xs text-md font-semibold text-primary">{{ service.title }}</p>
 
@@ -60,5 +60,5 @@ function onClick(service: Service) {
 					aria-hidden="true" />
 			</button>
 		</nav>
-	</Container>
+	</div>
 </template>

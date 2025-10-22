@@ -18,7 +18,7 @@ function toggleSub(sub: Subservice) {
 	<div class="space-y-xl">
 		<h2 class="text-heading-lg font-bold text-center">2. Välj tillägg</h2>
 
-		<Grid class="md:grid-cols-2 gap-xl">
+		<div class="grid md:grid-cols-2 gap-xl">
 			<div
 				v-for="sub in subservices"
 				:key="sub.id"
@@ -50,6 +50,6 @@ function toggleSub(sub: Subservice) {
 					<Icon name="lucide:check" size="16" />
 				</div>
 			</div>
-		</Grid>
+		</div>
 	</div>
 </template>

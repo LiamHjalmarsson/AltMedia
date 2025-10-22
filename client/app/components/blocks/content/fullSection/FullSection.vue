@@ -33,8 +33,8 @@ const textColor = computed(() => {
 </script>
 
 <template>
-	<Section
-		class="h-screen bg-cover bg-center relative"
+	<section
+		class="relative w-full h-screen flex items-center justify-center overflow-hidden"
 		:class="!block.color?.is_hex ? bgColor : ''"
 		:style="block.color?.is_hex ? bgColor : ''">
 		<NuxtImg
@@ -72,5 +72,5 @@ const textColor = computed(() => {
 				{{ block.link.label || "Läs mer" }}
 			</NuxtLink>
 		</div>
-	</Section>
+	</section>
 </template>

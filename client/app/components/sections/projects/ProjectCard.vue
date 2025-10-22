@@ -7,7 +7,7 @@ const slug = computed(() => `/projects/${project.slug}`);
 </script>
 
 <template>
-	<Card class="overflow-hidden">
+	<div class="overflow-hidden flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
 		<NuxtLink :to="slug" :aria-label="`Läs artikel: ${project.title}`">
 			<div class="h-40 overflow-hidden">
 				<NuxtImg
@@ -36,5 +36,5 @@ const slug = computed(() => `/projects/${project.slug}`);
 				</div>
 			</div>
 		</NuxtLink>
-	</Card>
+	</div>
 </template>

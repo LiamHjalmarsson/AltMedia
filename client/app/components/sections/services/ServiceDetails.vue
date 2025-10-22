@@ -13,8 +13,8 @@ defineProps<{
 				{{ service.title }}
 			</h2>
 		</div>
-		<Grid class="grid-cols-3 mt-lg">
+		<div class="grid grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl mt-lg">
 			<SubServiceCard v-for="sub_service in service.subservices" :key="sub_service.id" :sub_service :service />
-		</Grid>
+		</div>
 	</div>
 </template>

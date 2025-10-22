@@ -15,10 +15,12 @@ function handleSubmit(data: Record<string, any>) {}
 </script>
 
 <template>
-	<Section class="min-h-[80vh]">
-		<Container>
-			<Grid class="grid-cols-3 gap-2xl">
-				<Card class="col-span-2 pr-2xl">
+	<section
+		class="min-h-[80vh] relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
+			<div class="grid grid-cols-3 gap-2xl">
+				<div
+					class="flex flex-col rounded-xl group transition transform duration-300 shadow-lg col-span-2 pr-2xl">
 					<div class="p-2xl">
 						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" align_content="left" />
 
@@ -28,10 +30,10 @@ function handleSubmit(data: Record<string, any>) {}
 
 						<Form v-if="contact?.form" :form="contact.form" @submit="handleSubmit" class="mt-lg" />
 					</div>
-				</Card>
+				</div>
 
 				<div class="flex flex-col">
-					<Card class="w-full p-lg">
+					<div class="w-full p-lg flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
 						<h3 class="text-heading-md font-bold">Kontakta</h3>
 
 						<div class="flex items-center mt-md gap-xs" v-if="globalStore.contact?.phone">
@@ -43,9 +45,11 @@ function handleSubmit(data: Record<string, any>) {}
 							<Icon name="mdi:email" />
 							<span>{{ globalStore.contact.email }}</span>
 						</div>
-					</Card>
+					</div>
 
-					<Card class="mt-xl w-full p-lg" v-if="globalStore.contact?.social_medias?.length">
+					<div
+						v-if="globalStore.contact?.social_medias?.length"
+						class="mt-xl w-full p-lg flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
 						<h3 class="text-heading-md font-semibold mb-md">Följ oss</h3>
 
 						<div class="flex gap-md">
@@ -59,9 +63,9 @@ function handleSubmit(data: Record<string, any>) {}
 								</IconWrapper>
 							</NuxtLink>
 						</div>
-					</Card>
+					</div>
 				</div>
-			</Grid>
-		</Container>
-	</Section>
+			</div>
+		</div>
+	</section>
 </template>

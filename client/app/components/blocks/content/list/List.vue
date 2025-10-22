@@ -5,8 +5,9 @@ defineProps<{ block: ListBlock }>();
 </script>
 
 <template>
-	<Section class="bg-bg-dark text-light">
-		<Container>
+	<section
+		class="bg-bg-dark text-light relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
@@ -30,7 +31,7 @@ defineProps<{ block: ListBlock }>();
 							quality="85"
 							placeholder
 							loading="lazy"
-							class="w-full h-full object-cover max-h-[520px] rounded-2xl scale-[1.02] group-hover:scale-100 transition-transform duration-700 ease-out" />
+							class="w-full h-full object-cover max-h-[350px] rounded-2xl" />
 					</div>
 
 					<div
@@ -75,6 +76,6 @@ defineProps<{ block: ListBlock }>();
 					</div>
 				</div>
 			</div>
-		</Container>
-	</Section>
+		</div>
+	</section>
 </template>
