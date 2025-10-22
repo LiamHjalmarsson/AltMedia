@@ -17,7 +17,9 @@ const sizeClass: Record<Size, string> = {
 </script>
 
 <template>
-	<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl" :class="[sizeClass[size]]">
+	<div
+		class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]"
+		:class="[sizeClass[size]]">
 		<slot />
 	</div>
 </template>

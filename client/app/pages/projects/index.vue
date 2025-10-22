@@ -27,8 +27,8 @@ function onFilterCategory(slug: string) {
 </script>
 
 <template>
-	<Section>
-		<Container>
+	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<Heading title="Våra projekt" class="mt-2xl" align_content="center" />
 
 			<Filter
@@ -37,9 +37,9 @@ function onFilterCategory(slug: string) {
 				:selected="selected"
 				@filterByService="onFilterCategory" />
 
-			<Grid class="grid-cols-3 gap-2xl mt-xl">
+			<div class="grid grid-cols-3 gap-2xl mt-xl">
 				<ProjectCard v-for="project in projects" :key="project.id" :project="project" />
-			</Grid>
-		</Container>
-	</Section>
+			</div>
+		</div>
+	</section>
 </template>

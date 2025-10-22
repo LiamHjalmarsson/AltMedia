@@ -5,7 +5,7 @@ defineProps<{ services: Service[] }>();
 </script>
 
 <template>
-	<Grid class="grid-cols-3 grid gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
+	<div class="grid-cols-3 grid gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 		<NuxtLink v-for="service in services" :key="service.id" :to="`/services/${service.slug}`">
 			<div
 				class="p-lg h-full flex flex-col justify-between rounded-xl group transition transform duration-300 shadow-lg">
@@ -19,5 +19,5 @@ defineProps<{ services: Service[] }>();
 				<p class="text-sm mt-sm">{{ service.description }}</p>
 			</div>
 		</NuxtLink>
-	</Grid>
+	</div>
 </template>

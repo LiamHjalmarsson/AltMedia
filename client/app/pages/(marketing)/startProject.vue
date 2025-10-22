@@ -28,14 +28,14 @@ function prevStep() {
 </script>
 
 <template>
-	<Section>
-		<Container>
+	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<div class="my-2xl text-center max-w-2xl mx-auto">
 				<Heading :title="buildProject?.title" align_content="center" />
 				<p class="text-base text-dark-gray mt-sm">{{ buildProject?.description }}</p>
 			</div>
 
-			<Grid class="grid-cols-3 gap-2xl items-start">
+			<div class="grid grid-cols-3 gap-2xl items-start">
 				<div class="col-span-2 space-y-2xl pr-2xl">
 					<StepProgress
 						:progress="(currentStep / (buildProject?.steps?.length || 4)) * 100"
@@ -102,7 +102,7 @@ function prevStep() {
 					:summary="formData.summary"
 					:total-once="totalOnce"
 					:total-monthly="totalMonthly" />
-			</Grid>
-		</Container>
-	</Section>
+			</div>
+		</div>
+	</section>
 </template>

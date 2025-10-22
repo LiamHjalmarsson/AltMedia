@@ -31,8 +31,8 @@ function submitForm() {}
 </script>
 
 <template>
-	<Section>
-		<Container>
+	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<div class="mb-xl text-center">
 				<Heading title="Starta ett projekt" align_content="center" />
 				<p class="text-lg text-dark-gray mt-sm">
@@ -46,14 +46,13 @@ function submitForm() {}
 					:style="{ width: progress + '%' }" />
 			</div>
 
-			<Grid class="grid-cols-3 gap-2xl items-start">
-				<!-- Steps (left) -->
+			<div class="grid grid-cols-3 gap-2xl items-start">
 				<div class="col-span-2 space-y-2xl">
 					<div
 						v-if="currentStep === 1"
 						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
 						<h2 class="text-heading-md font-bold">1. Välj projekt typ</h2>
-						<Grid class="grid-cols-2 gap-lg">
+						<div class="grid grid-cols-2 gap-lg">
 							<button
 								v-for="type in ['Webbplats', 'E-handel', 'Branding', 'Annat']"
 								:key="type"
@@ -66,7 +65,7 @@ function submitForm() {}
 								]">
 								{{ type }}
 							</button>
-						</Grid>
+						</div>
 					</div>
 
 					<div
@@ -105,7 +104,6 @@ function submitForm() {}
 						</p>
 					</div>
 
-					<!-- Navigation -->
 					<div class="flex justify-between items-center pt-lg">
 						<Button v-if="currentStep > 1" variant="ghost" @click="prevStep"> Tillbaka </Button>
 
@@ -117,7 +115,6 @@ function submitForm() {}
 					</div>
 				</div>
 
-				<!-- Summary (right) -->
 				<aside class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light shadow-lg space-y-lg">
 					<h3 class="text-heading-md font-bold">Sammanfattning</h3>
 
@@ -143,7 +140,7 @@ function submitForm() {}
 						<p class="text-heading-md font-bold text-primary">Totalpris: {{ formData.totalPrice }} SEK</p>
 					</div>
 				</aside>
-			</Grid>
-		</Container>
-	</Section>
+			</div>
+		</div>
+	</section>
 </template>

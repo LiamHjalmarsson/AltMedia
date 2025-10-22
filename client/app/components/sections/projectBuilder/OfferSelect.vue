@@ -17,7 +17,7 @@ function handleSelect(offerId: number) {
 	<div class="space-y-xl">
 		<h2 class="text-heading-lg font-bold text-center mb-lg">1. Välj ett paket</h2>
 
-		<Grid class="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-xl">
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-xl">
 			<div
 				v-for="offer in offers"
 				:key="offer.id"
@@ -74,6 +74,6 @@ function handleSelect(offerId: number) {
 					</p>
 				</div>
 			</div>
-		</Grid>
+		</div>
 	</div>
 </template>

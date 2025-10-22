@@ -13,7 +13,7 @@ function toggleAnswer(id: number) {
 
 <template>
 	<section class="relative py-2xl md:py-3xl">
-		<div class="container mx-auto max-w-[1400px] px-md grid lg:grid-cols-2 gap-3xl items-start">
+		<div class="container mx-auto max-w-[1600px] px-md grid lg:grid-cols-2 gap-2xl items-start">
 			<div class="space-y-xl">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 
