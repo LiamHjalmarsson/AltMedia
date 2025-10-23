@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const globalStore = useGlobalStore();
+
 const { footer } = storeToRefs(globalStore);
 </script>
 
@@ -10,10 +11,10 @@ const { footer } = storeToRefs(globalStore);
 			<div
 				class="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-xl text-center md:flex-row md:gap-2xl md:text-left">
 				<div class="flex-1 space-y-md">
-					<h3
+					<h2
 						class="text-heading-md sm:text-heading-lg md:text-heading-xl font-semibold leading-tight text-light">
 						{{ footer?.cta?.title }}
-					</h3>
+					</h2>
 
 					<p
 						v-if="footer?.cta?.description"

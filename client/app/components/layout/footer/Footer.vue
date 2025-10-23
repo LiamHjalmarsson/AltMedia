@@ -2,32 +2,20 @@
 const globalStore = useGlobalStore();
 
 const { footer, contact } = storeToRefs(globalStore);
+
+const currentYear = new Date().getFullYear();
 </script>
 
 <template>
 	<footer class="p-xl xl:p-2xl bg-dark text-light">
-		<div class="mx-auto w-full h-full max-w-[1200px]">
+		<div class="mx-auto w-full h-full max-w-[1600px]">
 			<nav
-				aria-label="Footer"
+				aria-label="Sidfotsnavigation"
 				class="mb-2xl flex max-md:space-y-lg max-md:flex-col justify-between items-center xl:items-start">
-				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column="column" />
+				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column />
 			</nav>
 
-			<div class="flex justify-between items-center">
-				<div class="w-1/4" />
-
-				<div class="text-center text-sm lg:text-md text-gray font-semibold w-full xl:w-2/4">
-					© {{ new Date().getFullYear() }} Alt media. Alla rättigheter förbehållna.
-				</div>
-
-				<div class="flex justify-end items-center space-x-md w-1/4">
-					<NuxtLink v-for="socialMedia in contact?.social_medias" :key="socialMedia.id" :to="socialMedia.url">
-						<Icon :name="socialMedia.icon?.icon_name" size="24" />
-					</NuxtLink>
-				</div>
-
-				<SocialLinks v-if="contact?.social_medias" :social-medias="contact.social_medias" />
-			</div>
+			<FooterBottom :year="currentYear" :socials="contact?.social_medias || []" />
 		</div>
 	</footer>
 </template>

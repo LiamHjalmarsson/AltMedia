@@ -10,8 +10,8 @@ defineProps<{ column: FooterColumn }>();
 			{{ column.title }}
 		</NuxtLink>
 
-		<ul v-if="column.links?.length" class="mt-sm">
-			<li v-for="subLink in column.links" :key="subLink.label" class="mb-sm">
+		<ul v-if="column.links?.length" class="mt-sm space-y-sm">
+			<li v-for="subLink in column.links" :key="subLink.label">
 				<MenuLink :link="subLink" />
 			</li>
 		</ul>
