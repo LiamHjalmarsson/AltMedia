@@ -8,7 +8,7 @@ const { contact } = storeToRefs(contactStore);
 await useAsyncData("contact", () => contactStore.fetchContact(), { server: true });
 
 definePageMeta({
-	layout: "custom",
+	layout: "minimal",
 });
 
 function handleSubmit(data: Record<string, any>) {}
@@ -58,9 +58,10 @@ function handleSubmit(data: Record<string, any>) {}
 								:key="socialMedia.id"
 								:to="socialMedia.url"
 								target="_blank">
-								<IconWrapper class="bg-dark text-light">
+								<div
+									class="bg-dark text-light flex justify-center items-center rounded-full border shadow-lg transition duration-300 w-10 h-10 p-xs">
 									<Icon :name="socialMedia.icon.icon_name" size="28" />
-								</IconWrapper>
+								</div>
 							</NuxtLink>
 						</div>
 					</div>

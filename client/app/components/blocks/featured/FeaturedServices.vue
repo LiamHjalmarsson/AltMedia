@@ -5,24 +5,23 @@ defineProps<{ block: FeaturedServicesBlock }>();
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
+	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full h-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
-				:has_link="false"
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 				<div
 					v-for="service in block.services"
 					:key="service.id"
-					class="h-full relative overflow-hidden flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
+					class="relative h-full flex flex-col rounded-xl group transition duration-300 shadow-lg overflow-hidden bg-light/5">
 					<NuxtLink
 						:to="`/services/${service.slug}`"
-						class="w-full h-full"
-						:aria-label="`Läs mer om ${service.title}`">
-						<div class="flex flex-col justify-between relative z-10 p-lg lg:p-xl h-full">
+						:aria-label="`Läs mer om ${service.title}`"
+						class="flex flex-col justify-between h-full p-lg lg:p-xl">
+						<div class="flex flex-col justify-between relative z-10 h-full">
 							<div
 								size="lg"
 								class="border-primary bg-primary-disabled/50 shadow-primary/40 relative flex justify-center items-center rounded-full border shadow-lg text-primary transition duration-300 w-12 h-12 p-xs">
@@ -45,15 +44,15 @@ defineProps<{ block: FeaturedServicesBlock }>();
 									class="text-primary" />
 							</div>
 
-							<div class="flex-grow">
+							<div class="flex-1">
 								<h3
 									class="font-semibold text-heading-sm md:text-heading-md my-sm md:my-md group-hover:text-primary duration-300">
 									{{ service.title }}
 								</h3>
 
-								<div class="text-sm md:text-md leading-relaxed mb-sm md:mb-md">
+								<p class="text-sm md:text-md leading-relaxed mb-sm md:mb-md">
 									{{ service.description }}
-								</div>
+								</p>
 							</div>
 
 							<button

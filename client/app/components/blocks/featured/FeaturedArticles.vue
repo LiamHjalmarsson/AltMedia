@@ -5,35 +5,31 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
-			<div class="mb-sm md:mb-md lg:mb-lg xl:mb-xl">
-				<Heading v-bind="block.heading" :align_content="block.heading.align_content" />
-			</div>
+	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto w-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+			<Heading
+				v-bind="block.heading"
+				:align_content="block.heading.align_content"
+				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
 			<div class="grid md:grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 				<div
 					v-for="article in block.articles"
 					:key="article.id"
-					class="overflow-hidden flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
+					class="overflow-hidden flex flex-col rounded-xl group transition transform duration-300 shadow-lg bg-light/5">
 					<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<div class="h-40 overflow-hidden">
 							<NuxtImg
 								:src="article.cover.url"
 								:alt="article.cover.alternativeText || article.title"
-								densities="x1 x2"
-								width="600"
-								height="400"
-								sizes="100vw sm:50vw md:33vw"
 								format="webp"
 								quality="85"
-								placeholder
 								loading="lazy"
 								class="h-full w-full object-cover group-hover:scale-105 transition transform duration-300" />
 						</div>
 
 						<div class="flex flex-col justify-between flex-1 p-md">
-							<h3 class="text-lg font-bold text-dark duration-300 group-hover:text-primary line-clamp-2">
+							<h3 class="text-lg font-bold duration-300 group-hover:text-primary line-clamp-2">
 								{{ article.title }}
 							</h3>
 
@@ -45,8 +41,10 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 
 							<div class="mt-auto flex items-center justify-between pt-sm">
 								<div class="text-xs text-dark-gray">
-									<div v-if="article.published_date">{{ article.published_date }}</div>
-									<div v-if="article.reading_time_min">{{ article.reading_time_min }} min</div>
+									<span v-if="article.published_date">
+										{{ article.published_date }}
+									</span>
+									<span v-if="article.reading_time_min"> {{ article.reading_time_min }} min </span>
 								</div>
 
 								<button

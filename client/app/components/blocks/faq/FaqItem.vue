@@ -25,7 +25,7 @@ function onToggle(id: number) {
 		:aria-expanded="activeId === item.id"
 		:aria-controls="`faq-answer-${item.id}`"
 		class="p-md cursor-pointer max-w-[750px] w-full flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
-		<div class="flex items-center justify-between w-ful px-xs">
+		<div class="flex items-center justify-between px-xs">
 			<span class="text-heading-sm lg:text-heading-md font-semibold font-heading text-secondary">
 				{{ number }}
 			</span>
@@ -50,16 +50,10 @@ function onToggle(id: number) {
 			</button>
 		</div>
 
-		<div class="w-full">
-			<Transition :css="false" @enter="onEnter" @leave="onLeave">
-				<div
-					v-show="activeId === item.id"
-					:id="`faq-answer-${item.id}`"
-					class="overflow-hidden mt-sm px-2xs"
-					:aria-labelledby="`faq-title-${item.id}`">
-					<StrapiBlocksText :nodes="item.answer" />
-				</div>
-			</Transition>
-		</div>
+		<Transition :css="false" @enter="onEnter" @leave="onLeave">
+			<div v-show="activeId === item.id" class="overflow-hidden mt-sm px-2xs">
+				<StrapiBlocksText :nodes="item.answer" />
+			</div>
+		</Transition>
 	</div>
 </template>

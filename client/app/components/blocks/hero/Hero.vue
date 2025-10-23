@@ -14,7 +14,7 @@ const backgroundStyle = computed(() => {
 
 	const optimized = img(src, {
 		format: "webp",
-		quality: 50,
+		quality: 65,
 		width: 1800,
 	});
 
@@ -26,14 +26,18 @@ const backgroundStyle = computed(() => {
 	};
 });
 
-const textAlign = computed(() => {
-	switch (block.align_content) {
-		case "center":
-			return "items-center text-center";
-		case "right":
-			return "items-end text-right";
-		default:
-			return "items-start text-left";
+const alignClass = computed(() => {
+	if (block.has_form) {
+		return "gap-2xl max-xl:flex-col";
+	} else {
+		switch (block.align_content) {
+			case "center":
+				return "items-center text-center";
+			case "right":
+				return "items-end text-right";
+			default:
+				return "items-start text-left";
+		}
 	}
 });
 
@@ -47,6 +51,7 @@ function formatColoredWords(block: Hero): string {
 			title = title.replace(regex, `<span style="color:${color}">${word}</span>`);
 		});
 	}
+
 	return title;
 }
 </script>
@@ -58,18 +63,13 @@ function formatColoredWords(block: Hero): string {
 		<div class="absolute inset-0 z-0" />
 
 		<div class="flex items-center relative z-10 p-sm xs:p-md md:p-lg lg:p-2xl">
-			<div
-				class="flex w-full items-center"
-				:class="[!block.has_form ? textAlign : '', block.has_form ? 'gap-2xl max-xl:flex-col' : '']">
+			<div class="flex w-full items-center" :class="alignClass">
 				<div
 					class="flex flex-col space-y-xl max-w-4xl"
-					:class="[
-						!block.has_form ? textAlign : '',
-						block.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : '',
-					]">
+					:class="block?.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : ''">
 					<h1
-						class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl font-bold leading-tight tracking-tight"
-						v-html="formatColoredWords(block)"></h1>
+						class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl font-extrabold leading-tight tracking-tight"
+						v-html="formatColoredWords(block)" />
 
 					<p
 						v-if="block.description"

@@ -13,7 +13,7 @@ function selectOffer(id: number) {
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
 		<div class="container mx-auto max-w-[1400px] px-md">
 			<Heading
 				:title="block.heading.title"
@@ -24,11 +24,11 @@ function selectOffer(id: number) {
 				<div
 					v-for="offer in block.offers"
 					:key="offer.id"
-					class="p-lg relative flex flex-col rounded-xl group transition transform duration-300 shadow-lg"
-					:class="offer.is_popular ? 'scale-105 border border-primary' : ''">
+					class="p-lg relative flex flex-col rounded-xl group transition duration-300 shadow-2xl bg-light/5"
+					:class="offer.is_popular ? 'scale-105  shadow-primary' : ''">
 					<div
 						v-if="offer.is_popular"
-						class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-lg py-xs shadow-2xl shadow-primary bg-primary rounded-full text-light font-semibold text-xs">
+						class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-light rounded-full px-lg py-xs font-semibold text-xs shadow-lg shadow-primary">
 						Mest populär
 					</div>
 
@@ -38,9 +38,8 @@ function selectOffer(id: number) {
 							:src="offer.icon.image?.url"
 							:alt="offer.icon.image?.alternativeText || offer.title"
 							densities="x1 x2"
-							width="100"
-							height="100"
-							sizes="100vw sm:50vw md:33vw"
+							width="80"
+							height="80"
 							format="webp"
 							quality="85"
 							placeholder
@@ -54,19 +53,19 @@ function selectOffer(id: number) {
 					</div>
 
 					<div class="mb-md flex-1">
-						<h3 class="text-heading-md font-bold text-center px-lg mb-sm">
+						<h3 class="text-heading-md font-bold text-center mb-sm">
 							{{ offer.title }}
 						</h3>
 
-						<p class="mt-md px-lg text-sm text-dark-gray text-center mb-lg">
+						<p class="text-sm text-dark-gray text-center mb-md">
 							{{ offer.description }}
 						</p>
 
-						<p class="mt-md text-center text-2xl font-extrabold text-primary mb-lg">
-							{{ offer.start_price ? offer.start_price + " kr" : "Kontakta oss" }}
+						<p class="text-xl font-bold text-primary text-center mb-lg">
+							{{ offer.start_price ? `${offer.start_price} kr` : "Kontakta oss" }}
 						</p>
 
-						<ul class="my-md px-xl">
+						<ul class="space-y-xs mb-lg">
 							<li
 								v-for="(feature, i) in offer.features"
 								:key="i"

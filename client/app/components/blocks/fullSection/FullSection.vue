@@ -2,18 +2,18 @@
 import { computed } from "vue";
 import type { FullSectionBlock } from "~/types/content/blocks";
 
-const props = defineProps<{ block: FullSectionBlock }>();
+const { block } = defineProps<{ block: FullSectionBlock }>();
 
 const bgColor = computed(() => {
-	if (!props.block.color) {
+	if (!block.color) {
 		return "bg-bg-dark text-light";
 	}
 
-	if (props.block.color.is_hex && props.block.color.hex) {
-		return { backgroundColor: props.block.color.hex };
+	if (block.color.is_hex && block.color.hex) {
+		return { backgroundColor: block.color.hex };
 	}
 
-	switch (props.block.color.type) {
+	switch (block.color.type) {
 		case "primary":
 			return "bg-primary";
 		case "secondary":
@@ -24,11 +24,11 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	if (!props.block.color) {
+	if (!block.color) {
 		return "text-light";
 	}
 
-	return props.block.color.is_dark_text ? "text-dark" : "text-light";
+	return block.color.is_dark_text ? "text-dark" : "text-light";
 });
 </script>
 
@@ -43,16 +43,13 @@ const textColor = computed(() => {
 			:alt="block.cover.alternativeText || ''"
 			format="webp"
 			quality="80"
-			placeholder
 			loading="lazy"
-			sizes="100vw"
-			densities="x1 x2"
 			class="object-cover opacity-10 absolute inset-0 h-full w-full" />
 
-		<div class="text-light relative z-10 max-w-screen-md lg:max-w-screen-lg text-center mx-auto py-2xl px-md">
+		<div class="relative z-10 text-center mx-auto py-2xl px-md max-w-screen-md lg:max-w-screen-lg">
 			<h3
 				v-if="block.title"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold font-heading text-secondary mb-xs">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary mb-xs">
 				{{ block.title }}
 			</h3>
 

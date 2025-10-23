@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const globalStore = useGlobalStore();
+
 await useAsyncData("global", () => globalStore.fetchGlobalConfig(), { server: true });
+
 const { globalConfig, seo } = storeToRefs(globalStore);
 
 useHead({

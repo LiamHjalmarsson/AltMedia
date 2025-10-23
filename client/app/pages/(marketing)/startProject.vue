@@ -7,7 +7,7 @@ const { buildProject, currentOffer, selectedSubs, totalOnce, totalMonthly, selec
 await useAsyncData("buildProject", () => buildProjectStore.fetchBuildProject(), { server: true });
 
 definePageMeta({
-	layout: "custom",
+	layout: "minimal",
 });
 
 const currentStep = ref(1);

@@ -4,10 +4,10 @@ import type { FaqBlock } from "~/types/content/blocks";
 
 const { block } = defineProps<{ block: FaqBlock }>();
 
-const activeItemId = ref<number | null>(null);
+const activeId = ref<number | null>(null);
 
 function toggleAnswer(id: number) {
-	activeItemId.value = activeItemId.value === id ? null : id;
+	activeId.value = activeId.value === id ? null : id;
 }
 </script>
 
@@ -23,8 +23,8 @@ function toggleAnswer(id: number) {
 					:alt="block.icon.image.alternativeText || block.heading.title"
 					format="webp"
 					quality="85"
-					class="rounded-2xl shadow-lg max-h-[400px] object-cover"
-					loading="lazy" />
+					loading="lazy"
+					class="rounded-2xl shadow-lg max-h-[400px] object-cover" />
 			</div>
 
 			<div class="flex flex-col space-y-lg">
@@ -33,7 +33,7 @@ function toggleAnswer(id: number) {
 					:key="faq.id"
 					:item="faq"
 					:number="i + 1"
-					:activeId="activeItemId"
+					:activeId="activeId"
 					@toggle="toggleAnswer" />
 			</div>
 		</div>

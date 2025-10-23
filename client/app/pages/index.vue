@@ -5,7 +5,7 @@ const homeStore = useHomeStore();
 
 await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
 
-const { homePage } = storeToRefs(homeStore);
+const { homePage, loading } = storeToRefs(homeStore);
 
 const hero = computed(() => homePage.value?.hero ?? null);
 
@@ -16,8 +16,8 @@ const blocks = computed<Blocks[]>(() => homePage?.value?.blocks ?? []);
 
 <template>
 	<Hero :block="hero">
-		<HeroForm v-if="form" :form="form" class="max-lg:w-full" />
+		<HeroForm v-if="form" :form class="max-lg:w-full" />
 	</Hero>
 
-	<BlocksRenderer :blocks="blocks" />
+	<BlockRenderer :blocks />
 </template>
