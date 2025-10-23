@@ -27,6 +27,18 @@ export default defineNuxtConfig({
 				// { rel: "preconnect", href: "https://fonts.googleapis.com" },
 				// { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
 			],
+			meta: [
+				{
+				'http-equiv': 'Content-Security-Policy',
+				content: `
+					default-src 'self';
+					connect-src 'self' https://stable-benefit-bde0905312.strapiapp.com;
+					img-src 'self' https://stable-benefit-bde0905312.strapiapp.com;
+					style-src 'self' 'unsafe-inline';
+					script-src 'self' 'unsafe-inline';
+				`,
+				}
+			]
 		},
 	},
 
