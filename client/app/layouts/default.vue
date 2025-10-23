@@ -6,19 +6,20 @@ await useAsyncData("global", () => globalStore.fetchGlobalConfig(), { server: tr
 const { globalConfig, seo } = storeToRefs(globalStore);
 
 useHead({
-	title: globalConfig.value?.site_name,
-
+	titleTemplate: (titleChunk?: string) =>
+		titleChunk
+			? titleChunk + (globalConfig.value?.site_name ? ` | ${globalConfig.value.site_name}` : "")
+			: (globalConfig.value?.site_name ?? null),
 	htmlAttrs: { lang: "sv" },
-
 	link: globalConfig.value?.favicon
 		? [
 				{
 					rel: "icon",
-					type: "image/x-icon",
-					href: globalConfig.value?.favicon.url,
+					type: "image/png",
+					href: globalConfig.value.favicon.url,
 				},
 			]
-		: null,
+		: [],
 });
 
 useSeoMeta({

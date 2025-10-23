@@ -30,9 +30,9 @@ function onToggle(id: number) {
 				{{ number }}
 			</span>
 
-			<h4 class="text-heading-2xs md:text-heading-xs font-semibold flex-1 pl-lg">
+			<h3 class="text-heading-2xs md:text-heading-xs font-semibold flex-1 pl-lg">
 				{{ item.question }}
-			</h4>
+			</h3>
 
 			<button
 				:id="`faq-title-${item.id}`"
