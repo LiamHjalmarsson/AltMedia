@@ -36,13 +36,14 @@ function onToggle(id: number) {
 
 			<button
 				:id="`faq-title-${item.id}`"
-				class="text-left flex justify-between items-center focus:outline-none cursor-pointer focus-visible:outline-primary"
+				class="text-left flex justify-between items-center focus:outline-none cursor-pointer focus-visible:outline-primary min-h-[44px] min-w-[44px]"
 				:aria-expanded="activeId === item.id"
 				:aria-label="`Expandera frågan: ${item.question}`"
 				:aria-controls="`faq-answer-${item.id}`"
 				type="button">
 				<Icon
 					name="heroicons:chevron-down"
+					size="20"
 					:class="[
 						'text-heading-xs transition-transform duration-300 cursor-pointer',
 						activeId === item.id ? 'rotate-180' : '',
