@@ -35,7 +35,7 @@ export default defineNuxtConfig({
 		routeRules: {
 			"/**": {
 				headers: {
-					"Cache-Control": "public, max-age=3600, immutable",
+					"Cache-Control": "public, max-age=36000, immutable",
 					"Content-Security-Policy":
 						"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
 					"Cross-Origin-Opener-Policy": "same-origin",
@@ -70,17 +70,17 @@ export default defineNuxtConfig({
 	vite: {
 		plugins: [tailwindcss()],
 
-		build: {
-			cssCodeSplit: true,
-			rollupOptions: {
-				output: {
-					manualChunks: {
-						vue: ["vue"],
-						gsap: ["gsap"],
-					},
-				},
-			},
-		},
+		// build: {
+		// 	cssCodeSplit: true,
+		// 	rollupOptions: {
+		// 		output: {
+		// 			manualChunks: {
+		// 				vue: ["vue"],
+		// 				gsap: ["gsap"],
+		// 			},
+		// 		},
+		// 	},
+		// },
 	},
 
 	typescript: {

@@ -61,9 +61,9 @@ function selectOffer(id: number) {
 							{{ offer.description }}
 						</p>
 
-						<p class="text-xl font-bold text-primary text-center mb-lg">
+						<h4 class="text-xl font-bold text-primary text-center mb-lg">
 							{{ offer.start_price ? `${offer.start_price} kr` : "Kontakta oss" }}
-						</p>
+						</h4>
 
 						<ul class="space-y-xs mb-lg">
 							<li
