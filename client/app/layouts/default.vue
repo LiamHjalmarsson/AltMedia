@@ -44,7 +44,7 @@ useSeoMeta({
 			<slot />
 		</main>
 
-		<CtaSection />
+		<FooterCta />
 
 		<Footer />
 	</div>
