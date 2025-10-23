@@ -23,29 +23,29 @@ export default defineNuxtConfig({
 		head: {
 			link: [
 				{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" },
-				{ rel: "dns-prefetch", href: "https://stable-benefit-bde0905312.strapiapp.com" },
-				{ rel: "preconnect", href: "https://fonts.googleapis.com" },
-				{ rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+				// { rel: "dns-prefetch", href: "https://stable-benefit-bde0905312.strapiapp.com" },
+				// { rel: "preconnect", href: "https://fonts.googleapis.com" },
+				// { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
 			],
 		},
 	},
 
-	nitro: {
-		compressPublicAssets: true,
-		routeRules: {
-			"/**": {
-				headers: {
-					"Cache-Control": "public, max-age=120, immutable",
-					"Content-Security-Policy":
-						"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
-					"Cross-Origin-Opener-Policy": "same-origin",
-					"X-Frame-Options": "DENY",
-					"Referrer-Policy": "strict-origin-when-cross-origin",
-					"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-				},
-			},
-		},
-	},
+	// nitro: {
+	// 	compressPublicAssets: true,
+	// 	routeRules: {
+	// 		"/**": {
+	// 			headers: {
+	// 				"Cache-Control": "public, max-age=120, immutable",
+	// 				"Content-Security-Policy":
+	// 					"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
+	// 				"Cross-Origin-Opener-Policy": "same-origin",
+	// 				"X-Frame-Options": "DENY",
+	// 				"Referrer-Policy": "strict-origin-when-cross-origin",
+	// 				"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+	// 			},
+	// 		},
+	// 	},
+	// },
 
 	fonts: {
 		provider: "google",

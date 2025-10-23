@@ -10,7 +10,7 @@ export interface GlobalConfig extends BaseEntity {
 	};
 	navigation: Navigation;
 	footer: Footer;
-	seo?: Seo;
+	seo: Seo;
 	contact?: ContactDetails;
 }
 

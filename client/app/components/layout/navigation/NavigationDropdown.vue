@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 
-const globalStore = useGlobalStore();
-
-const { header } = storeToRefs(globalStore);
-
 defineProps<{
 	isMenuOpen: boolean;
 }>();
 
 const emit = defineEmits(["close"]);
+
+const globalStore = useGlobalStore();
+
+const { header } = storeToRefs(globalStore);
 
 const { onEnter, onLeave } = useCollapse();
 </script>
@@ -26,11 +26,13 @@ const { onEnter, onLeave } = useCollapse();
 					<li
 						v-for="link in header?.links"
 						:key="link.label"
+						role="menu"
 						class="transition-opacity duration-500 relative">
 						<MenuLink
 							:link
-							class="px-md py-2xs block font-semibold text-lg text-center w-full"
-							@click="emit('close')" />
+							role="menuitem"
+							@click="emit('close')"
+							class="px-md py-2xs block font-semibold text-lg text-center w-full" />
 					</li>
 				</ul>
 			</div>
