@@ -22,6 +22,8 @@ function toggleAnswer(id: number) {
 					:src="block.icon.image.url"
 					:alt="block.icon.image.alternativeText || block.heading.title"
 					format="webp"
+					:width="block.icon.image?.width || 600"
+					:height="block.icon.image?.height || 400"
 					quality="85"
 					loading="lazy"
 					class="rounded-2xl shadow-lg max-h-[400px] object-cover" />
