@@ -7,13 +7,30 @@ const { block } = defineProps<{
 }>();
 
 const content: BlockNode[] = block.content || [];
+
+const hasImage = computed(() => !!block.image?.url);
+
+const textAlignClass = computed(() => {
+	if (!hasImage.value) {
+		switch (block.align_content) {
+			case "center":
+				return "text-center";
+			case "right":
+				return "text-right";
+			default:
+				return "text-left";
+		}
+	}
+
+	return "";
+});
 </script>
 
 <template>
 	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
 		<div class="mx-auto w-full h-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
-			<div :class="['grid items-center gap-xl', block.image?.url ? 'md:grid-cols-2' : 'md:grid-cols-1']">
-				<div v-if="block.image?.url" :class="block.reverse ? 'md:order-2' : 'md:order-1'">
+			<div :class="['grid items-center gap-xl', hasImage ? 'md:grid-cols-2' : 'md:grid-cols-1']">
+				<div v-if="hasImage" :class="block.reverse ? 'md:order-2' : 'md:order-1'">
 					<NuxtImg
 						:src="block.image.url"
 						:alt="block.image.alternativeText || ''"
@@ -26,21 +43,8 @@ const content: BlockNode[] = block.content || [];
 						class="w-full h-auto rounded-xl object-cover" />
 				</div>
 
-				<div
-					:class="[
-						block.image?.url ? (block.reverse ? 'md:order-1' : 'md:order-2') : '',
-						!block.image?.url
-							? block.align_content === 'center'
-								? 'text-center'
-								: block.align_content === 'right'
-									? 'text-right'
-									: 'text-left'
-							: '',
-					]">
-					<StrapiBlocksText
-						v-if="content?.length"
-						:nodes="content"
-						class="mb-lg leading-relaxed text-base md:text-lg" />
+				<div :class="[hasImage ? (block.reverse ? 'md:order-1' : 'md:order-2') : '', textAlignClass]">
+					<StrapiBlocksText v-if="content?.length" :nodes="content" class="mb-lg leading-relaxed" />
 				</div>
 			</div>
 		</div>
