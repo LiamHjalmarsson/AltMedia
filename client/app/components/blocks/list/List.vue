@@ -13,63 +13,9 @@ const { block } = defineProps<{ block: ListBlock }>();
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-xl" />
 
-			<div class="flex flex-col gap-2xl">
-				<div
-					v-for="(item, i) in block.items"
-					:key="item.id"
-					class="group grid lg:grid-cols-2 items-center gap-2xl">
-					<div
-						v-if="item.icon?.is_image"
-						:class="[
-							'overflow-hidden rounded-2xl hidden lg:block transition-transform duration-500 ease-out',
-							(i + 1) % 2 === 0 ? 'order-2' : 'order-1',
-						]">
-						<NuxtImg
-							:src="item.icon.image?.url"
-							:alt="item.icon.image?.alternativeText || item.title"
-							format="webp"
-							quality="85"
-							loading="lazy"
-							class="w-full h-full object-cover max-h-[350px] rounded-2xl" />
-					</div>
-
-					<div
-						:class="[
-							'flex flex-col justify-center relative',
-							(i + 1) % 2 === 0 ? 'lg:order-1 lg:pr-2xl' : 'lg:order-2 lg:pl-2xl',
-							'max-lg:bg-light/5 max-lg:rounded-2xl max-lg:shadow-2xl max-lg:backdrop-blur-md',
-						]">
-						<div class="relative lg:hidden">
-							<NuxtImg
-								v-if="item.icon?.is_image"
-								:src="item.icon.image?.url"
-								:alt="item.icon.image?.alternativeText || item.title"
-								format="webp"
-								quality="85"
-								loading="lazy"
-								class="w-full h-64 sm:h-80 object-cover" />
-							<div class="absolute inset-0 bg-gradient-to-t from-bg-dark/60 to-transparent" />
-						</div>
-
-						<div class="p-xl sm:p-2xl text-center lg:text-left space-y-md">
-							<div class="flex items-center gap-md justify-center lg:justify-start flex-wrap">
-								<span
-									class="text-heading-xl lg:text-heading-2xl font-extrabold text-secondary font-heading">
-									{{ (i + 1).toString().padStart(2, "0") }}
-								</span>
-								<h3 class="text-heading-md lg:text-heading-lg font-semibold leading-tight">
-									{{ item.title }}
-								</h3>
-							</div>
-
-							<StrapiBlocksText
-								v-if="item.content?.length"
-								:nodes="item.content"
-								class="text-base sm:text-lg text-light/85 leading-relaxed max-lg:text-center" />
-						</div>
-					</div>
-				</div>
-			</div>
+			<ul class="flex flex-col gap-2xl">
+				<ListItem v-for="(item, index) in block.items" :key="item.id" :item="item" :index="index" />
+			</ul>
 		</div>
 	</section>
 </template>

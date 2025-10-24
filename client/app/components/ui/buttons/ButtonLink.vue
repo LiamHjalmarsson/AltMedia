@@ -17,9 +17,12 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 				<slot />
 			</div>
 
-			<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 max-lg:hidden bg-primary rounded-full" />
+			<span
+				ref="backgroundColor"
+				class="absolute top-0 left-0 h-10 w-10 max-lg:hidden bg-gradient-to-br from-primary to-primary-hover rounded-full" />
 
-			<span class="absolute top-0 left-0 h-10 w-full bg-primary rounded-full lg:hidden" />
+			<span
+				class="absolute top-0 left-0 h-10 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />
 		</div>
 	</NuxtLink>
 </template>

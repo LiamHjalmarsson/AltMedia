@@ -24,11 +24,7 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	if (!block.color) {
-		return "text-light";
-	}
-
-	return block.color.is_dark_text ? "text-dark" : "text-light";
+	return block.color?.is_dark_text ? "text-dark" : "text-light";
 });
 </script>
 
@@ -43,21 +39,24 @@ const textColor = computed(() => {
 			:alt="block.cover.alternativeText || ''"
 			format="webp"
 			quality="80"
+			sizes="100vw"
+			densities="x1 x2"
 			loading="lazy"
 			class="object-cover opacity-10 absolute inset-0 h-full w-full" />
 
-		<div class="relative z-10 text-center mx-auto py-2xl px-md max-w-screen-md lg:max-w-screen-lg">
-			<h3
+		<div
+			class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg py-2xl px-md"
+			:class="textColor">
+			<h2
 				v-if="block.title"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary mb-xs">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary mb-md">
 				{{ block.title }}
-			</h3>
+			</h2>
 
 			<ClientOnly>
 				<StrapiBlocksText
 					v-if="block.content?.length"
 					:nodes="block.content || []"
-					:class="textColor"
 					class="text-lg lg:text-xl font-medium leading-relaxed" />
 			</ClientOnly>
 		</div>
@@ -67,6 +66,7 @@ const textColor = computed(() => {
 				:to="block.link.url"
 				class="inline-block bg-primary text-white px-lg py-md rounded-lg font-semibold">
 				{{ block.link.label || "Läs mer" }}
+				<Icon name="lucide:arrow-right" class="ml-xs" />
 			</NuxtLink>
 		</div>
 	</section>

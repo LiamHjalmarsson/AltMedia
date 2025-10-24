@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Hero } from "~/types/content/blocks";
+import HeroContent from "./HeroContent.vue";
 
 const { block } = defineProps<{ block: Hero }>();
 
@@ -40,54 +41,16 @@ const alignClass = computed(() => {
 		}
 	}
 });
-
-function formatColoredWords(block: Hero): string {
-	let title = block.title;
-
-	if (block.colored_words) {
-		Object.entries(block.colored_words).forEach(([word, color]) => {
-			const regex = new RegExp(`\\b${word}\\b`, "gi");
-
-			title = title.replace(regex, `<span style="color:${color}">${word}</span>`);
-		});
-	}
-
-	return title;
-}
 </script>
 
 <template>
 	<section
 		class="hero bg-dark text-light overflow-hidden relative min-h-screen flex justify-center items-center"
 		:style="backgroundStyle">
-		<div class="absolute inset-0 z-0" />
-
-		<div class="flex items-center relative z-10 p-sm xs:p-md md:p-lg lg:p-2xl">
-			<div class="flex w-full items-center" :class="alignClass">
-				<div
-					class="flex flex-col space-y-xl max-w-4xl"
-					:class="block?.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : ''">
-					<h1
-						class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl font-extrabold leading-tight tracking-tight"
-						v-html="formatColoredWords(block)" />
-
-					<p
-						v-if="block.description"
-						class="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl max-sm:text-center">
-						{{ block.description }}
-					</p>
-
-					<div v-if="block.links?.length" class="flex flex-wrap gap-md justify-center md:justify-start">
-						<ButtonLink
-							v-for="link in block.links"
-							:key="link.id"
-							:variant="link.variant"
-							:to="link.url"
-							:size="link.size || 'lg'">
-							{{ link.label }}
-						</ButtonLink>
-					</div>
-				</div>
+		<div
+			class="flex max-xl:flex-col max-xl:space-y-2xl max-xl:p-2xl items-center relative z-10 p-sm xs:p-md md:p-lg lg:p-2xl">
+			<div class="flex w-full items-center flex-1" :class="alignClass">
+				<HeroContent :content="block" />
 			</div>
 
 			<slot v-if="block.has_form" />
