@@ -12,9 +12,9 @@ function toggleAnswer(id: number) {
 </script>
 
 <template>
-	<section class="relative py-2xl md:py-3xl">
+	<section class="relative py-2xl md:py-3xl flex justify-center items-center">
 		<div class="container mx-auto max-w-[1600px] px-md grid lg:grid-cols-2 gap-2xl items-start">
-			<div class="space-y-xl">
+			<div class="space-y-md">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 
 				<NuxtImg
@@ -26,10 +26,10 @@ function toggleAnswer(id: number) {
 					:height="block.icon.image?.height || 400"
 					quality="85"
 					loading="lazy"
-					class="rounded-2xl shadow-lg max-h-[400px] object-cover" />
+					class="rounded-2xl shadow-lg max-h-[200px] lg:max-h-[400px] object-cover" />
 			</div>
 
-			<div class="flex flex-col space-y-lg">
+			<ul class="flex flex-col space-y-lg">
 				<FaqItem
 					v-for="(faq, i) in block.items"
 					:key="faq.id"
@@ -37,7 +37,7 @@ function toggleAnswer(id: number) {
 					:number="i + 1"
 					:activeId="activeId"
 					@toggle="toggleAnswer" />
-			</div>
+			</ul>
 		</div>
 	</section>
 </template>
