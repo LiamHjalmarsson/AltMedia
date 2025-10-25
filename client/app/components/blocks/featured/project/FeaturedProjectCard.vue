@@ -5,7 +5,7 @@ defineProps<{ project: Project }>();
 </script>
 
 <template>
-	<Card class="cursor-pointer overflow-hidden">
+	<Card class="cursor-pointer overflow-hidden relative">
 		<NuxtLink :to="`/projects/${project?.slug}`" class="block w-full h-full">
 			<NuxtImg
 				v-if="project.cover?.url"

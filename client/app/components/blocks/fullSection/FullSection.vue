@@ -30,7 +30,7 @@ const textColor = computed(() => {
 
 <template>
 	<section
-		class="relative w-full h-screen flex items-center justify-center overflow-hidden"
+		class="relative w-full min-h-[70vh] p-2xl flex items-center justify-center overflow-hidden"
 		:class="!block.color?.is_hex ? bgColor : ''"
 		:style="block.color?.is_hex ? bgColor : ''">
 		<NuxtImg
@@ -49,7 +49,7 @@ const textColor = computed(() => {
 			:class="textColor">
 			<h2
 				v-if="block.title"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary mb-md">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary">
 				{{ block.title }}
 			</h2>
 

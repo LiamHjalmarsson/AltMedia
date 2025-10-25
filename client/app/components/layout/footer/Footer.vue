@@ -8,14 +8,16 @@ const currentYear = new Date().getFullYear();
 
 <template>
 	<footer class="p-xl xl:p-2xl bg-dark text-light">
-		<div class="mx-auto w-full h-full max-w-[1400px]">
-			<nav
-				aria-label="Sidfotsnavigation"
-				class="mb-2xl flex max-md:space-y-lg max-md:flex-col justify-between items-center xl:items-start">
-				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column />
-			</nav>
+		<div>
+			<div class="mx-auto w-full h-full max-w-[1400px]">
+				<nav
+					aria-label="Sidfotsnavigation"
+					class="mb-2xl flex max-md:space-y-lg max-md:flex-col justify-between items-center xl:items-start">
+					<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column />
+				</nav>
 
-			<FooterBottom :year="currentYear" :socials="contact?.social_medias || []" />
+				<FooterBottom :year="currentYear" :socials="contact?.social_medias || []" />
+			</div>
 		</div>
 	</footer>
 </template>

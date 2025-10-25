@@ -5,8 +5,8 @@ defineProps<{ block: FeaturedServicesBlock }>();
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+	<section class="relative p-2xl">
+		<div class="mx-auto max-w-6xl px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"

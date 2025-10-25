@@ -1,20 +1,30 @@
 <script setup lang="ts">
 const globalStore = useGlobalStore();
 
-const { footer } = storeToRefs(globalStore);
+const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<section
-		class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl my-2xl max-w-[1600px]"
-		v-if="footer?.cta">
-		<div
-			class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-bg-dark via-bg-dark/90 to-bg-dark/80 text-light shadow-xl px-lg py-2xl sm:px-xl md:px-2xl md:py-2xl">
+	<section class="overflow-hidden text-light" v-if="footer?.cta">
+		<div class="relative mx-auto container px-sm py-xl sm:px-md lg:px-lg">
 			<div
-				class="mx-auto flex w-full max-w-6xl flex-col items-start justify-between gap-xl text-center md:flex-row md:gap-2xl md:text-left">
-				<CtaContent :title="footer.cta.title" :description="footer.cta.description" />
-
-				<CtaButtons :links="footer.cta.links" />
+				class="rounded-3xl border border-light/10 bg-gradient-to-bl from-bg-dark via-bg-light to-bg-medium shadow-xl shadow-primary/10 p-xl text-center">
+				<p class="text-sm font-semibold tracking-widest uppercase text-secondary/80">{{ footer.cta.title }}</p>
+				<h2 class="mt-md text-3xl font-semibold sm:text-4xl">
+					{{ footer.cta.title }}
+				</h2>
+				<p class="mx-auto mt-md text-base text-light/80">
+					{{ footer.cta.description }}
+				</p>
+				<div class="mt-lg flex flex-col items-center justify-center space-x-xl sm:flex-row">
+					<ButtonSecondaryLink>
+						{{ contact?.email }}
+					</ButtonSecondaryLink>
+					<ButtonLink to="/startProject" aria-label="Starta ett projekt nu">
+						Starta projekt
+						<Icon name="lucide:rocket" size="18" class="ml-md" />
+					</ButtonLink>
+				</div>
 			</div>
 		</div>
 	</section>
