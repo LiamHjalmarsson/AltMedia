@@ -99,56 +99,25 @@ onMounted(() => {
 				class="mb-sm md:mb-md lg:mb-lg xl:mb-x" />
 
 			<div class="hidden lg:flex gap-lg min-w-0">
-				<div
+				<article
 					v-for="(project, index) in block.projects"
 					:key="project.id"
 					:ref="(element) => setRef(element as HTMLElement, index)"
-					class="overflow-hidden rounded-xl shadow-2xl relative h-96 flex-1">
-					<NuxtLink :to="`/projects/${project.slug}`" class="block w-full h-full">
-						<NuxtImg
-							v-if="project.cover?.url"
-							:src="project.cover.url"
-							:alt="project.cover.alternativeText || ''"
-							format="webp"
-							quality="85"
-							loading="lazy"
-							class="object-cover w-full h-full" />
-
-						<div class="project-overlay absolute inset-0 bg-dark opacity-0" />
-
-						<h3
-							class="project-title text-heading-xl font-semibold absolute inset-x-0 -bottom-12 z-10 text-secondary text-center px-md">
-							{{ project.title }}
-						</h3>
-					</NuxtLink>
-				</div>
+					class="overflow-hidden rounded-xl shadow-xl relative h-96 flex-1">
+					<FeaturedProjectCard :project />
+				</article>
 			</div>
 
 			<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
-				<div
+				<FeaturedProjectCard
 					v-for="(project, index) in block.projects"
 					:key="project.id"
+					:project
 					:class="[
 						'overflow-hidden rounded-xl shadow-xl relative aspect-[4/3]',
 						index % 5 === 0 ? 'col-span-2' : '',
 						index % 7 === 0 ? 'row-span-2' : '',
-					]">
-					<NuxtLink :to="`/projects/${project.slug}`" class="block w-full h-full">
-						<NuxtImg
-							v-if="project.cover?.url"
-							:src="project.cover.url"
-							:alt="project.cover.alternativeText || ''"
-							format="webp"
-							quality="80"
-							loading="lazy"
-							class="object-cover w-full h-full" />
-
-						<div
-							class="absolute inset-0 flex items-end justify-start p-sm bg-gradient-to-t from-black/60 to-transparent">
-							<h3 class="text-light text-sm sm:text-md font-semibold">{{ project.title }}</h3>
-						</div>
-					</NuxtLink>
-				</div>
+					]" />
 			</div>
 		</div>
 	</section>

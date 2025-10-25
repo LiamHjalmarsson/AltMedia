@@ -12,8 +12,8 @@ function toggleAnswer(id: number) {
 </script>
 
 <template>
-	<section class="relative py-2xl md:py-3xl flex justify-center items-center">
-		<div class="container mx-auto max-w-[1600px] px-md grid lg:grid-cols-2 gap-2xl items-start">
+	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
+		<div class="mx-auto max-w-[1600px] px-md grid lg:grid-cols-2 gap-2xl items-start">
 			<div class="space-y-md">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 

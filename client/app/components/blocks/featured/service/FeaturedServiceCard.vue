@@ -8,10 +8,7 @@ defineProps<{ service: Service }>();
 </script>
 
 <template>
-	<article
-		@mouseenter="onEnter"
-		@mouseleave="onLeave"
-		class="relative h-full flex flex-col rounded-xl group transition duration-300 shadow-lg overflow-hidden bg-gradient-to-br from-bg-dark/15 to-bg-dark/5">
+	<Card @mouseenter="onEnter" @mouseleave="onLeave">
 		<NuxtLink
 			:to="`/services/${service.slug}`"
 			:aria-label="`Läs mer om ${service.title}`"
@@ -61,5 +58,5 @@ defineProps<{ service: Service }>();
 				ref="bgRef"
 				class="absolute -bottom-6 -left-6 rounded-full w-4 h-4 bg-gradient-to-tr from-primary/5 via-primary/10 to-primary/20" />
 		</NuxtLink>
-	</article>
+	</Card>
 </template>

@@ -1,7 +1,21 @@
 <script setup lang="ts">
+import { computed, useAttrs } from "vue";
+
 const emit = defineEmits(["update:modelValue"]);
 
 defineProps<{ modelValue?: string | number }>();
+
+const attrs = useAttrs();
+
+const ariaLabel = computed(() => {
+	if (typeof attrs["aria-label"] === "string") return attrs["aria-label"];
+
+	if (typeof attrs.placeholder === "string") return attrs.placeholder;
+
+	if (typeof attrs.name === "string") return attrs.name;
+
+	return undefined;
+});
 
 function handleInput(event: Event) {
 	const target = event.target as HTMLInputElement;
@@ -19,8 +33,8 @@ function handleInput(event: Event) {
 		v-bind="$attrs"
 		:value="modelValue"
 		@input="handleInput"
-		:arial-label="$attrs['aria-label'] || $attrs.placeholder || $attrs.name"
+		:aria-label="ariaLabel"
 		:class="[
-			'w-full py-xs px-sm rounded-lg outline-none backdrop-blur-lg transition shadow-xl border-light/5 border  focus-visible:outline-primary',
+			'w-full py-xs px-sm rounded-lg border border-light/5 outline-none backdrop-blur-lg shadow-xl placeholder:text-light/60 focus-visible:outline-primary transition',
 		]" />
 </template>

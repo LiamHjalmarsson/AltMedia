@@ -14,14 +14,14 @@ function selectOffer(id: number) {
 
 <template>
 	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="container mx-auto max-w-[1400px] px-md">
+		<div class="container mx-auto max-w-[1600px] px-md">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-xl xl:mb-2xl" />
 
-			<div class="grid md:grid-cols-3 gap-2xl">
-				<div
+			<ul class="grid md:grid-cols-3 gap-2xl">
+				<li
 					v-for="offer in block.offers"
 					:key="offer.id"
 					class="p-lg relative flex flex-col rounded-xl group transition duration-300 shadow-2xl bg-light/5"
@@ -37,12 +37,10 @@ function selectOffer(id: number) {
 							v-if="offer.icon?.is_image"
 							:src="offer.icon.image?.url"
 							:alt="offer.icon.image?.alternativeText || offer.title"
-							densities="x1 x2"
-							width="80"
-							height="80"
 							format="webp"
 							quality="85"
-							placeholder
+							width="100"
+							height="100"
 							loading="lazy"
 							class="rounded-md" />
 						<Icon
@@ -52,24 +50,24 @@ function selectOffer(id: number) {
 							class="text-primary" />
 					</div>
 
-					<div class="mb-md flex-1">
-						<h3 class="text-heading-md font-bold text-center mb-sm">
+					<div class="mb-md flex-1 space-y-sm">
+						<h3 class="text-heading-md font-bold text-center">
 							{{ offer.title }}
 						</h3>
 
-						<p class="text-sm text-dark-gray text-center mb-md">
+						<p class="text-sm text-dark-gray text-center">
 							{{ offer.description }}
 						</p>
 
-						<h4 class="text-xl font-bold text-primary text-center mb-lg">
+						<h4 class="text-xl font-bold text-primary text-center my-md">
 							{{ offer.start_price ? `${offer.start_price} kr` : "Kontakta oss" }}
 						</h4>
 
-						<ul class="space-y-xs mb-lg">
+						<ul class="space-y-xs mb-md">
 							<li
 								v-for="(feature, i) in offer.features"
 								:key="i"
-								class="flex items-center text-sm text-dark-gray mb-sm">
+								class="flex items-center text-sm text-dark-gray">
 								<Icon name="lucide:check-circle" size="18" class="text-green-500 mr-xs" />
 								<span>
 									{{ feature }}
@@ -79,8 +77,8 @@ function selectOffer(id: number) {
 					</div>
 
 					<Button @click="selectOffer(offer.id)" class="mx-auto text-sm"> Välj {{ offer.title }} </Button>
-				</div>
-			</div>
+				</li>
+			</ul>
 		</div>
 	</section>
 </template>

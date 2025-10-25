@@ -8,9 +8,9 @@ defineProps<{
 </script>
 
 <template>
-	<div>
+	<div class="flex flex-col space-y-2xs">
 		<Label :for="id || label" :required>{{ label }}</Label>
 		<slot />
-		<p v-if="error" class="mt-2xs text-xs text-error">{{ error }}</p>
+		<p v-if="error" class="text-xs text-error">{{ error }}</p>
 	</div>
 </template>

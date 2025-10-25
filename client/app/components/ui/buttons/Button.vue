@@ -6,7 +6,7 @@ const { element: button, backgroundColor } = useHoverAnimation();
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative font-bold py-xs px-2xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full">
+		class="relative font-bold py-xs px-2xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition">
 		<span class="relative flex items-center z-10 max-lg:text-light">
 			<slot />
 		</span>

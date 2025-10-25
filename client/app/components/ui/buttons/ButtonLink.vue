@@ -5,15 +5,14 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 </script>
 
 <template>
-	<NuxtLink :to="to || '/'" :target="external ? '_blank' : undefined">
-		<div
-			ref="linkWrapper"
-			:to="to || '/'"
-			:target="external ? '_blank' : undefined"
-			:rel="external ? 'noopener noreferrer' : undefined"
-			:aria-label="ariaLabel"
-			class="relative py-xs px-2xl w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<div class="relative font-bold z-10">
+	<NuxtLink
+		:to="to || '/'"
+		:target="external ? '_blank' : undefined"
+		:rel="external ? 'noopener noreferrer' : undefined"
+		:aria-label="ariaLabel"
+		class="focus-visible:outline-primary">
+		<div ref="linkWrapper" class="relative py-xs px-2xl w-fit cursor-pointer min-h-[44px] min-w-[44px]">
+			<div class="relative font-bold z-10 flex items-center">
 				<slot />
 			</div>
 

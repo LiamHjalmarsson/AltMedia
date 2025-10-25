@@ -25,7 +25,7 @@ const alignClass = computed(() => {
 
 		<ButtonLink v-if="has_link && link?.url" :to="link.url" class="max-lg:hidden">
 			{{ link.label }}
-			<Icon name="material-symbols:arrow-forward" />
+			<Icon name="material-symbols:arrow-forward" size="18" class="ml-sm" />
 		</ButtonLink>
 	</div>
 </template>
