@@ -16,7 +16,7 @@ export interface Article extends ContentItem {
 	reading_time_min?: number | null;
 	description?: string;
 	cover: Image;
-	services: RelatedService[];
+	services?: RelatedService[];
 }
 
 export interface Offer extends BaseEntity {
