@@ -1,16 +1,19 @@
 <script setup lang="ts">
 defineProps<{
+	tag?: string;
 	bg?: string;
-	id?: string;
 }>();
 </script>
 
 <template>
-	<section
-		:id="id"
-		:class="['relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl', bg || '']">
-		<div class="mx-auto w-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+	<component
+		:is="tag || 'section'"
+		:class="[
+			'relative flex justify-center items-center w-full p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl',
+			bg || 'bg-transparent',
+		]">
+		<div class="w-full" :class="['mx-auto px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl']">
 			<slot />
 		</div>
-	</section>
+	</component>
 </template>

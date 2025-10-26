@@ -7,7 +7,7 @@ const emit = defineEmits(["select"]);
 </script>
 
 <template>
-	<Card class="p-lg" :class="{ 'scale-105 shadow-primary': offer?.is_popular }">
+	<Card class="p-lg" :class="{ 'scale-105 ': offer?.is_popular }">
 		<div
 			v-if="offer.is_popular"
 			class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-light rounded-full px-lg py-xs font-semibold text-xs shadow-lg shadow-primary">

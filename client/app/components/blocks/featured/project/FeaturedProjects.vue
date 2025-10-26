@@ -91,8 +91,8 @@ onMounted(() => {
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+	<section class="relative flex justify-center items-center py-4xl">
+		<div class="mx-auto w-full max-w-[1400px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
 			<Heading
 				v-bind="block.heading"
 				:align_content="block.heading.align_content"

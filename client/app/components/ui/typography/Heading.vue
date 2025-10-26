@@ -19,10 +19,10 @@ const alignClass = computed(() => {
 <template>
 	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
 		<div>
-			<span class="block text-sm font-semibold uppercase tracking-widest text-primary"> Våra kärntjänster </span>
+			<!-- <span class="block text-sm font-semibold uppercase tracking-widest text-primary"> Våra kärntjänster </span> -->
 
 			<h2
-				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-bold tracking-tight">
+				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold tracking-tight">
 				{{ title }}
 			</h2>
 		</div>

@@ -13,14 +13,14 @@ function selectOffer(id: number) {
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="container mx-auto max-w-[1600px] px-md">
+	<section class="relative flex justify-center items-center py-5xl">
+		<div class="container mx-auto max-w-[1200px] px-md">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				class="mb-sm md:mb-md lg:mb-xl xl:mb-2xl" />
 
-			<ul class="grid md:grid-cols-3 gap-2xl">
+			<ul class="grid md:grid-cols-3 gap-3xl">
 				<li v-for="offer in block.offers" :key="offer.id">
 					<FeaturedOfferCard :offer @select="selectOffer(offer.id)" />
 				</li>

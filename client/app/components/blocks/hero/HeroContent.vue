@@ -19,19 +19,17 @@ function formatColoredWords(content: Hero): string {
 
 <template>
 	<div
-		class="flex flex-col space-y-xl max-w-4xl"
+		class="flex flex-col space-y-xl"
 		:class="content.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : ''">
 		<span
-			class="inline-flex items-center rounded-full border border-light/20 bg-light/5 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-primary w-fit">
+			class="inline-flex items-center rounded-full border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
 			Digital webbyrå
 		</span>
 
 		<h1
-			class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-extrabold leading-tight tracking-tight"
+			class="text-heading-xl md:text-heading-2xl xl:text-heading-3xl font-extrabold leading-tight tracking-tight"
 			v-html="formatColoredWords(content)" />
-		<p
-			v-if="content.description"
-			class="text-sm sm:text-md md:text-lg lg:text-xl xl:text-2xl max-sm:text-center text-light/80">
+		<p v-if="content.description" class="text-sm sm:text-md md:text-lg lg:text-xl max-sm:text-center text-light/80">
 			{{ content.description }}
 		</p>
 

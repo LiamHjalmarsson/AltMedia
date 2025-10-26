@@ -12,9 +12,9 @@ function toggleAnswer(id: number) {
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto max-w-[1600px] px-md grid lg:grid-cols-2 gap-2xl items-start">
-			<div class="space-y-md">
+	<section class="relative flex justify-center items-center pt-4xl pb-3xl">
+		<div class="mx-auto max-w-[1400px] grid lg:grid-cols-2 gap-4xl items-start">
+			<div class="space-y-lg">
 				<Heading :title="block.heading.title" :align_content="block.heading.align_content" />
 
 				<NuxtImg
@@ -29,7 +29,7 @@ function toggleAnswer(id: number) {
 					class="rounded-2xl shadow-lg max-h-[200px] lg:max-h-[400px] object-cover" />
 			</div>
 
-			<ul class="flex flex-col space-y-lg">
+			<ul class="flex flex-col space-y-xl">
 				<FaqItem
 					v-for="(faq, i) in block.items"
 					:key="faq.id"

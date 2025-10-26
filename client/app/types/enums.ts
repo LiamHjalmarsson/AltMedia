@@ -1,4 +1,4 @@
-export type Variant = "primary" | "secondary" | "tertiary" | "ghost";
+export type Variant = "primary" | "secondary" | "tertiary" | "ghost" | "neutral";
 
 export type ButtonType = "button" | "submit" | "reset";
 

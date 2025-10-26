@@ -10,7 +10,7 @@ export function useCardHover() {
 		}
 
 		gsap.to(bgRef.value, {
-			scale: 75,
+			scale: 90,
 			opacity: 1,
 			duration: 0.4,
 			ease: "power2.out",

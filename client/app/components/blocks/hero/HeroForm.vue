@@ -17,10 +17,10 @@ function onSubmit(event: Event) {
 </script>
 
 <template>
-	<div class="flex justify-end items-center relative max-lg:hidden">
+	<div class="flex justify-end items-center relative max-lg:hidden pl-2xl">
 		<div class="w-full rounded-2xl p-xs border border-light/10 overflow-hidden sm:w-[480px]">
 			<div class="rounded-xl border border-light/10 bg-light/10 p-lg shadow-2xl backdrop-blur-lg h-full">
-				<h2 class="text-heading-md text-light font-bold">{{ form.title }}</h2>
+				<h2 class="text-heading-lg text-light font-bold">{{ form.title }}</h2>
 
 				<p class="my-md text-md text-light-gray">{{ form.description }}</p>
 
@@ -41,6 +41,7 @@ function onSubmit(event: Event) {
 					<div :style="{ gridColumn: '1 / -1' }">
 						<Button type="submit">
 							{{ form.button?.label }}
+							<Icon name="prime:send" size="20" class="ml-sm" />
 						</Button>
 					</div>
 				</form>

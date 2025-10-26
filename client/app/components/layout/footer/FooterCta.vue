@@ -5,10 +5,9 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<section class="overflow-hidden text-light" v-if="footer?.cta">
-		<div class="relative mx-auto container px-sm py-xl sm:px-md lg:px-lg">
-			<div
-				class="rounded-3xl border border-light/10 bg-gradient-to-bl from-bg-dark via-bg-light to-bg-medium shadow-xl shadow-primary/10 p-xl text-center">
+	<section class="overflow-hidden text-light my-2xl" v-if="footer?.cta">
+		<div class="relative mx-auto max-w-[1300px] px-sm py-xl sm:px-md lg:px-lg">
+			<div class="rounded-3xl border border-light/10 bg-bg-dark shadow-xl shadow-primary/10 p-xl text-center">
 				<p class="text-sm font-semibold tracking-widest uppercase text-secondary/80">{{ footer.cta.title }}</p>
 				<h2 class="mt-md text-3xl font-semibold sm:text-4xl">
 					{{ footer.cta.title }}
