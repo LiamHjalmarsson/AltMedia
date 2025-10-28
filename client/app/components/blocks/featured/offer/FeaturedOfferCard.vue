@@ -10,11 +10,11 @@ const emit = defineEmits(["select"]);
 	<Card class="p-lg" :class="{ 'scale-105 ': offer?.is_popular }">
 		<div
 			v-if="offer.is_popular"
-			class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-light rounded-full px-lg py-xs font-semibold text-xs shadow-lg shadow-primary">
+			class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-light px-lg py-xs font-semibold text-xs shadow-lg shadow-primary">
 			Mest populär
 		</div>
 
-		<div class="flex justify-center items-center mb-md">
+		<div class="flex justify-center items-center mb-md" :class="[offer.is_popular ? 'mt-md' : '']">
 			<NuxtImg
 				v-if="offer.icon?.is_image"
 				:src="offer.icon.image?.url"
@@ -23,8 +23,7 @@ const emit = defineEmits(["select"]);
 				quality="85"
 				width="100"
 				height="100"
-				loading="lazy"
-				class="rounded-md" />
+				loading="lazy" />
 			<Icon v-else-if="offer.icon?.icon_name" :name="offer.icon.icon_name" size="40" class="text-primary" />
 		</div>
 

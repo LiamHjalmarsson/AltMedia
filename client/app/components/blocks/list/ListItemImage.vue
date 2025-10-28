@@ -12,7 +12,7 @@ defineProps<{ icon: Icon; title: string }>();
 			:alt="icon.image.alternativeText || title"
 			format="webp"
 			quality="85"
-			class="w-full h-full object-cover max-h-[350px]"
+			class="w-full h-full object-contain max-h-[450px]"
 			loading="lazy" />
 	</div>
 </template>

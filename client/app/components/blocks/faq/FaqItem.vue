@@ -26,7 +26,7 @@ function onToggle(id: number) {
 		tabindex="0"
 		:aria-expanded="activeId === item.id"
 		:aria-controls="`faq-answer-${item.id}`"
-		class="p-md cursor-pointer max-w-[750px] rounded-xl group border border-dark/5 transition duration-300"
+		class="p-md cursor-pointer group border border-dark/5 transition duration-300"
 		:class="[isOpen ? 'shadow-2xl' : 'shadow-lg']">
 		<button
 			:id="`faq-title-${item.id}`"
@@ -38,7 +38,7 @@ function onToggle(id: number) {
 					{{ number }}
 				</span>
 
-				<h3 class="text-heading-2xs md:text-heading-xs font-semibold flex-1">
+				<h3 class="text-heading-2xs md:text-heading-xs font-semibold flex-1 text-start">
 					{{ item.question }}
 				</h3>
 			</div>
@@ -57,7 +57,7 @@ function onToggle(id: number) {
 				v-show="isOpen"
 				:id="`faq-answer-${item.id}`"
 				:aria-labelledby="`faq-title-${item.id}`"
-				class="overflow-hidden mt-sm px-2xs leading-relaxed">
+				class="overflow-hidden mt-sm px-xl leading-relaxed">
 				<StrapiBlocksText :nodes="item.answer" />
 			</div>
 		</Transition>

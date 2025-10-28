@@ -13,8 +13,8 @@ function selectOffer(id: number) {
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center py-5xl">
-		<div class="container mx-auto max-w-[1200px] px-md">
+	<section class="relative py-5xl">
+		<div class="mx-auto max-w-[1300px] px-3xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"

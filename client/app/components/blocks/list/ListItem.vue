@@ -11,11 +11,11 @@ const isEven = computed(() => (index + 1) % 2 === 0);
 		<ListItemImage
 			:icon="item.icon"
 			:title="item.title"
-			:class="['hidden lg:block rounded-2xl ', isEven ? 'order-2' : 'order-1']" />
+			:class="['hidden lg:block', isEven ? 'order-2' : 'order-1']" />
 		<div
 			class="relative flex flex-col justify-center max-lg:bg-light/5 max-lg:rounded-2xl max-lg:shadow-2xl max-lg:backdrop-blur-md"
 			:class="[isEven ? 'lg:order-1' : 'lg:order-2 ']">
-			<ListItemImage :icon="item.icon" :title="item.title" class="lg:hidden rounded-t-2xl" />
+			<ListItemImage :icon="item.icon" :title="item.title" class="lg:hidden" />
 
 			<div class="p-xl sm:p-2xl text-center lg:text-left space-y-md">
 				<div class="flex items-center justify-center lg:justify-start flex-wrap space-x-md">

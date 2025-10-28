@@ -10,7 +10,7 @@ const tag = props.as || "div";
 <template>
 	<component
 		:is="tag"
-		class="relative rounded-xl shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
+		class="relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
 		<slot />
 	</component>
 </template>

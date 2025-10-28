@@ -6,8 +6,8 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full max-w-[1400px]">
+	<section class="relative pb-3xl">
+		<div class="mx-auto w-full max-w-[1300px] px-3xl">
 			<Heading
 				v-bind="block.heading"
 				:align_content="block.heading.align_content"

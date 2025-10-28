@@ -91,8 +91,8 @@ onMounted(() => {
 </script>
 
 <template>
-	<section class="relative flex justify-center items-center py-4xl">
-		<div class="mx-auto w-full max-w-[1400px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+	<section class="relative py-4xl">
+		<div class="mx-auto max-w-[1300px] px-3xl">
 			<Heading
 				v-bind="block.heading"
 				:align_content="block.heading.align_content"
@@ -103,7 +103,7 @@ onMounted(() => {
 					v-for="(project, index) in block.projects"
 					:key="project.id"
 					:ref="(element) => setRef(element as HTMLElement, index)"
-					class="overflow-hidden rounded-xl shadow-xl relative h-96 flex-1">
+					class="overflow-hidden shadow-xl relative h-96 flex-1">
 					<FeaturedProjectCard :project />
 				</article>
 			</div>
@@ -114,7 +114,7 @@ onMounted(() => {
 					:key="project.id"
 					:project
 					:class="[
-						'overflow-hidden rounded-xl shadow-xl relative aspect-[4/3]',
+						'overflow-hidden shadow-xl relative aspect-[4/3]',
 						index % 5 === 0 ? 'col-span-2' : '',
 						index % 7 === 0 ? 'row-span-2' : '',
 					]" />

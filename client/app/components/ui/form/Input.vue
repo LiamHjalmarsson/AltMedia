@@ -35,6 +35,6 @@ function handleInput(event: Event) {
 		@input="handleInput"
 		:aria-label="ariaLabel"
 		:class="[
-			'w-full py-xs px-sm rounded-lg border border-light/5 outline-none backdrop-blur-lg shadow-xl placeholder:text-light/60 focus-visible:outline-primary transition',
+			'w-full py-xs px-sm border border-light/5 outline-none backdrop-blur-lg shadow-xl placeholder:text-light/60 focus-visible:outline-primary transition',
 		]" />
 </template>
