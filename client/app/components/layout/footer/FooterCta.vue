@@ -18,16 +18,16 @@ const { footer, contact } = storeToRefs(globalStore);
 					{{ footer.cta.title }}
 				</p>
 
-				<h2 class="mt-md text-3xl font-semibold sm:text-4xl">
+				<h2 class="mt-lg text-3xl font-semibold sm:text-4xl">
 					{{ footer.cta.title }}
 				</h2>
 
-				<p class="mx-auto mt-md text-base text-light/80">
+				<p class="mx-auto mt-lg text-base text-light/80">
 					{{ footer.cta.description }}
 				</p>
 
 				<div
-					class="mt-xl w-full flex flex-col items-center justify-center max-md:space-y-lg md:space-x-xl max-md:max-w-[250px] max-w-[500px] md:flex-row mx-auto">
+					class="mt-2xl w-full flex flex-col items-center justify-center max-md:space-y-lg md:space-x-xl max-md:max-w-[250px] max-w-[500px] lg:max-w-[600px] md:flex-row mx-auto">
 					<ButtonSecondaryLink class="flex-1 w-full">
 						{{ contact?.email }}
 					</ButtonSecondaryLink>

@@ -45,7 +45,7 @@ const alignClass = computed(() => {
 
 <template>
 	<section
-		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-4xl max-lg:h-screen"
+		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl max-lg:h-screen"
 		:style="backgroundStyle">
 		<div class="absolute inset-0 pointer-events-none">
 			<div class="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/30 blur-3xl" />
