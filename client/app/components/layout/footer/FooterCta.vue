@@ -5,15 +5,15 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<section v-if="footer?.cta" class="relative overflow-hidden text-light mt-2xl">
-		<div class="relative p-3xl shadow-xl shadow-primary/10">
+	<section v-if="footer?.cta" class="relative overflow-hidden text-light lg:mt-2xl">
+		<div class="relative px-xl py-3xl lg:p-3xl shadow-xl shadow-primary/10">
 			<video class="absolute inset-0 w-full h-full object-cover opacity-30" autoplay muted loop playsinline>
 				<source src="/videos/cta.mp4" type="video/mp4" />
 			</video>
 
 			<div class="absolute inset-0 bg-bg-dark/70"></div>
 
-			<div class="relative text-center p-3xl max-w-[900px] mx-auto">
+			<div class="relative text-center lg:p-3xl w-full max-w-[900px] mx-auto">
 				<p class="text-sm font-semibold tracking-widest uppercase text-secondary/80">
 					{{ footer.cta.title }}
 				</p>
@@ -26,7 +26,7 @@ const { footer, contact } = storeToRefs(globalStore);
 					{{ footer.cta.description }}
 				</p>
 
-				<div class="mt-xl flex flex-col items-center justify-center space-x-xl sm:flex-row">
+				<div class="mt-xl flex flex-col items-center justify-center space-y-lg lg:space-x-xl sm:flex-row">
 					<ButtonSecondaryLink>
 						{{ contact?.email }}
 					</ButtonSecondaryLink>

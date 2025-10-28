@@ -13,10 +13,13 @@ function toggleAnswer(id: number) {
 
 <template>
 	<section class="relative py-3xl lg:py-4xl">
-		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-3xl">
-			<Heading :title="block.heading.title" :align_content="block.heading.align_content" class="mb-lg lg:mb-xl" />
+		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
+			<Heading
+				:title="block.heading.title"
+				:align_content="block.heading.align_content"
+				class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<div class="grid grid-cols-1 lg:grid-cols-3 gap-3xl items-start">
+			<div class="lg:grid-cols-3 lg:space-y-3xl items-start">
 				<div>
 					<!-- <NuxtImg
 						v-if="block.icon?.is_image && block.icon.image?.url"

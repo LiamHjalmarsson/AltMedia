@@ -16,7 +16,7 @@ const blocks = computed<Blocks[]>(() => homePage?.value?.blocks ?? []);
 
 <template>
 	<Hero :block="hero">
-		<HeroForm v-if="form" :form class="max-lg:w-full" />
+		<HeroForm v-if="form" :form class="max-w-[450px]" />
 	</Hero>
 
 	<BlockRenderer :blocks />

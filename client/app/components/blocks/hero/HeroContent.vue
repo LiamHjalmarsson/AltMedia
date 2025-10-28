@@ -19,21 +19,21 @@ function formatColoredWords(content: Hero): string {
 
 <template>
 	<div
-		class="flex flex-col space-y-xl"
+		class="flex flex-col space-y-lg lg:space-y-xl"
 		:class="content.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : ''">
 		<span
-			class="inline-flex items-center rounded-full border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
+			class="inline-flex items-center border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
 			Digital webbyrå
 		</span>
 
 		<h1
 			class="text-heading-xl md:text-heading-2xl xl:text-heading-3xl font-extrabold leading-tight tracking-tight"
 			v-html="formatColoredWords(content)" />
-		<p v-if="content.description" class="text-sm sm:text-md md:text-lg lg:text-xl max-sm:text-center text-light/80">
+		<p v-if="content.description" class="text-md md:text-lg lg:text-xl text-light/90">
 			{{ content.description }}
 		</p>
 
-		<div v-if="content.links?.length" class="flex flex-wrap gap-md justify-center md:justify-start">
+		<div v-if="content.links?.length" class="flex justify-center md:justify-start">
 			<ButtonLink
 				v-for="link in content.links"
 				:key="link.id"

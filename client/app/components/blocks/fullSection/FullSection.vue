@@ -44,20 +44,15 @@ const textColor = computed(() => {
 			loading="lazy"
 			class="absolute inset-0 object-cover opacity-30 h-full w-full" />
 
-		<div
-			class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg py-2xl px-md"
-			:class="textColor">
+		<div class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg" :class="textColor">
 			<h2
 				v-if="block.title"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary">
+				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary">
 				{{ block.title }}
 			</h2>
 
 			<ClientOnly>
-				<StrapiBlocksText
-					v-if="block.content?.length"
-					:nodes="block.content || []"
-					class="text-lg lg:text-xl font-medium leading-relaxed" />
+				<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
 			</ClientOnly>
 		</div>
 

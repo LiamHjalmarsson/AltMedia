@@ -91,12 +91,12 @@ onMounted(() => {
 </script>
 
 <template>
-	<section class="relative py-4xl">
-		<div class="mx-auto max-w-[1300px] px-3xl">
+	<section class="relative pb-3xl lg:py-5xl">
+		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
 			<Heading
 				v-bind="block.heading"
 				:align_content="block.heading.align_content"
-				class="mb-sm md:mb-md lg:mb-lg xl:mb-x" />
+				class="mb-md lg:mb-lg xl:mb-xl" />
 
 			<div class="hidden lg:flex gap-lg min-w-0">
 				<article
