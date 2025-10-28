@@ -10,9 +10,11 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 		:target="external ? '_blank' : undefined"
 		:rel="external ? 'noopener noreferrer' : undefined"
 		:aria-label="ariaLabel"
-		class="focus-visible:outline-primary">
-		<div ref="linkWrapper" class="relative py-xs px-2xl w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<div class="relative font-bold z-10 flex items-center">
+		class="focus-visible:outline-primary w-full flex">
+		<div
+			ref="linkWrapper"
+			class="relative py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">
+			<div class="relative font-bold z-10 flex items-center max-lg:justify-center">
 				<slot />
 			</div>
 
@@ -21,7 +23,7 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 				class="absolute top-0 left-0 h-10 w-10 max-lg:hidden bg-gradient-to-br from-primary to-primary-hover rounded-full" />
 
 			<span
-				class="absolute top-0 left-0 h-10 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />
+				class="absolute top-0 left-0 h-11 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />
 		</div>
 	</NuxtLink>
 </template>

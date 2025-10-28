@@ -26,7 +26,8 @@ const { footer, contact } = storeToRefs(globalStore);
 					{{ footer.cta.description }}
 				</p>
 
-				<div class="mt-xl flex flex-col items-center justify-center space-y-lg lg:space-x-xl sm:flex-row">
+				<div
+					class="mt-xl flex flex-col items-center justify-center space-y-lg lg:space-x-xl sm:flex-row max-lg:max- max-w-[250px] mx-auto">
 					<ButtonSecondaryLink>
 						{{ contact?.email }}
 					</ButtonSecondaryLink>

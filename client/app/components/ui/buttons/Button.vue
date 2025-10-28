@@ -13,6 +13,6 @@ const { element: button, backgroundColor } = useHoverAnimation();
 
 		<span ref="backgroundColor" class="absolute top-0 left-0 h-10 w-10 max-lg:hidden bg-primary rounded-full" />
 
-		<span class="absolute top-0 left-0 h-9 w-full bg-primary rounded-full lg:hidden" />
+		<span class="absolute top-0 left-0 h-11 w-full bg-primary rounded-full lg:hidden" />
 	</button>
 </template>
