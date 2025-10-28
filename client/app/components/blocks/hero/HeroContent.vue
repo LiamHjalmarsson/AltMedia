@@ -39,7 +39,8 @@ function formatColoredWords(content: Hero): string {
 				:key="link.id"
 				:variant="link.variant"
 				:to="link.url"
-				:size="link.size || 'lg'">
+				:size="link.size || 'lg'"
+				class="max-lg:min-w-[250px]">
 				{{ link.label }}
 			</ButtonLink>
 		</div>

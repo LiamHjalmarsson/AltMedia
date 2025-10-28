@@ -10,7 +10,7 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 		:target="external ? '_blank' : undefined"
 		:rel="external ? 'noopener noreferrer' : undefined"
 		:aria-label="ariaLabel"
-		class="focus-visible:outline-primary w-full flex">
+		class="focus-visible:outline-primary flex">
 		<div
 			ref="linkWrapper"
 			class="relative py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">

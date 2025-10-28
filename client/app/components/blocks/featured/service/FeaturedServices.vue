@@ -12,7 +12,7 @@ defineProps<{ block: FeaturedServicesBlock }>();
 				:align_content="block.heading.align_content"
 				class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-xl md:gap-lg lg:gap-xl">
+			<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-xl md:gap-lg lg:gap-xl">
 				<FeaturedServiceCard v-for="service in block.services" :key="service.id" :service="service" />
 			</div>
 		</div>

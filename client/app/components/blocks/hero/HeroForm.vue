@@ -45,7 +45,6 @@ function onSubmit(event: Event) {
 						</Button>
 					</div>
 				</form>
-				behåll då fixa min vue
 			</div>
 		</div>
 	</div>

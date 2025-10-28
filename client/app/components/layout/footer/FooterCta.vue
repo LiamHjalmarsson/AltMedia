@@ -27,12 +27,12 @@ const { footer, contact } = storeToRefs(globalStore);
 				</p>
 
 				<div
-					class="mt-xl flex flex-col items-center justify-center space-y-lg lg:space-x-xl sm:flex-row max-lg:max- max-w-[250px] mx-auto">
-					<ButtonSecondaryLink>
+					class="mt-xl w-full flex flex-col items-center justify-center max-md:space-y-lg md:space-x-xl max-md:max-w-[250px] max-w-[500px] md:flex-row mx-auto">
+					<ButtonSecondaryLink class="flex-1 w-full">
 						{{ contact?.email }}
 					</ButtonSecondaryLink>
 
-					<ButtonLink to="/startProject" aria-label="Starta ett projekt nu">
+					<ButtonLink to="/startProject" aria-label="Starta ett projekt nu" class="flex-1 w-full">
 						Starta projekt
 						<Icon name="lucide:rocket" size="18" class="ml-md" />
 					</ButtonLink>

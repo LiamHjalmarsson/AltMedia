@@ -13,7 +13,7 @@ const isEven = computed(() => (index + 1) % 2 === 0);
 			:title="item.title"
 			:class="['hidden lg:block', isEven ? 'order-2' : 'order-1']" />
 		<div
-			class="relative flex flex-col justify-center max-lg:bg-light/5 max-lg:shadow-2xl max-lg:backdrop-blur-md"
+			class="relative flex flex-col justify-center max-lg:bg-light/5 max-lg:shadow-2xl max-lg:backdrop-blur-md h-full"
 			:class="[isEven ? 'lg:order-1' : 'lg:order-2 ']">
 			<ListItemImage :icon="item.icon" :title="item.title" class="lg:hidden" />
 

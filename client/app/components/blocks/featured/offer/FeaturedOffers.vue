@@ -20,7 +20,7 @@ function selectOffer(id: number) {
 				:align_content="block.heading.align_content"
 				class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<ul class="grid md:grid-cols-3 max-md:space-y-3xl lg:space-x-3xl">
+			<ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3xl sm:gap-lg lg:gap-2xl mt-lg md:mt-xl lg:mt-2xl">
 				<li v-for="offer in block.offers" :key="offer.id">
 					<FeaturedOfferCard :offer @select="selectOffer(offer.id)" />
 				</li>

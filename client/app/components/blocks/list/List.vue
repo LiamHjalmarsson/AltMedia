@@ -12,7 +12,7 @@ const { block } = defineProps<{ block: ListBlock }>();
 				:align_content="block.heading.align_content"
 				class="mb-lg lg:mb-lg xl:mb-xl" />
 
-			<ul class="flex flex-col space-y-2xl lg:gap-4xl">
+			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-4xl">
 				<ListItem v-for="(item, index) in block.items" :key="item.id" :item :index />
 			</ul>
 		</div>

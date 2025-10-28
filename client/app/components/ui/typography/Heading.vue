@@ -18,7 +18,7 @@ const alignClass = computed(() => {
 
 <template>
 	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
-		<div>
+		<div class="flex-2 grow">
 			<!-- <span class="block text-sm font-semibold uppercase tracking-widest text-primary"> Våra kärntjänster </span> -->
 
 			<h2
@@ -27,7 +27,7 @@ const alignClass = computed(() => {
 			</h2>
 		</div>
 
-		<ButtonLink v-if="has_link && link?.url" :to="link.url" class="max-lg:hidden">
+		<ButtonLink v-if="has_link && link?.url" :to="link.url" class="max-lg:hidden w-fit shrink">
 			{{ link.label }}
 			<Icon name="material-symbols:arrow-forward" size="18" class="ml-sm" />
 		</ButtonLink>
