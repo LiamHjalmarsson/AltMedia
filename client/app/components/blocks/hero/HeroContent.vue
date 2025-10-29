@@ -20,7 +20,7 @@ function formatColoredWords(content: Hero): string {
 <template>
 	<div
 		class="flex flex-col space-y-lg lg:space-y-xl"
-		:class="content.has_form ? 'xl:pr-2xl max-xl:items-center max-xl:text-center' : ''">
+		:class="content.has_form ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
 		<span
 			class="inline-flex items-center border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
 			Digital webbyrå

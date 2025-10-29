@@ -6,7 +6,7 @@ defineProps<{ project: Project }>();
 
 <template>
 	<Card class="cursor-pointer overflow-hidden relative">
-		<NuxtLink :to="`/projects/${project?.slug}`" class="block w-full h-full">
+		<NuxtLink :to="`/projects/${project?.slug}`" class="block w-full h-full relative">
 			<NuxtImg
 				v-if="project.cover?.url"
 				:src="project.cover.url"
@@ -16,10 +16,10 @@ defineProps<{ project: Project }>();
 				loading="lazy"
 				class="object-cover w-full h-full" />
 
-			<div class="project-overlay absolute inset-0 bg-bg-dark opacity-0 transition-opacity duration-300" />
+			<div class="project-overlay absolute inset-0 bg-bg-dark/70 opacity-0" />
 
 			<h3
-				class="project-title hidden lg:block font-semibold absolute inset-x-0 bottom-10 z-10 text-secondary text-center px-md text-heading-md sm:text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl tracking-tight leading-tight">
+				class="project-title hidden lg:block font-semibold absolute inset-x-0 bottom-10 z-10 text-light text-center px-md text-heading-md sm:text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl tracking-tight leading-tight">
 				{{ project.title }}
 			</h3>
 

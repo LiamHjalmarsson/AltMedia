@@ -19,9 +19,9 @@ function toggleAnswer(id: number) {
 				:align_content="block.heading.align_content"
 				class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<div class="lg:grid-cols-3 lg:space-y-3xl items-start">
+			<div class="lg:grid lg:grid-cols-3 lg:space-x-3xl items-start">
 				<div>
-					<!-- <NuxtImg
+					<NuxtImg
 						v-if="block.icon?.is_image && block.icon.image?.url"
 						:src="block.icon.image.url"
 						:alt="block.icon.image.alternativeText || block.heading.title"
@@ -30,7 +30,7 @@ function toggleAnswer(id: number) {
 						:height="block.icon.image?.height || 400"
 						quality="85"
 						loading="lazy"
-						class="shadow-lg w-full max-h-[350px] object-cover" /> -->
+						class="shadow-lg w-full max-h-[350px] object-cover" />
 				</div>
 
 				<ul class="flex flex-col w-full space-y-xl col-span-2">

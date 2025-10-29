@@ -32,7 +32,12 @@ export function useCollapse() {
 
 		const height = target.scrollHeight;
 
-		gsap.set(target, { height: 0, opacity: 0, overflow: "hidden", immediateRender: true });
+		gsap.set(target, {
+			height: 0,
+			opacity: 0,
+			overflow: "hidden",
+			immediateRender: true,
+		});
 
 		gsap.to(target, {
 			height,
@@ -41,7 +46,10 @@ export function useCollapse() {
 			ease: "power3.out",
 			overwrite: "auto",
 			onComplete: () => {
-				gsap.set(target, { height: "auto", clearProps: "overflow" });
+				gsap.set(target, {
+					height: "auto",
+					clearProps: "overflow",
+				});
 
 				isAnimating = false;
 
@@ -78,8 +86,12 @@ export function useCollapse() {
 			ease: "power3.in",
 			overwrite: "auto",
 			onComplete: () => {
-				gsap.set(target, { clearProps: "all" });
+				gsap.set(target, {
+					clearProps: "all",
+				});
+
 				isAnimating = false;
+
 				done();
 			},
 		});
