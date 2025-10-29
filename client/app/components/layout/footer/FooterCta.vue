@@ -5,7 +5,7 @@ const { footer, contact } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<section v-if="footer?.cta" class="relative overflow-hidden text-light lg:mt-2xl">
+	<section v-if="footer?.cta" class="relative overflow-hidden text-light">
 		<div class="relative px-xl py-3xl lg:p-3xl shadow-xl shadow-primary/10">
 			<video class="absolute inset-0 w-full h-full object-cover opacity-30" autoplay muted loop playsinline>
 				<source src="/videos/cta.mp4" type="video/mp4" />

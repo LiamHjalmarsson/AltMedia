@@ -701,6 +701,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text & Schema.Attribute.Required;
     icon: Schema.Attribute.Component<'ui.icon', false> &
       Schema.Attribute.Required;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

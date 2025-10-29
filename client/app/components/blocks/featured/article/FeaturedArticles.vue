@@ -6,7 +6,7 @@ defineProps<{ block: FeaturedArticlesBlock }>();
 </script>
 
 <template>
-	<section class="relative pb-3xl">
+	<section class="relative pb-4xl">
 		<div class="mx-auto w-full max-w-[1300px] px-xl lg:px-3xl">
 			<Heading
 				v-bind="block.heading"

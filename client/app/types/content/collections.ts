@@ -45,6 +45,7 @@ export interface Service extends BaseEntity {
 	slug: string;
 	description: string;
 	icon: Icon;
+	image: Image;
 	subservices: Subservice[];
 }
 

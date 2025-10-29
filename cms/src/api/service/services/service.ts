@@ -3,7 +3,7 @@
  */
 
 import { factories } from "@strapi/strapi";
-import { iconPopulate } from "../../../utils/populate";
+import { iconPopulate, imagePopulate } from "../../../utils/populate";
 
 export default factories.createCoreService("api::service.service", ({ strapi }) => ({
 	async getAllServices(sanitizedQuery) {
@@ -12,6 +12,7 @@ export default factories.createCoreService("api::service.service", ({ strapi }) 
 			fields: ["id", "title", "slug", "description"],
 			populate: {
 				icon: iconPopulate,
+				image: imagePopulate,
 				subservices: subservicePopulate,
 			},
 		});
@@ -24,6 +25,7 @@ export default factories.createCoreService("api::service.service", ({ strapi }) 
 			fields: ["id", "title", "slug", "description"],
 			populate: {
 				subservices: subservicePopulate,
+				image: imagePopulate,
 				icon: iconPopulate,
 			},
 		});
