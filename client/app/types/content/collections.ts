@@ -36,6 +36,7 @@ export type RelatedService = Pick<Service, "id" | "documentId" | "title" | "slug
 export interface Project extends ContentItem {
 	cover: Image;
 	services: RelatedService[];
+	description: string;
 	client?: string;
 	date?: Date;
 }

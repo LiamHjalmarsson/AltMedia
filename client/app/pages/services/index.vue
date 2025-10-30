@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const serviceStore = useServiceStore();
+
 const { services } = storeToRefs(serviceStore);
 
 await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
@@ -8,7 +9,11 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
-			<Heading title="Våra tjänster" align_content="start" class="my-xl" />
+			<Heading
+				title="Våra tjänster"
+				description="Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser."
+				align_content="start"
+				class="mt-xl mb-2xl" />
 
 			<div
 				v-for="(service, index) in services"
@@ -22,7 +27,7 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 						:alt="service.image.alternativeText || service.title"
 						format="webp"
 						quality="85"
-						class="w-full h-full object-cover rounded-2xl shadow-2xl"
+						class="w-full h-full object-cover shadow-2xl"
 						loading="lazy" />
 				</div>
 

@@ -37,6 +37,9 @@
       "component": "ui.link",
       "repeatable": false,
       "required": false
+    },
+    "description": {
+      "type": "text"
     }
   },
   "config": {}

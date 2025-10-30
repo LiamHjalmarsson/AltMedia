@@ -1,47 +1,49 @@
 <script setup lang="ts">
 const articleStore = useArticleStore();
 
-const serviceStore = useServiceStore();
-
-const route = useRoute();
-
-const router = useRouter();
-
 const { articles } = storeToRefs(articleStore);
 
-const { services } = storeToRefs(serviceStore);
-
-const selected = ref<string | null>((route.query.service as string) ?? null);
-
-await useAsyncData("articles", () => articleStore.fetchArticles(selected.value), {
-	server: true,
-	watch: [selected],
-});
-
-await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
-
-function onFilterCategory(title: string) {
-	selected.value = selected.value === title ? null : title;
-
-	router.push({
-		query: { service: selected.value || undefined },
-	});
-}
+await useAsyncData("articles", () => articleStore.fetchArticles(), { server: true });
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
-			<Heading title="Våra artiklar" class="mt-2xl" align_content="center" />
+	<section class="relative py-4xl lg:py-5xl flex justify-center">
+		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+			<Heading title="Våra artiklar" align_content="start" class="my-xl" />
 
-			<Filter
-				:services="services"
-				:selected="selected"
-				@filterByService="onFilterCategory"
-				base-path="/articles" />
+			<div class="grid md:grid-cols-3 gap-2xl lg:gap-xl">
+				<article
+					v-for="article in articles"
+					:key="article.id"
+					class="flex flex-col group transition-transform duration-300">
+					<NuxtLink :to="`/articles/${article.slug}`" class="overflow-hidden block">
+						<NuxtImg
+							v-if="article.cover?.url"
+							:src="article.cover.url"
+							:alt="article.cover.alternativeText || article.title"
+							format="webp"
+							quality="85"
+							class="w-full h-[280px] md:h-[320px] object-cover"
+							loading="lazy" />
+					</NuxtLink>
 
-			<div class="grid grid-cols-3 gap-2xl mt-xl">
-				<ArticleCard v-for="article in articles" :key="article.id" :article="article" />
+					<div class="mt-lg">
+						<h3
+							class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+							{{ article.title }}
+						</h3>
+
+						<div class="flex justify-between items-center mt-sm">
+							<div class="text-sm text-dark-gray flex items-center gap-xs" v-if="article.published_date">
+								<span>{{ article.published_date }}</span>
+								<span>•</span>
+								<span>{{ article.reading_time_min || "10 min" }} läsning</span>
+							</div>
+
+							<ReadMoreButton />
+						</div>
+					</div>
+				</article>
 			</div>
 		</div>
 	</section>

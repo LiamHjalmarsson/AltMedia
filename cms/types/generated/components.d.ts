@@ -345,6 +345,7 @@ export interface UiHeading extends Struct.ComponentSchema {
   attributes: {
     align_content: Schema.Attribute.Enumeration<['left', 'right', 'center']> &
       Schema.Attribute.DefaultTo<'left'>;
+    description: Schema.Attribute.Text;
     has_link: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     link: Schema.Attribute.Component<'ui.link', false>;
     title: Schema.Attribute.String & Schema.Attribute.Required;

@@ -64,6 +64,7 @@ export interface Button {
 export interface Heading {
 	id?: number;
 	title: string;
+	description?: string;
 	align_content: AlignContent;
 	has_link?: boolean;
 	link?: Link | null;
