@@ -23,8 +23,9 @@ const alignClass = computed(() => {
 				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold tracking-tight">
 				{{ title }}
 			</h2>
+
 			<p v-if="description" class="text-xl font-medium max-w-[550px]">
-				Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser
+				{{ description }}
 			</p>
 		</div>
 

@@ -15,48 +15,48 @@ await useAsyncData("projects", () => projectStore.fetchProjects(), { server: tru
 				<article
 					v-for="(project, i) in projects"
 					:key="project.id"
-					class="flex flex-col space-y-lg group transition-transform duration-500"
-					:class="[i % 4 === 1 ? 'md:mt-2xl' : '', i % 4 === 2 ? 'md:-mt-2xl' : '']">
-					<NuxtLink :to="`/projects/${project.slug}`" class="overflow-hidden block">
-						<NuxtImg
-							v-if="project.cover?.url"
-							:src="project.cover.url"
-							:alt="project.cover.alternativeText || project.title"
-							format="webp"
-							quality="85"
-							class="w-full h-[300px] object-cover"
-							loading="lazy" />
-					</NuxtLink>
-
-					<div class="space-y-xs">
-						<h3
-							class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
-							{{ project.title }}
-						</h3>
-
-						<p v-if="project.description" class="text-base text-dark/80 max-w-[600px]">
-							{{ project.description }}
-						</p>
-
-						<div v-if="project.services?.length" class="flex flex-wrap gap-xs text-sm text-dark-gray mt-sm">
-							<span
-								v-for="service in project.services"
-								:key="service.id"
-								class="after:content-['·'] last:after:hidden after:px-xs">
-								{{ service.title }}
-							</span>
+					class="group transition-transform duration-500"
+					:class="[i % 4 === 1 ? 'md:pt-2xl' : '', i % 4 === 2 ? 'md:pt-2xl' : '']">
+					<NuxtLink :to="`/projects/${project.slug}`" class="space-y-lg">
+						<div class="overflow-hidden block shadow-lg">
+							<NuxtImg
+								v-if="project.cover?.url"
+								:src="project.cover.url"
+								:alt="project.cover.alternativeText || project.title"
+								format="webp"
+								quality="85"
+								class="w-full h-[300px] object-cover"
+								loading="lazy" />
 						</div>
 
-						<NuxtLink
-							:to="`/projects/${project.slug}`"
-							class="inline-flex items-center text-primary text-sm font-semibold group mt-sm">
-							<span>Visa projekt</span>
-							<Icon
-								name="lucide:arrow-right"
-								size="16"
-								class="ml-xs group-hover:translate-x-[3px] transition-transform duration-300" />
-						</NuxtLink>
-					</div>
+						<div class="space-y-xs">
+							<h3
+								class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+								{{ project.title }}
+							</h3>
+
+							<p v-if="project.description" class="text-base text-dark/80 max-w-[600px]">
+								{{ project.description }}
+							</p>
+
+							<div v-if="project.services?.length" class="flex flex-wrap gap-xs text-sm text-dark-gray">
+								<span
+									v-for="service in project.services"
+									:key="service.id"
+									class="after:content-['·'] last:after:hidden after:px-xs">
+									{{ service.title }}
+								</span>
+							</div>
+
+							<span class="inline-flex items-center text-primary text-sm font-semibold group">
+								<span>Visa projekt</span>
+								<Icon
+									name="lucide:arrow-right"
+									size="16"
+									class="ml-xs group-hover:translate-x-[3px] transition-transform duration-300" />
+							</span>
+						</div>
+					</NuxtLink>
 				</article>
 			</div>
 		</div>

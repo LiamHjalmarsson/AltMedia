@@ -12,37 +12,41 @@ await useAsyncData("articles", () => articleStore.fetchArticles(), { server: tru
 			<Heading title="Våra artiklar" align_content="start" class="my-xl" />
 
 			<div class="grid md:grid-cols-3 gap-2xl lg:gap-xl">
-				<article
-					v-for="article in articles"
-					:key="article.id"
-					class="flex flex-col group transition-transform duration-300">
-					<NuxtLink :to="`/articles/${article.slug}`" class="overflow-hidden block">
-						<NuxtImg
-							v-if="article.cover?.url"
-							:src="article.cover.url"
-							:alt="article.cover.alternativeText || article.title"
-							format="webp"
-							quality="85"
-							class="w-full h-[280px] md:h-[320px] object-cover"
-							loading="lazy" />
-					</NuxtLink>
-
-					<div class="mt-lg">
-						<h3
-							class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
-							{{ article.title }}
-						</h3>
-
-						<div class="flex justify-between items-center mt-sm">
-							<div class="text-sm text-dark-gray flex items-center gap-xs" v-if="article.published_date">
-								<span>{{ article.published_date }}</span>
-								<span>•</span>
-								<span>{{ article.reading_time_min || "10 min" }} läsning</span>
-							</div>
-
-							<ReadMoreButton />
+				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
+					<NuxtLink :to="`/articles/${article.slug}`">
+						<div class="overflow-hidden block shadow-lg">
+							<NuxtImg
+								v-if="article.cover?.url"
+								:src="article.cover.url"
+								:alt="article.cover.alternativeText || article.title"
+								format="webp"
+								quality="85"
+								class="w-full h-[250px] md:h-[300px] object-cover"
+								loading="lazy" />
 						</div>
-					</div>
+
+						<div class="mt-lg">
+							<h3
+								class="text-heading-md font-bold leading-tight tracking-tight lg:group-hover:text-primary transition-colors duration-300">
+								{{ article.title }}
+							</h3>
+
+							<div class="flex justify-between items-center mt-sm">
+								<div
+									class="text-sm text-dark-gray flex items-center gap-xs"
+									v-if="article.published_date">
+									<span>{{ article.published_date }}</span>
+									<span> / </span>
+									<span>{{ article.reading_time_min || "10" }} min läsning</span>
+								</div>
+
+								<span class="inline-flex items-center text-primary text-sm font-semibold group">
+									<span>Läs artikel</span>
+									<Icon name="lucide:arrow-right" size="16" class="ml-xs" />
+								</span>
+							</div>
+						</div>
+					</NuxtLink>
 				</article>
 			</div>
 		</div>

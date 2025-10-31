@@ -28,15 +28,16 @@ function prevStep() {
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
-			<div class="my-2xl text-center max-w-2xl mx-auto">
-				<Heading :title="buildProject?.title" align_content="center" />
-				<p class="text-base text-dark-gray mt-sm">{{ buildProject?.description }}</p>
-			</div>
+	<section class="relative py-4xl lg:py-5xl flex justify-center">
+		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+			<Heading
+				:title="buildProject?.title"
+				align_content="start"
+				class="mb-xl"
+				:description="buildProject?.description" />
 
-			<div class="grid grid-cols-3 gap-2xl items-start">
-				<div class="col-span-2 space-y-2xl pr-2xl">
+			<div class="grid grid-cols-5 gap-2xl items-start">
+				<div class="col-span-3 space-y-2xl">
 					<StepProgress
 						:progress="(currentStep / (buildProject?.steps?.length || 4)) * 100"
 						:steps="buildProject?.steps"

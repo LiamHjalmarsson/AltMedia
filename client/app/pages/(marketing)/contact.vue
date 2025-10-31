@@ -15,13 +15,11 @@ function handleSubmit(data: Record<string, any>) {}
 </script>
 
 <template>
-	<section
-		class="min-h-[80vh] relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
-			<div class="grid grid-cols-3 gap-2xl">
-				<div
-					class="flex flex-col rounded-xl group transition transform duration-300 shadow-lg col-span-2 pr-2xl">
-					<div class="p-2xl">
+	<section class="relative py-3xl lg:py-5xl">
+		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl pt-3xl">
+			<div class="grid grid-cols-5 gap-2xl">
+				<div class="flex flex-col shadow-lg col-span-3">
+					<div class="p-xl">
 						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" align_content="left" />
 
 						<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">
@@ -32,24 +30,24 @@ function handleSubmit(data: Record<string, any>) {}
 					</div>
 				</div>
 
-				<div class="flex flex-col">
-					<div class="w-full p-lg flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
-						<h3 class="text-heading-md font-bold">Kontakta</h3>
+				<div class="flex flex-col col-span-2">
+					<div class="w-full p-lg flex flex-col shadow-lg">
+						<h3 class="text-heading-lg font-bold mb-md">Kontakta</h3>
 
-						<div class="flex items-center mt-md gap-xs" v-if="globalStore.contact?.phone">
-							<Icon name="mdi:phone" />
+						<div class="flex items-center gap-xs text-lg mb-md" v-if="globalStore.contact?.phone">
+							<Icon name="mdi:phone" size="20" />
 							<span>{{ globalStore.contact.phone }}</span>
 						</div>
 
-						<div class="flex items-center mt-md gap-xs" v-if="globalStore.contact?.email">
-							<Icon name="mdi:email" />
+						<div class="flex items-center gap-xs text-lg" v-if="globalStore.contact?.email">
+							<Icon name="mdi:email" size="20" />
 							<span>{{ globalStore.contact.email }}</span>
 						</div>
 					</div>
 
 					<div
 						v-if="globalStore.contact?.social_medias?.length"
-						class="mt-xl w-full p-lg flex flex-col rounded-xl group transition transform duration-300 shadow-lg">
+						class="mt-xl w-full p-lg flex flex-col shadow-lg">
 						<h3 class="text-heading-md font-semibold mb-md">Följ oss</h3>
 
 						<div class="flex gap-md">

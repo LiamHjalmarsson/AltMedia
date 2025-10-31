@@ -31,22 +31,28 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 						loading="lazy" />
 				</div>
 
-				<div class="flex-1 flex flex-col justify-center h-full">
-					<h3 class="font-bold text-heading-xl md:text-heading-2xl mb-lg leading-tight">
+				<div class="flex-1 flex flex-col justify-center h-full space-y-lg">
+					<h3 class="font-bold text-heading-xl md:text-heading-2xl leading-tight">
 						{{ service.title }}
 					</h3>
 
-					<p v-if="service.description" class="text-lg mb-xl max-w-[600px] leading-relaxed">
+					<p v-if="service.description" class="text-lg max-w-[600px] leading-relaxed">
 						{{ service.description }}
 					</p>
 
-					<ul class="space-y-sm">
+					<ul class="space-y-xs">
 						<li
 							v-for="subservice in service.subservices"
 							:key="subservice.id"
 							class="font-semibold text-lg font-heading group">
 							<NuxtLink :to="`/services/${service.slug}/${subservice.slug}`">
-								<span>{{ subservice.title }}</span>
+								<span class="inline-flex items-center font-semibold text-lg font-heading">
+									<span>{{ subservice.title }}</span>
+									<Icon
+										name="lucide:arrow-right"
+										size="16"
+										class="ml-xs group-hover:translate-x-[3px] transition-transform duration-300" />
+								</span>
 							</NuxtLink>
 						</li>
 					</ul>

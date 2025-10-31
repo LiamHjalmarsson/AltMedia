@@ -27,8 +27,8 @@ const textAlignClass = computed(() => {
 </script>
 
 <template>
-	<section class="relative w-full flex justify-center items-center p-xs xs:p-sm sm:p-md md:p-lg lg:p-2xl">
-		<div class="mx-auto w-full h-full max-w-[1600px] px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl">
+	<section class="relative py-3xl lg:py-5xl">
+		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
 			<div :class="['grid items-center gap-xl', hasImage ? 'md:grid-cols-2' : 'md:grid-cols-1']">
 				<div v-if="hasImage" :class="block.reverse ? 'md:order-2' : 'md:order-1'">
 					<NuxtImg

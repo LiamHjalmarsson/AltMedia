@@ -19,5 +19,5 @@ watch(
 </script>
 
 <template>
-	<BlocksRenderer v-if="currentPage?.blocks" :blocks="currentPage.blocks" />
+	<BlockRenderer v-if="currentPage?.blocks" :blocks="currentPage.blocks" />
 </template>

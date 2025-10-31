@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-	<div class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light/10 shadow-lg backdrop-blur">
+	<div class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light/10 shadow-lg backdrop-blur col-span-2">
 		<h3 class="text-heading-md font-bold mb-lg">Sammanfattning</h3>
 		<ul class="space-y-md text-dark-gray">
 			<li><strong>Paket:</strong> {{ currentOffer?.title || "Ej valt" }}</li>
