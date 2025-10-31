@@ -21,12 +21,7 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			link: [
-				{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" },
-				// { rel: "dns-prefetch", href: "https://stable-benefit-bde0905312.strapiapp.com" },
-				// { rel: "preconnect", href: "https://fonts.googleapis.com" },
-				// { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
-			],
+			link: [{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" }],
 		},
 	},
 
@@ -68,18 +63,6 @@ export default defineNuxtConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
-
-		// build: {
-		// 	cssCodeSplit: true,
-		// 	rollupOptions: {
-		// 		output: {
-		// 			manualChunks: {
-		// 				vue: ["vue"],
-		// 				gsap: ["gsap"],
-		// 			},
-		// 		},
-		// 	},
-		// },
 	},
 
 	typescript: {

@@ -5,7 +5,7 @@ const homeStore = useHomeStore();
 
 await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
 
-const { homePage, loading } = storeToRefs(homeStore);
+const { homePage } = storeToRefs(homeStore);
 
 const hero = computed(() => homePage.value?.hero ?? null);
 
