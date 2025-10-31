@@ -19,14 +19,10 @@ export interface Article extends ContentItem {
 	services?: RelatedService[];
 }
 
-export interface Offer extends BaseEntity {
+export interface Website extends BaseEntity {
 	title: string;
 	description?: string;
-	features?: string[];
-	is_popular: boolean;
-	start_price: number;
-	month_price: number;
-	slug?: string;
+	price: number;
 	icon?: Icon;
 	subservices: Subservice[];
 }
@@ -84,7 +80,7 @@ export interface BuildProject extends BaseEntity {
 	title: string;
 	description: string;
 	steps: Step[];
-	offers: Offer[];
+	offers: Website[];
 	subservices: Subservice[];
 }
 

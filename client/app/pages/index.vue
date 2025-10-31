@@ -11,13 +11,15 @@ const hero = computed(() => homePage.value?.hero ?? null);
 
 const form = computed(() => homePage.value?.hero_form ?? null);
 
+const hasForm = computed(() => Boolean(homePage.value?.has_form && form.value));
+
 const blocks = computed<Blocks[]>(() => homePage?.value?.blocks ?? []);
 </script>
 
 <template>
-	<Hero :block="hero">
-		<HeroForm v-if="form" :form class="max-w-[450px]" />
+	<Hero v-if="hero" :block="hero" :hasForm>
+		<HeroForm :form class="max-w-[450px]" />
 	</Hero>
 
-	<BlockRenderer :blocks />
+	<BlockRenderer v-if="blocks?.length" :blocks="blocks" />
 </template>

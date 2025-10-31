@@ -17,7 +17,6 @@ const iconSize = computed(() => (props.size || 48) * 0.6);
 		:class="[
 			variant === 'primary' && 'bg-primary/10 text-primary border-primary/20',
 			variant === 'secondary' && 'bg-secondary/10 text-secondary border-secondary/20',
-			variant === 'neutral' && 'bg-light/5 text-light border-light/10',
 		]"
 		:style="{ width: `${size || 48}px`, height: `${size || 48}px` }"
 		role="img">

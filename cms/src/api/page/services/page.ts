@@ -14,7 +14,7 @@ import {
 const heroPopulate = {
 	fields: ["title", "description", "colored_words", "align_content"],
 	populate: {
-		cover: imagePopulate,
+		background: imagePopulate,
 	},
 };
 

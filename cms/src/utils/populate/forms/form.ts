@@ -5,7 +5,7 @@ export const formPopulate = {
 	populate: {
 		inputs: formInputPopulate,
 		button: {
-			fields: ["label", "variant", "type"],
+			fields: ["label", "variant", "type", "icon"],
 		},
 	},
 };

@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import Label from "~/components/ui/form/Label.vue";
 import type { Hero } from "~/types/content/blocks";
 
-const { content } = defineProps<{ content: Hero }>();
+const { content } = defineProps<{ hasForm: boolean; content: Hero }>();
 
 function formatColoredWords(content: Hero): string {
 	let title = content.title;
@@ -20,10 +21,11 @@ function formatColoredWords(content: Hero): string {
 <template>
 	<div
 		class="flex flex-col space-y-lg lg:space-y-xl"
-		:class="content.has_form ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
+		:class="hasForm ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
 		<span
+			v-if="content.badge"
 			class="inline-flex items-center border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
-			Digital webbyrå
+			{{ content.badge }}
 		</span>
 
 		<h1
@@ -38,11 +40,9 @@ function formatColoredWords(content: Hero): string {
 				v-for="link in content.links"
 				:key="link.id"
 				:variant="link.variant"
-				:to="link.url"
-				:size="link.size || 'lg'"
-				class="max-lg:min-w-[250px]">
-				{{ link.label }}
-			</ButtonLink>
+				:url="link.url"
+				:label="link.label"
+				class="max-lg:min-w-[250px]" />
 		</div>
 	</div>
 </template>

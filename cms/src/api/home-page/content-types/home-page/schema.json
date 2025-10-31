@@ -4,7 +4,7 @@
   "info": {
     "singularName": "home-page",
     "pluralName": "home-pages",
-    "displayName": "Home Page"
+    "displayName": "Start sida"
   },
   "options": {
     "draftAndPublish": true
@@ -17,8 +17,23 @@
       "repeatable": false,
       "required": true
     },
+    "has_form": {
+      "type": "boolean",
+      "required": false,
+      "default": false
+    },
     "hero_form": {
       "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "has_form"
+            },
+            true
+          ]
+        }
+      },
       "component": "form.form",
       "repeatable": false
     },

@@ -25,11 +25,6 @@
       "repeatable": true,
       "required": true
     },
-    "offers": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::offer.offer"
-    },
     "subservices": {
       "type": "relation",
       "relation": "oneToMany",

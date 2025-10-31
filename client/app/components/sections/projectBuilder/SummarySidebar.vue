@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Offer, Subservice } from "~/types/content/collections";
+import type { Website, Subservice } from "~/types/content/collections";
 
 defineProps<{
-	currentOffer: Offer | null;
+	currentOffer: Website | null;
 	selectedSubs: Subservice[];
 	summary: string;
 	totalOnce: number;

@@ -105,13 +105,16 @@ function submitForm() {}
 					</div>
 
 					<div class="flex justify-between items-center pt-lg">
-						<Button v-if="currentStep > 1" variant="ghost" @click="prevStep"> Tillbaka </Button>
+						<Button v-if="currentStep > 1" variant="ghost" label="Tillbaka" @click="prevStep" />
 
-						<Button v-if="currentStep < steps.length" variant="primary" class="ml-auto" @click="nextStep">
-							Nästa
-						</Button>
+						<Button
+							v-if="currentStep < steps.length"
+							variant="primary"
+							label="Nästa"
+							class="ml-auto"
+							@click="nextStep" />
 
-						<Button v-else variant="primary" class="ml-auto" @click="submitForm"> Skicka </Button>
+						<Button v-else variant="primary" label="Skicka" class="ml-auto" @click="submitForm" />
 					</div>
 				</div>
 

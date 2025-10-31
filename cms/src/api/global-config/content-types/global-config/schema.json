@@ -4,7 +4,7 @@
   "info": {
     "singularName": "global-config",
     "pluralName": "global-configs",
-    "displayName": "Global Config"
+    "displayName": "Global Settings"
   },
   "options": {
     "draftAndPublish": true
@@ -34,14 +34,14 @@
       "component": "global.footer",
       "repeatable": false
     },
-    "seo": {
-      "type": "component",
-      "component": "seo.seo",
-      "repeatable": false
-    },
     "contact": {
       "type": "component",
       "component": "global.contact",
+      "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
       "repeatable": false
     }
   }

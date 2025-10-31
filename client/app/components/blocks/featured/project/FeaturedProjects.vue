@@ -92,18 +92,16 @@ onMounted(() => {
 				:align_content="block.heading.align_content"
 				class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<!-- Desktop interactive -->
 			<div class="hidden lg:flex gap-lg min-w-0">
 				<article
 					v-for="(project, index) in block.projects"
 					:key="project.id"
-					:ref="(el) => setRef(el as HTMLElement, index)"
+					:ref="(element) => setRef(element as HTMLElement, index)"
 					class="overflow-hidden shadow-xl relative h-96 flex-1 transition-transform">
 					<FeaturedProjectCard :project="project" />
 				</article>
 			</div>
 
-			<!-- Mobile grid -->
 			<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
 				<FeaturedProjectCard
 					v-for="(project, index) in block.projects"

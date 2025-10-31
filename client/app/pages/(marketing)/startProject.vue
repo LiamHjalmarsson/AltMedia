@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const buildProjectStore = useBuildProjectStore();
 
-const { buildProject, currentOffer, selectedSubs, totalOnce, totalMonthly, selectedSubIds, loading } =
-	storeToRefs(buildProjectStore);
+const { buildProject, currentOffer, selectedSubIds } = storeToRefs(buildProjectStore);
 
 await useAsyncData("buildProject", () => buildProjectStore.fetchBuildProject(), { server: true });
 
@@ -29,7 +28,7 @@ function prevStep() {
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl pt-2xl">
 			<Heading
 				:title="buildProject?.title"
 				align_content="start"
@@ -44,18 +43,11 @@ function prevStep() {
 						:current-step="currentStep"
 						class="mb-xl" />
 
-					<OfferSelect
-						v-if="currentStep === 1"
-						:offers="buildProject?.offers"
-						:current-offer-id="currentOffer?.id"
-						@select="buildProjectStore.setCurrentOffer" />
-
 					<AddonSelect
 						v-if="currentStep === 2"
 						:subservices="buildProject?.subservices"
 						:current-offer="currentOffer"
-						:selected-ids="selectedSubIds"
-						@toggle="buildProjectStore.toggleSub" />
+						:selected-ids="selectedSubIds" />
 
 					<div v-if="currentStep === 3" class="space-y-md">
 						<h2 class="text-heading-md font-bold">3. Sammanfattning</h2>
@@ -66,43 +58,38 @@ function prevStep() {
 							class="w-full rounded-xl border border-light/30 shadow-sm bg-light/10 p-md focus:border-primary transition" />
 					</div>
 
-					<StepConfirm
-						v-if="currentStep === 4"
-						:current-offer="currentOffer"
-						:selected-subs="selectedSubs"
-						:total-once="totalOnce"
-						:total-monthly="totalMonthly" />
+					<StepConfirm v-if="currentStep === 4" :current-offer="currentOffer" />
 
 					<div class="flex justify-between items-center pt-xl border-t border-light/20">
-						<button
-							type="button"
-							class="inline-flex items-center justify-center gap-sm px-lg py-sm rounded-xl font-semibold border transition border-primary text-primary bg-transparent hover:bg-primary/10 focus:ring-2 focus:ring-primary/50">
-							<Icon name="lucide:arrow-left" size="18" />
-							<span><slot>Tillbaka</slot></span>
-						</button>
+						<Button variant="outline" label="Tillbaka" icon="lucide:arrow-left" @click="prevStep" />
 
 						<Button
 							v-if="currentStep < (buildProject?.steps?.length || 4)"
 							:disabled="currentStep === 1 && !currentOffer"
 							variant="primary"
+							label="Nästa"
+							icon="lucide:arrow-right"
 							class="ml-auto"
-							@click="nextStep">
-							Nästa
-							<Icon name="lucide:arrow-right" size="18" class="ml-xs" />
-						</Button>
-						<Button v-else variant="primary" class="ml-auto">
-							Skicka
-							<Icon name="lucide:send" size="18" class="ml-xs" />
-						</Button>
+							@click="nextStep" />
+
+						<Button v-else variant="primary" label="Skicka" icon="ucide:send" class="ml-auto" />
 					</div>
 				</div>
 
-				<SummarySidebar
-					:current-offer="currentOffer"
-					:selected-subs="selectedSubs"
-					:summary="formData.summary"
-					:total-once="totalOnce"
-					:total-monthly="totalMonthly" />
+				<div
+					class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light/10 shadow-lg backdrop-blur col-span-2">
+					<h3 class="text-heading-md font-bold mb-lg">Sammanfattning</h3>
+					<ul class="space-y-md text-dark-gray">
+						<li><strong>Beskrivning:</strong></li>
+						<li>
+							<strong>Tillägg:</strong>
+							<ul class="mt-1 space-y-1"></ul>
+						</li>
+					</ul>
+					<div class="mt-xl border-t pt-lg space-y-xs">
+						<p class="text-heading-sm font-semibold">Engångskostnad: TOTAL kr</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

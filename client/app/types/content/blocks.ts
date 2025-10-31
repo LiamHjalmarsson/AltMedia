@@ -2,7 +2,7 @@ import type { Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent } from "../enums";
-import type { Article, Offer, Project, Service } from "./collections";
+import type { Article, Website, Project, Service } from "./collections";
 
 export interface ListItem {
 	id: number;
@@ -32,10 +32,10 @@ export interface Hero {
 	id: number;
 	title: string;
 	description?: string;
+	badge?: string;
 	colored_words?: Record<string, string>;
 	align_content: AlignContent;
-	cover: Image[];
-	has_form: boolean;
+	background: Image;
 	links?: Link[];
 }
 
@@ -71,11 +71,11 @@ export interface FeaturedProjectsBlock {
 	projects: FeaturedProject[];
 }
 
-export interface FeaturedOffersBlock {
+export interface FeaturedWebsiteBlock {
 	__component: "block.featured-offers";
 	id: number;
 	heading: Heading;
-	offers: Offer[];
+	page_example: Website[];
 }
 
 export type FeaturedArticle = Pick<
@@ -126,4 +126,4 @@ export type Blocks =
 	| FeaturedServicesBlock
 	| FeaturedProjectsBlock
 	| FeaturedArticlesBlock
-	| FeaturedOffersBlock;
+	| FeaturedWebsiteBlock;

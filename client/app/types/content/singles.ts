@@ -17,6 +17,7 @@ export interface GlobalConfig extends BaseEntity {
 export interface HomePage extends BaseEntity {
 	hero: Hero;
 	hero_form: Form;
+	has_form: boolean;
 	blocks: Blocks[];
 }
 

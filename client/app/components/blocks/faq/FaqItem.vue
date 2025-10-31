@@ -19,16 +19,9 @@ function onToggle(id: number) {
 </script>
 
 <template>
-	<li
-		@click="onToggle(item.id)"
-		@keydown.enter.space="onToggle(item.id)"
-		role="button"
-		tabindex="0"
-		:aria-expanded="activeId === item.id"
-		:aria-controls="`faq-answer-${item.id}`"
-		class="p-md cursor-pointer group border border-dark/5 transition duration-300"
-		:class="[isOpen ? 'shadow-2xl' : 'shadow-lg']">
+	<li class="p-md group border border-dark/5 transition duration-300" :class="[isOpen ? 'shadow-2xl' : 'shadow-lg']">
 		<button
+			@click="onToggle(item.id)"
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="activeId === item.id"
 			:aria-controls="`faq-answer-${item.id}`"

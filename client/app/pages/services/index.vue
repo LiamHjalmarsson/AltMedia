@@ -4,6 +4,14 @@ const serviceStore = useServiceStore();
 const { services } = storeToRefs(serviceStore);
 
 await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
+
+useSeoMeta({
+	title: "Våra tjänster",
+	description: "Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser.",
+	ogTitle: "Våra tjänster",
+	ogDescription: "Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser.",
+	twitterCard: "summary_large_image",
+});
 </script>
 
 <template>

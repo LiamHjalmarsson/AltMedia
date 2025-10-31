@@ -15,7 +15,7 @@ import {
 export default factories.createCoreService("api::home-page.home-page", ({ strapi }) => ({
 	async getHomePage() {
 		return strapi.service("api::home-page.home-page").find({
-			fields: ["id", "documentId"],
+			fields: ["id", "documentId", "has_form"],
 			populate: {
 				hero: heroPopulate,
 				hero_form: formPopulate,
@@ -23,7 +23,7 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 					on: {
 						"block.featured-services": featuredServicesBlockPopulate,
 						"block.list": listPopulateBlock,
-						"block.featured-offers": featuredOffersBlockPopulate,
+						"block.featured-offers": featuredExampleBlockPopulate,
 						"block.full-section": fullSectionPopulateBlock,
 						"block.featured-projects": featuredProjectsBlockPopulate,
 						"block.faq": faqBlockPopulate,
@@ -36,9 +36,9 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 }));
 
 export const heroPopulate = {
-	fields: ["title", "description", "colored_words", "align_content", "has_form"],
+	fields: ["title", "description", "colored_words", "align_content", "badge"],
 	populate: {
-		cover: imagePopulate,
+		background: imagePopulate,
 		links: linkPopulate,
 	},
 };
@@ -69,13 +69,20 @@ export const listPopulateBlock = {
 	},
 };
 
-export const featuredOffersBlockPopulate = {
+export const featuredExampleBlockPopulate = {
 	populate: {
 		fields: ["id"],
 		heading: headingPopulate,
-		offers: {
-			fields: ["title", "description", "features", "is_popular", "start_price", "month_price"],
-			populate: { icon: iconPopulate },
+		page_example: {
+			fields: ["title", "description"],
+			populate: {
+				icon: iconPopulate,
+				subservices: {
+					populate: {
+						fields: ["title"],
+					},
+				},
+			},
 		},
 	},
 };

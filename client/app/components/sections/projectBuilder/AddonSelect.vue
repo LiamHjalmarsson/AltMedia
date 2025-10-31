@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Subservice, Offer } from "~/types/content/collections";
+import type { Subservice, Website } from "~/types/content/collections";
 
 defineProps<{
 	subservices: Subservice[];
 	selectedIds: Set<number>;
-	currentOffer: Offer | null;
+	currentOffer: Website | null;
 }>();
 
 const emit = defineEmits(["toggle"]);

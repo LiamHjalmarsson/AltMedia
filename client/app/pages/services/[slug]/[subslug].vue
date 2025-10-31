@@ -5,17 +5,25 @@ const route = useRoute();
 
 const { currentSubService } = storeToRefs(serviceStore);
 
-watch(
-	() => route.params.subslug,
-	async (subslug) => {
-		if (typeof subslug === "string") {
-			await serviceStore.fetchSubService(subslug);
-		} else {
-			serviceStore.currentSubService = null;
-		}
-	},
-	{ immediate: true }
+const subslug = computed(() => route.params.subslug as string);
+
+await useAsyncData(
+	() => `subservice:${subslug.value}`,
+	() => serviceStore.fetchSubService(subslug.value),
+	{ server: true, watch: [subslug] }
 );
+
+watchEffect(() => {
+	const subservice = currentSubService.value;
+
+	useSeoMeta({
+		title: subservice?.title ?? "Delmoment",
+		description: "Delmoment i en tjänst.",
+		ogTitle: subservice?.title ?? "Delmoment",
+		ogDescription: "Delmoment i en tjänst.",
+		twitterCard: "summary_large_image",
+	});
+});
 </script>
 
 <template>
@@ -23,5 +31,5 @@ watch(
 
 	<SubserviceIntroduction v-if="currentSubService" :subservice="currentSubService" />
 
-	<BlocksRenderer v-if="currentSubService?.blocks" :blocks="currentSubService.blocks" />
+	<BlockRenderer v-if="currentSubService?.blocks" :blocks="currentSubService.blocks" />
 </template>

@@ -11,6 +11,23 @@ export interface BlockItemsFaqItem extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockItemsPageExample extends Struct.ComponentSchema {
+  collectionName: 'components_block_items_page_examples';
+  info: {
+    displayName: 'Page Example';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    price: Schema.Attribute.Integer;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlockCta extends Struct.ComponentSchema {
   collectionName: 'components_block_ctas';
   info: {
@@ -54,7 +71,7 @@ export interface BlockFeaturedOffers extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
+    page_example: Schema.Attribute.Component<'block-items.page-example', true>;
   };
 }
 
@@ -101,13 +118,12 @@ export interface BlockHero extends Struct.ComponentSchema {
   };
   attributes: {
     align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
-    colored_words: Schema.Attribute.JSON;
-    cover: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
     >;
+    badge: Schema.Attribute.String;
+    colored_words: Schema.Attribute.JSON;
     description: Schema.Attribute.Text;
-    has_form: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     links: Schema.Attribute.Component<'ui.link', true>;
     title: Schema.Attribute.String;
   };
@@ -309,17 +325,14 @@ export interface UiButton extends Struct.ComponentSchema {
     displayName: 'Button';
   };
   attributes: {
-    aria_label: Schema.Attribute.String;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    icon_is_position_right: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<true>;
+    icon: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
     size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
-      Schema.Attribute.DefaultTo<'md'>;
+      Schema.Attribute.DefaultTo<'lg'>;
     type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']> &
       Schema.Attribute.DefaultTo<'button'>;
     variant: Schema.Attribute.Enumeration<
-      ['primary', 'secondary', 'tertiary', 'ghost']
+      ['primary', 'secondary', 'outline', 'ghost']
     > &
       Schema.Attribute.DefaultTo<'primary'>;
   };
@@ -370,18 +383,16 @@ export interface UiLink extends Struct.ComponentSchema {
     displayName: 'Link';
   };
   attributes: {
-    aria_label: Schema.Attribute.String;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    icon_is_position_right: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<true>;
+    icon: Schema.Attribute.String;
     is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
     size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
-      Schema.Attribute.DefaultTo<'md'>;
+      Schema.Attribute.DefaultTo<'lg'>;
     url: Schema.Attribute.String;
     variant: Schema.Attribute.Enumeration<
-      ['primary', 'secondary', 'tertiary', 'ghost']
-    >;
+      ['primary', 'secondary', 'outline', 'ghost']
+    > &
+      Schema.Attribute.DefaultTo<'primary'>;
   };
 }
 
@@ -389,6 +400,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'block-items.faq-item': BlockItemsFaqItem;
+      'block-items.page-example': BlockItemsPageExample;
       'block.cta': BlockCta;
       'block.faq': BlockFaq;
       'block.featured-articles': BlockFeaturedArticles;

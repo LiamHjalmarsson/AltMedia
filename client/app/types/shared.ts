@@ -45,20 +45,17 @@ export interface Link {
 	url: string;
 	variant: Variant;
 	is_external: boolean;
-	size?: Size;
-	icon?: Icon;
-	icon_is_position_right?: boolean;
-	aria_label?: string;
+	size: Size;
+	icon?: string;
 }
+
 export interface Button {
 	id: number;
 	label: string;
 	variant: Variant;
 	type: ButtonType;
-	size?: Size;
-	icon?: Icon;
-	icon_is_position_right?: boolean;
-	aria_label?: string;
+	size: Size;
+	icon?: string;
 }
 
 export interface Heading {

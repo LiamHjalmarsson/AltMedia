@@ -39,10 +39,11 @@ function onSubmit(event: Event) {
 					</FormField>
 
 					<div :style="{ gridColumn: '1 / -1' }">
-						<Button type="submit">
-							{{ form.button?.label }}
-							<Icon name="prime:send" size="20" class="ml-sm" />
-						</Button>
+						<Button
+							type="submit"
+							:label="form.button?.label"
+							:icon="form.button.icon"
+							:variant="form.button.variant" />
 					</div>
 				</form>
 			</div>

@@ -14,7 +14,7 @@ defineProps<{ service: Service }>();
 			:aria-label="`Läs mer om ${service.title}`"
 			class="flex flex-col justify-between h-full p-lg lg:p-xl focus-visible:outline-primary">
 			<div class="flex flex-col justify-between relative z-10 h-full">
-				<IconBadge v-if="service.icon" :icon="service.icon" variant="primary" size="50" />
+				<IconBadge v-if="service.icon" :icon="service.icon" variant="primary" :size="50" />
 
 				<div class="flex-1">
 					<h3

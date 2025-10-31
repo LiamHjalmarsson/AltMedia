@@ -35,7 +35,7 @@ const heroBlock = computed<Hero | null>(() => {
 		has_form: false,
 		links: [],
 		cover: currentProject.value.cover ? [currentProject.value.cover] : [],
-	};
+	} as unknown as Hero;
 });
 </script>
 
@@ -44,5 +44,5 @@ const heroBlock = computed<Hero | null>(() => {
 
 	<Introduction v-if="currentProject?.introduction" :block="currentProject.introduction" />
 
-	<BlocksRenderer v-if="currentProject?.blocks" :blocks="currentProject.blocks" />
+	<BlockRenderer v-if="currentProject?.blocks" :blocks="currentProject.blocks" />
 </template>

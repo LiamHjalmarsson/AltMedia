@@ -13,10 +13,11 @@
     },
     "variant": {
       "type": "enumeration",
+      "default": "primary",
       "enum": [
         "primary",
         "secondary",
-        "tertiary",
+        "outline",
         "ghost"
       ]
     },
@@ -24,9 +25,12 @@
       "type": "boolean",
       "default": false
     },
+    "icon": {
+      "type": "string"
+    },
     "size": {
       "type": "enumeration",
-      "default": "md",
+      "default": "lg",
       "enum": [
         "xs",
         "sm",
@@ -34,18 +38,6 @@
         "lg",
         "xl"
       ]
-    },
-    "icon": {
-      "type": "component",
-      "component": "ui.icon",
-      "repeatable": false
-    },
-    "icon_is_position_right": {
-      "type": "boolean",
-      "default": true
-    },
-    "aria_label": {
-      "type": "string"
     }
   },
   "config": {}

@@ -5,7 +5,7 @@ const { block } = defineProps<{ block: ListBlock }>();
 </script>
 
 <template>
-	<section class="bg-dark text-light pt-3xl pb-4xl">
+	<section class="bg-bg-dark text-light pt-3xl pb-4xl">
 		<div class="mx-auto w-full h-full max-w-[1300px] px-xl lg:px-3xl">
 			<Heading
 				:title="block.heading.title"

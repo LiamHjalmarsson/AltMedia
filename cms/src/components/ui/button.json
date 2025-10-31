@@ -15,7 +15,7 @@
       "enum": [
         "primary",
         "secondary",
-        "tertiary",
+        "outline",
         "ghost"
       ]
     },
@@ -30,7 +30,7 @@
     },
     "size": {
       "type": "enumeration",
-      "default": "md",
+      "default": "lg",
       "enum": [
         "xs",
         "sm",
@@ -40,15 +40,6 @@
       ]
     },
     "icon": {
-      "type": "component",
-      "component": "ui.icon",
-      "repeatable": false
-    },
-    "icon_is_position_right": {
-      "type": "boolean",
-      "default": true
-    },
-    "aria_label": {
       "type": "string"
     }
   },

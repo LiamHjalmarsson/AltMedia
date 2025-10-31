@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_block_items_page_examples",
+  "info": {
+    "displayName": "Page Example"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "icon": {
+      "type": "component",
+      "component": "ui.icon",
+      "repeatable": false
+    },
+    "price": {
+      "type": "integer"
+    },
+    "subservices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subservice.subservice"
+    }
+  },
+  "config": {}
+}

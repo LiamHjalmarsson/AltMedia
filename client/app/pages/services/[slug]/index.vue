@@ -5,13 +5,25 @@ const serviceStore = useServiceStore();
 
 const { currentService } = storeToRefs(serviceStore);
 
-watch(
-	() => route.params.slug,
-	async (slug) => {
-		if (slug) await serviceStore.fetchService(slug as string);
-	},
-	{ immediate: true }
+const slug = computed(() => route.params.slug as string);
+
+await useAsyncData(
+	() => `service:${slug.value}`,
+	() => serviceStore.fetchService(slug.value),
+	{ server: true, watch: [slug] }
 );
+
+watchEffect(() => {
+	const service = currentService.value;
+
+	useSeoMeta({
+		title: service?.title ?? "Tjänst",
+		description: service?.description ?? "Tjänst från Alt Media.",
+		ogTitle: service?.title ?? "Tjänst",
+		ogDescription: service?.description ?? "Tjänst från Alt Media.",
+		twitterCard: "summary_large_image",
+	});
+});
 </script>
 
 <template>

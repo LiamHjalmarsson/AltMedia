@@ -497,7 +497,7 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
 export interface ApiGlobalConfigGlobalConfig extends Struct.SingleTypeSchema {
   collectionName: 'global_configs';
   info: {
-    displayName: 'Global Config';
+    displayName: 'Global Settings';
     pluralName: 'global-configs';
     singularName: 'global-config';
   };
@@ -531,7 +531,7 @@ export interface ApiGlobalConfigGlobalConfig extends Struct.SingleTypeSchema {
 export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   collectionName: 'home_pages';
   info: {
-    displayName: 'Home Page';
+    displayName: 'Start sida';
     pluralName: 'home-pages';
     singularName: 'home-page';
   };
@@ -553,6 +553,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    has_form: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hero: Schema.Attribute.Component<'block.hero', false> &
       Schema.Attribute.Required;
     hero_form: Schema.Attribute.Component<'form.form', false>;
@@ -563,43 +564,6 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
-  collectionName: 'offers';
-  info: {
-    displayName: 'Offer';
-    pluralName: 'offers';
-    singularName: 'offer';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
-    features: Schema.Attribute.JSON & Schema.Attribute.Required;
-    icon: Schema.Attribute.Component<'ui.icon', false> &
-      Schema.Attribute.Required;
-    is_popular: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'> &
-      Schema.Attribute.Private;
-    month_price: Schema.Attribute.Integer;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
-    start_price: Schema.Attribute.Integer & Schema.Attribute.Required;
-    subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -745,7 +709,6 @@ export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
       'api::start-a-project.start-a-project'
     > &
       Schema.Attribute.Private;
-    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     publishedAt: Schema.Attribute.DateTime;
     steps: Schema.Attribute.Component<'form.step', true> &
       Schema.Attribute.Required;
@@ -1371,7 +1334,6 @@ declare module '@strapi/strapi' {
       'api::contact.contact': ApiContactContact;
       'api::global-config.global-config': ApiGlobalConfigGlobalConfig;
       'api::home-page.home-page': ApiHomePageHomePage;
-      'api::offer.offer': ApiOfferOffer;
       'api::page.page': ApiPagePage;
       'api::project.project': ApiProjectProject;
       'api::service.service': ApiServiceService;

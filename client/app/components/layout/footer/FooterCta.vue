@@ -32,10 +32,12 @@ const { footer, contact } = storeToRefs(globalStore);
 						{{ contact?.email }}
 					</ButtonSecondaryLink>
 
-					<ButtonLink to="/startProject" aria-label="Starta ett projekt nu" class="flex-1 w-full">
-						Starta projekt
-						<Icon name="lucide:rocket" size="18" class="ml-md" />
-					</ButtonLink>
+					<ButtonLink
+						label="Starta projekt"
+						url="/startProject"
+						icon="lucide:rocket"
+						aria-label="Starta ett projekt nu"
+						class="flex-1 w-full" />
 				</div>
 			</div>
 		</div>
