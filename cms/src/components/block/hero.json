@@ -5,6 +5,9 @@
   },
   "options": {},
   "attributes": {
+    "badge": {
+      "type": "string"
+    },
     "title": {
       "type": "string"
     },
@@ -46,9 +49,6 @@
       "type": "component",
       "component": "ui.link",
       "repeatable": true
-    },
-    "badge": {
-      "type": "string"
     }
   },
   "config": {}

@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { Subservice, Website } from "~/types/content/collections";
+import type { Subservice } from "~/types/content/collections";
 
 defineProps<{
 	subservices: Subservice[];
 	selectedIds: Set<number>;
-	currentOffer: Website | null;
 }>();
 
 const emit = defineEmits(["toggle"]);
@@ -23,24 +22,13 @@ function toggleSub(sub: Subservice) {
 				v-for="sub in subservices"
 				:key="sub.id"
 				@click="toggleSub(sub)"
-				class="group relative cursor-pointer rounded-2xl border shadow-md p-lg transition hover:shadow-lg"
-				:class="[
-					selectedIds.has(sub.id) || currentOffer?.subservices?.some((s) => s.id === sub.id)
-						? 'border-primary ring-2 ring-primary/50 bg-primary/5'
-						: 'border-light/20 bg-white',
-				]">
+				class="group relative cursor-pointer border-light/20 bg-white rounded-2xl border shadow-md p-lg transition hover:shadow-lg">
 				<div class="flex flex-col space-y-sm">
 					<h3 class="text-heading-sm font-semibold">{{ sub.title }}</h3>
 
 					<p v-if="sub.price_once || sub.price_month" class="text-sm text-dark-gray">
 						<span v-if="sub.price_once">+ {{ sub.price_once }} kr engångs</span>
 						<span v-if="sub.price_month"> · {{ sub.price_month }} kr/mån</span>
-					</p>
-
-					<p
-						v-if="currentOffer?.subservices?.some((s) => s.id === sub.id)"
-						class="text-xs text-green-600 font-semibold">
-						Ingår i paketet
 					</p>
 				</div>
 

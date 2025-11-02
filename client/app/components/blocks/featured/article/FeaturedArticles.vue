@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FeaturedArticlesBlock } from "~/types/content/blocks";
-import FeaturedArticleCard from "./FeaturedArticleCard.vue";
 
 defineProps<{ block: FeaturedArticlesBlock }>();
 </script>

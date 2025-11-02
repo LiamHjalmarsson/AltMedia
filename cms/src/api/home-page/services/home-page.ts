@@ -18,16 +18,14 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 			fields: ["id", "documentId", "has_form"],
 			populate: {
 				hero: heroPopulate,
-				hero_form: formPopulate,
+				form: formPopulate,
 				blocks: {
 					on: {
-						"block.featured-services": featuredServicesBlockPopulate,
+						"block.featured": featuredBlockPopulate,
 						"block.list": listPopulateBlock,
-						"block.featured-offers": featuredExampleBlockPopulate,
+						"block.examples-build": examplesBuildBlockPopulate,
 						"block.full-section": fullSectionPopulateBlock,
-						"block.featured-projects": featuredProjectsBlockPopulate,
 						"block.faq": faqBlockPopulate,
-						"block.featured-articles": featuredArticlesBlockPopulate,
 					},
 				},
 			},
@@ -43,9 +41,9 @@ export const heroPopulate = {
 	},
 };
 
-export const featuredServicesBlockPopulate = {
+export const featuredBlockPopulate = {
 	populate: {
-		fields: ["id"],
+		fields: ["id", "features"],
 		heading: headingPopulate,
 		services: {
 			fields: ["title", "slug", "description"],
@@ -53,27 +51,41 @@ export const featuredServicesBlockPopulate = {
 				icon: iconPopulate,
 			},
 		},
-	},
-};
-
-export const listPopulateBlock = {
-	populate: {
-		fields: ["id"],
-		heading: headingPopulate,
-		items: {
-			fields: ["title", "content"],
+		projects: {
+			fields: ["title", "slug"],
 			populate: {
-				icon: iconPopulate,
+				cover: imagePopulate,
+			},
+		},
+		articles: {
+			fields: ["title", "slug", "published_date", "description"],
+			populate: {
+				cover: imagePopulate,
 			},
 		},
 	},
 };
 
-export const featuredExampleBlockPopulate = {
+export const listPopulateBlock = {
+	populate: {
+		fields: ["id", "show_numbers", "layout"],
+		heading: headingPopulate,
+		background: imagePopulate,
+		items: {
+			fields: ["title", "content"],
+			populate: {
+				image: imagePopulate,
+			},
+		},
+	},
+};
+
+export const examplesBuildBlockPopulate = {
 	populate: {
 		fields: ["id"],
 		heading: headingPopulate,
-		page_example: {
+		button: linkPopulate,
+		items: {
 			fields: ["title", "description"],
 			populate: {
 				icon: iconPopulate,
@@ -87,19 +99,6 @@ export const featuredExampleBlockPopulate = {
 	},
 };
 
-export const featuredProjectsBlockPopulate = {
-	populate: {
-		fields: ["id"],
-		heading: headingPopulate,
-		projects: {
-			fields: ["title", "slug"],
-			populate: {
-				cover: imagePopulate,
-			},
-		},
-	},
-};
-
 export const faqBlockPopulate = {
 	populate: {
 		fields: ["id"],
@@ -108,19 +107,6 @@ export const faqBlockPopulate = {
 			fields: ["question", "answer"],
 		},
 		icon: iconPopulate,
-	},
-};
-
-export const featuredArticlesBlockPopulate = {
-	populate: {
-		fields: ["id"],
-		heading: headingPopulate,
-		articles: {
-			fields: ["title", "slug", "published_date", "description"],
-			populate: {
-				cover: imagePopulate,
-			},
-		},
 	},
 };
 

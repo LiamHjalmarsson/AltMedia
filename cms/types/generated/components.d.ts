@@ -1,5 +1,23 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface BlockItemsBuildItem extends Struct.ComponentSchema {
+  collectionName: 'components_block_items_build_items';
+  info: {
+    displayName: 'Build Item';
+    icon: 'apps';
+  };
+  attributes: {
+    description: Schema.Attribute.Text;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
+    price: Schema.Attribute.BigInteger;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlockItemsFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_block_items_faq_items';
   info: {
@@ -11,19 +29,15 @@ export interface BlockItemsFaqItem extends Struct.ComponentSchema {
   };
 }
 
-export interface BlockItemsPageExample extends Struct.ComponentSchema {
-  collectionName: 'components_block_items_page_examples';
+export interface BlockItemsListItem extends Struct.ComponentSchema {
+  collectionName: 'components_block_items_list_items';
   info: {
-    displayName: 'Page Example';
+    displayName: 'List item';
+    icon: 'bulletList';
   };
   attributes: {
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    price: Schema.Attribute.Integer;
-    subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
+    content: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
   };
 }
@@ -41,6 +55,19 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockExamplesBuild extends Struct.ComponentSchema {
+  collectionName: 'components_block_examples_builds';
+  info: {
+    displayName: 'Examples Build';
+    icon: 'bulletList';
+  };
+  attributes: {
+    button: Schema.Attribute.Component<'ui.link', false>;
+    heading: Schema.Attribute.Component<'ui.heading', false>;
+    items: Schema.Attribute.Component<'block-items.build-item', true>;
+  };
+}
+
 export interface BlockFaq extends Struct.ComponentSchema {
   collectionName: 'components_block_faqs';
   info: {
@@ -53,46 +80,19 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
 }
 
-export interface BlockFeaturedArticles extends Struct.ComponentSchema {
-  collectionName: 'components_block_featured_articles';
+export interface BlockFeatured extends Struct.ComponentSchema {
+  collectionName: 'components_block_featureds';
   info: {
-    displayName: 'Featured Articles';
+    displayName: 'Featured';
   };
   attributes: {
     articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    heading: Schema.Attribute.Component<'ui.heading', false>;
-  };
-}
-
-export interface BlockFeaturedOffers extends Struct.ComponentSchema {
-  collectionName: 'components_block_featured_offers';
-  info: {
-    displayName: 'Featured Offers';
-  };
-  attributes: {
-    heading: Schema.Attribute.Component<'ui.heading', false>;
-    page_example: Schema.Attribute.Component<'block-items.page-example', true>;
-  };
-}
-
-export interface BlockFeaturedProjects extends Struct.ComponentSchema {
-  collectionName: 'components_block_featured_projects';
-  info: {
-    displayName: 'Featured Projects';
-  };
-  attributes: {
+    features: Schema.Attribute.Enumeration<
+      ['tj\u00E4nster', 'projekt', 'artiklar']
+    > &
+      Schema.Attribute.Required;
     heading: Schema.Attribute.Component<'ui.heading', false>;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
-  };
-}
-
-export interface BlockFeaturedServices extends Struct.ComponentSchema {
-  collectionName: 'components_block_featured_services';
-  info: {
-    displayName: 'Featured Services';
-  };
-  attributes: {
-    heading: Schema.Attribute.Component<'ui.heading', false>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
   };
 }
@@ -149,8 +149,14 @@ export interface BlockList extends Struct.ComponentSchema {
     displayName: 'List';
   };
   attributes: {
+    background: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    items: Schema.Attribute.Component<'ui.card', true>;
+    items: Schema.Attribute.Component<'block-items.list-item', true>;
+    layout: Schema.Attribute.Enumeration<['alternating', 'grid']> &
+      Schema.Attribute.DefaultTo<'alternating'>;
+    show_numbers: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -399,14 +405,13 @@ export interface UiLink extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'block-items.build-item': BlockItemsBuildItem;
       'block-items.faq-item': BlockItemsFaqItem;
-      'block-items.page-example': BlockItemsPageExample;
+      'block-items.list-item': BlockItemsListItem;
       'block.cta': BlockCta;
+      'block.examples-build': BlockExamplesBuild;
       'block.faq': BlockFaq;
-      'block.featured-articles': BlockFeaturedArticles;
-      'block.featured-offers': BlockFeaturedOffers;
-      'block.featured-projects': BlockFeaturedProjects;
-      'block.featured-services': BlockFeaturedServices;
+      'block.featured': BlockFeatured;
       'block.full-section': BlockFullSection;
       'block.hero': BlockHero;
       'block.info': BlockInfo;

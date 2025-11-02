@@ -541,22 +541,20 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
   attributes: {
     blocks: Schema.Attribute.DynamicZone<
       [
-        'block.featured-services',
         'block.list',
-        'block.featured-offers',
         'block.full-section',
-        'block.featured-projects',
         'block.faq',
-        'block.featured-articles',
+        'block.featured',
+        'block.examples-build',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    form: Schema.Attribute.Component<'form.form', false>;
     has_form: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hero: Schema.Attribute.Component<'block.hero', false> &
       Schema.Attribute.Required;
-    hero_form: Schema.Attribute.Component<'form.form', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

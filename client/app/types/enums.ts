@@ -11,3 +11,5 @@ export type AlignContent = "left" | "center" | "right";
 export type InputType = "input" | "textarea" | "select";
 
 export type ColumnSpan = "full" | "half" | "two-thirds" | "one-third";
+
+export type Layout = "grid" | "alternating";

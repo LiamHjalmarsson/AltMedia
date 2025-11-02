@@ -1,20 +1,33 @@
-import type { Button, Heading, Icon } from "../shared";
+import type { BaseEntity, Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
-import type { AlignContent } from "../enums";
-import type { Article, Website, Project, Service } from "./collections";
+import type { AlignContent, Layout } from "../enums";
+import type { Article, Project, Service, Subservice } from "./collections";
+
+export interface FeaturedBlock {
+	__component: "block.featured";
+	id: number;
+	heading: Heading;
+	features: "tjänster" | "projekt" | "artiklar";
+	services?: Service[];
+	projects?: Project[];
+	articles?: Article[];
+}
 
 export interface ListItem {
 	id: number;
 	title: string;
 	content: BlockNode[];
-	icon?: Icon;
+	image: Image;
 }
 
 export interface ListBlock {
 	__component: "block.list";
 	id: number;
 	heading: Heading;
+	show_numbers: boolean;
+	background?: Image;
+	layout: Layout;
 	items: ListItem[];
 }
 
@@ -71,11 +84,20 @@ export interface FeaturedProjectsBlock {
 	projects: FeaturedProject[];
 }
 
-export interface FeaturedWebsiteBlock {
-	__component: "block.featured-offers";
+export interface BuildItem extends BaseEntity {
+	title: string;
+	description?: string;
+	price: number;
+	icon?: Icon;
+	subservices: Subservice[];
+}
+
+export interface ExamplesBuildBlock {
+	__component: "block.examples-build";
 	id: number;
 	heading: Heading;
-	page_example: Website[];
+	button: Link;
+	items: BuildItem[];
 }
 
 export type FeaturedArticle = Pick<
@@ -120,10 +142,4 @@ export type MarketingBlocks = HeroBlock | CtaBlock | FullSectionBlock;
 
 export type CollectionBlocks = InfoBlock | ListBlock | FaqBlock;
 
-export type Blocks =
-	| MarketingBlocks
-	| CollectionBlocks
-	| FeaturedServicesBlock
-	| FeaturedProjectsBlock
-	| FeaturedArticlesBlock
-	| FeaturedWebsiteBlock;
+export type Blocks = MarketingBlocks | CollectionBlocks | FeaturedBlock | ExamplesBuildBlock;

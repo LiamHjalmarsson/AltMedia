@@ -1,5 +1,5 @@
 import { headingPopulate } from "../ui/heading";
-import { iconPopulate } from "../ui/icon";
+import { imagePopulate } from "../ui/image";
 
 export const listPopulateBlock = {
 	populate: {
@@ -8,7 +8,7 @@ export const listPopulateBlock = {
 		items: {
 			fields: ["title", "content"],
 			populate: {
-				icon: iconPopulate,
+				image: imagePopulate,
 			},
 		},
 	},

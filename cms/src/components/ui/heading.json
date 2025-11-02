@@ -9,6 +9,9 @@
       "type": "string",
       "required": true
     },
+    "description": {
+      "type": "text"
+    },
     "align_content": {
       "type": "enumeration",
       "default": "left",
@@ -20,6 +23,16 @@
     },
     "has_link": {
       "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "align_content"
+            },
+            "left"
+          ]
+        }
+      },
       "default": false
     },
     "link": {
@@ -37,9 +50,6 @@
       "component": "ui.link",
       "repeatable": false,
       "required": false
-    },
-    "description": {
-      "type": "text"
     }
   },
   "config": {}

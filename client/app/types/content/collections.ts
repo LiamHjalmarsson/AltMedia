@@ -19,14 +19,6 @@ export interface Article extends ContentItem {
 	services?: RelatedService[];
 }
 
-export interface Website extends BaseEntity {
-	title: string;
-	description?: string;
-	price: number;
-	icon?: Icon;
-	subservices: Subservice[];
-}
-
 export type RelatedService = Pick<Service, "id" | "documentId" | "title" | "slug">;
 
 export interface Project extends ContentItem {
@@ -80,7 +72,6 @@ export interface BuildProject extends BaseEntity {
 	title: string;
 	description: string;
 	steps: Step[];
-	offers: Website[];
 	subservices: Subservice[];
 }
 

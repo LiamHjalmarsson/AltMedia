@@ -1,12 +1,10 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Website, BuildProject, Subservice } from "~/types/content/collections";
+import type { BuildProject, Subservice } from "~/types/content/collections";
 
 export const useBuildProjectStore = defineStore("buildProject", () => {
 	const buildProject = ref<BuildProject | null>(null);
-
-	const currentOffer = ref<Website | null>(null);
 
 	const selectedSubIds = ref<Set<number>>(new Set());
 
@@ -36,7 +34,6 @@ export const useBuildProjectStore = defineStore("buildProject", () => {
 
 	return {
 		buildProject,
-		currentOffer,
 		selectedSubIds,
 		loading,
 

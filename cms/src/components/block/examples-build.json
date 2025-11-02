@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_block_examples_builds",
+  "info": {
+    "displayName": "Examples Build",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "ui.heading",
+      "repeatable": false
+    },
+    "items": {
+      "type": "component",
+      "component": "block-items.build-item",
+      "repeatable": true
+    },
+    "button": {
+      "type": "component",
+      "component": "ui.link",
+      "repeatable": false
+    }
+  },
+  "config": {}
+}

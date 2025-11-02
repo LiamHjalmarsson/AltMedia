@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { Website, Subservice } from "~/types/content/collections";
+import type { Subservice } from "~/types/content/collections";
 
 defineProps<{
-	currentOffer: Website | null;
 	selectedSubs: Subservice[];
 	totalOnce: number;
 	totalMonthly: number;
@@ -16,7 +15,6 @@ defineProps<{
 		<div
 			class="p-xl border border-light/20 shadow-md space-y-md flex flex-col rounded-2xl group transition transform duration-300">
 			<ul class="space-y-sm text-dark-gray">
-				<li><b>Paket:</b> {{ currentOffer?.title || "Ej valt" }}</li>
 				<li><b>Antal tillägg:</b> {{ selectedSubs.length }}</li>
 				<li><b>Engångskostnad:</b> {{ totalOnce }} kr</li>
 				<li v-if="totalMonthly"><b>Månadskostnad:</b> {{ totalMonthly }} kr/mån</li>

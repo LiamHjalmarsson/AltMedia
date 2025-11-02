@@ -9,10 +9,8 @@ const map: Record<string, any> = {
 	"block.full-section": resolveComponent("FullSection"),
 	"block.faq": resolveComponent("Faq"),
 	"block.info": resolveComponent("Info"),
-	"block.featured-services": resolveComponent("FeaturedServices"),
-	"block.featured-offers": resolveComponent("FeaturedWebsite"),
-	"block.featured-projects": resolveComponent("FeaturedProjects"),
-	"block.featured-articles": resolveComponent("FeaturedArticles"),
+	"block.featured": resolveComponent("Featured"),
+	"block.examples-build": resolveComponent("ExamplesBuild"),
 };
 </script>
 

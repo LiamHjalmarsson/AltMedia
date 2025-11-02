@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { Icon } from "~/types/shared";
+import type { Image } from "~/types/shared";
 
-defineProps<{ icon: Icon; title: string }>();
+defineProps<{ image: Image; title: string }>();
 </script>
 
 <template>
 	<div class="overflow-hidden">
 		<NuxtImg
-			v-if="icon?.is_image && icon.image?.url"
-			:src="icon.image.url"
-			:alt="icon.image.alternativeText || title"
+			v-if="image.url"
+			:src="image.url"
+			:alt="image.alternativeText || title"
 			format="webp"
 			quality="85"
 			class="w-full h-full object-contain max-h-[200px] lg:max-h-[450px]"

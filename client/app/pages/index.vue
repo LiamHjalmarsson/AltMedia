@@ -9,7 +9,7 @@ const { homePage } = storeToRefs(homeStore);
 
 const hero = computed(() => homePage.value?.hero ?? null);
 
-const form = computed(() => homePage.value?.hero_form ?? null);
+const form = computed(() => homePage.value?.form ?? null);
 
 const hasForm = computed(() => Boolean(homePage.value?.has_form && form.value));
 

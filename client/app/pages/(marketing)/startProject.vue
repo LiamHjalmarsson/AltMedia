@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const buildProjectStore = useBuildProjectStore();
 
-const { buildProject, currentOffer, selectedSubIds } = storeToRefs(buildProjectStore);
+const { buildProject, selectedSubIds } = storeToRefs(buildProjectStore);
 
 await useAsyncData("buildProject", () => buildProjectStore.fetchBuildProject(), { server: true });
 
@@ -46,7 +46,6 @@ function prevStep() {
 					<AddonSelect
 						v-if="currentStep === 2"
 						:subservices="buildProject?.subservices"
-						:current-offer="currentOffer"
 						:selected-ids="selectedSubIds" />
 
 					<div v-if="currentStep === 3" class="space-y-md">
@@ -58,14 +57,13 @@ function prevStep() {
 							class="w-full rounded-xl border border-light/30 shadow-sm bg-light/10 p-md focus:border-primary transition" />
 					</div>
 
-					<StepConfirm v-if="currentStep === 4" :current-offer="currentOffer" />
+					<StepConfirm v-if="currentStep === 4" />
 
 					<div class="flex justify-between items-center pt-xl border-t border-light/20">
 						<Button variant="outline" label="Tillbaka" icon="lucide:arrow-left" @click="prevStep" />
 
 						<Button
 							v-if="currentStep < (buildProject?.steps?.length || 4)"
-							:disabled="currentStep === 1 && !currentOffer"
 							variant="primary"
 							label="Nästa"
 							icon="lucide:arrow-right"

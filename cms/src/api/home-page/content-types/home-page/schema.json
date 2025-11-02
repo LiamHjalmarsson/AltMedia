@@ -22,7 +22,7 @@
       "required": false,
       "default": false
     },
-    "hero_form": {
+    "form": {
       "type": "component",
       "conditions": {
         "visible": {
@@ -40,13 +40,11 @@
     "blocks": {
       "type": "dynamiczone",
       "components": [
-        "block.featured-services",
         "block.list",
-        "block.featured-offers",
         "block.full-section",
-        "block.featured-projects",
         "block.faq",
-        "block.featured-articles"
+        "block.featured",
+        "block.examples-build"
       ]
     }
   }

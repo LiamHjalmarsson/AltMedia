@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from "vue";
 import gsap from "gsap";
-import type { FeaturedProjectsBlock } from "~/types/content/blocks";
+import type { Project } from "~/types/content/collections";
 
-const { block } = defineProps<{ block: FeaturedProjectsBlock }>();
+defineProps<{ projects: Project[] }>();
 
 const projectRefs = ref<HTMLElement[]>([]);
 
@@ -85,34 +85,26 @@ onMounted(() => {
 </script>
 
 <template>
-	<section class="relative pb-3xl lg:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<Heading
-				v-bind="block.heading"
-				:align_content="block.heading.align_content"
-				class="mb-md lg:mb-lg xl:mb-xl" />
+	<div class="hidden lg:flex gap-lg min-w-0">
+		<article
+			v-for="(project, index) in projects"
+			:key="project.id"
+			:ref="(element) => setRef(element as HTMLElement, index)"
+			class="overflow-hidden shadow-xl relative h-96 flex-1 transition-transform">
+			<FeaturedProjectCard :project="project" />
+		</article>
+	</div>
 
-			<div class="hidden lg:flex gap-lg min-w-0">
-				<article
-					v-for="(project, index) in block.projects"
-					:key="project.id"
-					:ref="(element) => setRef(element as HTMLElement, index)"
-					class="overflow-hidden shadow-xl relative h-96 flex-1 transition-transform">
-					<FeaturedProjectCard :project="project" />
-				</article>
-			</div>
-
-			<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
-				<FeaturedProjectCard
-					v-for="(project, index) in block.projects"
-					:key="project.id"
-					:project="project"
-					:class="[
-						'overflow-hidden shadow-xl relative aspect-[4/3]',
-						index % 5 === 0 ? 'col-span-2' : '',
-						index % 7 === 0 ? 'row-span-2' : '',
-					]" />
-			</div>
-		</div>
-	</section>
+	<div class="grid grid-cols-2 sm:grid-cols-3 gap-md lg:hidden">
+		<FeaturedProjectCard
+			v-for="(project, index) in projects"
+			:key="project.id"
+			:project="project"
+			:class="[
+				'overflow-hidden shadow-xl relative aspect-[4/3]',
+				index % 5 === 0 ? 'col-span-2' : '',
+				index % 7 === 0 ? 'row-span-2' : '',
+			]" />
+	</div>
+	s
 </template>

@@ -1,20 +1,42 @@
 {
-	"collectionName": "components_block_lists",
-	"info": {
-		"displayName": "List"
-	},
-	"options": {},
-	"attributes": {
-		"heading": {
-			"type": "component",
-			"component": "ui.heading",
-			"repeatable": false
-		},
-		"items": {
-			"type": "component",
-			"component": "ui.card",
-			"repeatable": true
-		}
-	},
-	"config": {}
+  "collectionName": "components_block_lists",
+  "info": {
+    "displayName": "List"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "ui.heading",
+      "repeatable": false
+    },
+    "items": {
+      "type": "component",
+      "component": "block-items.list-item",
+      "repeatable": true
+    },
+    "show_numbers": {
+      "type": "boolean",
+      "default": true
+    },
+    "background": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "layout": {
+      "type": "enumeration",
+      "default": "alternating",
+      "enum": [
+        "alternating",
+        "grid"
+      ]
+    }
+  },
+  "config": {}
 }

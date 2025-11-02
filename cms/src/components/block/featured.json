@@ -1,0 +1,69 @@
+{
+  "collectionName": "components_block_featureds",
+  "info": {
+    "displayName": "Featured"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "ui.heading",
+      "repeatable": false
+    },
+    "features": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "tjänster",
+        "projekt",
+        "artiklar"
+      ]
+    },
+    "articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "features"
+            },
+            "artiklar"
+          ]
+        }
+      }
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "features"
+            },
+            "projekt"
+          ]
+        }
+      }
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "features"
+            },
+            "tjänster"
+          ]
+        }
+      }
+    }
+  },
+  "config": {}
+}
