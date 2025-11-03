@@ -10,7 +10,7 @@ const variantClass: Record<Variant, string> = {
 	primary: "bg-gradient-to-br from-primary to-primary-hover",
 	secondary: "bg-primary/10",
 	ghost: "text-primary",
-	outline: "border border-primary",
+	outline: "border-2 border-primary",
 };
 </script>
 
