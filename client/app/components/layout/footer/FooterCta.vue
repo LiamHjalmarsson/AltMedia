@@ -4,8 +4,6 @@ const globalStore = useGlobalStore();
 const { footer } = storeToRefs(globalStore);
 
 const cta = computed(() => footer.value?.cta);
-
-console.log(cta.value);
 </script>
 
 <template>
@@ -19,7 +17,7 @@ console.log(cta.value);
 					muted
 					loop
 					playsinline>
-					<source src="/videos/cta.mp4" type="video/mp4" />
+					<source :src="cta.cover.url" type="video/mp4" />
 				</video>
 
 				<NuxtImg
