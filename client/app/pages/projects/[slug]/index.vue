@@ -40,7 +40,7 @@ const heroBlock = computed<Hero | null>(() => {
 </script>
 
 <template>
-	<Hero v-if="heroBlock" :block="heroBlock" />
+	<!-- <Hero v-if="heroBlock" :block="heroBlock" /> -->
 
 	<Introduction v-if="currentProject?.introduction" :block="currentProject.introduction" />
 

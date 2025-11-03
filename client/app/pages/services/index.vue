@@ -1,15 +1,27 @@
 <script setup lang="ts">
+import type { Page } from "~/types/content/collections";
+
 const serviceStore = useServiceStore();
 
 const { services } = storeToRefs(serviceStore);
 
+const { findOne } = useStrapi();
+
 await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
 
+const { data: page } = await useAsyncData("servicesPage", async () => {
+	const res = await findOne<Page>("services-page");
+	return res.data;
+});
+
 useSeoMeta({
-	title: "Våra tjänster",
-	description: "Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser.",
-	ogTitle: "Våra tjänster",
-	ogDescription: "Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser.",
+	title: page.value?.seo?.meta_title,
+	description: page.value?.seo?.meta_description,
+	ogTitle: page.value?.seo?.meta_title,
+	ogDescription: page.value?.seo?.meta_description,
+	ogUrl: page.value?.seo?.meta_canonical_url,
+	twitterImage: page.value?.seo?.meta_image,
+	ogImage: page.value?.seo?.meta_image,
 	twitterCard: "summary_large_image",
 });
 </script>
@@ -18,9 +30,9 @@ useSeoMeta({
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading
-				title="Våra tjänster"
-				description="Vår expertis inom design och teknik levererar toppmärken och digitala upplevelser."
-				align_content="start"
+				:title="page?.title"
+				:description="page?.description"
+				:align_content="page?.align_content"
 				class="mt-xl mb-2xl" />
 
 			<div

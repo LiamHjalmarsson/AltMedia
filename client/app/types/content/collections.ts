@@ -2,6 +2,7 @@ import type { BaseEntity, Icon, Image, ImageFormat, Introduction, Seo } from "..
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, CollectionBlocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
+import type { AlignContent } from "../enums";
 
 export interface ContentItem extends BaseEntity {
 	title: string;
@@ -52,8 +53,10 @@ export interface Tag extends BaseEntity {
 
 export interface Page extends BaseEntity {
 	title: string;
-	slug: string;
-	blocks: Blocks[];
+	slug?: string;
+	description?: string;
+	align_content?: AlignContent;
+	blocks?: Blocks[];
 	seo?: Seo | null;
 }
 

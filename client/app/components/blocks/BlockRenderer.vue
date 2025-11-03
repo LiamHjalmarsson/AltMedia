@@ -4,7 +4,7 @@ import type { Blocks } from "~/types/content/blocks";
 defineProps<{ blocks: Blocks[] }>();
 
 const map: Record<string, any> = {
-	"block.hero": resolveComponent("Hero"),
+	// "block.hero": resolveComponent("Hero"),
 	"block.list": resolveComponent("List"),
 	"block.full-section": resolveComponent("FullSection"),
 	"block.faq": resolveComponent("Faq"),
