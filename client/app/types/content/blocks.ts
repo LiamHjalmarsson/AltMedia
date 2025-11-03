@@ -19,6 +19,7 @@ export interface ListItem {
 	title: string;
 	content: BlockNode[];
 	image: Image;
+	color?: Color;
 }
 
 export interface ListBlock {
@@ -28,6 +29,7 @@ export interface ListBlock {
 	show_numbers: boolean;
 	background?: Image;
 	layout: Layout;
+	color?: Color;
 	items: ListItem[];
 }
 
@@ -123,7 +125,7 @@ export interface FaqBlock {
 	id: number;
 	heading: Heading;
 	items: FaqItem[];
-	icon: Icon;
+	image: Image;
 }
 
 export interface Cta {

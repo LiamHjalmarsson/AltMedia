@@ -1,9 +1,38 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import type { ListItem } from "~/types/content/blocks";
 
-const { index } = defineProps<{ item: ListItem; index: number }>();
+const props = defineProps<{ item: ListItem; index: number; showNumbers: boolean }>();
 
-const isEven = computed(() => (index + 1) % 2 === 0);
+const isEven = computed(() => (props.index + 1) % 2 === 0);
+
+const colorClass = computed(() => {
+	const color = props.item.color;
+	if (!color) return "";
+
+	if (color.hex) {
+		return {
+			color: color.hex,
+		};
+	}
+
+	switch (color.type) {
+		case "primary":
+			return { color: "var(--color-primary)" };
+		case "secondary":
+			return { color: "var(--color-secondary)" };
+		default:
+			return { color: "var(--color-primary)" };
+	}
+});
+
+const textThemeClass = computed(() => {
+	const color = props.item.color;
+
+	if (!color) return "";
+
+	return color.theme === "dark" ? "text-dark" : "text-light";
+});
 </script>
 
 <template>
@@ -12,18 +41,22 @@ const isEven = computed(() => (index + 1) % 2 === 0);
 			:image="item.image"
 			:title="item.title"
 			:class="['hidden lg:block', isEven ? 'order-2' : 'order-1']" />
+
 		<div
 			class="relative flex flex-col justify-center max-lg:bg-light/5 max-lg:shadow-2xl max-lg:backdrop-blur-md h-full"
-			:class="[isEven ? 'lg:order-1' : 'lg:order-2 ']">
+			:class="[isEven ? 'lg:order-1' : 'lg:order-2', textThemeClass]">
 			<ListItemImage :image="item.image" :title="item.title" class="lg:hidden" />
 
 			<div class="pb-xl px-xl lg:p-xl text-center lg:text-left space-y-md">
 				<div class="flex items-center justify-center lg:justify-start flex-wrap space-x-md">
-					<span class="text-heading-xl lg:text-heading-2xl font-extrabold text-secondary font-heading">
+					<span
+						v-if="showNumbers"
+						class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading transition-colors"
+						:style="colorClass">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-md lg:text-heading-lg font-semibold leading-wide">
+					<h3 class="text-heading-md lg:text-heading-lg font-semibold leading-wide transition-colors">
 						{{ item.title }}
 					</h3>
 				</div>

@@ -71,10 +71,16 @@ export const listPopulateBlock = {
 		fields: ["id", "show_numbers", "layout"],
 		heading: headingPopulate,
 		background: imagePopulate,
+		color: {
+			fields: ["type", "hex", "theme"],
+		},
 		items: {
 			fields: ["title", "content"],
 			populate: {
 				image: imagePopulate,
+				color: {
+					fields: ["type", "hex", "theme"],
+				},
 			},
 		},
 	},
@@ -106,7 +112,7 @@ export const faqBlockPopulate = {
 		items: {
 			fields: ["question", "answer"],
 		},
-		icon: iconPopulate,
+		image: imagePopulate,
 	},
 };
 

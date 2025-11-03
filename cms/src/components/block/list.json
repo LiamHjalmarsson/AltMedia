@@ -36,6 +36,11 @@
         "alternating",
         "grid"
       ]
+    },
+    "color": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
     }
   },
   "config": {}

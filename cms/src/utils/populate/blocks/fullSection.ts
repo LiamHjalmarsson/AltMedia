@@ -8,7 +8,7 @@ export const fullSectionPopulateBlock = {
 			fields: ["label", "url", "variant", "is_external"],
 		},
 		color: {
-			fields: ["is_hex", "type", "is_dark_text", "hex"],
+			fields: ["type", "hex", "theme"],
 		},
 	},
 };

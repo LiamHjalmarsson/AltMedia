@@ -36,6 +36,7 @@ export interface BlockItemsListItem extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
+    color: Schema.Attribute.Component<'styles.color', false>;
     content: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
@@ -75,7 +76,7 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     items: Schema.Attribute.Component<'block-items.faq-item', true>;
   };
 }
@@ -152,6 +153,7 @@ export interface BlockList extends Struct.ComponentSchema {
     background: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    color: Schema.Attribute.Component<'styles.color', false>;
     heading: Schema.Attribute.Component<'ui.heading', false>;
     items: Schema.Attribute.Component<'block-items.list-item', true>;
     layout: Schema.Attribute.Enumeration<['alternating', 'grid']> &
@@ -316,8 +318,8 @@ export interface StylesColor extends Struct.ComponentSchema {
   };
   attributes: {
     hex: Schema.Attribute.String;
-    is_dark_text: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    is_hex: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    theme: Schema.Attribute.Enumeration<['light', 'dark', 'gradient']> &
+      Schema.Attribute.DefaultTo<'dark'>;
     type: Schema.Attribute.Enumeration<
       ['primary', 'secondary', 'tertiary', 'ghost']
     > &

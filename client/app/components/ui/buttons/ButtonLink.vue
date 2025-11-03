@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Size, Variant } from "~/types/enums";
+import type { Variant } from "~/types/enums";
 import type { Link } from "~/types/shared";
 
 defineProps<Link>();
@@ -27,7 +27,7 @@ const variantClass: Record<Variant, string> = {
 			<div class="relative font-bold z-10 flex items-center max-lg:justify-center">
 				{{ label }}
 
-				<Icon v-if="icon" :name="icon" class="ml-md" />
+				<Icon v-if="icon" :name="icon" size="20" class="ml-md" />
 			</div>
 
 			<span

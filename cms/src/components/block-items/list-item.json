@@ -21,6 +21,11 @@
         "videos",
         "audios"
       ]
+    },
+    "color": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
     }
   },
   "config": {}

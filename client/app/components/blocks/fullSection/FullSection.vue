@@ -9,7 +9,7 @@ const bgColor = computed(() => {
 		return "bg-bg-dark text-light";
 	}
 
-	if (block.color.is_hex && block.color.hex) {
+	if (block.color.hex) {
 		return { backgroundColor: block.color.hex };
 	}
 
@@ -24,15 +24,15 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	return block.color?.is_dark_text ? "text-dark" : "text-light";
+	return block.color?.theme === "dark" ? "text-dark" : "text-light";
 });
 </script>
 
 <template>
 	<section
 		class="relative w-full min-h-[70vh] p-2xl flex items-center justify-center overflow-hidden"
-		:class="!block.color?.is_hex ? bgColor : ''"
-		:style="block.color?.is_hex ? bgColor : ''">
+		:class="!block.color?.hex ? bgColor : ''"
+		:style="block.color?.hex ? bgColor : ''">
 		<NuxtImg
 			v-if="block.cover"
 			:src="block.cover.url"
@@ -57,12 +57,12 @@ const textColor = computed(() => {
 		</div>
 
 		<div v-if="block.link" class="absolute bottom-0 right-0 p-2xl m-2xl">
-			<NuxtLink
-				:to="block.link.url"
-				class="inline-block bg-primary text-white px-lg py-md rounded-lg font-semibold">
-				{{ block.link.label || "Läs mer" }}
-				<Icon name="lucide:arrow-right" class="ml-xs" />
-			</NuxtLink>
+			<ButtonLink
+				:label="block.link.label"
+				:url="block.link.url"
+				:variant="block.link.variant"
+				:icon="block.link.icon"
+				:class="textColor" />
 		</div>
 	</section>
 </template>

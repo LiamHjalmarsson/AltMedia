@@ -36,6 +36,7 @@ const { footer, contact } = storeToRefs(globalStore);
 						label="Starta projekt"
 						url="/startProject"
 						icon="lucide:rocket"
+						variant="primary"
 						aria-label="Starta ett projekt nu"
 						class="flex-1 w-full" />
 				</div>

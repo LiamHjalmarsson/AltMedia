@@ -5,22 +5,8 @@
   },
   "options": {},
   "attributes": {
-    "is_hex": {
-      "type": "boolean",
-      "default": false
-    },
     "type": {
       "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "is_hex"
-            },
-            false
-          ]
-        }
-      },
       "default": "primary",
       "enum": [
         "primary",
@@ -30,21 +16,16 @@
       ]
     },
     "hex": {
-      "type": "string",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "is_hex"
-            },
-            true
-          ]
-        }
-      }
+      "type": "string"
     },
-    "is_dark_text": {
-      "type": "boolean",
-      "default": false
+    "theme": {
+      "type": "enumeration",
+      "default": "dark",
+      "enum": [
+        "light",
+        "dark",
+        "gradient"
+      ]
     }
   },
   "config": {}

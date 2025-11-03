@@ -35,7 +35,8 @@ const alignClass = computed(() => {
 			v-if="has_link && link?.url"
 			:url="link.url"
 			:label="link.label"
-			icon="material-symbols:arrow-forward"
+			:variant="link.variant"
+			:icon="link?.icon || 'material-symbols:arrow-forward'"
 			class="max-lg:hidden w-fit shrink" />
 	</div>
 </template>

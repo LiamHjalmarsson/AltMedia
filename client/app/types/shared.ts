@@ -1,6 +1,6 @@
 import type { Block } from "typescript";
 import type { Subservice } from "./content/collections";
-import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Variant } from "./enums";
+import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Theme, Variant } from "./enums";
 
 export interface BaseEntity {
 	id: number;
@@ -40,21 +40,21 @@ export interface Icon {
 }
 
 export interface Link {
-	id: number;
+	id?: number;
 	label: string;
 	url: string;
 	variant: Variant;
-	is_external: boolean;
-	size: Size;
+	is_external?: boolean;
+	size?: Size;
 	icon?: string;
 }
 
 export interface Button {
-	id: number;
+	id?: number;
 	label: string;
 	variant: Variant;
 	type: ButtonType;
-	size: Size;
+	size?: Size;
 	icon?: string;
 }
 
@@ -75,10 +75,9 @@ export interface Card {
 }
 
 export interface Color {
-	is_hex: boolean;
-	type?: Variant;
+	type: Variant;
 	hex?: string;
-	is_dark_text: boolean;
+	theme: Theme;
 }
 
 export interface Seo {
