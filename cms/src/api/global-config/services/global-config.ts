@@ -47,10 +47,17 @@ const navigationPopulate = {
 const footerPopulate = {
 	populate: {
 		cta: {
-			fields: ["title", "description"],
+			fields: ["title", "subtitle", "description"],
 			populate: {
 				buttons: buttonPopulate,
 				links: linkPopulate,
+				cover: imagePopulate,
+				color: {
+					fields: ["type", "hex", "theme"],
+				},
+				background: {
+					fields: ["type", "hex", "theme"],
+				},
 			},
 		},
 		footer_columns: {
@@ -63,3 +70,4 @@ const footerPopulate = {
 		},
 	},
 };
+

@@ -24,11 +24,13 @@ onMounted(() => {
 
 		cards.forEach((card, i) => {
 			const title = card.querySelector(".project-title") as HTMLElement | null;
+
 			const overlay = card.querySelector(".project-overlay") as HTMLElement | null;
 
 			if (!title || !overlay) return;
 
 			gsap.set(title, { opacity: 0, y: 30, pointerEvents: "none" });
+
 			gsap.set(overlay, { opacity: 0 });
 
 			card.addEventListener("mouseenter", () => {
@@ -106,5 +108,4 @@ onMounted(() => {
 				index % 7 === 0 ? 'row-span-2' : '',
 			]" />
 	</div>
-	s
 </template>

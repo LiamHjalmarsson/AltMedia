@@ -30,6 +30,7 @@ export interface Image extends BaseEntity {
 	provider?: string;
 	alternativeText?: string;
 	caption?: string;
+	mime?: string;
 }
 
 export interface Icon {

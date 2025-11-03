@@ -1,28 +1,50 @@
 {
-	"collectionName": "components_block_ctas",
-	"info": {
-		"displayName": "Cta"
-	},
-	"options": {},
-	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"description": {
-			"type": "text",
-			"unique": false
-		},
-		"buttons": {
-			"type": "component",
-			"component": "ui.button",
-			"repeatable": true
-		},
-		"links": {
-			"type": "component",
-			"component": "ui.link",
-			"repeatable": true
-		}
-	},
-	"config": {}
+  "collectionName": "components_block_ctas",
+  "info": {
+    "displayName": "Cta"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text",
+      "unique": false
+    },
+    "buttons": {
+      "type": "component",
+      "component": "ui.button",
+      "repeatable": true
+    },
+    "links": {
+      "type": "component",
+      "component": "ui.link",
+      "repeatable": true
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "color": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
+    },
+    "background": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
+    }
+  },
+  "config": {}
 }
-

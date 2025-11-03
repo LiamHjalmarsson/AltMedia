@@ -131,9 +131,13 @@ export interface FaqBlock {
 export interface Cta {
 	id: number;
 	title: string;
+	subtitle?: string;
 	description?: string;
 	buttons?: Button[];
 	links?: Link[];
+	cover?: Image;
+	color?: Color;
+	background?: Color;
 }
 
 export interface CtaBlock extends Cta {

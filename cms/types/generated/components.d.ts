@@ -49,9 +49,13 @@ export interface BlockCta extends Struct.ComponentSchema {
     displayName: 'Cta';
   };
   attributes: {
+    background: Schema.Attribute.Component<'styles.color', false>;
     buttons: Schema.Attribute.Component<'ui.button', true>;
+    color: Schema.Attribute.Component<'styles.color', false>;
+    cover: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     description: Schema.Attribute.Text;
     links: Schema.Attribute.Component<'ui.link', true>;
+    subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
   };
 }
