@@ -677,6 +677,37 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProjectsPageProjectsPage extends Struct.SingleTypeSchema {
+  collectionName: 'projects_pages';
+  info: {
+    displayName: 'Projects Page';
+    pluralName: 'projects-pages';
+    singularName: 'projects-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::projects-page.projects-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'seo.seo', false>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
@@ -1398,6 +1429,7 @@ declare module '@strapi/strapi' {
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::page.page': ApiPagePage;
       'api::project.project': ApiProjectProject;
+      'api::projects-page.projects-page': ApiProjectsPageProjectsPage;
       'api::service.service': ApiServiceService;
       'api::services-page.services-page': ApiServicesPageServicesPage;
       'api::start-a-project.start-a-project': ApiStartAProjectStartAProject;

@@ -1,15 +1,40 @@
 <script setup lang="ts">
+import type { Page } from "~/types/content/collections";
+
 const projectStore = useProjectStore();
 
 const { projects } = storeToRefs(projectStore);
 
+const { findOne } = useStrapi();
+
 await useAsyncData("projects", () => projectStore.fetchProjects(), { server: true });
+
+const { data: page } = await useAsyncData("projectsPage", async () => {
+	const res = await findOne<Page>("projects-page");
+
+	return res.data;
+});
+
+useSeoMeta({
+	title: page.value?.seo?.meta_title,
+	description: page.value?.seo?.meta_description,
+	ogTitle: page.value?.seo?.meta_title,
+	ogDescription: page.value?.seo?.meta_description,
+	ogUrl: page.value?.seo?.meta_canonical_url,
+	twitterImage: page.value?.seo?.meta_image,
+	ogImage: page.value?.seo?.meta_image,
+	twitterCard: "summary_large_image",
+});
 </script>
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
-			<Heading title="Våra projekt" align_content="start" class="my-xl" />
+			<Heading
+				:title="page?.title"
+				:align_content="page?.align_content"
+				:description="page?.description"
+				class="my-xl" />
 
 			<div class="grid md:grid-cols-2 gap-3xl">
 				<article
