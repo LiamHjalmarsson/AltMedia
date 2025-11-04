@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Hero } from "~/types/content/blocks";
-import HeroContent from "./HeroContent.vue";
 
 const { block, hasForm } = defineProps<{ hasForm?: boolean; block: Hero }>();
 
