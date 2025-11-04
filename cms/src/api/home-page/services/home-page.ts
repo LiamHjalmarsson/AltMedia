@@ -5,11 +5,12 @@
 import { factories } from "@strapi/strapi";
 import {
 	fullSectionPopulateBlock,
-	imagePopulate,
-	linkPopulate,
 	formPopulate,
-	headingPopulate,
-	iconPopulate,
+	listPopulateBlock,
+	heroPopulate,
+	featuredBlockPopulate,
+	examplesBuildBlockPopulate,
+	faqBlockPopulate,
 } from "../../../utils/populate";
 
 export default factories.createCoreService("api::home-page.home-page", ({ strapi }) => ({
@@ -32,87 +33,4 @@ export default factories.createCoreService("api::home-page.home-page", ({ strapi
 		});
 	},
 }));
-
-export const heroPopulate = {
-	fields: ["title", "description", "colored_words", "align_content", "badge"],
-	populate: {
-		background: imagePopulate,
-		links: linkPopulate,
-	},
-};
-
-export const featuredBlockPopulate = {
-	populate: {
-		fields: ["id", "features"],
-		heading: headingPopulate,
-		services: {
-			fields: ["title", "slug", "description"],
-			populate: {
-				icon: iconPopulate,
-			},
-		},
-		projects: {
-			fields: ["title", "slug"],
-			populate: {
-				cover: imagePopulate,
-			},
-		},
-		articles: {
-			fields: ["title", "slug", "published_date", "description"],
-			populate: {
-				cover: imagePopulate,
-			},
-		},
-	},
-};
-
-export const listPopulateBlock = {
-	populate: {
-		fields: ["id", "show_numbers", "layout"],
-		heading: headingPopulate,
-		background: imagePopulate,
-		color: {
-			fields: ["type", "hex", "theme"],
-		},
-		items: {
-			fields: ["title", "content"],
-			populate: {
-				image: imagePopulate,
-				color: {
-					fields: ["type", "hex", "theme"],
-				},
-			},
-		},
-	},
-};
-
-export const examplesBuildBlockPopulate = {
-	populate: {
-		fields: ["id"],
-		heading: headingPopulate,
-		button: linkPopulate,
-		items: {
-			fields: ["title", "description"],
-			populate: {
-				icon: iconPopulate,
-				subservices: {
-					populate: {
-						fields: ["title"],
-					},
-				},
-			},
-		},
-	},
-};
-
-export const faqBlockPopulate = {
-	populate: {
-		fields: ["id"],
-		heading: headingPopulate,
-		items: {
-			fields: ["question", "answer"],
-		},
-		image: imagePopulate,
-	},
-};
 

@@ -15,3 +15,7 @@ export * from "./blocks/fullSection";
 export * from "./blocks/introduction";
 export * from "./blocks/info";
 export * from "./blocks/list";
+export * from "./blocks/examplesBuild";
+export * from "./blocks/faq";
+export * from "./blocks/featured";
+export * from "./blocks/hero";

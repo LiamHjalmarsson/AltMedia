@@ -130,7 +130,7 @@ export interface BlockHero extends Struct.ComponentSchema {
     colored_words: Schema.Attribute.JSON;
     description: Schema.Attribute.Text;
     links: Schema.Attribute.Component<'ui.link', true>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
