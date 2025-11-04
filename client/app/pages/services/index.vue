@@ -11,6 +11,7 @@ await useAsyncData("services", () => serviceStore.fetchServices(), { server: tru
 
 const { data: page } = await useAsyncData("servicesPage", async () => {
 	const res = await findOne<Page>("services-page");
+
 	return res.data;
 });
 
