@@ -15,6 +15,8 @@ const { data: page } = await useAsyncData("projectsPage", async () => {
 	return res.data;
 });
 
+console.log(page.value);
+
 useSeoMeta({
 	title: page.value?.seo?.meta_title,
 	description: page.value?.seo?.meta_description,

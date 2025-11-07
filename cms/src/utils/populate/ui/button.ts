@@ -1,3 +1,3 @@
 export const buttonPopulate = {
-	fields: ["label", "variant", "type", "icon", "size"],
+	fields: ["label", "variant", "type", "icon", "size", "reversed"],
 };

@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_form_questions",
+  "info": {
+    "displayName": "questions"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "boolean",
+        "multi",
+        "text",
+        "budget",
+        "time",
+        "static",
+        "input"
+      ]
+    },
+    "options": {
+      "type": "json"
+    }
+  },
+  "config": {}
+}

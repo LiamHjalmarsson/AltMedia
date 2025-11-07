@@ -7,8 +7,10 @@ defineProps<{ projects: Project[] }>();
 
 const projectRefs = ref<HTMLElement[]>([]);
 
-const setRef = (element: HTMLElement | null, index: number) => {
-	if (element) projectRefs.value[index] = element;
+const setRef = (element: Element | ComponentPublicInstance | null, index: number) => {
+	if (element instanceof HTMLElement) {
+		projectRefs.value[index] = element;
+	}
 };
 
 const isDesktop = computed(() => window.matchMedia("(min-width: 1024px)").matches);
@@ -91,7 +93,7 @@ onMounted(() => {
 		<article
 			v-for="(project, index) in projects"
 			:key="project.id"
-			:ref="(element) => setRef(element as HTMLElement, index)"
+			:ref="(element: Element | ComponentPublicInstance | null) => setRef(element, index)"
 			class="overflow-hidden shadow-xl relative h-96 flex-1 transition-transform">
 			<FeaturedProjectCard :project="project" />
 		</article>

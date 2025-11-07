@@ -1,4 +1,4 @@
-import type { BaseEntity, Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
+import type { BaseEntity, Button, Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, CollectionBlocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
@@ -60,6 +60,32 @@ export interface Page extends BaseEntity {
 	seo?: Seo | null;
 }
 
+export interface PageBuild {
+	id: number;
+	documentId: string;
+	title: string;
+	description?: string;
+	steps: {
+		id: number;
+		title: string;
+		description?: string;
+		questions: {
+			id: number;
+			label: string;
+			type: "boolean" | "multi" | "text" | "budget" | "time" | "static" | "input";
+			options?: string[] | null;
+		}[];
+		related_services?: { id: number; title: string }[];
+		related_subservices?: { id: number; title: string }[];
+	}[];
+}
+
+export interface Step {
+	id: number;
+	title: string;
+	description?: string | null;
+}
+
 export interface TeamMember extends BaseEntity {
 	firstname: string;
 	lastname: string;
@@ -69,17 +95,4 @@ export interface TeamMember extends BaseEntity {
 	email?: string;
 	phone?: string;
 	social_medias?: SocialMedia[];
-}
-
-export interface BuildProject extends BaseEntity {
-	title: string;
-	description: string;
-	steps: Step[];
-	subservices: Subservice[];
-}
-
-export interface Step {
-	id: number;
-	title: string;
-	description?: string | null;
 }

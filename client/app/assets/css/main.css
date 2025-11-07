@@ -43,12 +43,14 @@
 	--color-bg-light: #443c97;
 
 	--color-dark: #2a2c2c;
+	--color-black: #2a2c2c;
 	--color-darker-gray: #4d5151;
 	--color-dark-gray: #6a706f;
 	--color-gray: #d6d8d7;
 	--color-light-gray: #d6d8d7;
 	--color-dark-light: #f4f5f5;
 	--color-light: #f9fafa;
+	--color-white: #f9fafa;
 
 	/* Spacing */
 	--spacing-2xs: 0.25rem;

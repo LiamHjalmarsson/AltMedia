@@ -9,21 +9,129 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 
 		const sanitizedQuery = await this.sanitizeQuery(ctx);
 
-		const { results, pagination } = await strapi.service("api::page.page").getAllPages(sanitizedQuery);
+		const results = await strapi.documents("api::page.page").findMany({
+			fields: ["id", "title", "slug"],
+			filters: sanitizedQuery.filters,
+			sort: sanitizedQuery.sort,
+			pagination: sanitizedQuery.pagination,
+		});
 
 		const sanitizedEntity = await this.sanitizeOutput(results, ctx);
 
-		return this.transformResponse(sanitizedEntity, { pagination });
+		return this.transformResponse(sanitizedEntity);
 	},
 
 	async findOne(ctx) {
-		await this.validateQuery(ctx);
+		const { id: slug } = ctx.params;
 
-		const sanitizedQuery = await this.sanitizeQuery(ctx);
-
-		const { id } = ctx.params;
-
-		const entity = await strapi.service("api::page.page").getPageBySlug(sanitizedQuery, id);
+		const entity = await strapi.documents("api::page.page").findFirst({
+			filters: { slug },
+			fields: ["id", "title", "slug"],
+			populate: {
+				seo: {
+					fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],
+					populate: {
+						meta_image: {
+							fields: ["alternativeText", "width", "url", "provider"],
+						},
+					},
+				},
+				blocks: {
+					on: {
+						"block.full-section": {
+							populate: {
+								fields: ["id", "title", "content"],
+								cover: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								link: {
+									fields: ["label", "url", "variant", "is_external"],
+								},
+								color: {
+									fields: ["type", "hex", "theme"],
+								},
+							},
+						},
+						"block.hero": {
+							fields: ["title", "description", "colored_words", "align_content", "badge"],
+							populate: {
+								background: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								links: {
+									fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
+								},
+							},
+						},
+						"block.info": {
+							populate: {
+								fields: ["id", "align_content", "content", "reverse"],
+								image: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								button: {
+									fields: ["label", "variant", "type", "icon"],
+								},
+							},
+						},
+						"block.list": {
+							populate: {
+								fields: ["id", "show_numbers", "layout"],
+								heading: {
+									fields: ["title", "align_content", "has_link", "description"],
+									populate: {
+										link: {
+											fields: [
+												"label",
+												"url",
+												"variant",
+												"is_external",
+												"icon",
+												"size",
+												"reversed",
+											],
+										},
+									},
+								},
+								background: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								color: {
+									fields: ["type", "hex", "theme"],
+								},
+								items: {
+									fields: ["title", "content"],
+									populate: {
+										image: {
+											fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+										},
+										color: {
+											fields: ["type", "hex", "theme"],
+										},
+									},
+								},
+							},
+						},
+						"sections.introduction": {
+							populate: {
+								fields: ["id", "title", "subtitle", "description"],
+								subservices: {
+									fields: ["title", "content"],
+									populate: {
+										tags: {
+											fields: ["title"],
+										},
+										service: {
+											fields: ["slug"],
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		});
 
 		if (!entity) {
 			return ctx.notFound("Page not found");
@@ -34,4 +142,3 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

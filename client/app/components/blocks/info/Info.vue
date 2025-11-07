@@ -32,8 +32,8 @@ const textAlignClass = computed(() => {
 			<div :class="['grid items-center gap-xl', hasImage ? 'md:grid-cols-2' : 'md:grid-cols-1']">
 				<div v-if="hasImage" :class="block.reverse ? 'md:order-2' : 'md:order-1'">
 					<NuxtImg
-						:src="block.image.url"
-						:alt="block.image.alternativeText || ''"
+						:src="block.image?.url"
+						:alt="block.image?.alternativeText || ''"
 						format="webp"
 						quality="85"
 						placeholder

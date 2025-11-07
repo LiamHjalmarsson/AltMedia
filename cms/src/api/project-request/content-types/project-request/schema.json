@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_requests",
+  "info": {
+    "singularName": "project-request",
+    "pluralName": "project-requests",
+    "displayName": "Project Request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "regex": "^\\\\+?[0-9\\\\s-]{7,}$"
+    },
+    "data": {
+      "type": "json"
+    },
+    "appending": {
+      "type": "enumeration",
+      "default": "new",
+      "enum": [
+        "new",
+        "reviewed",
+        "archived"
+      ]
+    }
+  }
+}

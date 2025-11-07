@@ -35,7 +35,8 @@ function onSubmit(event: Event) {
 							:id="input.name"
 							:name="input.name"
 							:placeholder="input.placeholder"
-							:required="input.required" />
+							:required="input.required"
+							class="border-transparent" />
 					</FormField>
 
 					<div :style="{ gridColumn: '1 / -1' }">

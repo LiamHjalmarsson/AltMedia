@@ -19,7 +19,8 @@
       "target": "api::subservice.subservice"
     },
     "description": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
     }
   },
   "config": {}

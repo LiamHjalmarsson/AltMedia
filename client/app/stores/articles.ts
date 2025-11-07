@@ -44,6 +44,8 @@ export const useArticleStore = defineStore("articles", () => {
 		try {
 			const result: Strapi5ResponseSingle<Article> = await findOne<Article>("articles", slug);
 
+			console.log(result);
+
 			currentArticle.value = result.data;
 
 			return currentArticle.value;

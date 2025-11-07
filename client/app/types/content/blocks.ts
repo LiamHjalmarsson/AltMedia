@@ -36,9 +36,9 @@ export interface ListBlock {
 export interface InfoBlock {
 	__component: "block.info";
 	id: number;
-	image: Image;
+	image?: Image;
 	align_content: AlignContent;
-	button: Button;
+	button?: Button;
 	content: BlockNode[];
 	reverse: boolean;
 }

@@ -1,15 +1,12 @@
 import { ref, onMounted } from "vue";
 import gsap from "gsap";
 
-export function useHoverAnimation() {
+export function useHoverAnimation(isReversed = false) {
 	const element = ref<HTMLElement | null>(null);
-
 	const backgroundColor = ref<HTMLElement | null>(null);
 
 	const onHover = (toRight = true) => {
-		if (!backgroundColor.value) {
-			return;
-		}
+		if (!backgroundColor.value) return;
 
 		gsap.killTweensOf(backgroundColor.value);
 
@@ -35,9 +32,7 @@ export function useHoverAnimation() {
 	};
 
 	const onClick = () => {
-		if (!backgroundColor.value) {
-			return;
-		}
+		if (!backgroundColor.value) return;
 
 		gsap.killTweensOf(backgroundColor.value);
 
@@ -52,13 +47,17 @@ export function useHoverAnimation() {
 	};
 
 	function initAnimation() {
-		if (!element.value || !backgroundColor.value) {
-			return;
+		if (!element.value || !backgroundColor.value) return;
+
+		if (!isReversed) {
+			element.value.addEventListener("mouseenter", () => onHover(true));
+
+			element.value.addEventListener("mouseleave", () => onHover(false));
+		} else {
+			element.value.addEventListener("mouseenter", () => onHover(false));
+
+			element.value.addEventListener("mouseleave", () => onHover(true));
 		}
-
-		element.value.addEventListener("mouseenter", () => onHover(true));
-
-		element.value.addEventListener("mouseleave", () => onHover(false));
 
 		element.value.addEventListener("click", onClick);
 	}

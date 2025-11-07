@@ -2,9 +2,9 @@
 import type { Variant } from "~/types/enums";
 import type { Button } from "~/types/shared";
 
-defineProps<Button>();
+const props = defineProps<Button>();
 
-const { element: button, backgroundColor } = useHoverAnimation();
+const { element: button, backgroundColor } = useHoverAnimation(props.reversed ?? false);
 
 const variantClass: Record<Variant, string> = {
 	primary: "bg-gradient-to-br from-primary to-primary-hover border-primary",
@@ -18,17 +18,24 @@ const variantClass: Record<Variant, string> = {
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative font-bold py-xs px-2xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition">
-		<span class="relative flex items-center max-lg:justify-center z-10 max-lg:text-light">
-			{{ label }}
-
-			<Icon v-if="icon" :name="icon" class="ml-md" />
+		class="relative font-bold py-xs px-2xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition flex items-center justify-center gap-sm">
+		<span class="relative flex items-center z-10">
+			<Icon
+				v-if="icon"
+				:name="icon"
+				class="transition-all duration-200"
+				:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
+			<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>
 		</span>
 
 		<span
 			ref="backgroundColor"
-			class="absolute top-0 left-0 h-10 w-10 border max-lg:hidden rounded-full"
-			:class="[variantClass[variant]]" />
+			class="absolute top-0 h-10 w-10 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
+			:class="variantClass[variant]"
+			:style="{
+				left: reversed ? 'calc(100% - 2.5rem)' : '0',
+				right: 'auto',
+			}" />
 
 		<span
 			class="absolute top-0 left-0 h-11 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />

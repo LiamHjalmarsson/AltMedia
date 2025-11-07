@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "build_project_pages",
+  "info": {
+    "singularName": "build-project-page",
+    "pluralName": "build-project-pages",
+    "displayName": "BuildProject Page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "steps": {
+      "type": "component",
+      "component": "form.step",
+      "repeatable": true
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
+      "repeatable": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    }
+  }
+}

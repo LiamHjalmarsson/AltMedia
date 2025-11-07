@@ -24,16 +24,23 @@ const variantClass: Record<Variant, string> = {
 		<div
 			ref="linkWrapper"
 			class="relative py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<div class="relative font-bold z-10 flex items-center max-lg:justify-center">
-				{{ label }}
-
-				<Icon v-if="icon" :name="icon" size="20" class="ml-md" />
-			</div>
+			<span class="relative flex items-center z-10">
+				<Icon
+					v-if="icon"
+					:name="icon"
+					class="transition-all duration-200"
+					:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
+				<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>
+			</span>
 
 			<span
 				ref="backgroundColor"
-				:class="[variantClass[variant]]"
-				class="absolute top-0 left-0 h-10 w-10 max-lg:hidden rounded-full" />
+				class="absolute top-0 h-10 w-10 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
+				:class="variantClass[variant]"
+				:style="{
+					left: reversed ? 'calc(100% - 2.5rem)' : '0',
+					right: 'auto',
+				}" />
 
 			<span
 				class="absolute top-0 left-0 h-11 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />

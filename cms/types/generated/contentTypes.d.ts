@@ -408,6 +408,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text &
+      Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -450,7 +451,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+    services: Schema.Attribute.Relation<'manyToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -458,6 +459,9 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
         i18n: {
           localized: false;
         };
+      }> &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 3;
       }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -489,6 +493,39 @@ export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiBuildProjectPageBuildProjectPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'build_project_pages';
+  info: {
+    displayName: 'BuildProject Page';
+    pluralName: 'build-project-pages';
+    singularName: 'build-project-page';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::build-project-page.build-project-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'seo.seo', false>;
+    slug: Schema.Attribute.UID<'title'>;
+    steps: Schema.Attribute.Component<'form.step', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -636,6 +673,40 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProjectRequestProjectRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'project_requests';
+  info: {
+    displayName: 'Project Request';
+    pluralName: 'project-requests';
+    singularName: 'project-request';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    appending: Schema.Attribute.Enumeration<['new', 'reviewed', 'archived']> &
+      Schema.Attribute.DefaultTo<'new'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    data: Schema.Attribute.JSON;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::project-request.project-request'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    phone: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
@@ -719,6 +790,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    articles: Schema.Attribute.Relation<'manyToMany', 'api::article.article'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -774,41 +846,6 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
     title: Schema.Attribute.String;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiStartAProjectStartAProject extends Struct.SingleTypeSchema {
-  collectionName: 'start_a_projects';
-  info: {
-    displayName: 'Start a project Page';
-    pluralName: 'start-a-projects';
-    singularName: 'start-a-project';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.String & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::start-a-project.start-a-project'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    steps: Schema.Attribute.Component<'form.step', true> &
-      Schema.Attribute.Required;
-    subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
-    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1424,15 +1461,16 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
       'api::articles-page.articles-page': ApiArticlesPageArticlesPage;
+      'api::build-project-page.build-project-page': ApiBuildProjectPageBuildProjectPage;
       'api::contact.contact': ApiContactContact;
       'api::global-config.global-config': ApiGlobalConfigGlobalConfig;
       'api::home-page.home-page': ApiHomePageHomePage;
       'api::page.page': ApiPagePage;
+      'api::project-request.project-request': ApiProjectRequestProjectRequest;
       'api::project.project': ApiProjectProject;
       'api::projects-page.projects-page': ApiProjectsPageProjectsPage;
       'api::service.service': ApiServiceService;
       'api::services-page.services-page': ApiServicesPageServicesPage;
-      'api::start-a-project.start-a-project': ApiStartAProjectStartAProject;
       'api::subservice.subservice': ApiSubserviceSubservice;
       'api::tag.tag': ApiTagTag;
       'api::team.team': ApiTeamTeam;

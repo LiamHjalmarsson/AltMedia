@@ -17,7 +17,7 @@ watch(
 </script>
 
 <template>
-	<!-- <Hero v-if="currentArticle?.hero" :block="currentArticle.hero" /> -->
+	<Hero v-if="currentArticle?.hero" :block="currentArticle.hero" />
 
 	<Introduction v-if="currentArticle?.introduction" :block="currentArticle.introduction" />
 

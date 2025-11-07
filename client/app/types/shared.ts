@@ -48,6 +48,7 @@ export interface Link {
 	is_external?: boolean;
 	size?: Size;
 	icon?: string;
+	reversed?: boolean;
 }
 
 export interface Button {
@@ -57,6 +58,7 @@ export interface Button {
 	type: ButtonType;
 	size?: Size;
 	icon?: string;
+	reversed?: boolean;
 }
 
 export interface Heading {

@@ -41,6 +41,10 @@
     },
     "icon": {
       "type": "string"
+    },
+    "reversed": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

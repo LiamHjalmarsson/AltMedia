@@ -25,6 +25,18 @@ export default defineNuxtConfig({
 		},
 	},
 
+	runtimeConfig: {
+		strapi: {
+			url: process.env.STRAPI_URL || "http://localhost:1337",
+			token: process.env.STRAPI_TOKEN || undefined,
+		},
+		public: {
+			strapi: {
+				url: "http://localhost:1337",
+			},
+		},
+	},
+
 	// nitro: {
 	// 	compressPublicAssets: true,
 	// 	routeRules: {

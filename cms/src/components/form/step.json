@@ -10,6 +10,21 @@
     },
     "description": {
       "type": "string"
+    },
+    "questions": {
+      "type": "component",
+      "component": "form.questions",
+      "repeatable": true
+    },
+    "related_subservices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subservice.subservice"
+    },
+    "related_services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service"
     }
   },
   "config": {}

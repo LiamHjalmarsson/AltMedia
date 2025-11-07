@@ -203,6 +203,20 @@ export interface FormInput extends Struct.ComponentSchema {
   };
 }
 
+export interface FormQuestions extends Struct.ComponentSchema {
+  collectionName: 'components_form_questions';
+  info: {
+    displayName: 'questions';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    options: Schema.Attribute.JSON;
+    type: Schema.Attribute.Enumeration<
+      ['boolean', 'multi', 'text', 'budget', 'time', 'static', 'input']
+    >;
+  };
+}
+
 export interface FormStep extends Struct.ComponentSchema {
   collectionName: 'components_form_steps';
   info: {
@@ -210,6 +224,15 @@ export interface FormStep extends Struct.ComponentSchema {
   };
   attributes: {
     description: Schema.Attribute.String;
+    questions: Schema.Attribute.Component<'form.questions', true>;
+    related_services: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service.service'
+    >;
+    related_subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
     title: Schema.Attribute.String;
   };
 }
@@ -290,7 +313,7 @@ export interface SectionsIntroduction extends Struct.ComponentSchema {
     displayName: 'Introduction';
   };
   attributes: {
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
     subservices: Schema.Attribute.Relation<
       'oneToMany',
       'api::subservice.subservice'
@@ -339,6 +362,7 @@ export interface UiButton extends Struct.ComponentSchema {
   attributes: {
     icon: Schema.Attribute.String;
     label: Schema.Attribute.String & Schema.Attribute.Required;
+    reversed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
       Schema.Attribute.DefaultTo<'lg'>;
     type: Schema.Attribute.Enumeration<['button', 'submit', 'reset']> &
@@ -397,10 +421,11 @@ export interface UiLink extends Struct.ComponentSchema {
   attributes: {
     icon: Schema.Attribute.String;
     is_external: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    label: Schema.Attribute.String;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    reversed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     size: Schema.Attribute.Enumeration<['xs', 'sm', 'md', 'lg', 'xl']> &
       Schema.Attribute.DefaultTo<'lg'>;
-    url: Schema.Attribute.String;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
     variant: Schema.Attribute.Enumeration<
       ['primary', 'secondary', 'outline', 'ghost']
     > &
@@ -424,6 +449,7 @@ declare module '@strapi/strapi' {
       'block.list': BlockList;
       'form.form': FormForm;
       'form.input': FormInput;
+      'form.questions': FormQuestions;
       'form.step': FormStep;
       'global.contact': GlobalContact;
       'global.footer': GlobalFooter;
