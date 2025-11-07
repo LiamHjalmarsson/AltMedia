@@ -1,62 +1,82 @@
-import type { BaseEntity, Button, Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
+import type { Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, CollectionBlocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
 import type { AlignContent } from "../enums";
 
-export interface ContentItem extends BaseEntity {
+export interface Article {
+	id: number;
 	title: string;
 	slug: string;
+	description?: string;
+	published_date: Date;
+	reading_time_min?: number | null;
+	cover: Image;
+	services?: RelatedService[];
 	hero?: Hero;
 	introduction?: Introduction;
 	blocks?: CollectionBlocks[];
 }
 
-export interface Article extends ContentItem {
-	published_date: Date;
-	reading_time_min?: number | null;
-	description?: string;
-	cover: Image;
-	services?: RelatedService[];
-}
+export type RelatedService = Pick<Service, "id" | "title" | "slug">;
 
-export type RelatedService = Pick<Service, "id" | "documentId" | "title" | "slug">;
-
-export interface Project extends ContentItem {
-	cover: Image;
-	services: RelatedService[];
-	description: string;
+export interface Project {
+	id: string;
+	title: string;
+	slug: string;
 	client?: string;
 	date?: Date;
+	cover: Image;
+	services: RelatedService[];
+	hero?: Hero;
+	introduction?: Introduction;
+	blocks?: CollectionBlocks[];
 }
 
-export interface Service extends BaseEntity {
+export interface Service {
+	id: number;
 	title: string;
 	slug: string;
 	description: string;
 	icon: Icon;
 	image: Image;
 	subservices: Subservice[];
+	// articles?: Article[];
 }
 
-export interface Subservice extends ContentItem {
-	content: BlockNode[];
-	tags?: Tag[];
-	service?: Service;
+export interface Subservice {
+	id: string;
+	title: string;
+	slug: string;
 	price_once?: number | null;
 	price_month?: number | null;
+	content: BlockNode[];
+	service?: Service;
+	tags?: Tag[];
+	hero?: Hero;
+	introduction?: Introduction;
+	blocks?: CollectionBlocks[];
 }
 
-export interface Tag extends BaseEntity {
+export interface Tag {
+	id: number;
 	title: string;
 }
 
-export interface Page extends BaseEntity {
+export interface Page {
+	id: number;
 	title: string;
-	slug?: string;
-	description?: string;
-	align_content?: AlignContent;
+	slug: string;
 	blocks?: Blocks[];
+	seo?: Seo | null;
+}
+
+export interface PageContent {
+	id: number;
+	title: string;
+	description?: string;
+	slug?: string;
+	align_content?: AlignContent;
 	seo?: Seo | null;
 }
 
@@ -86,7 +106,8 @@ export interface Step {
 	description?: string | null;
 }
 
-export interface TeamMember extends BaseEntity {
+export interface TeamMember {
+	id: number;
 	firstname: string;
 	lastname: string;
 	roles: string[];

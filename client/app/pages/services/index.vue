@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Page } from "~/types/content/collections";
+import type { PageContent } from "~/types/content/collections";
 
 const serviceStore = useServiceStore();
 
@@ -10,7 +10,7 @@ const { findOne } = useStrapi();
 await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
 
 const { data: page } = await useAsyncData("servicesPage", async () => {
-	const res = await findOne<Page>("services-page");
+	const res = await findOne<PageContent>("services-page");
 
 	return res.data;
 });

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Page } from "~/types/content/collections";
+import type { PageContent } from "~/types/content/collections";
 
 const projectStore = useProjectStore();
 
@@ -10,7 +10,7 @@ const { findOne } = useStrapi();
 await useAsyncData("projects", () => projectStore.fetchProjects(), { server: true });
 
 const { data: page } = await useAsyncData("projectsPage", async () => {
-	const res = await findOne<Page>("projects-page");
+	const res = await findOne<PageContent>("projects-page");
 
 	return res.data;
 });
@@ -61,10 +61,6 @@ useSeoMeta({
 								class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
 								{{ project.title }}
 							</h3>
-
-							<p v-if="project.description" class="text-base text-dark/80 max-w-[600px]">
-								{{ project.description }}
-							</p>
 
 							<div v-if="project.services?.length" class="flex flex-wrap gap-xs text-sm text-dark-gray">
 								<span

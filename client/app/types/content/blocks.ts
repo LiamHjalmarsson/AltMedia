@@ -1,18 +1,8 @@
-import type { BaseEntity, Button, Heading, Icon } from "../shared";
+import type { Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Color, Image, Link } from "../shared";
 import type { AlignContent, Layout } from "../enums";
 import type { Article, Project, Service, Subservice } from "./collections";
-
-export interface FeaturedBlock {
-	__component: "block.featured";
-	id: number;
-	heading: Heading;
-	features: "tjänster" | "projekt" | "artiklar";
-	services?: Service[];
-	projects?: Project[];
-	articles?: Article[];
-}
 
 export interface ListItem {
 	id: number;
@@ -27,8 +17,8 @@ export interface ListBlock {
 	id: number;
 	heading: Heading;
 	show_numbers: boolean;
-	background?: Image;
 	layout: Layout;
+	background?: Image;
 	color?: Color;
 	items: ListItem[];
 }
@@ -38,9 +28,19 @@ export interface InfoBlock {
 	id: number;
 	image?: Image;
 	align_content: AlignContent;
-	button?: Button;
-	content: BlockNode[];
 	reverse: boolean;
+	content: BlockNode[];
+	button?: Button;
+}
+
+export interface FullSectionBlock {
+	__component: "block.full-section";
+	id: number;
+	title: string;
+	content: BlockNode[];
+	cover?: Image | null;
+	link?: Link | null;
+	color?: Color | null;
 }
 
 export interface Hero {
@@ -58,35 +58,32 @@ export interface HeroBlock extends Hero {
 	__component: "block.hero";
 }
 
-export interface FullSectionBlock {
-	__component: "block.full-section";
+export interface FaqItem {
 	id: number;
-	title: string;
-	content: BlockNode[];
-	cover?: Image | null;
-	link?: Link | null;
-	color?: Color | null;
+	question: string;
+	answer: BlockNode[];
 }
 
-export type FeaturedService = Pick<Service, "id" | "documentId" | "title" | "slug" | "description" | "icon">;
-
-export interface FeaturedServicesBlock {
-	__component: "block.featured-services";
+export interface FaqBlock {
+	__component: "block.faq";
 	id: number;
 	heading: Heading;
-	services: FeaturedService[];
+	items: FaqItem[];
+	image: Image;
 }
 
-export type FeaturedProject = Pick<Project, "id" | "documentId" | "title" | "slug" | "cover">;
-
-export interface FeaturedProjectsBlock {
-	__component: "block.featured-projects";
+export interface FeaturedBlock {
+	__component: "block.featured";
 	id: number;
 	heading: Heading;
-	projects: FeaturedProject[];
+	features: "tjänster" | "projekt" | "artiklar";
+	services?: Service[];
+	projects?: Project[];
+	articles?: Article[];
 }
 
-export interface BuildItem extends BaseEntity {
+export interface BuildItem {
+	id: number;
 	title: string;
 	description?: string;
 	price: number;
@@ -102,9 +99,27 @@ export interface ExamplesBuildBlock {
 	items: BuildItem[];
 }
 
+export type FeaturedService = Pick<Service, "id" | "title" | "slug" | "description" | "icon">;
+
+export interface FeaturedServicesBlock {
+	__component: "block.featured-services";
+	id: number;
+	heading: Heading;
+	services: FeaturedService[];
+}
+
+export type FeaturedProject = Pick<Project, "id" | "title" | "slug" | "cover">;
+
+export interface FeaturedProjectsBlock {
+	__component: "block.featured-projects";
+	id: number;
+	heading: Heading;
+	projects: FeaturedProject[];
+}
+
 export type FeaturedArticle = Pick<
 	Article,
-	"id" | "documentId" | "title" | "slug" | "published_date" | "reading_time_min" | "description" | "cover"
+	"id" | "title" | "slug" | "published_date" | "reading_time_min" | "description" | "cover"
 >;
 
 export interface FeaturedArticlesBlock {
@@ -112,20 +127,6 @@ export interface FeaturedArticlesBlock {
 	id: number;
 	heading: Heading;
 	articles: FeaturedArticle[];
-}
-
-export interface FaqItem {
-	id: number;
-	question: string;
-	answer: BlockNode[];
-}
-
-export interface FaqBlock {
-	__component: "block.faq";
-	id: number;
-	heading: Heading;
-	items: FaqItem[];
-	image: Image;
 }
 
 export interface Cta {

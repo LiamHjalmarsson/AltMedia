@@ -1,11 +1,5 @@
-import type { Block } from "typescript";
 import type { Subservice } from "./content/collections";
 import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Theme, Variant } from "./enums";
-
-export interface BaseEntity {
-	id: number;
-	documentId: string;
-}
 
 export interface ImageFormat {
 	url: string;
@@ -16,7 +10,8 @@ export interface ImageFormat {
 	path?: string | null;
 }
 
-export interface Image extends BaseEntity {
+export interface Image {
+	id: number;
 	formats?: {
 		thumbnail?: ImageFormat;
 		small?: ImageFormat;
@@ -70,13 +65,6 @@ export interface Heading {
 	link?: Link | null;
 }
 
-export interface Card {
-	id: number;
-	title: string;
-	content: Block[];
-	icon: Icon;
-}
-
 export interface Color {
 	type: Variant;
 	hex?: string;
@@ -86,12 +74,11 @@ export interface Color {
 export interface Seo {
 	id: number;
 	meta_title: string;
-	meta_description: string;
+	meta_description?: string;
 	meta_canonical_url?: string | null;
-	prevent_index: boolean;
-	meta_image: {
+	prevent_index?: boolean;
+	meta_image?: {
 		id: number;
-		documentId: string;
 		url: string;
 	};
 }
@@ -112,8 +99,8 @@ export interface Input {
 	required: boolean;
 	type: InputType;
 	input_type?: string;
-	options?: {};
 	rows?: number;
+	options?: {};
 	column_span: ColumnSpan;
 }
 
@@ -121,7 +108,15 @@ export interface Form {
 	id: number;
 	title: string;
 	description?: string | null;
-	inputs: Input[];
 	columns: number;
+	inputs: Input[];
 	button: Button;
+}
+
+export interface MetaPage {
+	id: string;
+	title: string;
+	description?: string;
+	align_content?: "left" | "center" | "right";
+	seo?: Seo;
 }
