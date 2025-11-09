@@ -32,6 +32,7 @@ onMounted(async () => {
 
 	steps.value = rawSteps.map((step: any) => {
 		const s: Step = {
+			id: step.id,
 			title: step.title,
 			description: step.description,
 			questions: step.questions || [],
