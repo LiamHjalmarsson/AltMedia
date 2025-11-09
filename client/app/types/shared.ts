@@ -83,14 +83,6 @@ export interface Seo {
 	};
 }
 
-export interface Introduction {
-	id: number;
-	title: string;
-	subtitle: string;
-	description: string;
-	subservices: Subservice[];
-}
-
 export interface Input {
 	id: number;
 	label: string;
@@ -113,10 +105,28 @@ export interface Form {
 	button: Button;
 }
 
+export interface Introduction {
+	id: number;
+	title: string;
+	subtitle: string;
+	description: string;
+	subservices: Subservice[];
+}
+
 export interface MetaPage {
 	id: string;
 	title: string;
 	description?: string;
-	align_content?: "left" | "center" | "right";
+	slug?: string;
+	align_content?: AlignContent;
 	seo?: Seo;
+}
+
+export interface PageContent {
+	id: number;
+	title: string;
+	description?: string;
+	slug?: string;
+	align_content?: AlignContent;
+	seo?: Seo | null;
 }

@@ -99,36 +99,6 @@ export interface ExamplesBuildBlock {
 	items: BuildItem[];
 }
 
-export type FeaturedService = Pick<Service, "id" | "title" | "slug" | "description" | "icon">;
-
-export interface FeaturedServicesBlock {
-	__component: "block.featured-services";
-	id: number;
-	heading: Heading;
-	services: FeaturedService[];
-}
-
-export type FeaturedProject = Pick<Project, "id" | "title" | "slug" | "cover">;
-
-export interface FeaturedProjectsBlock {
-	__component: "block.featured-projects";
-	id: number;
-	heading: Heading;
-	projects: FeaturedProject[];
-}
-
-export type FeaturedArticle = Pick<
-	Article,
-	"id" | "title" | "slug" | "published_date" | "reading_time_min" | "description" | "cover"
->;
-
-export interface FeaturedArticlesBlock {
-	__component: "block.featured-articles";
-	id: number;
-	heading: Heading;
-	articles: FeaturedArticle[];
-}
-
 export interface Cta {
 	id: number;
 	title: string;

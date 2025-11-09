@@ -71,41 +71,6 @@ export interface Page {
 	seo?: Seo | null;
 }
 
-export interface PageContent {
-	id: number;
-	title: string;
-	description?: string;
-	slug?: string;
-	align_content?: AlignContent;
-	seo?: Seo | null;
-}
-
-export interface PageBuild {
-	id: number;
-	documentId: string;
-	title: string;
-	description?: string;
-	steps: {
-		id: number;
-		title: string;
-		description?: string;
-		questions: {
-			id: number;
-			label: string;
-			type: "boolean" | "multi" | "text" | "budget" | "time" | "static" | "input";
-			options?: string[] | null;
-		}[];
-		related_services?: { id: number; title: string }[];
-		related_subservices?: { id: number; title: string }[];
-	}[];
-}
-
-export interface Step {
-	id: number;
-	title: string;
-	description?: string | null;
-}
-
 export interface TeamMember {
 	id: number;
 	firstname: string;

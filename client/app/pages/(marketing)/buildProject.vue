@@ -1,21 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, nextTick, onMounted } from "vue";
 import gsap from "gsap";
-import type { PageBuild } from "~/types/content/collections";
-
-interface Question {
-	label: string;
-	type: "boolean" | "multi" | "text" | "budget" | "time" | "static" | "input";
-	options?: string[];
-}
-
-interface Step {
-	title: string;
-	description?: string | null;
-	questions: Question[];
-	related_services?: { title: string }[];
-	related_subservices?: { title: string }[];
-}
+import type { BuildProjectPage, Step } from "~/types";
 
 const { findOne, create } = useStrapi();
 
@@ -38,8 +24,7 @@ const filteredSummary = computed(() => {
 });
 
 onMounted(async () => {
-	// 🔹 Hämta Build Project Page från Strapi
-	const { data } = await findOne<PageBuild>("build-project-page");
+	const { data } = await findOne<BuildProjectPage>("build-project-page");
 
 	if (!data) return;
 
@@ -55,14 +40,12 @@ onMounted(async () => {
 		};
 
 		s.questions.forEach((q) => {
-			// ✅ Multi och Static får relaterade services/subservices
 			if (q.type === "multi" || q.type === "static") {
 				const services = s.related_services?.map((srv) => srv.title) || [];
 				const subs = s.related_subservices?.map((sub) => sub.title) || [];
 				q.options = [...services, ...subs];
 			}
 
-			// fallback om inget finns
 			if (!q.options) q.options = [];
 		});
 
@@ -70,7 +53,6 @@ onMounted(async () => {
 	});
 });
 
-// 🔹 GSAP-animationer
 async function animateChange(dir: "next" | "prev") {
 	const el = containerRef.value;
 	if (!el) return;
@@ -92,7 +74,6 @@ async function animateChange(dir: "next" | "prev") {
 	);
 }
 
-// 🔹 Stegkontroller
 async function nextStep() {
 	if (currentStep.value < totalSteps.value) {
 		await animateChange("next");
@@ -107,7 +88,6 @@ async function prevStep() {
 	}
 }
 
-// 🔹 Formulärhantering
 async function submit() {
 	try {
 		const payload = {
@@ -129,9 +109,7 @@ async function submit() {
 <template>
 	<section class="py-5xl relative">
 		<div class="w-full flex gap-3xl max-w-[1300px] px-md md:px-lg lg:px-2xl py-2xl">
-			<!-- FORM -->
 			<div class="flex-1">
-				<!-- Progress -->
 				<div class="relative mb-xl">
 					<div class="absolute top-1/2 left-0 w-full h-[4px] bg-dark/20 -translate-y-1/2 rounded-full" />
 					<div
@@ -160,7 +138,6 @@ async function submit() {
 					</div>
 				</div>
 
-				<!-- Current Step -->
 				<h2 class="text-heading-xl font-bold text-black mb-xs">
 					{{ steps[currentStep - 1]?.title }}
 				</h2>
@@ -169,7 +146,6 @@ async function submit() {
 				</p>
 
 				<div ref="containerRef" class="space-y-xl">
-					<!-- LAST STEP -->
 					<div v-if="isLastStep" class="space-y-xl">
 						<FormField label="Namn"><Input v-model="formData['Namn']" placeholder="Ditt namn" /></FormField>
 						<FormField label="Telefonnummer"
@@ -180,7 +156,6 @@ async function submit() {
 						/></FormField>
 					</div>
 
-					<!-- OTHER STEPS -->
 					<form v-else class="space-y-xl min-h-[250px]">
 						<div
 							v-for="question in steps[currentStep - 1]?.questions"
@@ -188,7 +163,6 @@ async function submit() {
 							class="space-y-md">
 							<label class="block font-medium text-black/80 text-lg">{{ question.label }}</label>
 
-							<!-- Boolean -->
 							<div v-if="question.type === 'boolean'" class="flex gap-md">
 								<div
 									v-for="option in ['Ja', 'Nej']"
@@ -204,7 +178,6 @@ async function submit() {
 								</div>
 							</div>
 
-							<!-- Multi -->
 							<div v-else-if="question.type === 'multi'" class="flex flex-wrap gap-lg">
 								<div
 									v-for="option in question.options"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PageContent } from "~/types/content/collections";
+import type { PageContent } from "~/types";
 
 const serviceStore = useServiceStore();
 
