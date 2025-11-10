@@ -1,18 +1,21 @@
 <script setup lang="ts">
 import type { Heading } from "~/types/shared";
 
-const { align_content } = defineProps<Heading>();
+const props = withDefaults(defineProps<Heading>(), {
+	align_content: "left",
+});
 
 const alignClass = computed(() => {
-	if (align_content === "center") {
-		return "text-center";
-	}
+	const align = props.align_content || "left";
 
-	if (align_content === "right") {
-		return "text-right";
+	switch (align) {
+		case "center":
+			return "text-center";
+		case "right":
+			return "text-right";
+		default:
+			return "text-left";
 	}
-
-	return "text-left";
 });
 </script>
 

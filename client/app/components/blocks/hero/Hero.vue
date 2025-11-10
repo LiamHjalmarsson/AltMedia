@@ -30,8 +30,7 @@ const alignClass = computed(() => {
 			width="1800"
 			height="1000"
 			quality="65"
-			decoding="async"
-			class="absolute inset-0 w-full h-full object-cover opacity-15" />
+			class="absolute inset-0 w-full h-full object-cover opacity-45" />
 
 		<div class="pt-xl relative z-10">
 			<div class="absolute inset-0 pointer-events-none">

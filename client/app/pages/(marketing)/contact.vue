@@ -20,9 +20,7 @@ function handleSubmit(data: Record<string, any>) {}
 			<div class="grid grid-cols-1 lg:grid-cols-5 gap-2xl">
 				<div class="flex flex-col shadow-lg col-span-3">
 					<div class="p-xl">
-						<Heading
-							:title="contactPage?.data?.form?.title || 'Skicka ett meddelande'"
-							align_content="left" />
+						<Heading :title="contactPage?.data?.form?.title || 'Skicka ett meddelande'" />
 
 						<p v-if="contactPage?.data?.form?.description" class="mt-sm text-dark-gray">
 							{{ contactPage?.data.form.description }}

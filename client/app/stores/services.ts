@@ -1,4 +1,3 @@
-import { defineStore } from "pinia";
 import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
 import type { Service, Subservice } from "~/types/";
 

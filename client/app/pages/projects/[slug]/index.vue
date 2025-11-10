@@ -5,15 +5,12 @@ const projectStore = useProjectStore();
 
 const { currentProject } = storeToRefs(projectStore);
 
+const slug = computed(() => route.params.slug as string);
+
 await useAsyncData(
-	() => `project-${route.params.slug}`,
-	async () => {
-		if (typeof route.params.slug === "string") {
-			return await projectStore.fetchProject(route.params.slug);
-		}
-		return null;
-	},
-	{ watch: [() => route.params.slug], server: true }
+	() => `project:${slug.value}`,
+	() => projectStore.fetchProject(slug.value),
+	{ server: true, lazy: true, watch: [slug] }
 );
 </script>
 
