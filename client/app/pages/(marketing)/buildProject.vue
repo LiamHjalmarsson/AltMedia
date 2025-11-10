@@ -10,6 +10,10 @@ await buildStore.fetchBuildProjectPage();
 
 const containerRef = ref<HTMLElement | null>(null);
 
+definePageMeta({
+	layout: "minimal",
+});
+
 async function animateTransition(direction: "next" | "prev", changeStep: () => void) {
 	const element = containerRef.value;
 

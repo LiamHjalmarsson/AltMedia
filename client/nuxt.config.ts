@@ -38,6 +38,7 @@ export default defineNuxtConfig({
 	fonts: {
 		provider: "google",
 		defaults: {
+			subsets: ["latin"],
 			weights: [400, 600],
 			styles: ["normal"],
 		},

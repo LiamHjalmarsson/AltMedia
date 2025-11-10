@@ -7,7 +7,7 @@ const logoAltText = computed(() => props.logo?.alternativeText || "Alt Media log
 </script>
 
 <template>
-	<NuxtLink to="/" aria-label="Alt Media startsida" class="flex items-center">
+	<NuxtLink to="/" aria-label="Alt Media startsida" class="flex items-center w-40 h-[30px]">
 		<NuxtImg
 			:src="logo?.url"
 			:alt="logoAltText"
