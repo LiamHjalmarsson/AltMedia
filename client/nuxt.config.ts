@@ -24,7 +24,7 @@ export default defineNuxtConfig({
 			link: [
 				{
 					rel: "preconnect",
-					href: process.env.NUXT_PUBLIC_STRAPI_URL,
+					href: "https://stable-benefit-bde0905312.strapiapp.com",
 					crossorigin: "",
 				},
 			],
@@ -55,9 +55,6 @@ export default defineNuxtConfig({
 		plugins: [tailwindcss()],
 		build: {
 			cssCodeSplit: true,
-			rollupOptions: {
-				output: { manualChunks: undefined },
-			},
 		},
 		esbuild: {
 			drop: ["console", "debugger"],
@@ -81,14 +78,14 @@ export default defineNuxtConfig({
 		},
 	],
 
-	routeRules: {
-		"/**": {
-			prerender: true,
-			headers: {
-				"Cache-Control": "public, max-age=31536000, immutable",
-			},
-		},
-	},
+	// routeRules: {
+	// 	"/**": {
+	// 		prerender: true,
+	// 		headers: {
+	// 			"Cache-Control": "public, max-age=31536000, immutable",
+	// 		},
+	// 	},
+	// },
 
 	router: {
 		options: {},
