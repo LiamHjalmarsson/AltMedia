@@ -33,6 +33,12 @@ const textColor = computed(() => {
 		<NuxtImg
 			v-if="block.background?.url"
 			:src="block.background.url"
+			sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 800px"
+			format="webp,avif"
+			quality="70"
+			width="800"
+			height="auto"
+			loading="lazy"
 			class="absolute inset-0 w-full h-full object-cover opacity-10"
 			aria-hidden="true" />
 

@@ -21,25 +21,34 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			link: [{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" }],
+			link: [
+				{
+					rel: "preconnect",
+					href: process.env.NUXT_PUBLIC_STRAPI_URL,
+					crossorigin: "",
+				},
+			],
 		},
 	},
 
-	// nitro: {
-	// 	compressPublicAssets: true,
-	// 	routeRules: {
-	// 		"/**": {
-	// 			headers: {
-	// 				"Cache-Control": "public, max-age=36000, immutable",
-	// 					"default-src 'self'; img-src * data: blob:; media-src * data: blob:; font-src * data: blob:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
-	// 				"Cross-Origin-Opener-Policy": "same-origin",
-	// 				"X-Frame-Options": "DENY",
-	// 				"Referrer-Policy": "strict-origin-when-cross-origin",
-	// 				"Permissions-Policy": "camera=(), microphone=(), geolocation=()",
-	// 			},
-	// 		},
-	// 	},
-	// },
+	runtimeConfig: {
+		public: {
+			strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL,
+		},
+	},
+
+	nitro: {
+		compressPublicAssets: true,
+		routeRules: {
+			"/**": {
+				prerender: true,
+				headers: {
+					"Cache-Control": "public, max-age=31536000, immutable",
+					"Cross-Origin-Opener-Policy": "same-origin",
+				},
+			},
+		},
+	},
 
 	fonts: {
 		provider: "google",
@@ -63,10 +72,24 @@ export default defineNuxtConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
+		build: {
+			cssCodeSplit: true,
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						vendor: ["vue", "pinia", "vue-router"],
+					},
+				},
+			},
+		},
+		esbuild: {
+			drop: ["console", "debugger"],
+		},
 	},
 
 	typescript: {
 		typeCheck: true,
+		strict: true,
 	},
 
 	components: [

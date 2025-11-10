@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Label from "~/components/ui/form/Label.vue";
-import type { Hero } from "~/types/content/blocks";
+import type { Hero } from "~/types";
 
 const { content } = defineProps<{ hasForm: boolean; content: Hero }>();
 
