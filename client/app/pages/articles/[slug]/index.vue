@@ -5,15 +5,12 @@ const articleStore = useArticleStore();
 
 const { currentArticle } = storeToRefs(articleStore);
 
+const slug = computed(() => route.params.slug as string);
+
 await useAsyncData(
-	() => `article-${route.params.slug}`,
-	async () => {
-		if (typeof route.params.slug === "string") {
-			return await articleStore.fetchArticleBySlug(route.params.slug);
-		}
-		return null;
-	},
-	{ watch: [() => route.params.slug], server: true }
+	() => `article:${slug.value}`,
+	() => articleStore.fetchArticleBySlug(slug.value),
+	{ server: true, lazy: true, watch: [slug] }
 );
 </script>
 
