@@ -4,13 +4,13 @@ import type { Blocks } from "~/types/content/blocks";
 defineProps<{ blocks: Blocks[] }>();
 
 const map: Record<string, any> = {
-	"block.hero": resolveComponent("Hero"),
-	"block.list": resolveComponent("List"),
-	"block.full-section": resolveComponent("FullSection"),
-	"block.faq": resolveComponent("Faq"),
-	"block.info": resolveComponent("Info"),
-	"block.featured": resolveComponent("Featured"),
-	"block.examples-build": resolveComponent("ExamplesBuild"),
+	"block.hero": defineAsyncComponent(() => import("~/components/blocks/hero/Hero.vue")),
+	"block.list": defineAsyncComponent(() => import("~/components/blocks/list/List.vue")),
+	"block.full-section": defineAsyncComponent(() => import("~/components/blocks/fullSection/FullSection.vue")),
+	"block.faq": defineAsyncComponent(() => import("~/components/blocks/faq/Faq.vue")),
+	"block.info": defineAsyncComponent(() => import("~/components/blocks/info/Info.vue")),
+	"block.featured": defineAsyncComponent(() => import("~/components/blocks/featured/Featured.vue")),
+	"block.examples-build": defineAsyncComponent(() => import("~/components/blocks/examplesBuild/ExamplesBuild.vue")),
 };
 </script>
 

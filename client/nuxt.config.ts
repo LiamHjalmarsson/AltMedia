@@ -31,25 +31,6 @@ export default defineNuxtConfig({
 		},
 	},
 
-	runtimeConfig: {
-		public: {
-			strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL,
-		},
-	},
-
-	nitro: {
-		compressPublicAssets: true,
-		routeRules: {
-			"/**": {
-				prerender: true,
-				headers: {
-					"Cache-Control": "public, max-age=31536000, immutable",
-					"Cross-Origin-Opener-Policy": "same-origin",
-				},
-			},
-		},
-	},
-
 	fonts: {
 		provider: "google",
 		defaults: {
@@ -103,6 +84,15 @@ export default defineNuxtConfig({
 			global: true,
 		},
 	],
+
+	routeRules: {
+		"/**": {
+			prerender: true,
+			headers: {
+				"Cache-Control": "public, max-age=31536000, immutable",
+			},
+		},
+	},
 
 	router: {
 		options: {},
