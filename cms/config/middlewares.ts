@@ -15,15 +15,16 @@ export default [
 			},
 		},
 	},
-	{
-		name: "strapi::cors",
-		config: {
-			enabled: true,
-			origin: ["http://localhost:3000", "http://localhost:3001", "https://alt-media-five.vercel.app"],
-			headers: ["*"],
-			methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-		},
-	},
+	"strapi::cors",
+	// {
+	// 	name: "strapi::cors",
+	// 	config: {
+	// 		enabled: true,
+	// 		origin: ["http://localhost:3000", "http://localhost:3001", "https://alt-media-five.vercel.app"],
+	// 		headers: ["*"],
+	// 		methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+	// 	},
+	// },
 	"strapi::poweredBy",
 	"strapi::query",
 	"strapi::body",
