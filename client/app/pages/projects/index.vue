@@ -7,7 +7,11 @@ const { projects } = storeToRefs(projectStore);
 
 const { findOne } = useStrapi();
 
-await useAsyncData("projects", () => projectStore.fetchProjects(), { server: true });
+const { data: projectsData } = await useAsyncData("projects", () => projectStore.fetchProjects(), {
+	server: true,
+});
+
+if (projectsData.value) projectStore.projects = projectsData.value;
 
 const { data: page } = await useAsyncData("projectsPage", async () => {
 	const res = await findOne<PageContent>("projects-page");

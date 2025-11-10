@@ -1,4 +1,4 @@
-import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
+import type { Strapi5ResponseMany } from "@nuxtjs/strapi";
 import type { Project } from "~/types";
 
 export const useProjectStore = defineStore("projects", () => {
@@ -8,38 +8,41 @@ export const useProjectStore = defineStore("projects", () => {
 
 	const loading = ref(false);
 
-	const { find, findOne } = useStrapi();
+	const { find } = useStrapi();
 
 	async function fetchProjects(params?: Record<string, any>) {
 		loading.value = true;
 
 		try {
-			const result: Strapi5ResponseMany<Project> = await find<Project>("projects");
+			const res: Strapi5ResponseMany<Project> = await find<Project>("projects");
 
-			projects.value = result.data ?? [];
+			projects.value = res?.data || [];
 
 			return projects.value;
-		} catch (error) {
-			console.error("Failed to fetch projects:", error);
+		} catch (err) {
+			console.error("Failed to fetch projects:", err);
+
+			return [];
 		} finally {
 			loading.value = false;
 		}
 	}
+
 	async function fetchProject(slug: string) {
-		if (currentProject.value?.slug === slug) {
-			return currentProject.value;
-		}
+		if (currentProject.value?.slug === slug) return currentProject.value;
 
 		loading.value = true;
 
 		try {
-			const result: Strapi5ResponseSingle<Project> = await findOne<Project>("projects", slug);
+			const res: Strapi5ResponseMany<Project> = await find<Project>("projects");
 
-			currentProject.value = result.data;
+			currentProject.value = res.data?.[0] || null;
 
 			return currentProject.value;
-		} catch (error) {
-			console.error("Failed to fetch project:", error);
+		} catch (err) {
+			console.error("Failed to fetch project:", err);
+
+			return null;
 		} finally {
 			loading.value = false;
 		}

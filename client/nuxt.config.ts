@@ -56,11 +56,7 @@ export default defineNuxtConfig({
 		build: {
 			cssCodeSplit: true,
 			rollupOptions: {
-				output: {
-					manualChunks: {
-						vendor: ["vue", "pinia", "vue-router"],
-					},
-				},
+				output: { manualChunks: undefined },
 			},
 		},
 		esbuild: {

@@ -30,6 +30,13 @@ export default [
 	"strapi::body",
 	"strapi::session",
 	"strapi::favicon",
-	"strapi::public",
+	// "strapi::public",
+	{
+		name: "strapi::public",
+		config: {
+			maxAge: 31536000,
+			immutable: true,
+		},
+	},
 ];
 
