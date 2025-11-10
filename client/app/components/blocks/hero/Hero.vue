@@ -3,29 +3,6 @@ import type { Hero } from "~/types";
 
 const { block, hasForm } = defineProps<{ hasForm?: boolean; block: Hero }>();
 
-const img = useImage();
-
-const backgroundStyle = computed(() => {
-	if (!block.background) {
-		return {};
-	}
-
-	const src = block.background.url;
-
-	const optimized = img(src, {
-		format: "webp",
-		quality: 65,
-		width: 1800,
-	});
-
-	return {
-		backgroundImage: `linear-gradient(to bottom right, rgba(10,10,25,0.85), rgba(10,10,25,0.7)), url('${optimized}')`,
-		backgroundSize: "cover",
-		backgroundPosition: "center",
-		backgroundRepeat: "no-repeat",
-	};
-});
-
 const alignClass = computed(() => {
 	if (hasForm) {
 		return "gap-2xl max-xl:flex-col";
@@ -44,9 +21,19 @@ const alignClass = computed(() => {
 
 <template>
 	<section
-		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl max-lg:h-screen"
-		:style="backgroundStyle">
-		<div class="pt-xl">
+		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl max-lg:h-screen">
+		<NuxtImg
+			v-if="block.background?.url"
+			:src="block.background.url"
+			:alt="block.title"
+			format="webp,avif"
+			width="1800"
+			height="1000"
+			quality="65"
+			decoding="async"
+			class="absolute inset-0 w-full h-full object-cover opacity-15" />
+
+		<div class="pt-xl relative z-10">
 			<div class="absolute inset-0 pointer-events-none">
 				<div class="absolute -top-32 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-primary/30 blur-3xl" />
 				<div

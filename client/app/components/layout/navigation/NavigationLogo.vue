@@ -13,7 +13,7 @@ const logoAltText = computed(() => props.logo?.alternativeText || "Alt Media log
 			:alt="logoAltText"
 			width="160"
 			height="30"
-			format="webp"
+			format="webp,avif"
 			quality="85"
 			loading="eager" />
 	</NuxtLink>
