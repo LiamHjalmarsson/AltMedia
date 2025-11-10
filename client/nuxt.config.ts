@@ -21,24 +21,7 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			link: [
-				{
-					rel: "preconnect",
-					href: "https://stable-benefit-bde0905312.strapiapp.com",
-					crossorigin: "",
-				},
-			],
-		},
-	},
-
-	image: {
-		format: ["webp", "avif"],
-		quality: 65,
-		screens: {
-			sm: 400,
-			md: 800,
-			lg: 1200,
-			xl: 1600,
+			link: [{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" }],
 		},
 	},
 
@@ -64,25 +47,10 @@ export default defineNuxtConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
-		build: {
-			cssCodeSplit: true,
-			rollupOptions: {
-				output: {
-					manualChunks: {
-						vue: ["vue"],
-						pinia: ["pinia"],
-					},
-				},
-			},
-		},
-		esbuild: {
-			drop: ["console", "debugger"],
-		},
 	},
 
 	typescript: {
 		typeCheck: true,
-		strict: true,
 	},
 
 	components: [
@@ -96,15 +64,6 @@ export default defineNuxtConfig({
 			global: true,
 		},
 	],
-
-	routeRules: {
-		"/**": {
-			prerender: true,
-			headers: {
-				"Cache-Control": "public, max-age=31536000, immutable",
-			},
-		},
-	},
 
 	router: {
 		options: {},
