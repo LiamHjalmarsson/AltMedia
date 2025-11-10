@@ -2,8 +2,6 @@
 export function useAppHead() {
 	const globalStore = useGlobalStore();
 
-	const { data } = useAsyncData("global", () => globalStore.fetchGlobalConfig(), { server: true });
-
 	const { globalConfig, seo } = storeToRefs(globalStore);
 
 	useHead({
@@ -40,5 +38,5 @@ export function useAppHead() {
 		twitterCard: "summary_large_image",
 	});
 
-	return { data, globalConfig, seo };
+	return { globalConfig, seo };
 }

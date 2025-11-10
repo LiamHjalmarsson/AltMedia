@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { Hero } from "~/types/content/blocks";
+import type { Hero } from "~/types";
 
 const { block, hasForm } = defineProps<{ hasForm?: boolean; block: Hero }>();
 
 const img = useImage();
 
 const backgroundStyle = computed(() => {
-	if (!block.background.url) {
+	if (!block.background) {
 		return {};
 	}
 

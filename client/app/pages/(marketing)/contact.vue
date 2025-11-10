@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const contactStore = useContactStore();
+import type { ContactPage } from "~/types";
 
 const globalStore = useGlobalStore();
 
-const { contact } = storeToRefs(contactStore);
+const { findOne } = useStrapi();
 
-await useAsyncData("contact", () => contactStore.fetchContact(), { server: true });
+const { data: contactPage } = await useAsyncData("contact-page", () => findOne<ContactPage>("contact"));
 
 definePageMeta({
 	layout: "minimal",
@@ -20,13 +20,19 @@ function handleSubmit(data: Record<string, any>) {}
 			<div class="grid grid-cols-1 lg:grid-cols-5 gap-2xl">
 				<div class="flex flex-col shadow-lg col-span-3">
 					<div class="p-xl">
-						<Heading :title="contact?.form?.title || 'Skicka ett meddelande'" align_content="left" />
+						<Heading
+							:title="contactPage?.data?.form?.title || 'Skicka ett meddelande'"
+							align_content="left" />
 
-						<p v-if="contact?.form?.description" class="mt-sm text-dark-gray">
-							{{ contact.form.description }}
+						<p v-if="contactPage?.data?.form?.description" class="mt-sm text-dark-gray">
+							{{ contactPage?.data.form.description }}
 						</p>
 
-						<Form v-if="contact?.form" :form="contact.form" @submit="handleSubmit" class="mt-lg" />
+						<Form
+							v-if="contactPage?.data?.form"
+							:form="contactPage?.data.form"
+							@submit="handleSubmit"
+							class="mt-lg" />
 					</div>
 				</div>
 

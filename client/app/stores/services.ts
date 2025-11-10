@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Service, Subservice } from "~/types/content/collections";
+import type { Service, Subservice } from "~/types/";
 
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
@@ -30,6 +30,10 @@ export const useServiceStore = defineStore("services", () => {
 	}
 
 	async function fetchService(slug: string) {
+		if (currentService.value?.slug === slug) {
+			return currentService.value;
+		}
+
 		loading.value = true;
 		try {
 			const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", slug);
@@ -60,6 +64,10 @@ export const useServiceStore = defineStore("services", () => {
 	}
 
 	async function fetchSubService(slug: string) {
+		if (currentSubService.value?.slug === slug) {
+			return currentSubService.value;
+		}
+
 		loading.value = true;
 		try {
 			const result: Strapi5ResponseSingle<Subservice> = await findOne<Subservice>("subservices", slug);

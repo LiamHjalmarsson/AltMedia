@@ -1,5 +1,5 @@
 import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Project } from "~/types/content/collections";
+import type { Project } from "~/types";
 
 export const useProjectStore = defineStore("projects", () => {
 	const projects = ref<Project[]>([]);
@@ -10,21 +10,11 @@ export const useProjectStore = defineStore("projects", () => {
 
 	const { find, findOne } = useStrapi();
 
-	async function fetchProjects(service?: string | null) {
+	async function fetchProjects(params?: Record<string, any>) {
 		loading.value = true;
 
 		try {
-			const params: any = {};
-
-			if (service) {
-				params.filters = {
-					services: {
-						slug: { $eqi: service },
-					},
-				};
-			}
-
-			const result: Strapi5ResponseMany<Project> = await find<Project>("projects", params);
+			const result: Strapi5ResponseMany<Project> = await find<Project>("projects");
 
 			projects.value = result.data ?? [];
 
@@ -36,6 +26,10 @@ export const useProjectStore = defineStore("projects", () => {
 		}
 	}
 	async function fetchProject(slug: string) {
+		if (currentProject.value?.slug === slug) {
+			return currentProject.value;
+		}
+
 		loading.value = true;
 
 		try {

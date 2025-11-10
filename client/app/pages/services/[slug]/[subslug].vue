@@ -10,7 +10,7 @@ const subslug = computed(() => route.params.subslug as string);
 await useAsyncData(
 	() => `subservice:${subslug.value}`,
 	() => serviceStore.fetchSubService(subslug.value),
-	{ server: true, watch: [subslug] }
+	{ server: true, lazy: true, watch: [subslug] }
 );
 
 watchEffect(() => {
@@ -27,7 +27,7 @@ watchEffect(() => {
 </script>
 
 <template>
-	<!-- <Hero v-if="currentSubService?.hero" :block="currentSubService.hero" /> -->
+	<Hero v-if="currentSubService?.hero" :block="currentSubService.hero" />
 
 	<SubserviceIntroduction v-if="currentSubService" :subservice="currentSubService" />
 

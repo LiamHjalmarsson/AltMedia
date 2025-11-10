@@ -1,5 +1,5 @@
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { GlobalConfig } from "~/types/content/singles";
+import type { GlobalConfig } from "~/types";
 
 export const useGlobalStore = defineStore("global-config", () => {
 	const globalConfig = ref<GlobalConfig | null>(null);
@@ -21,8 +21,6 @@ export const useGlobalStore = defineStore("global-config", () => {
 			globalConfig.value = res.data;
 
 			return globalConfig.value;
-		} catch (error) {
-			console.error("Failed to fetch global config:", error);
 		} finally {
 			loading.value = false;
 		}

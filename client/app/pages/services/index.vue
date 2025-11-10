@@ -3,11 +3,11 @@ import type { PageContent } from "~/types";
 
 const serviceStore = useServiceStore();
 
+await serviceStore.fetchServices();
+
 const { services } = storeToRefs(serviceStore);
 
 const { findOne } = useStrapi();
-
-await useAsyncData("services", () => serviceStore.fetchServices(), { server: true });
 
 const { data: page } = await useAsyncData("servicesPage", async () => {
 	const res = await findOne<PageContent>("services-page");

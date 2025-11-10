@@ -10,7 +10,7 @@ const slug = computed(() => route.params.slug as string);
 await useAsyncData(
 	() => `service:${slug.value}`,
 	() => serviceStore.fetchService(slug.value),
-	{ server: true, watch: [slug] }
+	{ server: true, lazy: true, watch: [slug] }
 );
 
 watchEffect(() => {
