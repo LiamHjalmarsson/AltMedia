@@ -30,6 +30,7 @@ const alignClass = computed(() => {
 			width="1800"
 			height="1000"
 			quality="65"
+			fetchpriority="high"
 			class="absolute inset-0 w-full h-full object-cover opacity-45" />
 
 		<div class="pt-xl relative z-10">

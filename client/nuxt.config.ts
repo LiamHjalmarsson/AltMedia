@@ -31,6 +31,17 @@ export default defineNuxtConfig({
 		},
 	},
 
+	image: {
+		format: ["webp", "avif"],
+		quality: 65,
+		screens: {
+			sm: 400,
+			md: 800,
+			lg: 1200,
+			xl: 1600,
+		},
+	},
+
 	fonts: {
 		provider: "google",
 		defaults: {
@@ -55,6 +66,14 @@ export default defineNuxtConfig({
 		plugins: [tailwindcss()],
 		build: {
 			cssCodeSplit: true,
+			rollupOptions: {
+				output: {
+					manualChunks: {
+						vue: ["vue"],
+						pinia: ["pinia"],
+					},
+				},
+			},
 		},
 		esbuild: {
 			drop: ["console", "debugger"],
@@ -78,14 +97,14 @@ export default defineNuxtConfig({
 		},
 	],
 
-	// routeRules: {
-	// 	"/**": {
-	// 		prerender: true,
-	// 		headers: {
-	// 			"Cache-Control": "public, max-age=31536000, immutable",
-	// 		},
-	// 	},
-	// },
+	routeRules: {
+		"/**": {
+			prerender: true,
+			headers: {
+				"Cache-Control": "public, max-age=31536000, immutable",
+			},
+		},
+	},
 
 	router: {
 		options: {},
