@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Form } from "~/types/shared";
+import type { Form } from "~/types";
 
 const emit = defineEmits(["submit"]);
 

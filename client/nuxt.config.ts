@@ -21,7 +21,13 @@ export default defineNuxtConfig({
 
 	app: {
 		head: {
-			link: [{ rel: "preconnect", href: "https://stable-benefit-bde0905312.strapiapp.com", crossorigin: "" }],
+			link: [
+				{
+					rel: "preconnect",
+					href: process.env.STRAPI_URL,
+					crossorigin: "",
+				},
+			],
 		},
 	},
 

@@ -1,5 +1,5 @@
 import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Service, Subservice } from "~/types/";
+import type { Service, Subservice } from "~/types";
 
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
