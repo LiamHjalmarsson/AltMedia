@@ -28,10 +28,6 @@ defineProps<{ item: BuildItem }>();
 				{{ item.description }}
 			</p>
 
-			<h4 class="text-xl font-bold text-primary text-center my-md">
-				{{ item.price }}
-			</h4>
-
 			<ul class="space-y-xs mb-md">
 				<li
 					v-for="(subservice, i) in item.subservices"

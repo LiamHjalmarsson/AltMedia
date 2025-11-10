@@ -2,7 +2,6 @@ import type { Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Blocks, CollectionBlocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
-import type { AlignContent } from "../enums";
 
 export interface Article {
 	id: number;

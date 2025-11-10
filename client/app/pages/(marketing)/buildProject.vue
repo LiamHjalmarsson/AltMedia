@@ -49,8 +49,8 @@ async function goToPreviousStep() {
 
 <template>
 	<section class="py-5xl relative">
-		<div class="w-full flex gap-3xl max-w-[1300px] px-md md:px-lg lg:px-2xl py-2xl">
-			<div class="flex-1">
+		<div class="w-full mx-auto flex gap-3xl max-w-[1350px] px-md md:px-lg lg:px-2xl py-2xl">
+			<div class="flex-1 min-w-[850px]">
 				<Progressbar :steps="steps" :activeStepIndex="activeStepIndex" :progress="progress" />
 
 				<h2 class="text-heading-xl font-bold text-black mb-xs">

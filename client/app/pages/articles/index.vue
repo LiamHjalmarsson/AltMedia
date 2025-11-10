@@ -36,7 +36,7 @@ useSeoMeta({
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading
 				:title="page?.title"
-				:align_content="page?.align_content"
+				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
 				class="my-xl" />
 

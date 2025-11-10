@@ -28,11 +28,6 @@ export default defineNuxtConfig({
 					crossorigin: "",
 				},
 				{
-					rel: "preconnect",
-					href: "https://fonts.gstatic.com",
-					crossorigin: "",
-				},
-				{
 					rel: "dns-prefetch",
 					href: process.env.STRAPI_URL,
 				},

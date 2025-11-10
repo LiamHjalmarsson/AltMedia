@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ExamplesBuildBlock } from "~/types/content/blocks";
+import type { ExamplesBuildBlock } from "~/types";
 
 const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 </script>

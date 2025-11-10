@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Project } from "~/types/content/collections";
+import type { Project } from "~/types";
 
 defineProps<{ project: Project }>();
 </script>
@@ -24,7 +24,7 @@ defineProps<{ project: Project }>();
 			</h3>
 
 			<div
-				class="absolute inset-0 flex items-end justify-start p-sm bg-gradient-to-t from-black/60 to-transparent lg:hidden">
+				class="absolute inset-0 flex items-end justify-start p-sm bg-gradient-to-t from-black/95 to-transparent lg:hidden">
 				<h3 class="text-light text-sm sm:text-md font-semibold">
 					{{ project.title }}
 				</h3>
