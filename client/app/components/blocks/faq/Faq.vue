@@ -25,7 +25,7 @@ function toggleAnswer(id: number) {
 						v-if="block.image"
 						:src="block.image.url"
 						:alt="block.image.alternativeText || block.heading.title"
-						format="webp"
+						format="webp,avif"
 						:width="block.image?.width || 600"
 						:height="block.image?.height || 400"
 						quality="85"

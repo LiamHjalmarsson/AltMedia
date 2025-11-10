@@ -13,7 +13,7 @@ defineProps<{ article: Article }>();
 					:src="article.cover.url"
 					:alt="article.cover.alternativeText || ''"
 					sizes="100vw sm:50vw md:33vw"
-					format="webp"
+					format="webp,avif"
 					quality="80"
 					placeholder
 					loading="lazy"

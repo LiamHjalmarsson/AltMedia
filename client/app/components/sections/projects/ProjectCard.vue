@@ -12,7 +12,7 @@ const slug = computed(() => `/projects/${project.slug}`);
 				<NuxtImg
 					:src="project.cover?.url"
 					:alt="project.cover?.alternativeText || project.title"
-					format="webp"
+					format="webp,avif"
 					quality="85"
 					class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
 					loading="lazy" />

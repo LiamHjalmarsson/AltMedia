@@ -6,7 +6,12 @@ const { articles } = storeToRefs(articleStore);
 
 const { findOne } = useStrapi();
 
-await useAsyncData("articles", () => articleStore.fetchArticles(), { server: true });
+await useAsyncData("articles", () => articleStore.fetchArticles(), {
+	server: true,
+	lazy: true,
+	default: () => [],
+	transform: (data) => data,
+});
 
 const { data: page } = await useAsyncData("articlesPage", async () => {
 	const res = await findOne<PageContent>("articles-page");
@@ -43,7 +48,7 @@ useSeoMeta({
 								v-if="article.cover?.url"
 								:src="article.cover.url"
 								:alt="article.cover.alternativeText || article.title"
-								format="webp"
+								format="webp,avif"
 								quality="85"
 								class="w-full h-[250px] md:h-[300px] object-cover"
 								loading="lazy" />

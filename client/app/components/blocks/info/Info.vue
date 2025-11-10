@@ -34,7 +34,7 @@ const textAlignClass = computed(() => {
 					<NuxtImg
 						:src="block.image?.url"
 						:alt="block.image?.alternativeText || ''"
-						format="webp"
+						format="webp,avif"
 						quality="85"
 						placeholder
 						loading="lazy"

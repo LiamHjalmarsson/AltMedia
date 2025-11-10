@@ -11,7 +11,7 @@ defineProps<{ item: BuildItem }>();
 				v-if="item.icon?.is_image"
 				:src="item.icon.image?.url"
 				:alt="item.icon.image?.alternativeText || item.title"
-				format="webp"
+				format="webp,avif"
 				quality="85"
 				width="100"
 				height="100"

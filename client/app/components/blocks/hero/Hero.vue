@@ -21,7 +21,7 @@ const alignClass = computed(() => {
 
 <template>
 	<section
-		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl max-lg:h-screen">
+		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[90vh] max-lg:h-screen">
 		<NuxtImg
 			v-if="block.background?.url"
 			:src="block.background.url"

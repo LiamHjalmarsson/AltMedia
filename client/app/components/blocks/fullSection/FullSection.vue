@@ -37,7 +37,7 @@ const textColor = computed(() => {
 			v-if="block.cover"
 			:src="block.cover.url"
 			:alt="block.cover.alternativeText || ''"
-			format="webp"
+			format="webp,avif"
 			quality="80"
 			sizes="100vw"
 			densities="x1 x2"

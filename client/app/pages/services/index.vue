@@ -46,7 +46,7 @@ useSeoMeta({
 						v-if="service.image?.url"
 						:src="service.image.url"
 						:alt="service.image.alternativeText || service.title"
-						format="webp"
+						format="webp,avif"
 						quality="85"
 						class="w-full h-full object-cover shadow-2xl"
 						loading="lazy" />

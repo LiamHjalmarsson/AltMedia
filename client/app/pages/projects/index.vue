@@ -52,7 +52,7 @@ useSeoMeta({
 								v-if="project.cover?.url"
 								:src="project.cover.url"
 								:alt="project.cover.alternativeText || project.title"
-								format="webp"
+								format="webp,avif"
 								quality="85"
 								class="w-full h-[300px] object-cover"
 								loading="lazy" />

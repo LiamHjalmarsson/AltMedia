@@ -24,7 +24,7 @@ const iconSize = computed(() => (props.size || 48) * 0.6);
 			v-if="icon.is_image && icon.image?.url"
 			:src="icon.image.url"
 			:alt="icon.image.alternativeText || ''"
-			format="webp"
+			format="webp,avif"
 			quality="85"
 			placeholder
 			loading="lazy"

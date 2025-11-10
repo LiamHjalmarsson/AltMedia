@@ -23,7 +23,7 @@ const cta = computed(() => footer.value?.cta);
 				<NuxtImg
 					v-else
 					:src="cta.cover.url"
-					format="webp"
+					format="webp,avif"
 					quality="85"
 					class="absolute inset-0 w-full h-full object-cover opacity-20"
 					aria-hidden="true" />

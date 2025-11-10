@@ -11,7 +11,7 @@ defineProps<{ article: Article }>();
 				<NuxtImg
 					:src="article.cover.url"
 					:alt="article.cover.alternativeText || article.title"
-					format="webp"
+					format="webp,avif"
 					quality="85"
 					loading="lazy"
 					class="h-full w-full object-cover group-hover:scale-105 transition duration-300" />

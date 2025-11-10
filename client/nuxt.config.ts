@@ -27,6 +27,15 @@ export default defineNuxtConfig({
 					href: process.env.STRAPI_URL,
 					crossorigin: "",
 				},
+				{
+					rel: "preconnect",
+					href: "https://fonts.gstatic.com",
+					crossorigin: "",
+				},
+				{
+					rel: "dns-prefetch",
+					href: process.env.STRAPI_URL,
+				},
 			],
 		},
 	},
@@ -53,6 +62,11 @@ export default defineNuxtConfig({
 
 	vite: {
 		plugins: [tailwindcss()],
+
+		build: {
+			cssMinify: true,
+			chunkSizeWarningLimit: 1000,
+		},
 	},
 
 	typescript: {

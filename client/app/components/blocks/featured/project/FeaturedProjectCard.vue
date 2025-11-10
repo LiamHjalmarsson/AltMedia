@@ -11,7 +11,7 @@ defineProps<{ project: Project }>();
 				v-if="project.cover?.url"
 				:src="project.cover.url"
 				:alt="project.cover.alternativeText || ''"
-				format="webp"
+				format="webp,avif"
 				quality="85"
 				loading="lazy"
 				class="object-cover w-full h-full" />
