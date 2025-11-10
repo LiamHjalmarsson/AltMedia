@@ -92,7 +92,7 @@ async function goToPreviousStep() {
 				</div>
 			</div>
 
-			<Summary :summaryData="summaryData" />
+			<SummaryPanel :summaryData="summaryData" />
 		</div>
 	</section>
 </template>
