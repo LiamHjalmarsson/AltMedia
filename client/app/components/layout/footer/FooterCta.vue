@@ -12,7 +12,7 @@ const cta = computed(() => footer.value?.cta);
 			<template v-if="cta.cover?.url">
 				<video
 					v-if="cta.cover.mime"
-					class="absolute inset-0 w-full h-full object-cover opacity-30"
+					class="absolute inset-0 w-full h-full object-cover opacity-90"
 					autoplay
 					muted
 					loop
@@ -29,7 +29,7 @@ const cta = computed(() => footer.value?.cta);
 					aria-hidden="true" />
 			</template>
 
-			<div class="absolute inset-0 bg-bg-dark/70"></div>
+			<div class="absolute inset-0 bg-bg-dark/90" />
 
 			<div class="relative text-center lg:p-3xl w-full max-w-[900px] mx-auto">
 				<p v-if="cta.subtitle" class="text-sm font-semibold tracking-widest uppercase text-secondary/80">

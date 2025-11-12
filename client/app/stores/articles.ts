@@ -18,7 +18,7 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseMany<Article> = await find<Article>("articles");
+			const res: Strapi5ResponseMany<Article> = await find<Article>("articles", params);
 
 			articles.value = res.data || [];
 

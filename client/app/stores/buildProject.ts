@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { BuildProjectPage, Question, Service, Step, Subservice } from "~/types";
+import type { BuildProjectPage, Step, Question, Service, Subservice } from "~/types";
 
 type FormDataRecord = Record<string, string | string[] | undefined>;
 
@@ -23,16 +23,18 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		}
 
 		loading.value = true;
+
 		try {
-			const res: Strapi5ResponseSingle<BuildProjectPage> = await findOne<BuildProjectPage>("build-project-page");
+			const res: Strapi5ResponseSingle<BuildProjectPage> = await findOne("build-project-page");
 
 			page.value = res.data;
 
-			steps.value = page.value?.steps ? normalizeSteps(page.value.steps as any) : [];
+			steps.value = normalizeSteps(page.value?.steps || []);
 
 			return page.value;
 		} catch (err) {
 			console.error("❌ Failed to fetch Build Project Page:", err);
+
 			page.value = null;
 
 			return null;
@@ -41,28 +43,83 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		}
 	}
 
-	function nextStep() {
-		if (activeStepIndex.value < totalStepCount.value) {
-			activeStepIndex.value++;
-		}
-	}
+	function normalizeSteps(rawSteps: Step[]): Step[] {
+		return rawSteps.map((step) => {
+			const relatedServices = step.services ?? [];
 
-	function previousStep() {
-		if (activeStepIndex.value > 1) {
-			activeStepIndex.value--;
-		}
+			const relatedSubservices = step.subservices ?? [];
+
+			if (step.type === "relations") {
+				const relationTitles = [
+					...relatedServices.map((service) => service.title),
+					...relatedSubservices.map((subservice) => subservice.title),
+				].filter(Boolean);
+
+				return {
+					...step,
+					questions: [],
+					related_services: relatedServices,
+					related_subservices: relatedSubservices,
+					relation_titles: relationTitles,
+				};
+			}
+
+			const normalizedQuestions: Question[] = (step.questions || []).map((question) => ({
+				...question,
+				options: question.options ?? [],
+			}));
+
+			return { ...step, questions: normalizedQuestions };
+		});
 	}
 
 	function toggleOption(label: string, option: string) {
-		formData.value[label] = formData.value[label] || [];
+		const step = steps.value.find((step) => step.questions?.some((question) => question.title === label));
 
-		const current = formData.value[label] as string[];
+		const question = step?.questions?.find((question) => question.title === label);
 
-		if (current.includes(option)) {
-			formData.value[label] = current.filter((opt) => opt !== option);
-		} else {
-			formData.value[label] = [...current, option];
+		if (!question) {
+			const current = Array.isArray(formData.value[label]) ? [...(formData.value[label] as string[])] : [];
+
+			const index = current.indexOf(option);
+
+			if (index !== -1) {
+				current.splice(index, 1);
+			} else {
+				current.push(option);
+			}
+
+			formData.value = { ...formData.value, [label]: current };
+			return;
 		}
+
+		if (question.type === "single") {
+			formData.value = { ...formData.value, [label]: option };
+
+			return;
+		}
+
+		const current = Array.isArray(formData.value[label]) ? [...(formData.value[label] as string[])] : [];
+
+		const index = current.indexOf(option);
+
+		if (index !== -1) {
+			current.splice(index, 1);
+		} else {
+			current.push(option);
+		}
+
+		formData.value = { ...formData.value, [label]: current };
+	}
+
+	function setValue(label: string, value: string | string[]) {
+		formData.value[label] = value;
+	}
+
+	function resetForm() {
+		formData.value = {};
+
+		activeStepIndex.value = 1;
 	}
 
 	async function submitProjectRequest() {
@@ -80,60 +137,46 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 			return true;
 		} catch (error) {
+			console.error("❌ Failed to submit project request:", error);
+
 			return false;
+		}
+	}
+
+	function nextStep() {
+		if (activeStepIndex.value < totalStepCount.value) {
+			activeStepIndex.value++;
+		}
+	}
+
+	function previousStep() {
+		if (activeStepIndex.value > 1) {
+			activeStepIndex.value--;
 		}
 	}
 
 	const totalStepCount = computed(() => steps.value.length);
 
-	const progress = computed(() => (activeStepIndex.value / totalStepCount.value) * 100);
+	const currentStep = computed(() => steps.value[activeStepIndex.value - 1] || null);
+
+	const progress = computed(() => (totalStepCount.value ? (activeStepIndex.value / totalStepCount.value) * 100 : 0));
 
 	const isOnLastStep = computed(() => activeStepIndex.value === totalStepCount.value);
 
 	const summaryData = computed(() => {
-		const excludedFields = ["Namn", "E-post", "Telefonnummer"];
+		const excluded = ["Namn", "E-post", "Telefonnummer"];
 
-		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excludedFields.includes(key)));
+		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excluded.includes(key)));
 	});
 
-	function normalizeSteps(rawSteps: Step[]): Step[] {
-		return rawSteps.map((step): Step => {
-			const relatedServices: Pick<Service, "title">[] = step.related_services ?? [];
+	const showSummaryPanel = computed(() => !!page.value?.settings?.show_summary_panel);
 
-			const relatedSubservices: Pick<Subservice, "title">[] = step.related_subservices ?? [];
-
-			const questions: Question[] = (step.questions || []).map((question): Question => {
-				const options: string[] = Array.isArray(question.options)
-					? question.options
-					: question.options
-						? [String(question.options)]
-						: [];
-
-				const expandedOptions =
-					question.type === "multi" || question.type === "static"
-						? [
-								...relatedServices.map((sservice) => sservice.title),
-								...relatedSubservices.map((subservice) => subservice.title),
-							]
-						: options;
-
-				return {
-					...question,
-					options: expandedOptions.filter(Boolean),
-				};
-			});
-
-			return {
-				...step,
-				questions,
-			};
-		});
+	function isRelationStep(step?: Step | null): boolean {
+		return step?.type === "relations";
 	}
 
-	function resetForm() {
-		formData.value = {};
-
-		activeStepIndex.value = 1;
+	function isClickableRelations(step?: Step | null): boolean {
+		return step?.clickable_relations === true;
 	}
 
 	return {
@@ -141,16 +184,24 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		steps,
 		formData,
 		activeStepIndex,
+		loading,
+
 		totalStepCount,
+		currentStep,
 		progress,
 		isOnLastStep,
 		summaryData,
-		loading,
+		showSummaryPanel,
+
 		fetchBuildProjectPage,
 		nextStep,
 		previousStep,
 		toggleOption,
+		setValue,
 		submitProjectRequest,
 		resetForm,
+
+		isRelationStep,
+		isClickableRelations,
 	};
 });

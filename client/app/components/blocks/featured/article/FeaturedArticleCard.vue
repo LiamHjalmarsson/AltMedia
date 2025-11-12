@@ -25,14 +25,13 @@ defineProps<{ article: Article }>();
 				</div>
 
 				<div class="flex items-center justify-between">
+					<ReadMoreButton />
 					<div class="text-xs text-dark-gray">
 						<span v-if="article.published_date">
 							{{ article.published_date }}
 						</span>
 						<span v-if="article.reading_time_min"> {{ article.reading_time_min }} min </span>
 					</div>
-
-					<ReadMoreButton />
 				</div>
 			</div>
 		</NuxtLink>

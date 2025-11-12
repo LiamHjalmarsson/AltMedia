@@ -34,7 +34,5 @@ function handleInput(event: Event) {
 		:value="modelValue"
 		@input="handleInput"
 		:aria-label="ariaLabel"
-		:class="[
-			'w-full py-xs px-sm border border-gray outline-none backdrop-blur-lg  focus-visible:outline-primary transition',
-		]" />
+		class="w-full py-sm px-sm backdrop-blur-lg transition outline-0 shadow-xl border-dark/5 border focus-visible:ring-primary focus:ring-2" />
 </template>

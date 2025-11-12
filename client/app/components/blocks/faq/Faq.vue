@@ -20,7 +20,7 @@ function toggleAnswer(id: number) {
 				class="mb-md lg:mb-lg xl:mb-xl" />
 
 			<div class="lg:grid lg:grid-cols-3 lg:space-x-3xl items-start">
-				<div>
+				<!-- <div>
 					<NuxtImg
 						v-if="block.image"
 						:src="block.image.url"
@@ -31,9 +31,9 @@ function toggleAnswer(id: number) {
 						quality="85"
 						loading="lazy"
 						class="shadow-lg w-full max-h-[350px] object-cover" />
-				</div>
+				</div> -->
 
-				<ul class="flex flex-col w-full space-y-xl col-span-2">
+				<ul class="flex flex-col w-full space-y-xl col-span-3">
 					<FaqItem
 						v-for="(faq, i) in block.items"
 						:key="faq.id"

@@ -27,7 +27,7 @@ function onToggle(id: number) {
 			:aria-controls="`faq-answer-${item.id}`"
 			class="flex items-center justify-between w-full px-xs">
 			<div class="flex items-center space-x-md">
-				<span class="text-heading-sm lg:text-heading-md font-semibold font-heading text-secondary">
+				<span class="text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
 					{{ number }}
 				</span>
 

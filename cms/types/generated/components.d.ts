@@ -166,6 +166,107 @@ export interface BlockList extends Struct.ComponentSchema {
   };
 }
 
+export interface BuildConditional extends Struct.ComponentSchema {
+  collectionName: 'components_build_conditionals';
+  info: {
+    displayName: 'Conditional';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    placeholder: Schema.Attribute.String;
+    trigger_value: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']> &
+      Schema.Attribute.DefaultTo<'input'>;
+  };
+}
+
+export interface BuildGroup extends Struct.ComponentSchema {
+  collectionName: 'components_build_groups';
+  info: {
+    displayName: 'Group';
+  };
+  attributes: {
+    questions: Schema.Attribute.Component<'build.question', true>;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface BuildOption extends Struct.ComponentSchema {
+  collectionName: 'components_build_options';
+  info: {
+    displayName: 'Option';
+  };
+  attributes: {
+    is_static: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface BuildQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_build_questions';
+  info: {
+    displayName: 'Question';
+  };
+  attributes: {
+    conditional: Schema.Attribute.Component<'build.conditional', false>;
+    help_text: Schema.Attribute.String;
+    options: Schema.Attribute.Component<'build.option', true>;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['multi', 'boolean', 'single', 'input', 'textarea', 'budget_time']
+    >;
+  };
+}
+
+export interface BuildSettings extends Struct.ComponentSchema {
+  collectionName: 'components_build_settings';
+  info: {
+    displayName: 'Settings';
+  };
+  attributes: {
+    message: Schema.Attribute.Text;
+    show_summary_panel: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface BuildStep extends Struct.ComponentSchema {
+  collectionName: 'components_build_steps';
+  info: {
+    displayName: 'Step';
+  };
+  attributes: {
+    clickable_relations: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    description: Schema.Attribute.String;
+    questions: Schema.Attribute.Component<'build.question', true>;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['relations', 'form']> &
+      Schema.Attribute.DefaultTo<'form'>;
+  };
+}
+
+export interface FormConditional extends Struct.ComponentSchema {
+  collectionName: 'components_form_conditionals';
+  info: {
+    displayName: 'conditional';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['input', 'text', 'number', 'email', 'url']
+    > &
+      Schema.Attribute.DefaultTo<'input'>;
+  };
+}
+
 export interface FormForm extends Struct.ComponentSchema {
   collectionName: 'components_form_forms';
   info: {
@@ -209,11 +310,7 @@ export interface FormQuestions extends Struct.ComponentSchema {
     displayName: 'questions';
   };
   attributes: {
-    label: Schema.Attribute.String;
-    options: Schema.Attribute.JSON;
-    type: Schema.Attribute.Enumeration<
-      ['boolean', 'multi', 'text', 'budget', 'time', 'static', 'input']
-    >;
+    questions: Schema.Attribute.Component<'build.question', true>;
   };
 }
 
@@ -223,8 +320,6 @@ export interface FormStep extends Struct.ComponentSchema {
     displayName: 'step';
   };
   attributes: {
-    description: Schema.Attribute.String;
-    questions: Schema.Attribute.Component<'form.questions', true>;
     related_services: Schema.Attribute.Relation<
       'oneToMany',
       'api::service.service'
@@ -447,6 +542,13 @@ declare module '@strapi/strapi' {
       'block.hero': BlockHero;
       'block.info': BlockInfo;
       'block.list': BlockList;
+      'build.conditional': BuildConditional;
+      'build.group': BuildGroup;
+      'build.option': BuildOption;
+      'build.question': BuildQuestion;
+      'build.settings': BuildSettings;
+      'build.step': BuildStep;
+      'form.conditional': FormConditional;
       'form.form': FormForm;
       'form.input': FormInput;
       'form.questions': FormQuestions;

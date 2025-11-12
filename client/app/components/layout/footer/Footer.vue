@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
 		<div class="mx-auto w-full h-full max-w-[1300px]">
 			<nav
 				aria-label="Sidfotsnavigation"
-				class="mb-2xl flex max-md:space-y-xl max-md:flex-col justify-between items-center xl:items-start">
+				class="mb-2xl flex max-md:space-y-xl max-md:flex-col justify-between items-center lg:items-start">
 				<FooterColumn v-for="column in footer?.footer_columns" :key="column.title" :column />
 			</nav>
 

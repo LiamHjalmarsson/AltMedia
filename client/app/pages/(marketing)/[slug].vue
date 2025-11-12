@@ -29,14 +29,7 @@ if (error.value) {
 	});
 }
 
-useSeoMeta({
-	title: page.value?.seo?.meta_title || page.value?.title,
-	description: page.value?.seo?.meta_description || "",
-	ogTitle: page.value?.seo?.meta_title,
-	ogDescription: page.value?.seo?.meta_description,
-	ogImage: page.value?.seo?.meta_image,
-	twitterCard: "summary_large_image",
-});
+useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>

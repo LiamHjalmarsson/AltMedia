@@ -10,7 +10,7 @@ export function useHoverAnimation(isReversed = false) {
 
 		gsap.killTweensOf(backgroundColor.value);
 
-		const leftValue = toRight ? "calc(100% - 2.5rem)" : 0;
+		const leftValue = toRight ? "calc(100% - 44px)" : 0;
 
 		gsap.timeline({ overwrite: "auto" })
 			.to(backgroundColor.value, {
@@ -22,7 +22,7 @@ export function useHoverAnimation(isReversed = false) {
 				ease: "power2.in",
 			})
 			.to(backgroundColor.value, {
-				width: "2.5rem",
+				width: "44px",
 				left: leftValue,
 				scale: 1,
 				boxShadow: "0 4px 10px rgba(0,0,0,0.15)",

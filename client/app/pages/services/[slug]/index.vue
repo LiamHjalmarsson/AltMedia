@@ -22,6 +22,7 @@ watchEffect(() => {
 		ogTitle: service?.title ?? "Tjänst",
 		ogDescription: service?.description ?? "Tjänst från Alt Media.",
 		twitterCard: "summary_large_image",
+		ogImage: "",
 	});
 });
 </script>

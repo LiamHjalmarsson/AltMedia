@@ -3,6 +3,8 @@ import type { PageContent } from "~/types";
 
 const serviceStore = useServiceStore();
 
+const { $setSeo } = useNuxtApp();
+
 await serviceStore.fetchServices();
 
 const { services } = storeToRefs(serviceStore);
@@ -15,16 +17,7 @@ const { data: page } = await useAsyncData("servicesPage", async () => {
 	return res.data;
 });
 
-useSeoMeta({
-	title: page.value?.seo?.meta_title,
-	description: page.value?.seo?.meta_description,
-	ogTitle: page.value?.seo?.meta_title,
-	ogDescription: page.value?.seo?.meta_description,
-	ogUrl: page.value?.seo?.meta_canonical_url,
-	twitterImage: page.value?.seo?.meta_image,
-	ogImage: page.value?.seo?.meta_image,
-	twitterCard: "summary_large_image",
-});
+useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>

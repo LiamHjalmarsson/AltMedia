@@ -1,42 +1,23 @@
-// composables/useAppHead.ts
-export function useAppHead() {
+import type { Seo } from "~/types";
+
+export function useAppHead(seo?: Seo) {
 	const globalStore = useGlobalStore();
 
-	const { globalConfig, seo } = storeToRefs(globalStore);
+	const { globalConfig, seo: defaultSeo } = storeToRefs(globalStore);
 
-	useHead({
-		titleTemplate: (titleChunk?: string) => {
-			const site = globalConfig.value?.site_name || "";
-
-			if (!titleChunk && site) return site;
-
-			return titleChunk && site ? `${titleChunk} | ${site}` : titleChunk || null;
-		},
-		htmlAttrs: { lang: "sv" },
-		link: globalConfig.value?.favicon.url
-			? [
-					{
-						rel: "icon",
-						type: "image/png",
-						href: globalConfig.value.favicon.url,
-					},
-				]
-			: [],
-	});
+	const resolvedSeo = computed(() => seo || defaultSeo.value);
 
 	useSeoMeta({
-		description: seo.value?.meta_description,
-
-		ogTitle: seo.value?.meta_title,
-		ogDescription: seo.value?.meta_description,
-		ogImage: seo.value?.meta_image?.url,
-		ogUrl: seo.value?.meta_canonical_url,
-
-		twitterTitle: seo.value?.meta_title,
-		twitterDescription: seo.value?.meta_description,
-		twitterImage: seo.value?.meta_image?.url,
+		title: resolvedSeo.value?.meta_title || globalConfig.value?.site_name || "Alt Media",
+		description:
+			resolvedSeo.value?.meta_description || "Digital byrå som skapar varumärken, design och teknik som växer.",
+		ogTitle: resolvedSeo.value?.meta_title,
+		ogDescription: resolvedSeo.value?.meta_description,
+		ogImage: resolvedSeo.value?.meta_image?.url || globalConfig.value?.seo.meta_image?.url,
+		ogUrl: resolvedSeo.value?.meta_canonical_url || globalConfig.value?.seo.meta_canonical_url,
+		twitterTitle: resolvedSeo.value?.meta_title,
+		twitterDescription: resolvedSeo.value?.meta_description,
+		twitterImage: resolvedSeo.value?.meta_image?.url || globalConfig.value?.seo.meta_image?.url,
 		twitterCard: "summary_large_image",
 	});
-
-	return { globalConfig, seo };
 }

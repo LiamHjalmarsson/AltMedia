@@ -1,21 +1,48 @@
 <script setup lang="ts">
-defineProps<{
-	summaryData: Record<string, string | string[] | undefined>;
-}>();
+const store = useBuildProjectStore();
+
+const { summaryData } = storeToRefs(store);
+
+const mergedSummary = computed<Record<string, string>>(() => {
+	const data = { ...summaryData.value };
+
+	const mergedSummary: Record<string, string> = {};
+
+	for (const [key, value] of Object.entries(data)) {
+		const val = Array.isArray(value) ? value.join(", ") : (value ?? "");
+
+		if (key.toLowerCase().includes("specificera") && data["Hur ser din budget ut?"]) {
+			mergedSummary["Hur ser din budget ut?"] = `${data["Hur ser din budget ut?"]} – ${val}`;
+
+			continue;
+		}
+
+		if (key.toLowerCase().includes("beskriv") && data["När behöver du lansera?"]) {
+			mergedSummary["När behöver du lansera?"] = `${data["När behöver du lansera?"]} – ${val}`;
+
+			continue;
+		}
+
+		if (["Specificera din budget", "Beskriv din tidsplan"].includes(key)) {
+			continue;
+		}
+
+		mergedSummary[key] = val;
+	}
+
+	return mergedSummary;
+});
 </script>
 
 <template>
-	<aside class="sticky top-24 bg-light border border-light/20 shadow-md p-xl h-fit space-y-lg">
-		<h3 class="text-heading-md font-bold text-dark">Sammanfattning</h3>
+	<div class="bg-white shadow-md p-6 rounded-lg">
+		<h3 class="text-2xl font-semibold mb-6">Sammanfattning</h3>
 
-		<div class="text-dark/80 text-sm">
-			<div v-for="(v, key) in summaryData" :key="key" class="border-b border-light/20 pb-md">
-				<p class="font-semibold text-md">{{ key }}</p>
-
-				<p class="text-sm font-medium mt-xs">{{ Array.isArray(v) ? v.join(", ") : v || "—" }}</p>
+		<div class="grid md:grid-cols-2 gap-x-10 gap-y-6">
+			<div v-for="(value, key) in mergedSummary" :key="key" class="border-b border-gray-200 pb-3">
+				<p class="font-semibold text-lg mb-1">{{ key }}</p>
+				<p class="text-gray-700">{{ value }}</p>
 			</div>
 		</div>
-
-		<p v-if="Object.keys(summaryData).length === 0" class="text-gray text-sm">Inga uppgifter ifyllda ännu.</p>
-	</aside>
+	</div>
 </template>

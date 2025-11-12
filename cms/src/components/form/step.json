@@ -8,14 +8,6 @@
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "string"
-    },
-    "questions": {
-      "type": "component",
-      "component": "form.questions",
-      "repeatable": true
-    },
     "related_subservices": {
       "type": "relation",
       "relation": "oneToMany",

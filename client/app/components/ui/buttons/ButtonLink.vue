@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Variant } from "~/types/enums";
-import type { Link } from "~/types/shared";
+import type { Variant } from "~/types";
+import type { Link } from "~/types";
 
 defineProps<Link>();
 
@@ -24,7 +24,7 @@ const variantClass: Record<Variant, string> = {
 		<div
 			ref="linkWrapper"
 			class="relative py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<span class="relative flex items-center z-10">
+			<span class="relative font-bold text-lg flex items-center justify-center w-full z-10">
 				<Icon
 					v-if="icon"
 					:name="icon"
@@ -35,10 +35,10 @@ const variantClass: Record<Variant, string> = {
 
 			<span
 				ref="backgroundColor"
-				class="absolute top-0 h-10 w-10 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
+				class="absolute top-0 h-11 w-11 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
 				:class="variantClass[variant]"
 				:style="{
-					left: reversed ? 'calc(100% - 2.5rem)' : '0',
+					left: reversed ? 'calc(100% - 44px)' : '0',
 					right: 'auto',
 				}" />
 

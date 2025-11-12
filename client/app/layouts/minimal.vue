@@ -1,6 +1,4 @@
-<script setup lang="ts">
-useAppHead();
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<AppShell :showCta="false">

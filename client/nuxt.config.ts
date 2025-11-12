@@ -19,21 +19,21 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
-	app: {
-		head: {
-			link: [
-				{
-					rel: "preconnect",
-					href: process.env.STRAPI_URL,
-					crossorigin: "",
-				},
-				{
-					rel: "dns-prefetch",
-					href: process.env.STRAPI_URL,
-				},
-			],
-		},
-	},
+	// app: {
+	// 	head: {
+	// 		link: [
+	// 			{
+	// 				rel: "preconnect",
+	// 				href: process.env.STRAPI_URL || "http://localhost:1337",
+	// 				crossorigin: "",
+	// 			},
+	// 			{
+	// 				rel: "dns-prefetch",
+	// 				href: process.env.STRAPI_URL || "http://localhost:1337",
+	// 			},
+	// 		],
+	// 	},
+	// },
 
 	fonts: {
 		provider: "google",
@@ -85,3 +85,4 @@ export default defineNuxtConfig({
 		options: {},
 	},
 });
+

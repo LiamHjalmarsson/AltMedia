@@ -4,7 +4,7 @@
   "info": {
     "singularName": "global-config",
     "pluralName": "global-configs",
-    "displayName": "Global Settings"
+    "displayName": "Inställningar"
   },
   "options": {
     "draftAndPublish": true

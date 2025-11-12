@@ -4,7 +4,7 @@
   "info": {
     "singularName": "build-project-page",
     "pluralName": "build-project-pages",
-    "displayName": "BuildProject Page"
+    "displayName": "Bygg Project Sida"
   },
   "options": {
     "draftAndPublish": true
@@ -19,17 +19,18 @@
     },
     "steps": {
       "type": "component",
-      "component": "form.step",
+      "component": "build.step",
       "repeatable": true
+    },
+    "settings": {
+      "type": "component",
+      "component": "build.settings",
+      "repeatable": false
     },
     "seo": {
       "type": "component",
       "component": "seo.seo",
       "repeatable": false
-    },
-    "slug": {
-      "type": "uid",
-      "targetField": "title"
     }
   }
 }

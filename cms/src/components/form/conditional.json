@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_form_conditionals",
+  "info": {
+    "displayName": "conditional"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "default": "input",
+      "enum": [
+        "input",
+        "text",
+        "number",
+        "email",
+        "url"
+      ]
+    }
+  },
+  "config": {}
+}

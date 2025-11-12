@@ -21,6 +21,11 @@ watchEffect(() => {
 		description: "Delmoment i en tjänst.",
 		ogTitle: subservice?.title ?? "Delmoment",
 		ogDescription: "Delmoment i en tjänst.",
+		ogImage: "",
+		ogUrl: "",
+		twitterImage: "",
+		twitterTitle: subservice?.title ?? "Delmoment",
+		twitterDescription: "Delmoment i en tjänst.",
 		twitterCard: "summary_large_image",
 	});
 });

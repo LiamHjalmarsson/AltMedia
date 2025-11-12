@@ -4,7 +4,7 @@
   "info": {
     "singularName": "subservice",
     "pluralName": "subservices",
-    "displayName": "Subservice"
+    "displayName": "Under Tjänster"
   },
   "options": {
     "draftAndPublish": true

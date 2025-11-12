@@ -77,34 +77,48 @@ export interface BuildProjectPage {
 	id: number;
 	title: string;
 	description?: string;
-	slug?: string;
-	steps: {
-		id: number;
-		title: string;
-		description?: string;
-		questions: {
-			id: number;
-			label: string;
-			type: "boolean" | "multi" | "text" | "budget" | "time" | "static" | "input";
-			options?: string[] | null;
-		}[];
-		related_services?: { id: number; title: string }[];
-		related_subservices?: { id: number; title: string }[];
-	}[];
+	steps: Step[];
+	settings: BuildSettings;
+	seo?: Seo;
+}
+
+export interface BuildSettings {
+	show_summary_panel?: boolean;
+	message?: string;
 }
 
 export interface Step {
 	id: number;
 	title: string;
-	description?: string | null;
+	subtitle?: string;
+	description?: string;
+	type: "form" | "relations";
+	clickable_relations?: boolean;
+	services?: Pick<Service, "id" | "title">[];
+	subservices?: Pick<Subservice, "id" | "title">[];
 	questions: Question[];
-	related_services?: Pick<Service, "id" | "title" | "slug">[];
-	related_subservices?: Pick<Subservice, "id" | "title" | "slug">[];
 }
 
 export interface Question {
 	id: number;
+	title: string;
+	help_text?: string;
+	type: "boolean" | "multi" | "single" | "budget_time" | "textarea" | "input";
+	options?: Option[];
+	conditional?: Conditional;
+}
+
+export interface Option {
+	id: number;
 	label: string;
-	type: "boolean" | "multi" | "text" | "budget" | "time" | "static" | "input";
-	options?: string[];
+	value: string;
+	is_static?: boolean;
+}
+
+export interface Conditional {
+	id: number;
+	trigger_value: string;
+	placeholder?: string;
+	label?: string;
+	type?: "input" | "textarea" | "number" | "url";
 }

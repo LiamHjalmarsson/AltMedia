@@ -16,7 +16,7 @@ defineProps<{ project: Project }>();
 				loading="lazy"
 				class="object-cover w-full h-full" />
 
-			<div class="project-overlay absolute inset-0 bg-bg-dark/70 opacity-0" />
+			<div class="project-overlay absolute inset-0 bg-bg-dark opacity-0" />
 
 			<h3
 				class="project-title hidden lg:block font-semibold absolute inset-x-0 bottom-10 z-10 text-light text-center px-md text-heading-md sm:text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl tracking-tight leading-tight">

@@ -376,7 +376,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   collectionName: 'articles';
   info: {
-    displayName: 'Article';
+    displayName: 'Artiklar';
     pluralName: 'articles';
     singularName: 'article';
   };
@@ -472,7 +472,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
 export interface ApiArticlesPageArticlesPage extends Struct.SingleTypeSchema {
   collectionName: 'articles_pages';
   info: {
-    displayName: 'Articles Page';
+    displayName: 'Artiklar Sida';
     pluralName: 'articles-pages';
     singularName: 'articles-page';
   };
@@ -504,7 +504,7 @@ export interface ApiBuildProjectPageBuildProjectPage
   extends Struct.SingleTypeSchema {
   collectionName: 'build_project_pages';
   info: {
-    displayName: 'BuildProject Page';
+    displayName: 'Bygg Project Sida';
     pluralName: 'build-project-pages';
     singularName: 'build-project-page';
   };
@@ -524,8 +524,8 @@ export interface ApiBuildProjectPageBuildProjectPage
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
-    slug: Schema.Attribute.UID<'title'>;
-    steps: Schema.Attribute.Component<'form.step', true>;
+    settings: Schema.Attribute.Component<'build.settings', false>;
+    steps: Schema.Attribute.Component<'build.step', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -536,7 +536,7 @@ export interface ApiBuildProjectPageBuildProjectPage
 export interface ApiContactContact extends Struct.SingleTypeSchema {
   collectionName: 'contacts';
   info: {
-    displayName: 'Contact Page';
+    displayName: 'Kontakt Sida';
     pluralName: 'contacts';
     singularName: 'contact';
   };
@@ -565,7 +565,7 @@ export interface ApiContactContact extends Struct.SingleTypeSchema {
 export interface ApiGlobalConfigGlobalConfig extends Struct.SingleTypeSchema {
   collectionName: 'global_configs';
   info: {
-    displayName: 'Global Settings';
+    displayName: 'Inst\u00E4llningar';
     pluralName: 'global-configs';
     singularName: 'global-config';
   };
@@ -639,7 +639,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
 export interface ApiPagePage extends Struct.CollectionTypeSchema {
   collectionName: 'pages';
   info: {
-    displayName: 'Page';
+    displayName: 'Statiska sidor';
     pluralName: 'pages';
     singularName: 'page';
   };
@@ -710,7 +710,7 @@ export interface ApiProjectRequestProjectRequest
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
-    displayName: 'Project';
+    displayName: 'Projekt';
     pluralName: 'projects';
     singularName: 'project';
   };
@@ -751,7 +751,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
 export interface ApiProjectsPageProjectsPage extends Struct.SingleTypeSchema {
   collectionName: 'projects_pages';
   info: {
-    displayName: 'Projects Page';
+    displayName: 'Projekt Sida';
     pluralName: 'projects-pages';
     singularName: 'projects-page';
   };
@@ -782,7 +782,7 @@ export interface ApiProjectsPageProjectsPage extends Struct.SingleTypeSchema {
 export interface ApiServiceService extends Struct.CollectionTypeSchema {
   collectionName: 'services';
   info: {
-    displayName: 'Service';
+    displayName: 'Tj\u00E4nster';
     pluralName: 'services';
     singularName: 'service';
   };
@@ -823,7 +823,7 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
 export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
   collectionName: 'services_pages';
   info: {
-    displayName: 'Services Page';
+    displayName: 'Tj\u00E4nster Sida';
     pluralName: 'services-pages';
     singularName: 'services-page';
   };
@@ -855,7 +855,7 @@ export interface ApiServicesPageServicesPage extends Struct.SingleTypeSchema {
 export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
   collectionName: 'subservices';
   info: {
-    displayName: 'Subservice';
+    displayName: 'Under Tj\u00E4nster';
     pluralName: 'subservices';
     singularName: 'subservice';
   };
@@ -894,7 +894,7 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
 export interface ApiTagTag extends Struct.CollectionTypeSchema {
   collectionName: 'tags';
   info: {
-    displayName: 'Tag';
+    displayName: 'Kategori';
     pluralName: 'tags';
     singularName: 'tag';
   };

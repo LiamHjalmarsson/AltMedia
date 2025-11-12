@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const homeStore = useHomeStore();
 
+useAppHead();
+
 await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
 
 const { hero, hasForm, form, blocks } = storeToRefs(homeStore);

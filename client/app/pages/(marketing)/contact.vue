@@ -11,6 +11,8 @@ definePageMeta({
 	layout: "minimal",
 });
 
+useAppHead(contactPage?.value?.data.seo || undefined);
+
 function handleSubmit(data: Record<string, any>) {}
 </script>
 
@@ -24,7 +26,7 @@ function handleSubmit(data: Record<string, any>) {}
 							:title="contactPage?.data?.form?.title || 'Skicka ett meddelande'"
 							:align_content="'left'" />
 
-						<p v-if="contactPage?.data?.form?.description" class="mt-sm text-dark-gray">
+						<p v-if="contactPage?.data?.form?.description" class="mt-sm text-black/80">
 							{{ contactPage?.data.form.description }}
 						</p>
 
@@ -61,7 +63,8 @@ function handleSubmit(data: Record<string, any>) {}
 								v-for="socialMedia in globalStore.contact.social_medias"
 								:key="socialMedia.id"
 								:to="socialMedia.url"
-								target="_blank">
+								target="_blank"
+								rel="noopener noreferrer">
 								<div
 									class="bg-dark text-light flex justify-center items-center rounded-full border shadow-lg transition duration-300 w-10 h-10 p-xs">
 									<Icon :name="socialMedia.icon.icon_name" size="28" />
