@@ -21,6 +21,22 @@ export default factories.createCoreController("api::project-request.project-requ
 			},
 		});
 
+		try {
+			await fetch(`${strapi.config.get("server.url") || "http://localhost:1337"}/api/discord`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${process.env.WEBHOOK_SECRET}`,
+				},
+				body: JSON.stringify({
+					model: "project-request",
+					entry: { name, email, phone, data: data, documentId: entity.documentId },
+				}),
+			});
+		} catch (err) {
+			strapi.log.error("Failed to send Discord notification:", err);
+		}
+
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 
 		return this.transformResponse(sanitizedEntity);
