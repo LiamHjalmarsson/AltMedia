@@ -127,7 +127,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 			const payload = {
 				name: formData.value["Namn"],
 				email: formData.value["E-post"],
-				phone: formData.value["Telefonnummer"],
+				phone: formData.value["Telefon"],
 				data: summaryData.value,
 			};
 
