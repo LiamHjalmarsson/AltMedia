@@ -78,13 +78,9 @@ export interface BuildProjectPage {
 	title: string;
 	description?: string;
 	steps: Step[];
-	settings: BuildSettings;
-	seo?: Seo;
-}
-
-export interface BuildSettings {
-	show_summary_panel?: boolean;
+	show_summary_panel: boolean;
 	message?: string;
+	seo?: Seo;
 }
 
 export interface Step {

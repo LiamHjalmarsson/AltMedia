@@ -81,7 +81,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 				</div>
 			</div>
 
-			<SummaryPanel v-if="page?.settings?.show_summary_panel" :summaryData="summaryData" />
+			<SummaryPanel v-if="page?.show_summary_panel" :summaryData="summaryData" />
 		</div>
 	</section>
 </template>

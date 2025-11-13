@@ -522,9 +522,11 @@ export interface ApiBuildProjectPageBuildProjectPage
       'api::build-project-page.build-project-page'
     > &
       Schema.Attribute.Private;
+    message: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
-    settings: Schema.Attribute.Component<'build.settings', false>;
+    show_summary_panel: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     steps: Schema.Attribute.Component<'build.step', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

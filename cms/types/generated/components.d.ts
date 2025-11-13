@@ -175,19 +175,7 @@ export interface BuildConditional extends Struct.ComponentSchema {
     label: Schema.Attribute.String;
     placeholder: Schema.Attribute.String;
     trigger_value: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']> &
-      Schema.Attribute.DefaultTo<'input'>;
-  };
-}
-
-export interface BuildGroup extends Struct.ComponentSchema {
-  collectionName: 'components_build_groups';
-  info: {
-    displayName: 'Group';
-  };
-  attributes: {
-    questions: Schema.Attribute.Component<'build.question', true>;
-    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']>;
   };
 }
 
@@ -214,20 +202,8 @@ export interface BuildQuestion extends Struct.ComponentSchema {
     options: Schema.Attribute.Component<'build.option', true>;
     title: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<
-      ['multi', 'boolean', 'single', 'input', 'textarea', 'budget_time']
+      ['boolean', 'multi', 'single', 'budget_time', 'textarea', 'input']
     >;
-  };
-}
-
-export interface BuildSettings extends Struct.ComponentSchema {
-  collectionName: 'components_build_settings';
-  info: {
-    displayName: 'Settings';
-  };
-  attributes: {
-    message: Schema.Attribute.Text;
-    show_summary_panel: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<true>;
   };
 }
 
@@ -238,8 +214,8 @@ export interface BuildStep extends Struct.ComponentSchema {
   };
   attributes: {
     clickable_relations: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
-    description: Schema.Attribute.String;
+      Schema.Attribute.DefaultTo<true>;
+    description: Schema.Attribute.Text;
     questions: Schema.Attribute.Component<'build.question', true>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     subservices: Schema.Attribute.Relation<
@@ -248,22 +224,7 @@ export interface BuildStep extends Struct.ComponentSchema {
     >;
     subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['relations', 'form']> &
-      Schema.Attribute.DefaultTo<'form'>;
-  };
-}
-
-export interface FormConditional extends Struct.ComponentSchema {
-  collectionName: 'components_form_conditionals';
-  info: {
-    displayName: 'conditional';
-  };
-  attributes: {
-    label: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<
-      ['input', 'text', 'number', 'email', 'url']
-    > &
-      Schema.Attribute.DefaultTo<'input'>;
+    type: Schema.Attribute.Enumeration<['form', 'relations']>;
   };
 }
 
@@ -301,34 +262,6 @@ export interface FormInput extends Struct.ComponentSchema {
     select_multiple: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     type: Schema.Attribute.Enumeration<['input', 'textarea', 'select']>;
-  };
-}
-
-export interface FormQuestions extends Struct.ComponentSchema {
-  collectionName: 'components_form_questions';
-  info: {
-    displayName: 'questions';
-  };
-  attributes: {
-    questions: Schema.Attribute.Component<'build.question', true>;
-  };
-}
-
-export interface FormStep extends Struct.ComponentSchema {
-  collectionName: 'components_form_steps';
-  info: {
-    displayName: 'step';
-  };
-  attributes: {
-    related_services: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::service.service'
-    >;
-    related_subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
-    title: Schema.Attribute.String;
   };
 }
 
@@ -543,16 +476,11 @@ declare module '@strapi/strapi' {
       'block.info': BlockInfo;
       'block.list': BlockList;
       'build.conditional': BuildConditional;
-      'build.group': BuildGroup;
       'build.option': BuildOption;
       'build.question': BuildQuestion;
-      'build.settings': BuildSettings;
       'build.step': BuildStep;
-      'form.conditional': FormConditional;
       'form.form': FormForm;
       'form.input': FormInput;
-      'form.questions': FormQuestions;
-      'form.step': FormStep;
       'global.contact': GlobalContact;
       'global.footer': GlobalFooter;
       'global.footer-column': GlobalFooterColumn;

@@ -169,7 +169,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excluded.includes(key)));
 	});
 
-	const showSummaryPanel = computed(() => !!page.value?.settings?.show_summary_panel);
+	const showSummaryPanel = computed(() => !!page.value?.show_summary_panel);
 
 	function isRelationStep(step?: Step | null): boolean {
 		return step?.type === "relations";

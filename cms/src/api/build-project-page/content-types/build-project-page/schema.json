@@ -22,10 +22,12 @@
       "component": "build.step",
       "repeatable": true
     },
-    "settings": {
-      "type": "component",
-      "component": "build.settings",
-      "repeatable": false
+    "show_summary_panel": {
+      "type": "boolean",
+      "default": false
+    },
+    "message": {
+      "type": "text"
     },
     "seo": {
       "type": "component",
