@@ -166,68 +166,6 @@ export interface BlockList extends Struct.ComponentSchema {
   };
 }
 
-export interface BuildConditional extends Struct.ComponentSchema {
-  collectionName: 'components_build_conditionals';
-  info: {
-    displayName: 'Conditional';
-  };
-  attributes: {
-    label: Schema.Attribute.String;
-    placeholder: Schema.Attribute.String;
-    trigger_value: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']>;
-  };
-}
-
-export interface BuildOption extends Struct.ComponentSchema {
-  collectionName: 'components_build_options';
-  info: {
-    displayName: 'Option';
-  };
-  attributes: {
-    is_static: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    label: Schema.Attribute.String;
-    value: Schema.Attribute.String;
-  };
-}
-
-export interface BuildQuestion extends Struct.ComponentSchema {
-  collectionName: 'components_build_questions';
-  info: {
-    displayName: 'Question';
-  };
-  attributes: {
-    conditional: Schema.Attribute.Component<'build.conditional', false>;
-    help_text: Schema.Attribute.String;
-    options: Schema.Attribute.Component<'build.option', true>;
-    title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<
-      ['boolean', 'multi', 'single', 'budget_time', 'textarea', 'input']
-    >;
-  };
-}
-
-export interface BuildStep extends Struct.ComponentSchema {
-  collectionName: 'components_build_steps';
-  info: {
-    displayName: 'Step';
-  };
-  attributes: {
-    clickable_relations: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<true>;
-    description: Schema.Attribute.Text;
-    questions: Schema.Attribute.Component<'build.question', true>;
-    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
-    subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
-    subtitle: Schema.Attribute.String;
-    title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['form', 'relations']>;
-  };
-}
-
 export interface FormForm extends Struct.ComponentSchema {
   collectionName: 'components_form_forms';
   info: {
@@ -475,10 +413,6 @@ declare module '@strapi/strapi' {
       'block.hero': BlockHero;
       'block.info': BlockInfo;
       'block.list': BlockList;
-      'build.conditional': BuildConditional;
-      'build.option': BuildOption;
-      'build.question': BuildQuestion;
-      'build.step': BuildStep;
       'form.form': FormForm;
       'form.input': FormInput;
       'global.contact': GlobalContact;
