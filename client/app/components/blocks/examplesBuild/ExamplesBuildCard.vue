@@ -29,7 +29,7 @@ defineProps<{ item: BuildItem }>();
 			<li
 				v-for="sub in item.subservices"
 				:key="sub.id"
-				class="flex items-center justify-center text-sm text-black/80 pb-xs border-b border-b-dark/10">
+				class="flex items-center justify-center text-sm text-black/80 pb-xs border-b border-b-dark/10 w-fit">
 				<span>{{ sub.title }}</span>
 			</li>
 		</ul>

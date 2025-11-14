@@ -17,10 +17,7 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 				<li v-for="(item, i) in block.items" :key="item.id">
 					<ExamplesBuildCard
 						:item="item"
-						:class="[
-							'transition-transform duration-300 lg:will-change-transform',
-							i % 3 === 1 ? 'lg:scale-105' : '',
-						]" />
+						:class="['transition-transform duration-300', i % 3 === 1 ? 'lg:scale-105' : '']" />
 				</li>
 			</ul>
 
