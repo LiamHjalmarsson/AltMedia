@@ -39,7 +39,7 @@ const alignClass = computed(() => {
 			:url="link.url"
 			:label="link.label"
 			:variant="link.variant"
-			:size="link.size || 'lg'"
+			:size="link.size || 'md'"
 			:icon="link?.icon || 'material-symbols:arrow-forward'"
 			class="max-lg:hidden w-fit shrink" />
 	</div>

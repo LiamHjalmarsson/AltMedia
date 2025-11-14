@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Size, Variant } from "~/types";
+import type { Variant } from "~/types";
 import type { Button } from "~/types";
 
 const props = defineProps<Button>();
@@ -26,7 +26,7 @@ const sizeClass: Record<Button["size"], string> = {
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition flex items-center justify-center space-x-sm"
+		class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition space-x-sm"
 		:class="[sizeClass[size]]">
 		<span class="relative flex items-center z-10 px-2xs">
 			<Icon

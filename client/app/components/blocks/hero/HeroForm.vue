@@ -46,7 +46,7 @@ function onSubmit(event: Event) {
 							type="submit"
 							:label="form.button?.label"
 							:icon="form.button.icon"
-							:size="form.button.size"
+							:size="form.button.size || 'md'"
 							:variant="form.button.variant" />
 					</div>
 				</form>

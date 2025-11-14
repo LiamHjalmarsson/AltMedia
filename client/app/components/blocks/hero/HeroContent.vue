@@ -40,7 +40,7 @@ function formatColoredWords(content: Hero): string {
 				:key="link.id"
 				:variant="link.variant"
 				:url="link.url"
-				:size="link.size || 'lg'"
+				:size="link.size || 'md'"
 				:label="link.label"
 				class="max-lg:min-w-[250px]" />
 		</div>
