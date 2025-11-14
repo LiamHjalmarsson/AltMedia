@@ -41,7 +41,7 @@ const textThemeClass = computed(() => {
 		return "";
 	}
 
-	return color.theme === "dark" ? "text-dark" : "text-light";
+	return color.theme === "dark" ? "text-black" : "text-white";
 });
 </script>
 

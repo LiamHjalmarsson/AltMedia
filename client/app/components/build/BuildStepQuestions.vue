@@ -16,7 +16,7 @@ defineProps<{
 			:key="question.id">
 			<div class="mb-md">
 				<label class="font-semibold text-lg">{{ question.title }}</label>
-				<p v-if="question.help_text" class="text-dark/80 text-sm mt-2xs">{{ question.help_text }}</p>
+				<p v-if="question.help_text" class="text-black/80 text-sm mt-2xs">{{ question.help_text }}</p>
 			</div>
 			<BuildQuestionBoolean v-if="question.type === 'boolean'" :question="question" />
 			<BuildQuestionOptions v-else-if="['single', 'multi'].includes(question.type)" :question="question" />

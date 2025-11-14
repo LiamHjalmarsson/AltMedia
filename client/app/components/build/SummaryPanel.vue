@@ -56,7 +56,7 @@ const mergedSummary = computed<Record<string, string>>(() => {
 		<div class="grid max-xl:grid-cols-2 gap-x-lg gap-y-lg">
 			<div v-for="(value, key) in mergedSummary" :key="key" class="border-b border-gray-200 pb-3">
 				<p class="font-semibold text-lg mb-1">{{ key }}</p>
-				<p class="text-dark/80">{{ value }}</p>
+				<p class="text-black/80">{{ value }}</p>
 			</div>
 		</div>
 	</div>

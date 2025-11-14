@@ -13,7 +13,7 @@ function handleClick() {
 </script>
 
 <template>
-	<div @click="handleClick" class="px-md py-xs cursor-pointer hover:bg-light/20 transition flex items-center">
+	<div @click="handleClick" class="px-md py-xs cursor-pointer hover:bg-white/20 transition flex items-center">
 		<slot>{{ value }}</slot>
 	</div>
 </template>

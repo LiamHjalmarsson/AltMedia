@@ -66,7 +66,7 @@ function handleSubmit(data: Record<string, any>) {}
 								target="_blank"
 								rel="noopener noreferrer">
 								<div
-									class="bg-dark text-light flex justify-center items-center rounded-full border shadow-lg transition duration-300 w-10 h-10 p-xs">
+									class="bg-black text-white flex justify-center items-center rounded-full border shadow-lg transition duration-300 w-10 h-10 p-xs">
 									<Icon :name="socialMedia.icon.icon_name" size="28" />
 								</div>
 							</NuxtLink>

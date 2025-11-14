@@ -55,7 +55,7 @@ useAppHead(page?.value?.seo || undefined);
 								{{ project.title }}
 							</h3>
 
-							<div v-if="project.services?.length" class="flex flex-wrap gap-xs text-sm text-dark-gray">
+							<div v-if="project.services?.length" class="flex flex-wrap gap-xs text-sm text-black/80">
 								<span
 									v-for="service in project.services"
 									:key="service.id"

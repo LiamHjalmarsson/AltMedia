@@ -7,7 +7,7 @@ const globalStore = useGlobalStore();
 
 const { header } = storeToRefs(globalStore);
 
-const { theme, init, destroy, force } = useAutoHeaderContrast(headerRef, {
+const { theme, init, destroy } = useAutoHeaderContrast(headerRef, {
 	baseSelector: ".hero",
 });
 

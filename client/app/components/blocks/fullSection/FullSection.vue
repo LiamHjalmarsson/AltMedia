@@ -6,7 +6,7 @@ const { block } = defineProps<{ block: FullSectionBlock }>();
 
 const bgColor = computed(() => {
 	if (!block.color) {
-		return "bg-bg-dark text-light";
+		return "bg-bg-dark text-white";
 	}
 
 	if (block.color.hex) {
@@ -24,7 +24,7 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	return block.color?.theme === "dark" ? "text-dark" : "text-light";
+	return block.color?.theme === "dark" ? "text-black" : "text-white";
 });
 </script>
 

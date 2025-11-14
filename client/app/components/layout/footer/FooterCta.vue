@@ -31,7 +31,7 @@ const cta = computed(() => footer.value?.cta);
 
 			<div class="absolute inset-0 bg-bg-dark/80" />
 
-			<div class="relative text-center lg:p-3xl w-full max-w-[900px] mx-auto">
+			<div class="relative text-center lg:p-3xl w-full max-w-[900px] mx-auto bg-bg-dark/0">
 				<p v-if="cta.subtitle" class="text-sm font-semibold tracking-widest uppercase text-secondary">
 					{{ cta.subtitle }}
 				</p>

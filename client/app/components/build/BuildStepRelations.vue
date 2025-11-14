@@ -21,12 +21,12 @@ function isSelected(title: string) {
 
 function relationClass(title: string) {
 	if (!isClickable.value) {
-		return "border-dark/10 bg-gray/10 text-dark/70 cursor-default select-none";
+		return "border-black/10 bg-gray/10 text-black/80 cursor-default select-none";
 	}
 
 	return isSelected(title)
 		? "bg-primary text-white border-primary"
-		: "hover:bg-primary/10 hover:border-primary hover:text-primary border-dark/10";
+		: "hover:bg-primary/10 hover:border-primary hover:text-primary border-black/10";
 }
 </script>
 

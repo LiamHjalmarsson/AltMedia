@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Article } from "~/types/content/collections";
+import type { Article } from "~/types";
 
 defineProps<{ article: Article }>();
 </script>
@@ -28,7 +28,7 @@ defineProps<{ article: Article }>();
 
 			<div class="flex items-center justify-between">
 				<ReadMoreButton />
-				<div class="text-xs text-dark-gray">
+				<div class="text-xs text-black-80">
 					<span v-if="article.published_date">
 						{{ article.published_date }}
 					</span>

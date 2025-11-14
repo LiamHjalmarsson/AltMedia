@@ -21,16 +21,16 @@ defineProps<{ article: Article }>();
 			</div>
 
 			<div class="flex flex-col justify-between flex-1 p-md">
-				<h3 class="text-lg font-bold text-dark duration-300 group-hover:text-primary line-clamp-2">
+				<h3 class="text-lg font-bold text-black duration-300 group-hover:text-primary line-clamp-2">
 					{{ article.title }}
 				</h3>
 
-				<p v-if="article.description" class="text-dark-gray mt-xs line-clamp-3">
+				<p v-if="article.description" class="text-black/80 mt-xs line-clamp-3">
 					{{ article.description }}
 				</p>
 
 				<div class="mt-auto flex items-center justify-between pt-sm">
-					<div class="text-xs text-dark-gray">
+					<div class="text-xs text-black/80">
 						<div v-if="article.published_date">{{ article.published_date }}</div>
 						<div v-if="article.reading_time_min">{{ article.reading_time_min }} min</div>
 					</div>

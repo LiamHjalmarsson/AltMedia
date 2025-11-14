@@ -9,9 +9,9 @@ defineProps<{ column: FooterColumn }>();
 		<h4 class="text-lg font-semibold text-white">{{ column.title }}</h4>
 
 		<ul class="space-y-sm">
-			<li v-for="l in column.links" :key="l.label">
-				<NuxtLink :to="l.url" class="block text-light/60 hover:text-white transition font-medium">
-					{{ l.label }}
+			<li v-for="link in column.links" :key="link.label">
+				<NuxtLink :to="link.url" class="block text-white/60 hover:text-white transition font-medium">
+					{{ link.label }}
 				</NuxtLink>
 			</li>
 		</ul>

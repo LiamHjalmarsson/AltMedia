@@ -35,12 +35,12 @@ function submitForm() {}
 		<div class="mx-auto w-full h-full px-xs xs:px-sm sm:px-md md:px-lg lg:px-2xl max-w-[1600px]">
 			<div class="mb-xl text-center">
 				<Heading title="Starta ett projekt" align_content="center" />
-				<p class="text-lg text-dark-gray mt-sm">
+				<p class="text-lg text-black/80 mt-sm">
 					Fyll i stegen nedan och se en offert med prisförslag i realtid.
 				</p>
 			</div>
 
-			<div class="w-full h-2 rounded-full bg-light/20 mb-2xl overflow-hidden">
+			<div class="w-full h-2 rounded-full bg-white/20 mb-2xl overflow-hidden">
 				<div
 					class="h-2 bg-gradient-to-r from-primary to-secondary transition-all duration-500"
 					:style="{ width: progress + '%' }" />
@@ -50,7 +50,7 @@ function submitForm() {}
 				<div class="col-span-2 space-y-2xl">
 					<div
 						v-if="currentStep === 1"
-						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						class="p-xl rounded-2xl border border-white/20 bg-white shadow-md space-y-lg">
 						<h2 class="text-heading-md font-bold">1. Välj projekt typ</h2>
 						<div class="grid grid-cols-2 gap-lg">
 							<button
@@ -61,7 +61,7 @@ function submitForm() {}
 									'p-lg rounded-xl border text-center transition cursor-pointer font-semibold',
 									formData.projectType === type
 										? 'border-primary bg-primary/10 text-primary'
-										: 'border-light/20 hover:border-primary/60',
+										: 'border-white/20 hover:border-primary/60',
 								]">
 								{{ type }}
 							</button>
@@ -70,7 +70,7 @@ function submitForm() {}
 
 					<div
 						v-if="currentStep === 2"
-						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						class="p-xl rounded-2xl border border-white/20 bg-white shadow-md space-y-lg">
 						<h2 class="text-heading-md font-bold">2. Beskriv projektet</h2>
 						<Textarea
 							v-model="formData.summary"
@@ -81,7 +81,7 @@ function submitForm() {}
 
 					<div
 						v-if="currentStep === 3"
-						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						class="p-xl rounded-2xl border border-white/20 bg-white shadow-md space-y-lg">
 						<h2 class="text-heading-md font-bold">3. Välj tillägg</h2>
 						<div class="grid grid-cols-2 gap-md">
 							<label
@@ -96,7 +96,7 @@ function submitForm() {}
 
 					<div
 						v-if="currentStep === 4"
-						class="p-xl rounded-2xl border border-light/20 bg-light shadow-md space-y-lg">
+						class="p-xl rounded-2xl border border-white/20 bg-white shadow-md space-y-lg">
 						<h2 class="text-heading-md font-bold">4. Bekräfta & skicka</h2>
 						<p>
 							Granska detaljerna i sammanfattningen till höger. Klicka på
@@ -133,10 +133,10 @@ function submitForm() {}
 					</div>
 				</div>
 
-				<aside class="sticky top-24 p-xl rounded-2xl border border-light/20 bg-light shadow-lg space-y-lg">
+				<aside class="sticky top-24 p-xl rounded-2xl border border-white/20 bg-white shadow-lg space-y-lg">
 					<h3 class="text-heading-md font-bold">Sammanfattning</h3>
 
-					<div class="space-y-sm text-dark-gray">
+					<div class="space-y-sm text-black/80">
 						<p>
 							<strong>Projekt typ:</strong>
 							<span>{{ formData.projectType || "Ej valt" }}</span>
@@ -154,7 +154,7 @@ function submitForm() {}
 						</p>
 					</div>
 
-					<div class="border-t border-light/20 pt-lg">
+					<div class="border-t border-white/20 pt-lg">
 						<p class="text-heading-md font-bold text-primary">Totalpris: {{ formData.totalPrice }} SEK</p>
 					</div>
 				</aside>

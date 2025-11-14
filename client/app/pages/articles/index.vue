@@ -53,7 +53,7 @@ useAppHead(page?.value?.seo || undefined);
 
 							<div class="flex justify-between items-center mt-sm">
 								<div
-									class="text-sm text-dark-gray flex items-center gap-xs"
+									class="text-sm text-black/80 flex items-center gap-xs"
 									v-if="article.published_date">
 									<span>{{ article.published_date }}</span>
 									<span> / </span>

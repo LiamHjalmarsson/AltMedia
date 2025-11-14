@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useCardHover } from "~/composables/useCardHover";
 import type { Service } from "~/types";
 
 const { bgRef, onEnter, onLeave } = useCardHover();
@@ -8,7 +7,7 @@ defineProps<{ service: Service }>();
 </script>
 
 <template>
-	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-gray/50">
+	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-white/50">
 		<NuxtLink
 			:to="`/services/${service.slug}`"
 			:aria-label="`Läs mer om ${service.title}`"
@@ -22,7 +21,7 @@ defineProps<{ service: Service }>();
 						{{ service.title }}
 					</h3>
 
-					<p class="text-md md:text-lg text-dark/80 leading-relaxed mb-sm md:mb-md">
+					<p class="text-md md:text-lg text-black/80 leading-relaxed mb-sm md:mb-md">
 						{{ service.description }}
 					</p>
 				</div>

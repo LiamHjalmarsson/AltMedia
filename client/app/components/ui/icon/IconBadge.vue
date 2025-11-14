@@ -32,6 +32,6 @@ const iconSize = computed(() => (props.size || 48) * 0.6);
 
 		<Icon v-else-if="icon.icon_name" :name="icon.icon_name" :size="iconSize" />
 
-		<span v-else class="text-xs text-light/60">?</span>
+		<span v-else class="text-xs text-white/60">?</span>
 	</span>
 </template>
