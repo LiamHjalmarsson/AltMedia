@@ -11,7 +11,7 @@ defineProps<{
 	<div class="space-y-xl">
 		<div
 			v-for="question in step.questions.filter(
-				(question) => !['Namn', 'Telefon', 'E-post', 'Meddelande'].includes(question.title)
+				(question) => !['Namn', 'Telefon', 'Email', 'Meddelande'].includes(question.title)
 			)"
 			:key="question.id">
 			<div class="mb-md">
@@ -34,7 +34,7 @@ defineProps<{
 			</div>
 		</div>
 
-		<div v-for="question in step.questions.filter((question) => question.title === 'E-post')" :key="question.id">
+		<div v-for="question in step.questions.filter((question) => question.title === 'Email')" :key="question.id">
 			<BuildQuestionInput :question="question" />
 		</div>
 

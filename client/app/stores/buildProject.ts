@@ -126,7 +126,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		try {
 			const payload = {
 				name: formData.value["Namn"],
-				email: formData.value["E-post"],
+				email: formData.value["Email"],
 				phone: formData.value["Telefon"],
 				data: summaryData.value,
 			};
@@ -164,7 +164,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 	const isOnLastStep = computed(() => activeStepIndex.value === totalStepCount.value);
 
 	const summaryData = computed(() => {
-		const excluded = ["Namn", "E-post", "Telefonnummer"];
+		const excluded = ["Namn", "Email", "Telefonnummer"];
 
 		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excluded.includes(key)));
 	});

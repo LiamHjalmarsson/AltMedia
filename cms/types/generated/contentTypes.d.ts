@@ -527,6 +527,7 @@ export interface ApiBuildProjectPageBuildProjectPage
     seo: Schema.Attribute.Component<'seo.seo', false>;
     show_summary_panel: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
+    steps: Schema.Attribute.Component<'project-build.step', true>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

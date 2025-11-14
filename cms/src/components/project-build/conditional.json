@@ -1,0 +1,23 @@
+{
+	"collectionName": "components_project-build_conditionals",
+	"info": {
+		"displayName": "Conditional"
+	},
+	"options": {},
+	"attributes": {
+		"label": {
+			"type": "string"
+		},
+		"trigger_value": {
+			"type": "string"
+		},
+		"placeholder": {
+			"type": "string"
+		},
+		"type": {
+			"type": "enumeration",
+			"enum": ["input", "textarea", "number", "url"]
+		}
+	},
+	"config": {}
+}

@@ -1,0 +1,30 @@
+{
+	"collectionName": "components_project-build_questions",
+	"info": {
+		"displayName": "Question"
+	},
+	"options": {},
+	"attributes": {
+		"title": {
+			"type": "string"
+		},
+		"help_text": {
+			"type": "string"
+		},
+		"type": {
+			"type": "enumeration",
+			"enum": ["boolean", "multi", "single", "budget_time", "textarea", "input"]
+		},
+		"options": {
+			"type": "component",
+			"component": "project-build.option",
+			"repeatable": true
+		},
+		"conditional": {
+			"type": "component",
+			"component": "project-build.conditional",
+			"repeatable": false
+		}
+	},
+	"config": {}
+}

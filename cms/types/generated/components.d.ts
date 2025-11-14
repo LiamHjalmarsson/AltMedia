@@ -273,6 +273,68 @@ export interface GlobalSocialMedia extends Struct.ComponentSchema {
   };
 }
 
+export interface ProjectBuildConditional extends Struct.ComponentSchema {
+  collectionName: 'components_project-build_conditionals';
+  info: {
+    displayName: 'Conditional';
+  };
+  attributes: {
+    label: Schema.Attribute.String;
+    placeholder: Schema.Attribute.String;
+    trigger_value: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']>;
+  };
+}
+
+export interface ProjectBuildOption extends Struct.ComponentSchema {
+  collectionName: 'components_project-build_options';
+  info: {
+    displayName: 'Option';
+  };
+  attributes: {
+    is_static: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    label: Schema.Attribute.String;
+    value: Schema.Attribute.String;
+  };
+}
+
+export interface ProjectBuildQuestion extends Struct.ComponentSchema {
+  collectionName: 'components_project-build_questions';
+  info: {
+    displayName: 'Question';
+  };
+  attributes: {
+    conditional: Schema.Attribute.Component<'project-build.conditional', false>;
+    help_text: Schema.Attribute.String;
+    options: Schema.Attribute.Component<'project-build.option', true>;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      ['boolean', 'multi', 'single', 'budget_time', 'textarea', 'input']
+    >;
+  };
+}
+
+export interface ProjectBuildStep extends Struct.ComponentSchema {
+  collectionName: 'components_project-build_steps';
+  info: {
+    displayName: 'Step';
+  };
+  attributes: {
+    clickable_relations: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
+    description: Schema.Attribute.Text;
+    questions: Schema.Attribute.Component<'project-build.question', true>;
+    services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
+    subservices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subservice.subservice'
+    >;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['form', 'relations']>;
+  };
+}
+
 export interface SectionsIntroduction extends Struct.ComponentSchema {
   collectionName: 'components_sections_introductions';
   info: {
@@ -421,6 +483,10 @@ declare module '@strapi/strapi' {
       'global.menu-link': GlobalMenuLink;
       'global.navigation': GlobalNavigation;
       'global.social-media': GlobalSocialMedia;
+      'project-build.conditional': ProjectBuildConditional;
+      'project-build.option': ProjectBuildOption;
+      'project-build.question': ProjectBuildQuestion;
+      'project-build.step': ProjectBuildStep;
       'sections.introduction': SectionsIntroduction;
       'seo.seo': SeoSeo;
       'styles.color': StylesColor;
