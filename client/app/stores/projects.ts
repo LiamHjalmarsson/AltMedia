@@ -20,8 +20,6 @@ export const useProjectStore = defineStore("projects", () => {
 
 			return projects.value;
 		} catch (err) {
-			console.error("Failed to fetch projects:", err);
-
 			return [];
 		} finally {
 			loading.value = false;
@@ -38,8 +36,6 @@ export const useProjectStore = defineStore("projects", () => {
 
 			return currentProject.value;
 		} catch (err) {
-			console.error("Failed to fetch project:", err);
-
 			return null;
 		} finally {
 			loading.value = false;

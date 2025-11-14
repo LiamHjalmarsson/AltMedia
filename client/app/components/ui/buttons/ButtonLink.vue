@@ -31,8 +31,8 @@ const sizeClass: Record<Link["size"], string> = {
 		class="focus-visible:outline-primary flex">
 		<div
 			ref="linkWrapper"
-			class="relative flex items-center justify-center py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<span class="relative font-bold flex items-center justify-center w-full z-10" :class="[sizeClass[size]]">
+			class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition space-x-sm">
+			<span class="relative flex items-center z-10 px-sm" :class="[sizeClass[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"

@@ -17,8 +17,6 @@ const alignClass = computed(() => {
 		}
 	}
 });
-
-console.log(block);
 </script>
 
 <template>

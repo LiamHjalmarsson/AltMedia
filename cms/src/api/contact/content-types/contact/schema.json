@@ -11,6 +11,12 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
     "form": {
       "type": "component",
       "component": "form.form",
@@ -19,6 +25,21 @@
     "seo": {
       "type": "component",
       "component": "seo.seo",
+      "repeatable": false
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "color": {
+      "type": "component",
+      "component": "styles.color",
       "repeatable": false
     }
   }

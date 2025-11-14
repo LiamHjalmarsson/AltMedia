@@ -33,8 +33,6 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 			return page.value;
 		} catch (err) {
-			console.error("❌ Failed to fetch Build Project Page:", err);
-
 			page.value = null;
 
 			return null;
@@ -137,8 +135,6 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 			return true;
 		} catch (error) {
-			console.error("❌ Failed to submit project request:", error);
-
 			return false;
 		}
 	}

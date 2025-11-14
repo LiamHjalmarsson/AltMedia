@@ -1,7 +1,11 @@
 <script setup lang="ts"></script>
 
 <template>
-	<AppShell :showCta="false">
-		<slot />
-	</AppShell>
+	<div class="min-h-screen flex flex-col">
+		<Navigation />
+
+		<main class="grow">
+			<slot />
+		</main>
+	</div>
 </template>

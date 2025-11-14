@@ -6,8 +6,14 @@ import { factories } from "@strapi/strapi";
 export default factories.createCoreController("api::contact.contact", ({ strapi }) => ({
 	async find(ctx) {
 		const entity = await strapi.documents("api::contact.contact").findFirst({
-			fields: ["id"],
+			fields: ["id", "title", "description"],
 			populate: {
+				color: {
+					fields: ["hex", "theme", "type"],
+				},
+				cover: {
+					fields: ["url", "formats", "width", "height", "alternativeText", "mime"],
+				},
 				form: {
 					fields: ["title", "description", "columns"],
 					populate: {
@@ -45,6 +51,7 @@ export default factories.createCoreController("api::contact.contact", ({ strapi 
 		}
 
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
 		return this.transformResponse(sanitizedEntity);
 	},
 }));

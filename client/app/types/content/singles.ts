@@ -1,4 +1,4 @@
-import type { Image, Seo, Icon, Form } from "../shared";
+import type { Image, Seo, Icon, Form, Color } from "../shared";
 import type { Blocks, Cta, Hero } from "./blocks";
 import type { Service, Subservice } from "./collections";
 
@@ -72,6 +72,10 @@ export interface HomePage {
 // 🔹 Kontakt-sida
 export interface ContactPage {
 	id: string;
+	title: string;
+	description: string;
+	color: Color;
+	cover: Image;
 	form: Form;
 	seo?: Seo;
 }
