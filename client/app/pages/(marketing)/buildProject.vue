@@ -60,6 +60,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						@click="animate('prev', store.previousStep)"
 						label="Tillbaka"
 						type="button"
+						size="lg"
 						reversed
 						variant="outline" />
 					<Button
@@ -69,6 +70,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						variant="primary"
 						@click="animate('next', store.nextStep)"
 						type="button"
+						size="lg"
 						class="ml-auto" />
 					<Button
 						v-if="isOnLastStep"
@@ -77,6 +79,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						variant="primary"
 						@click="store.submitProjectRequest"
 						type="submit"
+						size="lg"
 						class="ml-auto" />
 				</div>
 			</div>

@@ -1,44 +1,37 @@
 <script setup lang="ts">
-import type { BuildItem } from "~/types/content/blocks";
+import type { BuildItem } from "~/types";
 
 defineProps<{ item: BuildItem }>();
 </script>
 
 <template>
-	<Card class="p-lg">
-		<div class="flex justify-center items-center mb-md">
-			<NuxtImg
-				v-if="item.icon?.is_image"
-				:src="item.icon.image?.url"
-				:alt="item.icon.image?.alternativeText || item.title"
-				format="webp,avif"
-				quality="85"
-				width="100"
-				height="100"
-				loading="lazy" />
-			<Icon v-else-if="item.icon?.icon_name" :name="item.icon.icon_name" size="40" class="text-primary" />
-		</div>
+	<Card class="p-lg text-center flex flex-col items-center">
+		<NuxtImg
+			v-if="item.icon?.is_image && item.icon.image?.url"
+			:src="item.icon.image.url"
+			:alt="item.icon.image.alternativeText || item.title"
+			format="webp,avif"
+			quality="85"
+			width="100"
+			height="100" />
 
-		<div class="mb-md flex-1 space-y-sm">
-			<h3 class="text-heading-md font-bold text-center">
-				{{ item.title }}
-			</h3>
+		<Icon v-else-if="item.icon?.icon_name" :name="item.icon.icon_name" size="40" class="text-primary" />
 
-			<p v-if="item.description" class="text-sm text-dark-gray text-center">
+		<div class="space-y-sm mb-lg mt-xl">
+			<h3 class="text-heading-md font-bold">{{ item.title }}</h3>
+
+			<p v-if="item.description" class="text-sm text-black/80">
 				{{ item.description }}
 			</p>
-
-			<ul class="space-y-xs mb-md">
-				<li
-					v-for="(subservice, i) in item.subservices"
-					:key="i"
-					class="flex items-center text-sm text-dark-gray">
-					<Icon name="lucide:check-circle" size="18" class="text-green-500 mr-xs" />
-					<span>
-						{{ subservice.title }}
-					</span>
-				</li>
-			</ul>
 		</div>
+
+		<ul v-if="item.subservices?.length" class="space-y-xs w-full">
+			<li
+				v-for="sub in item.subservices"
+				:key="sub.id"
+				class="flex items-center justify-center text-sm text-black/80 pb-xs border-b border-b-dark/10">
+				<span>{{ sub.title }}</span>
+			</li>
+		</ul>
 	</Card>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Heading } from "~/types/shared";
+import type { Heading } from "~/types";
 
 const props = withDefaults(defineProps<Heading>(), {
 	align_content: "left",
@@ -21,7 +21,7 @@ const alignClass = computed(() => {
 
 <template>
 	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
-		<div class="flex-2 grow max-w-[750px]">
+		<div class="flex-2 grow">
 			<div>
 				<h2
 					class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold tracking-tight">

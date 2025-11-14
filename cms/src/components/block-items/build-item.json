@@ -17,9 +17,6 @@
       "component": "ui.icon",
       "repeatable": false
     },
-    "price": {
-      "type": "biginteger"
-    },
     "subservices": {
       "type": "relation",
       "relation": "oneToMany",

@@ -109,6 +109,7 @@ function submitForm() {}
 							v-if="currentStep > 1"
 							type="button"
 							variant="ghost"
+							size="lg"
 							label="Tillbaka"
 							@click="prevStep" />
 
@@ -117,6 +118,7 @@ function submitForm() {}
 							variant="primary"
 							label="Nästa"
 							type="button"
+							size="lg"
 							class="ml-auto"
 							@click="nextStep" />
 
@@ -125,6 +127,7 @@ function submitForm() {}
 							variant="primary"
 							label="Skicka"
 							type="submit"
+							size="lg"
 							class="ml-auto"
 							@click="submitForm" />
 					</div>

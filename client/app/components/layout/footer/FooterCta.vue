@@ -53,6 +53,7 @@ const cta = computed(() => footer.value?.cta);
 						:variant="link.variant"
 						:url="link.url"
 						:icon="link.icon"
+						:size="link.size || 'lg'"
 						:aria-label="link.label"
 						class="max-lg:flex-1 max-lg:w-full" />
 				</div>

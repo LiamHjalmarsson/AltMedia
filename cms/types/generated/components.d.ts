@@ -9,7 +9,6 @@ export interface BlockItemsBuildItem extends Struct.ComponentSchema {
   attributes: {
     description: Schema.Attribute.Text;
     icon: Schema.Attribute.Component<'ui.icon', false>;
-    price: Schema.Attribute.BigInteger;
     subservices: Schema.Attribute.Relation<
       'oneToMany',
       'api::subservice.subservice'

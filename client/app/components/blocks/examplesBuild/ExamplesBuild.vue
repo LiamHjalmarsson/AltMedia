@@ -29,6 +29,7 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 					:label="block.button.label"
 					:url="block.button.url"
 					:variant="block.button.variant"
+					:size="block.button.size || 'lg'"
 					:icon="block.button.icon"
 					class="mx-auto" />
 			</div>

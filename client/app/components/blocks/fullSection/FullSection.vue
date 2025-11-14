@@ -61,6 +61,7 @@ const textColor = computed(() => {
 				:label="block.link.label"
 				:url="block.link.url"
 				:variant="block.link.variant"
+				:size="block.link.size || 'lg'"
 				:icon="block.link.icon"
 				:class="textColor" />
 		</div>
