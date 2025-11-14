@@ -1,14 +1,22 @@
 <script setup lang="ts">
 import type { ListItem } from "~/types";
 
-const props = defineProps<{ item: ListItem; index: number; showNumbers: boolean }>();
+interface Item {
+	item: ListItem;
+	index: number;
+	showNumbers: boolean;
+}
+
+const props = defineProps<Item>();
 
 const isEven = computed(() => (props.index + 1) % 2 === 0);
 
 const colorClass = computed(() => {
 	const color = props.item.color;
 
-	if (!color) return "";
+	if (!color) {
+		return "";
+	}
 
 	if (color.hex) {
 		return {

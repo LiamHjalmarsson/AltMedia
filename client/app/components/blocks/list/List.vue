@@ -23,7 +23,9 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	if (!block.color) return "text-white";
+	if (!block.color) {
+		return "text-white";
+	}
 
 	return block.color.theme === "dark" ? "text-black" : "text-white";
 });
