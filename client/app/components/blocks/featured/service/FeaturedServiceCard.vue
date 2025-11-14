@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useCardHover } from "~/composables/useCardHover";
-import type { Service } from "~/types/content/collections";
+import type { Service } from "~/types";
 
 const { bgRef, onEnter, onLeave } = useCardHover();
 

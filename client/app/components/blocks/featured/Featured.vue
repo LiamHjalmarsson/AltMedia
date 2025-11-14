@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FeaturedBlock } from "~/types/content/blocks";
+import type { FeaturedBlock } from "~/types";
 
 defineProps<{ block: FeaturedBlock }>();
 </script>

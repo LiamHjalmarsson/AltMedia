@@ -23,7 +23,7 @@ console.log(block);
 
 <template>
 	<section
-		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[90vh] max-lg:h-screen"
+		class="hero bg-black text-white overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[90vh] max-lg:h-screen"
 		style="min-height: 90vh">
 		<CoverBackground :media="block.background" overlay="bg-bg-dark/70" />
 
