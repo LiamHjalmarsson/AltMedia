@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { FooterColumn } from "~/types/content/singles";
+import type { FooterColumn } from "~/types";
+
 defineProps<{ column: FooterColumn }>();
 </script>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SocialMedia } from "~/types/content/singles";
+import type { SocialMedia } from "~/types";
 
 defineProps<{
 	socialMedias: SocialMedia[];

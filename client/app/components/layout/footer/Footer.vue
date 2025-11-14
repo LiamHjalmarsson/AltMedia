@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 const globalStore = useGlobalStore();
-const { footer, contact, globalConfig } = storeToRefs(globalStore);
+
+const { footer, contact } = storeToRefs(globalStore);
 
 const year = new Date().getFullYear();
 </script>
