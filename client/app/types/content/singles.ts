@@ -32,6 +32,9 @@ export interface FooterColumn {
 
 export interface Footer {
 	id: number;
+	logo: Image;
+	title: string;
+	description: string;
 	cta?: Cta;
 	footer_columns?: FooterColumn[];
 }
@@ -52,6 +55,7 @@ export interface ContactDetails {
 
 export interface SocialMedia {
 	id: number;
+	title: string;
 	url: string;
 	icon: Icon;
 }

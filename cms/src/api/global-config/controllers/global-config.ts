@@ -22,7 +22,11 @@ export default factories.createCoreController("api::global-config.global-config"
 					},
 				},
 				footer: {
+					fields: ["description", "title"],
 					populate: {
+						logo: {
+							fields: ["alternativeText", "formats", "height", "width", "name", "url", "provider"],
+						},
 						cta: {
 							fields: ["title", "subtitle", "description"],
 							populate: {
@@ -57,7 +61,7 @@ export default factories.createCoreController("api::global-config.global-config"
 					fields: ["email", "phone"],
 					populate: {
 						social_medias: {
-							fields: ["url"],
+							fields: ["url", "title"],
 							populate: {
 								icon: {
 									fields: ["icon_name", "is_image", "id"],

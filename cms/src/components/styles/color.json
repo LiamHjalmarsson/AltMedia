@@ -12,7 +12,10 @@
         "primary",
         "secondary",
         "tertiary",
-        "ghost"
+        "ghost",
+        "outline",
+        "white",
+        "black"
       ]
     },
     "hex": {

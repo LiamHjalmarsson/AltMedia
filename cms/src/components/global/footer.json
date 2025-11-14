@@ -5,6 +5,20 @@
   },
   "options": {},
   "attributes": {
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
     "cta": {
       "type": "component",
       "component": "block.cta",

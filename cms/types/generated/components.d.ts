@@ -221,7 +221,10 @@ export interface GlobalFooter extends Struct.ComponentSchema {
   };
   attributes: {
     cta: Schema.Attribute.Component<'block.cta', false>;
+    description: Schema.Attribute.Text;
     footer_columns: Schema.Attribute.Component<'global.footer-column', true>;
+    logo: Schema.Attribute.Media<'images' | 'files'>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -268,6 +271,7 @@ export interface GlobalSocialMedia extends Struct.ComponentSchema {
   attributes: {
     icon: Schema.Attribute.Component<'ui.icon', false> &
       Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -375,7 +379,7 @@ export interface StylesColor extends Struct.ComponentSchema {
     theme: Schema.Attribute.Enumeration<['light', 'dark', 'gradient']> &
       Schema.Attribute.DefaultTo<'dark'>;
     type: Schema.Attribute.Enumeration<
-      ['primary', 'secondary', 'tertiary', 'ghost']
+      ['primary', 'secondary', 'tertiary', 'ghost', 'outline', 'white', 'black']
     > &
       Schema.Attribute.DefaultTo<'primary'>;
   };

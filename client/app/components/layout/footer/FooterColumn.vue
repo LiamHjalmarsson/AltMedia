@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import type { FooterColumn } from "~/types/content/singles";
-
 defineProps<{ column: FooterColumn }>();
 </script>
 
 <template>
-	<div class="flex flex-col font-heading max-lg:text-center">
-		<NuxtLink :to="column.url" class="text-heading-xs lg:text-heading-sm font-semibold">
-			{{ column.title }}
-		</NuxtLink>
+	<div class="space-y-md">
+		<h4 class="text-lg font-semibold text-white">{{ column.title }}</h4>
 
-		<ul v-if="column.links?.length" class="mt-sm space-y-sm">
-			<li v-for="subLink in column.links" :key="subLink.label">
-				<MenuLink :link="subLink" />
+		<ul class="space-y-sm">
+			<li v-for="l in column.links" :key="l.label">
+				<NuxtLink :to="l.url" class="block text-light/60 hover:text-white transition font-medium">
+					{{ l.label }}
+				</NuxtLink>
 			</li>
 		</ul>
 	</div>
