@@ -8,7 +8,7 @@ defineProps<{ service: Service }>();
 </script>
 
 <template>
-	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-light-gray/50">
+	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-gray/50">
 		<NuxtLink
 			:to="`/services/${service.slug}`"
 			:aria-label="`Läs mer om ${service.title}`"
@@ -18,11 +18,11 @@ defineProps<{ service: Service }>();
 
 				<div class="flex-1">
 					<h3
-						class="font-semibold text-heading-sm md:text-heading-md mb-md md:my-md group-hover:text-primary transition">
+						class="font-semibold text-heading-sm md:text-heading-lg mb-md md:my-md group-hover:text-primary transition">
 						{{ service.title }}
 					</h3>
 
-					<p class="text-sm md:text-md text-dark/80 leading-relaxed mb-sm md:mb-md">
+					<p class="text-md md:text-lg text-dark/80 leading-relaxed mb-sm md:mb-md">
 						{{ service.description }}
 					</p>
 				</div>

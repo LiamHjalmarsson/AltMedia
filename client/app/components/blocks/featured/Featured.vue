@@ -11,7 +11,7 @@ defineProps<{ block: FeaturedBlock }>();
 
 			<div
 				v-if="block.features === 'tjänster'"
-				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-xl md:gap-lg lg:gap-xl">
+				class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-md md:gap-lg lg:gap-xl xl:gap-2xl">
 				<FeaturedServiceCard v-for="service in block.services" :key="service.id" :service="service" />
 			</div>
 

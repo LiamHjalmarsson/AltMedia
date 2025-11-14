@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Image } from "~/types/shared";
+import type { Image } from "~/types";
 
 defineProps<{ image: Image; title: string }>();
 </script>

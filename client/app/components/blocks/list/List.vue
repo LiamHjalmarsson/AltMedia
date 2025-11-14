@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import type { ListBlock } from "~/types/content/blocks";
+import type { ListBlock } from "~/types";
 
 const { block } = defineProps<{ block: ListBlock }>();
 
 const bgColor = computed(() => {
-	if (!block.color) return "bg-bg-dark text-light";
+	if (!block.color) {
+		return "bg-bg-dark text-white";
+	}
 
-	if (block.color.hex) return { backgroundColor: block.color.hex };
+	if (block.color.hex) {
+		return { backgroundColor: block.color.hex };
+	}
 
 	switch (block.color.type) {
 		case "primary":
@@ -19,9 +23,9 @@ const bgColor = computed(() => {
 });
 
 const textColor = computed(() => {
-	if (!block.color) return "text-light";
+	if (!block.color) return "text-white";
 
-	return block.color.theme === "dark" ? "text-dark" : "text-light";
+	return block.color.theme === "dark" ? "text-black" : "text-white";
 });
 </script>
 
