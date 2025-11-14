@@ -137,6 +137,7 @@ html {
 	h5,
 	h6 {
 		font-family: var(--font-heading);
+		line-height: 1.25;
 	}
 }
 

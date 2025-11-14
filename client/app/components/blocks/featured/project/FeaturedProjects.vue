@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from "vue";
 import gsap from "gsap";
-import type { Project } from "~/types/content/collections";
+import type { Project } from "~/types";
 
 defineProps<{ projects: Project[] }>();
 
@@ -20,6 +20,7 @@ onMounted(() => {
 		if (!isDesktop.value) return;
 
 		const cards = projectRefs.value;
+
 		if (!cards.length) return;
 
 		gsap.set(cards, { flex: "1 1 0%" });
@@ -38,8 +39,8 @@ onMounted(() => {
 			card.addEventListener("mouseenter", () => {
 				gsap.killTweensOf([cards, title, overlay]);
 
-				cards.forEach((c, j) =>
-					gsap.to(c, {
+				cards.forEach((card, j) =>
+					gsap.to(card, {
 						flex: j === i ? "3 1 0%" : "1 1 0%",
 						duration: 0.25,
 						ease: "power2.out",
