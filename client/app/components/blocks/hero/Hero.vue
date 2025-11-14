@@ -17,24 +17,15 @@ const alignClass = computed(() => {
 		}
 	}
 });
+
+console.log(block);
 </script>
 
 <template>
 	<section
 		class="hero bg-dark text-light overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[90vh] max-lg:h-screen"
 		style="min-height: 90vh">
-		<NuxtImg
-			v-if="block.background?.url"
-			:src="block.background.url"
-			:alt="block.title"
-			format="webp,avif"
-			width="1800"
-			height="1000"
-			quality="65"
-			fetchpriority="high"
-			preload
-			decoding="sync"
-			class="absolute inset-0 w-full h-full object-cover opacity-45" />
+		<CoverBackground :media="block.background" overlay="bg-dark/40" />
 
 		<div class="pt-xl relative z-10">
 			<div class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl lg:max-w-[1500px]">

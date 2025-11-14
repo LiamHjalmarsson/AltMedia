@@ -12,7 +12,7 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 					fields: ["title", "description", "colored_words", "align_content", "badge"],
 					populate: {
 						background: {
-							fields: ["url", "formats", "width", "height", "alternativeText"],
+							fields: ["url", "formats", "width", "height", "alternativeText", "mime"],
 						},
 						links: {
 							fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
