@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Variant } from "~/types";
+import type { Size, Variant } from "~/types";
 import type { Button } from "~/types";
 
 const props = defineProps<Button>();
@@ -12,13 +12,22 @@ const variantClass: Record<Variant, string> = {
 	ghost: "text-primary",
 	outline: "border border-primary",
 };
+
+const sizeClass: Record<Button["size"], string> = {
+	xs: "text-sm ",
+	sm: "text-md ",
+	md: "text-lg ",
+	lg: "text-xl ",
+	xl: "text-2xl ",
+};
 </script>
 
 <template>
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative font-bold text-lg px-2xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition flex items-center justify-center space-x-sm">
+		class="relative font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition flex items-center justify-center space-x-sm"
+		:class="[sizeClass[size]]">
 		<span class="relative flex items-center z-10 px-2xs">
 			<Icon
 				v-if="icon"

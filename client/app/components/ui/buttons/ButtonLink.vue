@@ -12,6 +12,14 @@ const variantClass: Record<Variant, string> = {
 	ghost: "text-primary",
 	outline: "border-2 border-primary",
 };
+
+const sizeClass: Record<Link["size"], string> = {
+	xs: "text-sm ",
+	sm: "text-md ",
+	md: "text-lg ",
+	lg: "text-xl ",
+	xl: "text-2xl ",
+};
 </script>
 
 <template>
@@ -24,7 +32,7 @@ const variantClass: Record<Variant, string> = {
 		<div
 			ref="linkWrapper"
 			class="relative py-xs px-xl lg:px-2xl w-full lg:w-fit cursor-pointer min-h-[44px] min-w-[44px]">
-			<span class="relative font-bold text-lg flex items-center justify-center w-full z-10">
+			<span class="relative font-bold flex items-center justify-center w-full z-10" :class="[sizeClass[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"

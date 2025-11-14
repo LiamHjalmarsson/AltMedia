@@ -36,7 +36,7 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 							],
 						},
 						button: {
-							fields: ["label", "variant", "type", "icon"],
+							fields: ["label", "variant", "type", "icon", "size"],
 						},
 					},
 				},

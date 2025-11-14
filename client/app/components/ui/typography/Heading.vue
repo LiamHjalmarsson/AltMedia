@@ -28,7 +28,7 @@ const alignClass = computed(() => {
 					{{ title }}
 				</h2>
 
-				<p v-if="description" class="text-xl font-medium">
+				<p v-if="description" class="text-xl font-medium mt-sm">
 					{{ description }}
 				</p>
 			</div>
@@ -39,6 +39,7 @@ const alignClass = computed(() => {
 			:url="link.url"
 			:label="link.label"
 			:variant="link.variant"
+			:size="link.size || 'lg'"
 			:icon="link?.icon || 'material-symbols:arrow-forward'"
 			class="max-lg:hidden w-fit shrink" />
 	</div>

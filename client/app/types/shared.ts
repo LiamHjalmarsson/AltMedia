@@ -41,7 +41,7 @@ export interface Link {
 	url: string;
 	variant: Variant;
 	is_external?: boolean;
-	size?: Size;
+	size: Size;
 	icon?: string;
 	reversed?: boolean;
 }
@@ -51,7 +51,7 @@ export interface Button {
 	label: string;
 	variant: Variant;
 	type: ButtonType;
-	size?: Size;
+	size: Size;
 	icon?: string;
 	reversed?: boolean;
 }

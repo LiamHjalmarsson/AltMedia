@@ -42,6 +42,6 @@ const overlayClass = computed(() => {
 			class="absolute inset-0 w-full h-full object-cover"
 			aria-hidden="true" />
 
-		<div v-if="showOverlay" class="absolute inset-0 pointer-events-none" :class="overlayClass" />
+		<div v-if="showOverlay" class="absolute inset-0 pointer-events-none z-10" :class="overlayClass" />
 	</div>
 </template>
