@@ -33,15 +33,9 @@ const textColor = computed(() => {
 		class="relative w-full min-h-[70vh] p-2xl flex items-center justify-center overflow-hidden"
 		:class="!block.color?.hex ? bgColor : ''"
 		:style="block.color?.hex ? bgColor : ''">
-		<NuxtImg
-			v-if="block.cover"
-			:src="block.cover.url"
-			:alt="block.cover.alternativeText || ''"
-			format="webp,avif"
-			quality="80"
-			sizes="100vw"
-			densities="x1 x2"
-			loading="lazy"
+		<CoverBackground
+			:media="block.cover"
+			overlay="bg-bg-dark/30"
 			class="absolute inset-0 object-cover opacity-30 h-full w-full" />
 
 		<div class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg" :class="textColor">
