@@ -14,35 +14,17 @@ function toggleAnswer(id: number) {
 <template>
 	<section class="relative py-3xl lg:py-4xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<Heading
-				:title="block.heading.title"
-				:align_content="block.heading.align_content"
-				class="mb-md lg:mb-lg xl:mb-xl" />
+			<Heading v-bind="block.heading" class="mb-md lg:mb-lg xl:mb-xl" />
 
-			<div class="lg:grid lg:grid-cols-3 lg:space-x-3xl items-start">
-				<!-- <div>
-					<NuxtImg
-						v-if="block.image"
-						:src="block.image.url"
-						:alt="block.image.alternativeText || block.heading.title"
-						format="webp,avif"
-						:width="block.image?.width || 600"
-						:height="block.image?.height || 400"
-						quality="85"
-						loading="lazy"
-						class="shadow-lg w-full max-h-[350px] object-cover" />
-				</div> -->
-
-				<ul class="flex flex-col w-full space-y-xl col-span-3">
-					<FaqItem
-						v-for="(faq, i) in block.items"
-						:key="faq.id"
-						:item="faq"
-						:number="i + 1"
-						:activeId="activeId"
-						@toggle="toggleAnswer" />
-				</ul>
-			</div>
+			<ul class="flex flex-col w-full space-y-xl">
+				<FaqItem
+					v-for="(item, i) in block.items"
+					:key="item.id"
+					:item="item"
+					:number="i + 1"
+					:activeId="activeId"
+					@toggle="toggleAnswer" />
+			</ul>
 		</div>
 	</section>
 </template>

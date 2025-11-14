@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { FaqItem } from "~/types/content/blocks";
+import { computed } from "vue";
+import type { FaqItem } from "~/types";
 
-const { activeId, item, number } = defineProps<{
-	number: number;
-	activeId: number | null;
+const { item, activeId, number } = defineProps<{
 	item: FaqItem;
+	activeId: number | null;
+	number: number;
 }>();
 
 const emit = defineEmits(["toggle"]);
@@ -13,17 +14,17 @@ const { onEnter, onLeave } = useCollapse();
 
 const isOpen = computed(() => activeId === item.id);
 
-function onToggle(id: number) {
-	emit("toggle", id);
+function toggle() {
+	emit("toggle", item.id);
 }
 </script>
 
 <template>
-	<li class="p-md group border border-dark/5 transition duration-300" :class="[isOpen ? 'shadow-2xl' : 'shadow-lg']">
+	<li class="p-md border border-dark/5 transition duration-300" :class="isOpen ? 'shadow-2xl' : 'shadow-lg'">
 		<button
-			@click="onToggle(item.id)"
+			@click="toggle"
 			:id="`faq-title-${item.id}`"
-			:aria-expanded="activeId === item.id"
+			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"
 			class="flex items-center justify-between w-full px-xs">
 			<div class="flex items-center space-x-md">
@@ -31,7 +32,7 @@ function onToggle(id: number) {
 					{{ number }}
 				</span>
 
-				<h3 class="text-heading-2xs md:text-heading-xs font-semibold flex-1 text-start">
+				<h3 class="text-heading-xs font-semibold flex-1 text-start">
 					{{ item.question }}
 				</h3>
 			</div>
@@ -39,10 +40,7 @@ function onToggle(id: number) {
 			<Icon
 				name="heroicons:chevron-down"
 				size="20"
-				:class="[
-					'text-heading-xs transition-transform duration-500 cursor-pointer',
-					isOpen ? 'rotate-180' : '',
-				]" />
+				:class="['transition-transform duration-500', isOpen ? 'rotate-180' : '']" />
 		</button>
 
 		<Transition :css="false" @enter="onEnter" @leave="onLeave">
