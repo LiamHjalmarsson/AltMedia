@@ -15,7 +15,7 @@ defineProps<{ item: BuildItem }>();
 			width="100"
 			height="100" />
 
-		<Icon v-else-if="item.icon?.icon_name" :name="item.icon.icon_name" size="40" class="text-primary" />
+		<IconBadge v-if="item.icon?.icon_name" :icon="item.icon" variant="primary" :size="50" />
 
 		<div class="space-y-sm mb-lg mt-xl">
 			<h3 class="text-heading-md font-bold">{{ item.title }}</h3>
