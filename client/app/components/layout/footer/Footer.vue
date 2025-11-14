@@ -7,10 +7,10 @@ const year = new Date().getFullYear();
 </script>
 
 <template>
-	<footer class="bg-black text-white py-5xl">
+	<footer class="bg-gradient-to-b from-black via-black/95 to-black text-white py-5xl">
 		<div class="max-w-[1300px] mx-auto px-xl">
 			<div class="space-y-4xl">
-				<div class="space-y-md flex flex-col items-center justify-center">
+				<div class="space-y-md flex flex-col items-center justify-center text-center">
 					<NuxtImg
 						v-if="footer?.logo.url"
 						:src="footer.logo.url"
