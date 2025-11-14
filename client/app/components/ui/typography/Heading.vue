@@ -21,7 +21,7 @@ const alignClass = computed(() => {
 
 <template>
 	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
-		<div class="flex-2 grow">
+		<div class="flex-2 grow max-w-[750px]">
 			<div>
 				<h2
 					class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold tracking-tight">
