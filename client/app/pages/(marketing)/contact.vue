@@ -17,7 +17,7 @@ function handleSubmit(data: Record<string, any>) {}
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-5xl">
+	<section class="relative py-3xl lg:py-5xl min-h-screen flex justify-center items-center">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl pt-3xl">
 			<div class="grid grid-cols-1 lg:grid-cols-5 gap-2xl">
 				<div class="flex flex-col shadow-lg col-span-3">

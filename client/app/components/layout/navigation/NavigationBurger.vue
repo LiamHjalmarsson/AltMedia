@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Theme } from "~/types/enums";
+import type { Theme } from "~/types";
 
 const props = defineProps<{
 	isMenuOpen: boolean;
@@ -9,7 +9,7 @@ const props = defineProps<{
 const emit = defineEmits(["toggle"]);
 
 const barColor = computed(() => {
-	return props.theme === "dark" ? "bg-light" : "bg-dark";
+	return props.theme === "dark" ? "bg-white" : "bg-black";
 });
 </script>
 

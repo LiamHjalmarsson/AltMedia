@@ -21,7 +21,7 @@ const { onEnter, onLeave } = useCollapse();
 			id="mobile-menu"
 			class="fixed top-28 -left-0 md:-left-6 w-full flex justify-center md:justify-end z-40 lg:hidden p-lg">
 			<div
-				class="bg-light/10 bg-clip-padding backdrop-filter backdrop-blur-2xl p-lg shadow-2xl overflow-hidden transform-origin-top w-[95%] md:w-fit rounded-xl">
+				class="bg-white/10 bg-clip-padding backdrop-filter backdrop-blur-2xl p-lg shadow-2xl overflow-hidden transform-origin-top w-[95%] md:w-fit rounded-xl">
 				<ul class="flex flex-col space-y-md">
 					<li
 						v-for="link in header?.links"

@@ -20,6 +20,8 @@ const DEFAULT_DEBOUNCE_MS = 100;
 
 const NAVIGATION_RETRY_DELAYS = [0, 50, 150, 400, 1000] as const;
 
+const forcedTheme = ref<Theme | null>(null);
+
 /**
  * Composable that automatically determines whether a header should render
  * in light or dark theme based on background contrast.
@@ -364,9 +366,10 @@ export function useAutoHeaderContrast(
 	}
 
 	return {
-		theme: currentTheme,
-		init: initAutoHeaderContrast, // start logic (call in onMounted)
-		destroy: destroyAutoHeaderContrast, // cleanup (call in onBeforeUnmount)
-		refresh: refreshTheme, // manually force refresh
+		theme: computed(() => forcedTheme.value ?? currentTheme.value),
+		force: (value: Theme | null) => (forcedTheme.value = value),
+		init: initAutoHeaderContrast,
+		destroy: destroyAutoHeaderContrast,
+		refresh: refreshTheme,
 	};
 }
