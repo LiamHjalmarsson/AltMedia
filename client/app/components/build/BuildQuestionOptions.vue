@@ -19,12 +19,12 @@ function isSelected(option: string) {
 </script>
 
 <template>
-	<div class="flex flex-wrap gap-xl">
+	<div class="flex flex-wrap gap-lg lg:gap-xl">
 		<div
 			v-for="option in props.question.options || []"
 			:key="option.value || option.label"
 			@click="onToggle(option.label)"
-			class="cursor-pointer border border-dark/10 shadow-xl px-3xl py-md font-semibold transition select-none"
+			class="cursor-pointer border border-dark/10 shadow-xl px-sm lg:px-3xl py-md text-xs lg:text-lg font-semibold transition select-none"
 			:class="
 				isSelected(option.label)
 					? 'bg-primary text-white border-primary'

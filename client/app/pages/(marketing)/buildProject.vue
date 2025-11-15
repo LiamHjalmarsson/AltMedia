@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref, nextTick } from "vue";
 import gsap from "gsap";
 
 const store = useBuildProjectStore();
@@ -17,7 +16,9 @@ const containerRef = ref<HTMLElement | null>(null);
 async function animate(direction: "next" | "prev", stepFn: () => void) {
 	const element = containerRef.value;
 
-	if (!element) return stepFn();
+	if (!element) {
+		return stepFn();
+	}
 
 	await gsap.to(element.children, {
 		y: direction === "next" ? -16 : 16,
@@ -39,13 +40,15 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
-			<div class="flex-1 min-w-[850px]">
+	<section class="relative py-5xl">
+		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
+			<div class="flex-1 xl:min-w-[850px]">
 				<Progressbar :steps="steps" :activeStepIndex="activeStepIndex" :progress="progress" />
 
-				<h2 class="text-heading-xl font-bold mb-xs">{{ steps[activeStepIndex - 1]?.title }}</h2>
-				<p class="text-black/80 mb-lg text-2xl">{{ steps[activeStepIndex - 1]?.description }}</p>
+				<h2 class="text-heading-lg lg:text-heading-xl xl:text-heading-2xl font-bold mb-xs">
+					{{ steps[activeStepIndex - 1]?.title }}
+				</h2>
+				<p class="text-black/80 mb-lg text-lg lg:text-2xl">{{ steps[activeStepIndex - 1]?.description }}</p>
 
 				<div ref="containerRef" class="min-h-[400px]">
 					<BuildForm
@@ -54,7 +57,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						:key="activeStepIndex" />
 				</div>
 
-				<div class="flex justify-between items-center pt-xl">
+				<div class="flex justify-between items-center pt-xl space-x-xl">
 					<Button
 						v-if="activeStepIndex > 1"
 						@click="animate('prev', store.previousStep)"

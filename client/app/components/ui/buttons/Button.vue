@@ -7,7 +7,7 @@ const props = defineProps<Button>();
 const { element: button, backgroundColor } = useHoverAnimation(props.reversed ?? false);
 
 const variantClass: Record<Variant, string> = {
-	primary: "bg-gradient-to-br from-primary to-primary-hover border-primary",
+	primary: "bg-gradient-to-br from-primary to-primary-hover border-primary max-lg:text-white",
 	secondary: "bg-primary/10",
 	ghost: "text-primary",
 	outline: "border border-primary",
@@ -26,7 +26,7 @@ const sizeClass: Record<Button["size"], string> = {
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition space-x-sm"
+		class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition"
 		:class="[sizeClass[size]]">
 		<span class="relative flex items-center z-10 px-sm">
 			<Icon
@@ -46,7 +46,6 @@ const sizeClass: Record<Button["size"], string> = {
 				right: 'auto',
 			}" />
 
-		<span
-			class="absolute top-0 left-0 h-11 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />
+		<span class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden" :class="variantClass[variant]" />
 	</button>
 </template>

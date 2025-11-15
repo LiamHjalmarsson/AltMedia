@@ -25,7 +25,7 @@ defineProps<{
 			<BuildQuestionConditional v-if="question.conditional" :question="question" />
 		</div>
 
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-xl">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-lg lg:gap-xl">
 			<div
 				v-for="question in step.questions.filter((question) => ['Namn', 'Telefon'].includes(question.title))"
 				:key="question.id"

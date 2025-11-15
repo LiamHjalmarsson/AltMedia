@@ -32,12 +32,12 @@ function relationClass(title: string) {
 
 <template>
 	<div>
-		<div class="grid grid-cols-2 md:grid-cols-3 gap-xl">
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-lg lg:gap-xl">
 			<div
 				v-for="service in step.services || []"
 				:key="service.id"
 				@click="onToggle(service.title)"
-				class="border shadow-md px-3xl py-sm text-center text-lg font-semibold transition-all duration-150 select-none"
+				class="border shadow-md px-sm lg:px-3xl py-sm text-center text-xs lg:text-lg font-semibold transition-all duration-150 select-none"
 				:class="relationClass(service.title)">
 				{{ service.title }}
 			</div>

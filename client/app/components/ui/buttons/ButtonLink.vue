@@ -7,7 +7,7 @@ defineProps<Link>();
 const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 
 const variantClass: Record<Variant, string> = {
-	primary: "bg-gradient-to-br from-primary to-primary-hover",
+	primary: "bg-gradient-to-br from-primary to-primary-hover max-lg:text-white",
 	secondary: "bg-primary/10",
 	ghost: "text-primary",
 	outline: "border-2 border-primary",
@@ -31,8 +31,8 @@ const sizeClass: Record<Link["size"], string> = {
 		class="focus-visible:outline-primary flex">
 		<div
 			ref="linkWrapper"
-			class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition space-x-sm">
-			<span class="relative flex items-center z-10 px-sm max-lg:text-white" :class="[sizeClass[size]]">
+			class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition">
+			<span class="relative flex items-center z-10 px-sm" :class="[sizeClass[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"
