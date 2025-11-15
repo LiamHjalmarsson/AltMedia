@@ -60,7 +60,7 @@ watchEffect(() => {
 					<div
 						v-for="sub in currentService.subservices"
 						:key="sub.id"
-						class="group rounded-2xl border border-light/10 bg-light/5 backdrop-blur-md p-xl shadow-lg hover:shadow-2xl transition-all duration-300">
+						class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-xl shadow-lg hover:shadow-2xl transition-all duration-300">
 						<h3
 							class="font-semibold text-heading-sm md:text-heading-md group-hover:text-primary transition">
 							{{ sub.title }}

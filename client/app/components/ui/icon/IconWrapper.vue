@@ -22,7 +22,7 @@ const sizeClass: Partial<Record<Size, string>> = {
 
 <template>
 	<div
-		class="flex justify-center items-center rounded-full border shadow-lg bg-light/10 text-primary transition duration-300"
+		class="flex justify-center items-center rounded-full border shadow-lg bg-white/10 text-primary transition duration-300"
 		:class="sizeClass[props.size]">
 		<slot />
 	</div>

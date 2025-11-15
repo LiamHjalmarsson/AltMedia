@@ -6,7 +6,7 @@ const slug = computed(() => `/projects/${project.slug}`);
 
 <template>
 	<article
-		class="flex flex-col overflow-hidden rounded-2xl bg-light/5 backdrop-blur-md border border-light/10 shadow-xl transition-all duration-300 group hover:shadow-2xl">
+		class="flex flex-col overflow-hidden rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-xl transition-all duration-300 group hover:shadow-2xl">
 		<NuxtLink :to="slug" :aria-label="`Läs mer om ${project.title}`" class="flex flex-col h-full">
 			<div class="relative overflow-hidden aspect-[4/3]">
 				<NuxtImg
@@ -18,7 +18,7 @@ const slug = computed(() => `/projects/${project.slug}`);
 					loading="lazy" />
 
 				<div
-					class="absolute inset-0 bg-gradient-to-t from-dark/70 to-transparent opacity-60 group-hover:opacity-80 transition" />
+					class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-80 transition" />
 				<span class="absolute bottom-sm left-sm text-xs px-sm py-2xs rounded-full bg-primary/80 font-medium">
 					{{ project.services[0]?.title || "Projekt" }}
 				</span>

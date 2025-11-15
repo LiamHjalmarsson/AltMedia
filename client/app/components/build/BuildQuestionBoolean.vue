@@ -22,7 +22,7 @@ function isSelected(option: string) {
 			v-for="option in ['Ja', 'Nej']"
 			:key="option"
 			@click="onSelect(option)"
-			class="cursor-pointer border border-dark/10 shadow-lg px-xl lg:px-3xl py-sm font-semibold text-md lg:text-lg transition select-none"
+			class="cursor-pointer border border-black/10 shadow-lg px-xl lg:px-3xl py-sm font-semibold text-md lg:text-lg transition select-none"
 			:class="
 				isSelected(option) ? 'bg-primary text-white border-primary' : 'hover:border-primary hover:text-primary'
 			">

@@ -13,9 +13,9 @@ const props = defineProps<{
 				{{ error?.statusCode || "Error" }}
 			</p>
 
-			<h1 class="mt-sm text-heading-3xl font-extrabold tracking-tight text-dark">Sidan kunde inte hittas</h1>
+			<h1 class="mt-sm text-heading-3xl font-extrabold tracking-tight text-black">Sidan kunde inte hittas</h1>
 
-			<p class="mt-sm text-dark-gray leading-relaxed text-md">
+			<p class="mt-sm text-black/80 leading-relaxed text-md">
 				Länken du följde verkar vara trasig eller sidan har flyttats. Du kan försöka gå tillbaka till
 				startsidan.
 			</p>
