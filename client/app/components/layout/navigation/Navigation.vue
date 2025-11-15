@@ -28,7 +28,7 @@ onBeforeUnmount(destroy);
 		:class="theme === 'dark' ? 'text-white' : 'text-black'">
 		<nav
 			aria-label="main navigation"
-			class="flex items-center justify-between w-[100%] py-lg lg:w-[90%] px-md lg:px-lg border border-white/40 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl">
+			class="flex items-center justify-between w-[100%] py-lg lg:w-[80%] max-w-[1400px] px-md lg:px-lg border border-white/20 bg-white/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl">
 			<NavigationLogo :logo="header.logo" />
 
 			<NavigationLinks />

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
+import gsap from "gsap";
 
-defineProps<{
+const props = defineProps<{
 	isMenuOpen: boolean;
 }>();
 
@@ -11,31 +11,87 @@ const globalStore = useGlobalStore();
 
 const { header } = storeToRefs(globalStore);
 
-const { onEnter, onLeave } = useCollapse();
+const wrapperRef = ref<HTMLElement | null>(null);
+
+const isRendered = ref(false);
+
+function slideDown() {
+	if (!wrapperRef.value) {
+		return;
+	}
+
+	gsap.killTweensOf(wrapperRef.value);
+
+	gsap.fromTo(
+		wrapperRef.value,
+		{
+			height: 0,
+			opacity: 0,
+		},
+		{
+			height: "auto",
+			opacity: 1,
+			duration: 0.35,
+			ease: "power2.out",
+		}
+	);
+}
+
+function slideUp(): Promise<void> {
+	return new Promise((resolve) => {
+		if (!wrapperRef.value) {
+			return resolve();
+		}
+
+		gsap.killTweensOf(wrapperRef.value);
+
+		gsap.to(wrapperRef.value, {
+			height: 0,
+			opacity: 0,
+			duration: 0.3,
+			ease: "power2.in",
+			onComplete: resolve,
+		});
+	});
+}
+
+watch(
+	() => props.isMenuOpen,
+	async (open: boolean) => {
+		if (open) {
+			isRendered.value = true;
+
+			await nextTick();
+
+			slideDown();
+		} else {
+			await slideUp();
+
+			isRendered.value = false;
+		}
+	}
+);
 </script>
 
 <template>
-	<Transition @enter="onEnter" @leave="onLeave">
+	<div v-if="isRendered" id="mobile-menu" class="fixed top-28 left-0 w-full z-40 lg:hidden px-md">
 		<div
-			v-show="isMenuOpen"
-			id="mobile-menu"
-			class="fixed top-28 -left-0 md:-left-6 w-full flex justify-center md:justify-end z-40 lg:hidden p-lg">
-			<div
-				class="bg-white/10 bg-clip-padding backdrop-filter backdrop-blur-2xl p-lg shadow-2xl overflow-hidden transform-origin-top w-[95%] md:w-fit rounded-xl">
-				<ul class="flex flex-col space-y-md">
-					<li
-						v-for="link in header?.links"
-						:key="link.label"
-						role="menu"
-						class="transition-opacity duration-500 relative">
-						<MenuLink
-							:link
-							role="menuitem"
-							@click="emit('close')"
-							class="px-md py-2xs block font-semibold text-lg text-center w-full" />
-					</li>
-				</ul>
-			</div>
+			ref="wrapperRef"
+			class="overflow-hidden border border-white/20 bg-white/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-2xl">
+			<ul class="flex flex-col space-y-md p-lg">
+				<li
+					v-for="link in header?.links"
+					:key="link.label"
+					role="menu"
+					class="text-lg font-semibold text-center py-xs cursor-pointer"
+					@click="emit('close')">
+					<MenuLink
+						:link
+						role="menuitem"
+						@click="emit('close')"
+						class="px-md py-2xs block font-semibold text-lg text-center w-full" />
+				</li>
+			</ul>
 		</div>
-	</Transition>
+	</div>
 </template>
