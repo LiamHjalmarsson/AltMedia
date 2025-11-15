@@ -33,10 +33,13 @@ function submitForm() {}
 			aria-hidden="true" />
 
 		<div
-			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl grid grid-cols-1 lg:grid-cols-2 gap-4xl">
-			<div class="flex flex-col justify-center space-y-2xl">
+			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl flex flex-col justify-center items-center md:grid md:grid-cols-2 gap-xl lg:gap-4xl">
+			<div class="flex flex-col justify-center max-md:items-center max-md:text-center space-y-lg lg:space-y-2xl">
 				<div>
-					<h1 class="text-heading-3xl font-extrabold mb-md drop-shadow-lg">{{ contactPage?.data.title }}</h1>
+					<h1
+						class="text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-extrabold mb-md drop-shadow-lg">
+						{{ contactPage?.data.title }}
+					</h1>
 
 					<p class="max-w-[450px] text-lg leading-relaxed text-white/90">
 						{{ contactPage?.data.description }}
@@ -64,8 +67,8 @@ function submitForm() {}
 				</div>
 			</div>
 
-			<div class="flex justify-end">
-				<div class="text-white p-2xl w-full max-w-[500px]">
+			<div class="flex md:justify-end justify-center w-full">
+				<div class="text-white lg:p-2xl w-full max-w-[500px]">
 					<h3 class="text-heading-lg font-bold mb-xl">{{ contactPage?.data.form.title }}</h3>
 
 					<form @submit.prevent="submitForm" class="space-y-xl">
@@ -96,7 +99,8 @@ function submitForm() {}
 							:type="contactPage?.data.form.button.type"
 							:variant="contactPage?.data.form.button.variant"
 							:label="contactPage?.data.form.button.label"
-							:size="contactPage?.data.form.button.size || 'md'" />
+							:size="contactPage?.data.form.button.size || 'md'"
+							class="max-md:w-full" />
 					</form>
 				</div>
 			</div>

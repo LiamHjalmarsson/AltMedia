@@ -24,7 +24,7 @@ const alignClass = computed(() => {
 		<div class="flex-2 grow">
 			<div>
 				<h2
-					class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold tracking-tight">
+					class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold tracking-tight">
 					{{ title }}
 				</h2>
 

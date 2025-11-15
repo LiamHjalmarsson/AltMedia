@@ -41,7 +41,7 @@ const textColor = computed(() => {
 		<div class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg px-lg" :class="textColor">
 			<h2
 				v-if="block.title"
-				class="text-heading-lg md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold text-secondary mb-lg">
+				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold text-secondary mb-lg">
 				{{ block.title }}
 			</h2>
 

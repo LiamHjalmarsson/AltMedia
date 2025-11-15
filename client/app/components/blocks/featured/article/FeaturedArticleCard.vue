@@ -9,7 +9,7 @@ defineProps<{ article: Article }>();
 		:to="`/articles/${article.slug}`"
 		:aria-label="`Läs artikel: ${article.title}`"
 		class="block overflow-hidden group cursor-pointer relative">
-		<div class="h-40 relative overflow-hidden">
+		<div class="h-48 relative overflow-hidden">
 			<NuxtImg
 				:src="article.cover.url"
 				:alt="article.cover.alternativeText || article.title"
@@ -26,8 +26,9 @@ defineProps<{ article: Article }>();
 				</h3>
 			</div>
 
-			<div class="flex items-center justify-between">
-				<ReadMoreButton />
+			<div class="flex items-center justify-between mt-xs">
+				<ReadMoreButton class="group-hover:text-primary" />
+
 				<div class="text-xs text-black/80">
 					<span v-if="article.published_date">
 						{{ article.published_date }}

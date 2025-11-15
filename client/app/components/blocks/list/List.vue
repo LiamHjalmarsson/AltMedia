@@ -33,7 +33,7 @@ const textColor = computed(() => {
 
 <template>
 	<section
-		class="pt-3xl pb-4xl relative"
+		class="pt-4xl pb-5xl relative"
 		:class="!block.color?.hex ? bgColor : ''"
 		:style="block.color?.hex ? bgColor : ''">
 		<NuxtImg

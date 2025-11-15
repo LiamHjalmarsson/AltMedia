@@ -20,9 +20,11 @@ function toggle() {
 </script>
 
 <template>
-	<li class="p-md lg:p-lg border border-black/5 transition duration-300" :class="isOpen ? 'shadow-2xl' : 'shadow-lg'">
+	<li
+		class="p-md lg:p-lg border border-black/5 transition duration-300"
+		:class="isOpen ? 'shadow-2xl' : 'shadow-lg'"
+		@click="toggle">
 		<button
-			@click="toggle"
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"

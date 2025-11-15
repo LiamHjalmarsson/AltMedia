@@ -21,7 +21,7 @@ useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>
-	<section class="relative py-4xl lg:py-5xl flex justify-center">
+	<section class="relative py-5xl flex justify-center">
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading
 				:title="page?.title"
@@ -32,7 +32,7 @@ useAppHead(page?.value?.seo || undefined);
 			<div
 				v-for="(service, index) in services"
 				:key="service.id"
-				class="mb-4xl flex flex-col lg:flex-row gap-2xl lg:gap-3xl"
+				class="mb-2xl lg:mb-4xl flex flex-col lg:flex-row gap-xl md:gap-2xl lg:gap-3xl"
 				:class="index % 2 === 1 ? 'lg:flex-row-reverse' : ''">
 				<div class="flex-1 flex">
 					<NuxtImg
@@ -45,8 +45,8 @@ useAppHead(page?.value?.seo || undefined);
 						loading="lazy" />
 				</div>
 
-				<div class="flex-1 flex flex-col justify-center h-full space-y-lg">
-					<h3 class="font-bold text-heading-xl md:text-heading-2xl leading-tight">
+				<div class="flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg">
+					<h3 class="font-bold text-heading-lg md:text-heading-xl leading-tight">
 						{{ service.title }}
 					</h3>
 
@@ -58,16 +58,12 @@ useAppHead(page?.value?.seo || undefined);
 						<li
 							v-for="subservice in service.subservices"
 							:key="subservice.id"
-							class="font-semibold text-lg font-heading group">
-							<NuxtLink :to="`/services/${service.slug}/${subservice.slug}`">
-								<span class="inline-flex items-center font-semibold text-lg font-heading">
-									<span>{{ subservice.title }}</span>
-									<Icon
-										name="lucide:arrow-right"
-										size="16"
-										class="ml-xs group-hover:translate-x-[3px] transition-transform duration-300" />
-								</span>
-							</NuxtLink>
+							class="font-semibold font-heading group">
+							<ReadMoreLink
+								:to="`/services/${service.slug}/${subservice.slug}`"
+								:label="subservice.title"
+								size="20"
+								class="text-lg inline-flex items-center font-semibold font-heading" />
 						</li>
 					</ul>
 				</div>

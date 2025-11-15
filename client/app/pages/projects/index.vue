@@ -36,7 +36,7 @@ useAppHead(page?.value?.seo || undefined);
 					v-for="(project, i) in projects"
 					:key="project.id"
 					class="group transition-transform duration-500"
-					:class="[i % 4 === 1 ? 'md:pt-2xl' : '', i % 4 === 2 ? 'md:pt-2xl' : '']">
+					:class="[i % 4 === 1 ? 'md:pt-3xl' : '', i % 4 === 2 ? 'md:pt-3xl' : '']">
 					<NuxtLink :to="`/projects/${project.slug}`" class="space-y-lg">
 						<div class="overflow-hidden block shadow-lg">
 							<NuxtImg
@@ -63,14 +63,6 @@ useAppHead(page?.value?.seo || undefined);
 									{{ service.title }}
 								</span>
 							</div>
-
-							<span class="inline-flex items-center text-primary text-sm font-semibold group">
-								<span>Visa projekt</span>
-								<Icon
-									name="lucide:arrow-right"
-									size="16"
-									class="ml-xs group-hover:translate-x-[3px] transition-transform duration-300" />
-							</span>
 						</div>
 					</NuxtLink>
 				</article>
