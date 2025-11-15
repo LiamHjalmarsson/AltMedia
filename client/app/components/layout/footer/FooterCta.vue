@@ -8,7 +8,7 @@ const cta = computed(() => footer.value?.cta);
 
 <template>
 	<section v-if="cta" class="relative overflow-hidden text-white">
-		<div class="relative px-xl py-3xl lg:p-3xl">
+		<div class="relative px-lg py-3xl lg:p-3xl">
 			<template v-if="cta.cover?.url">
 				<video
 					v-if="cta.cover.mime"
@@ -36,7 +36,7 @@ const cta = computed(() => footer.value?.cta);
 					{{ cta.subtitle }}
 				</p>
 
-				<h2 class="mt-lg text-heading-xl sm:text-heading-2xl font-semibold">
+				<h2 class="mt-lg text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
 					{{ cta.title }}
 				</h2>
 

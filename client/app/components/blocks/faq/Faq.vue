@@ -13,8 +13,8 @@ function toggleAnswer(id: number) {
 
 <template>
 	<section class="relative py-3xl lg:py-4xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<Heading v-bind="block.heading" class="mb-md lg:mb-lg xl:mb-xl" />
+		<div class="mx-auto max-w-[1300px] px-lg lg:px-3xl">
+			<Heading v-bind="block.heading" class="mb-xl lg:mb-lg xl:mb-xl" />
 
 			<ul class="flex flex-col w-full space-y-xl">
 				<FaqItem

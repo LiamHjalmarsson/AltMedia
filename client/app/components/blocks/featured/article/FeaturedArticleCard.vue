@@ -21,14 +21,14 @@ defineProps<{ article: Article }>();
 
 		<div class="flex flex-col justify-between flex-1 mt-md">
 			<div class="flex-1">
-				<h3 class="text-2xl font-bold duration-300 group-hover:text-primary">
+				<h3 class="text-heading-sm font-bold duration-300 group-hover:text-primary">
 					{{ article.title }}
 				</h3>
 			</div>
 
 			<div class="flex items-center justify-between">
 				<ReadMoreButton />
-				<div class="text-xs text-black-80">
+				<div class="text-xs text-black/80">
 					<span v-if="article.published_date">
 						{{ article.published_date }}
 					</span>

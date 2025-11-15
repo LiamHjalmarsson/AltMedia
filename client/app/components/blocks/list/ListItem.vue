@@ -58,8 +58,8 @@ const textThemeClass = computed(() => {
 			:class="[isEven ? 'lg:order-1' : 'lg:order-2', textThemeClass]">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
-			<div class="pb-xl px-xl lg:p-md text-center lg:text-left space-y-md">
-				<div class="flex items-center justify-center lg:justify-start space-x-md">
+			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left space-y-md">
+				<div class="flex items-center justify-center max-lg:flex-wrap lg:justify-start space-x-md">
 					<span
 						v-if="showNumbers"
 						class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading"
@@ -67,7 +67,7 @@ const textThemeClass = computed(() => {
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-md lg:text-heading-lg font-semibold leading-wide">
+					<h3 class="text-heading-md md:text-heading-lg font-semibold leading-wide">
 						{{ item.title }}
 					</h3>
 				</div>

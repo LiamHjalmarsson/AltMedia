@@ -6,12 +6,12 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 
 <template>
 	<section class="relative py-3xl lg:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
+		<div class="mx-auto max-w-[1300px] px-lg md:px-xl lg:px-3xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
-				class="mb-md lg:mb-lg xl:mb-xl" />
+				class="mb-xl lg:mb-lg xl:mb-xl" />
 
 			<ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3xl sm:gap-lg lg:gap-2xl mt-lg md:mt-xl lg:mt-2xl">
 				<li v-for="(item, i) in block.items" :key="item.id">
@@ -26,7 +26,7 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 					:label="block.button.label"
 					:url="block.button.url"
 					:variant="block.button.variant"
-					:size="block.button.size || 'md'"
+					:size="block.button.size || 'sm'"
 					:icon="block.button.icon"
 					class="mx-auto" />
 			</div>

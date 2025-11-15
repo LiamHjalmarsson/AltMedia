@@ -23,7 +23,7 @@ function formatColoredWords(content: Hero): string {
 		:class="hasForm ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
 		<span
 			v-if="content.badge"
-			class="inline-flex items-center border-2 border-primary/30 bg-primary/20 px-md py-sm text-sm font-semibold uppercase tracking-widest text-primary w-fit">
+			class="inline-flex items-center border border-primary/30 bg-primary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-primary w-fit">
 			{{ content.badge }}
 		</span>
 
@@ -41,8 +41,7 @@ function formatColoredWords(content: Hero): string {
 				:variant="link.variant"
 				:url="link.url"
 				:size="link.size || 'md'"
-				:label="link.label"
-				class="max-lg:min-w-[250px]" />
+				:label="link.label" />
 		</div>
 	</div>
 </template>

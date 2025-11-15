@@ -28,7 +28,7 @@ const alignClass = computed(() => {
 					{{ title }}
 				</h2>
 
-				<p v-if="description" class="text-xl font-medium mt-sm">
+				<p v-if="description" class="text-xl font-medium mt-md">
 					{{ description }}
 				</p>
 			</div>

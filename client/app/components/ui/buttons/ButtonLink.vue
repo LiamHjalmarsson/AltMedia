@@ -32,7 +32,7 @@ const sizeClass: Record<Link["size"], string> = {
 		<div
 			ref="linkWrapper"
 			class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition space-x-sm">
-			<span class="relative flex items-center z-10 px-sm" :class="[sizeClass[size]]">
+			<span class="relative flex items-center z-10 px-sm max-lg:text-white" :class="[sizeClass[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"
@@ -50,8 +50,7 @@ const sizeClass: Record<Link["size"], string> = {
 					right: 'auto',
 				}" />
 
-			<span
-				class="absolute top-0 left-0 h-11 w-full bg-gradient-to-br from-primary to-primary-hover rounded-full lg:hidden" />
+			<span class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden" :class="variantClass[variant]" />
 		</div>
 	</NuxtLink>
 </template>

@@ -7,17 +7,17 @@ defineProps<{ service: Service }>();
 </script>
 
 <template>
-	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-white/50">
+	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-white/40">
 		<NuxtLink
 			:to="`/services/${service.slug}`"
 			:aria-label="`Läs mer om ${service.title}`"
-			class="flex flex-col justify-between h-full p-lg lg:p-xl focus-visible:outline-primary">
+			class="flex flex-col justify-between h-full p-xl focus-visible:outline-primary">
 			<div class="flex flex-col justify-between relative z-10 h-full">
 				<IconBadge v-if="service.icon" :icon="service.icon" variant="primary" :size="50" />
 
 				<div class="flex-1">
 					<h3
-						class="font-semibold text-heading-sm md:text-heading-lg mb-md md:my-md group-hover:text-primary transition">
+						class="font-semibold text-heading-md md:text-heading-lg my-md group-hover:text-primary transition">
 						{{ service.title }}
 					</h3>
 
