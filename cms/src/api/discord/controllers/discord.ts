@@ -1,11 +1,23 @@
-interface WebhookEntry {
+interface Build {
 	name: string;
 	email: string;
 	phone: string | null;
-	message?: string;
-	data: Record<string, unknown>;
+	data: Record<string, string | number | boolean | object | null>;
 	documentId?: string;
 }
+
+interface Contact {
+	name: string;
+	email: string;
+	message: string;
+}
+
+interface Analysis {
+	email: string;
+	url: string;
+}
+
+export type WebhookEntry = Build | Contact | Analysis;
 
 interface WebhookBody {
 	event?: string;
@@ -43,24 +55,25 @@ export default {
 			return ctx.send({ ok: true, skipped: true });
 		}
 
-		const fields = buildProjectRequestFields(entry);
+		const webhookUrl = resolveWebhookUrl(model);
 
-		const webhookUrl =
-			model === "contact-submission" ? process.env.DISCORD_CONTACT_WEBHOOK_URL : process.env.DISCORD_WEBHOOK_URL;
+		const fields = buildFields(entry);
 
 		const payload = {
 			username: "Requests",
-			content: `📩 *${event.replace("entry.", "").toUpperCase()}* från **${entry.name || "Okänd"}**`,
+			content: `📩 ${event.toUpperCase()} (${model})`,
 			embeds: [
 				{
-					title: "Ny förfrågan i " + model,
-					description: `**Namn:** ${entry.name || "—"}\n` + `**E-post:** ${entry.email || "—"}\n`,
+					title: `Ny förfrågan (${model})`,
+					description: extractDescription(entry),
 					color: 0x57f287,
 					timestamp: new Date().toISOString(),
 					fields,
 				},
 			],
 		};
+
+		console.log(payload);
 
 		try {
 			const res = await fetch(webhookUrl, {
@@ -86,19 +99,42 @@ export default {
 	},
 };
 
-function buildProjectRequestFields(entry: WebhookEntry) {
-	const fields = [];
+function resolveWebhookUrl(model: string): string {
+	switch (model) {
+		case "contact-submission":
+			return process.env.DISCORD_CONTACT_WEBHOOK_URL || "";
+		case "project-request":
+			return process.env.DISCORD_WEBHOOK_URL || "";
+		case "analysis-request":
+			return process.env.DISCORD_ANALYSIS_WEBHOOK_URL || "";
+		default:
+			return process.env.DISCORD_WEBHOOK_URL || "";
+	}
+}
 
-	for (const [key, value] of Object.entries(entry.data || {})) {
-		fields.push({
+function buildFields(entry: WebhookEntry) {
+	if ("data" in entry && entry.data) {
+		return Object.entries(entry.data).map(([key, value]) => ({
 			name: key,
 			value:
 				typeof value === "object"
-					? "```json\n" + JSON.stringify(value, null, 2).slice(0, 1000) + "\n```"
+					? "```json\n" + JSON.stringify(value, null, 2) + "\n```"
 					: String(value ?? "—"),
 			inline: false,
-		});
+		}));
 	}
 
-	return fields;
+	return [];
+}
+
+function extractDescription(entry: WebhookEntry): string {
+	if ("message" in entry) {
+		return `**Namn:** ${entry.name}\n**E-post:** ${entry.email}\n**Meddelande:** ${entry.message}`;
+	}
+
+	if ("url" in entry) {
+		return `**E-post:** ${entry.email}\n**URL:** ${entry.url}`;
+	}
+
+	return `**Namn:** ${entry.name}\n**E-post:** ${entry.email}\n**Telefon:** ${entry.phone}`;
 }
