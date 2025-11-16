@@ -21,7 +21,7 @@ const props = defineProps<{
 			</p>
 
 			<div class="mt-lg flex items-center justify-center gap-sm">
-				<ButtonLink variant="primary" url="/" label="Gå till startsidan" />
+				<ButtonLink variant="primary" url="/" label="Gå till startsidan" size="lg" />
 			</div>
 		</div>
 	</div>

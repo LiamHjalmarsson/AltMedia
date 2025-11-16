@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "analysis_requests",
+  "info": {
+    "singularName": "analysis-request",
+    "pluralName": "analysis-requests",
+    "displayName": "Analysis request"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

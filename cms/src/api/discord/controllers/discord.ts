@@ -2,6 +2,7 @@ interface WebhookEntry {
 	name: string;
 	email: string;
 	phone: string | null;
+	message?: string;
 	data: Record<string, unknown>;
 	documentId?: string;
 }
@@ -42,36 +43,27 @@ export default {
 			return ctx.send({ ok: true, skipped: true });
 		}
 
-		if (model !== "project-request") {
-			strapi.log.info(`Ignored webhook for model: ${model}`);
-
-			return ctx.send({ ok: true, ignored: true });
-		}
-
 		const fields = buildProjectRequestFields(entry);
 
-		const adminUrl = entry.documentId
-			? `${process.env.STRAPI_ADMIN_URL || "http://localhost:1337"}/admin/content-manager/collection-types/pi::project-request.project-request/${entry.documentId}`
-			: null;
+		const webhookUrl =
+			model === "contact-submission" ? process.env.DISCORD_CONTACT_WEBHOOK_URL : process.env.DISCORD_WEBHOOK_URL;
 
 		const payload = {
-			username: "Project Requests",
+			username: "Requests",
 			content: `📩 *${event.replace("entry.", "").toUpperCase()}* från **${entry.name || "Okänd"}**`,
 			embeds: [
 				{
-					title: "Ny projektförfrågan",
+					title: "Ny förfrågan i " + model,
 					description: `**Namn:** ${entry.name || "—"}\n` + `**E-post:** ${entry.email || "—"}\n`,
 					color: 0x57f287,
 					timestamp: new Date().toISOString(),
 					fields,
-					footer: adminUrl ? { text: "Öppna i Strapi Admin", icon_url: undefined } : undefined,
-					url: adminUrl ?? undefined,
 				},
 			],
 		};
 
 		try {
-			const res = await fetch(process.env.DISCORD_WEBHOOK_URL as string, {
+			const res = await fetch(webhookUrl, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify(payload),
@@ -88,6 +80,7 @@ export default {
 			return ctx.send({ ok: true });
 		} catch (err) {
 			strapi.log.error("Discord webhook failed:", err);
+
 			return ctx.internalServerError("Failed to send to Discord");
 		}
 	},

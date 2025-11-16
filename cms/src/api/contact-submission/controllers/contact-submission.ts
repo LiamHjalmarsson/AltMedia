@@ -28,7 +28,7 @@ export default factories.createCoreController("api::contact-submission.contact-s
 					Authorization: `Bearer ${process.env.WEBHOOK_SECRET}`,
 				},
 				body: JSON.stringify({
-					model: "project-request",
+					model: "contact-submission",
 					entry: { name, email, message },
 				}),
 			});
