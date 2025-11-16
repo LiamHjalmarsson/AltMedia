@@ -13,13 +13,17 @@ definePageMeta({
 	layout: "minimal",
 });
 
-const form = reactive({
+const payload = reactive<Record<string, string>>({
 	name: "",
 	email: "",
 	message: "",
 });
 
-function submitForm() {}
+const { create } = useStrapi();
+
+async function submitForm() {
+	await create("contact-submissions", payload);
+}
 </script>
 
 <template>
@@ -79,6 +83,7 @@ function submitForm() {}
 							:label="input.label">
 							<Input
 								v-if="input.type === 'input'"
+								v-model="payload[input.name]"
 								:id="input.name"
 								:name="input.name"
 								:placeholder="input.placeholder"
@@ -88,6 +93,7 @@ function submitForm() {}
 
 							<Textarea
 								v-else-if="input.type === 'textarea'"
+								v-model="payload[input.name]"
 								:id="input.name"
 								:name="input.name"
 								:rows="input.rows || 4"
