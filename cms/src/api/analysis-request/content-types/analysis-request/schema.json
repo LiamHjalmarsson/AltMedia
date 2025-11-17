@@ -4,7 +4,7 @@
   "info": {
     "singularName": "analysis-request",
     "pluralName": "analysis-requests",
-    "displayName": "Analysis request"
+    "displayName": "Analys Förfrågan"
   },
   "options": {
     "draftAndPublish": false

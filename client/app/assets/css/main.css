@@ -51,6 +51,8 @@
 	--color-light: #f9fafa;
 	--color-white: #f9fafa;
 
+	--color-error: #fe755f;
+
 	/* Spacing */
 	--spacing-2xs: 0.25rem;
 	--spacing-xs: 0.5rem;

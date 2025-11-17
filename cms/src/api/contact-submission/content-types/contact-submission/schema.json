@@ -4,7 +4,7 @@
   "info": {
     "singularName": "contact-submission",
     "pluralName": "contact-submissions",
-    "displayName": "contact-submission"
+    "displayName": "Kontakt förfrågan"
   },
   "options": {
     "draftAndPublish": false

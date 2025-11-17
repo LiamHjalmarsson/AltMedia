@@ -55,6 +55,14 @@ export default {
 			return ctx.send({ ok: true, skipped: true });
 		}
 
+		const allowedModels = ["project-request", "contact-submission", "analysis-request"];
+
+		if (!allowedModels.includes(model)) {
+			strapi.log.info(`Ignored webhook for model: ${model}`);
+
+			return ctx.send({ ok: true, ignored: true });
+		}
+
 		const webhookUrl = resolveWebhookUrl(model);
 
 		const fields = buildFields(entry);

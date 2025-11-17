@@ -9,7 +9,12 @@ export default factories.createCoreController("api::analysis-request.analysis-re
 		const { url, email } = ctx.request.body?.data || {};
 
 		if (!url || !email) {
-			return ctx.badRequest("Missing required fields", url);
+			return ctx.badRequest("Both email and url are required.", {
+				missing: {
+					email: !email,
+					url: !url,
+				},
+			});
 		}
 
 		const entity = await strapi.documents("api::analysis-request.analysis-request").create({
@@ -27,7 +32,7 @@ export default factories.createCoreController("api::analysis-request.analysis-re
 					Authorization: `Bearer ${process.env.WEBHOOK_SECRET}`,
 				},
 				body: JSON.stringify({
-					model: "contact-submission",
+					model: "analysis-request",
 					entry: { url, email },
 				}),
 			});

@@ -377,7 +377,7 @@ export interface ApiAnalysisRequestAnalysisRequest
   extends Struct.CollectionTypeSchema {
   collectionName: 'analysis_requests';
   info: {
-    displayName: 'Analysis request';
+    displayName: 'Analys F\u00F6rfr\u00E5gan';
     pluralName: 'analysis-requests';
     singularName: 'analysis-request';
   };
@@ -534,7 +534,7 @@ export interface ApiBuildProjectPageBuildProjectPage
   extends Struct.SingleTypeSchema {
   collectionName: 'build_project_pages';
   info: {
-    displayName: 'Bygg Project Sida';
+    displayName: 'Bygg Projekt Sida';
     pluralName: 'build-project-pages';
     singularName: 'build-project-page';
   };
@@ -567,7 +567,7 @@ export interface ApiContactSubmissionContactSubmission
   extends Struct.CollectionTypeSchema {
   collectionName: 'contact_submissions';
   info: {
-    displayName: 'contact-submission';
+    displayName: 'Kontakt f\u00F6rfr\u00E5gan';
     pluralName: 'contact-submissions';
     singularName: 'contact-submission';
   };
@@ -742,7 +742,7 @@ export interface ApiProjectRequestProjectRequest
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_requests';
   info: {
-    displayName: 'Project Request';
+    displayName: 'Projekt F\u00F6rfr\u00E5gan';
     pluralName: 'project-requests';
     singularName: 'project-request';
   };

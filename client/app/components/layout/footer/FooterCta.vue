@@ -13,6 +13,8 @@ const cta = computed(() => footer.value?.cta);
 				<video
 					v-if="cta.cover.mime"
 					class="absolute inset-0 w-full h-full object-cover opacity-90"
+					aria-hidden="true"
+					preload="none"
 					autoplay
 					muted
 					loop

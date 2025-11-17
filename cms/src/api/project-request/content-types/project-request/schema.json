@@ -4,7 +4,7 @@
   "info": {
     "singularName": "project-request",
     "pluralName": "project-requests",
-    "displayName": "Project Request"
+    "displayName": "Projekt Förfrågan"
   },
   "options": {
     "draftAndPublish": true

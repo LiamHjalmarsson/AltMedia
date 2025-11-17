@@ -13,6 +13,8 @@ const isRelationStep = computed(() => store.isRelationStep(props.currentStep));
 
 <template>
 	<div v-if="!currentStep" />
+
 	<BuildStepRelations v-else-if="isRelationStep" :step="currentStep" />
+
 	<BuildStepQuestions v-else :step="currentStep" :is-on-last-step="isOnLastStep" />
 </template>

@@ -87,8 +87,6 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						class="ml-auto" />
 				</div>
 			</div>
-
-			<SummaryPanel v-if="page?.show_summary_panel" :summaryData="summaryData" />
 		</div>
 	</section>
 </template>

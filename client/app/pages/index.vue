@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const homeStore = useHomeStore();
+
 useAppHead();
 
 await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
@@ -11,11 +12,49 @@ const payload = reactive<Record<string, string>>({
 	url: "",
 });
 
+const fieldErrors = reactive<Record<string, string>>({
+	email: "",
+	url: "",
+});
+
+const loading = ref(false);
+
+const success = ref(false);
+
+const errorMessage = ref("");
+
 const { create } = useStrapi();
 
 async function submitAnalysisRequest() {
-	console.log(payload);
-	await create("analysis-requests", payload);
+	loading.value = true;
+
+	success.value = false;
+
+	errorMessage.value = "";
+
+	fieldErrors.email = "";
+
+	fieldErrors.url = "";
+
+	try {
+		await create("analysis-requests", payload);
+
+		success.value = true;
+	} catch (err: any) {
+		console.log(err.error);
+
+		errorMessage.value = err?.error?.message || "Ett oväntat fel uppstod.";
+
+		const missing = err?.error?.details?.missing;
+
+		if (missing) {
+			if (missing.email) fieldErrors.email = "E-post är obligatoriskt.";
+
+			if (missing.url) fieldErrors.url = "URL är obligatoriskt.";
+		}
+	} finally {
+		loading.value = false;
+	}
 }
 </script>
 
@@ -37,7 +76,8 @@ async function submitAnalysisRequest() {
 							v-for="input in form.inputs"
 							:key="input.name"
 							:name="input.name"
-							:label="input.label">
+							:label="input.label"
+							:error="fieldErrors[input.name]">
 							<Input
 								v-if="input.type === 'input'"
 								:id="input.name"

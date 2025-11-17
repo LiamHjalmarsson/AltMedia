@@ -45,11 +45,15 @@ const year = new Date().getFullYear();
 				<p class="text-white/80 text-sm text-center">© {{ year }} Alt Media — Alla rättigheter förbehållna.</p>
 
 				<nav class="flex max-lg:flex-col max-lg:space-y-xl items-center lg:space-x-xl text-sm">
-					<NuxtLink to="/policy" class="text-white/80 hover:text-white transition"
+					<NuxtLink to="/policy" class="text-white/80 hover:text-white transition font-medium"
 						>Integritetspolicy</NuxtLink
 					>
-					<NuxtLink to="/cookies" class="text-white/80 hover:text-white transition">Cookies</NuxtLink>
-					<NuxtLink to="/contact" class="text-white/80 hover:text-white transition">Kontakt</NuxtLink>
+					<NuxtLink to="/cookies" class="text-white/80 hover:text-white transition font-medium"
+						>Cookies</NuxtLink
+					>
+					<NuxtLink to="/contact" class="text-white/80 hover:text-white transition font-medium"
+						>Kontakt</NuxtLink
+					>
 				</nav>
 			</div>
 		</div>

@@ -19,10 +19,52 @@ const payload = reactive<Record<string, string>>({
 	message: "",
 });
 
+const fieldErrors = reactive<Record<string, string>>({
+	name: "",
+	email: "",
+	message: "",
+});
+
 const { create } = useStrapi();
 
+const loading = ref(false);
+
+const success = ref(false);
+
+const errorMessage = ref("");
+
 async function submitForm() {
-	await create("contact-submissions", payload);
+	loading.value = true;
+
+	success.value = false;
+
+	errorMessage.value = "";
+
+	fieldErrors.email = "";
+
+	fieldErrors.name = "";
+
+	fieldErrors.message = "";
+
+	try {
+		await create("contact-submissions", payload);
+
+		success.value = true;
+	} catch (err: any) {
+		errorMessage.value = err?.error?.message || "Ett oväntat fel uppstod.";
+
+		const missing = err?.error?.details?.missing;
+
+		if (missing) {
+			if (missing.email) fieldErrors.email = "E-post är obligatoriskt.";
+
+			if (missing.name) fieldErrors.name = "Namn är obligatoriskt.";
+
+			if (missing.message) fieldErrors.message = "Meddelande är obligatoriskt.";
+		}
+	} finally {
+		loading.value = false;
+	}
 }
 </script>
 
@@ -45,12 +87,12 @@ async function submitForm() {
 						{{ contactPage?.data.title }}
 					</h1>
 
-					<p class="max-w-[450px] text-lg leading-relaxed text-white/90">
+					<p class="max-w-[450px] text-lg leading-relaxed text-white/80">
 						{{ contactPage?.data.description }}
 					</p>
 				</div>
 
-				<div class="space-y-md text-white/90">
+				<div class="space-y-md text-white/80">
 					<p v-if="contact?.phone" class="flex items-center gap-sm">
 						<Icon name="mdi:phone" size="20" /> {{ contact.phone }}
 					</p>
@@ -65,7 +107,7 @@ async function submitForm() {
 						:key="social_media.id"
 						:to="social_media.url"
 						target="_blank"
-						class="w-12 h-12 border border-white/60 rounded-full flex items-center justify-center hover:bg-white/10 transition">
+						class="w-12 h-12 border border-white/20 rounded-full flex items-center justify-center hover:bg-white/10 transition">
 						<Icon :name="social_media.icon?.icon_name" size="22" />
 					</NuxtLink>
 				</div>
@@ -80,6 +122,7 @@ async function submitForm() {
 							v-for="input in contactPage?.data.form.inputs"
 							:key="input.name"
 							:name="input.name"
+							:error="fieldErrors[input.name]"
 							:label="input.label">
 							<Input
 								v-if="input.type === 'input'"

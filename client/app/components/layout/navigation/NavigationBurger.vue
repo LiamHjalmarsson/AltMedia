@@ -11,12 +11,14 @@ const emit = defineEmits(["toggle"]);
 const barColor = computed(() => {
 	return props.theme === "dark" ? "bg-white" : "bg-black";
 });
+
+const ariaLabel = computed(() => (props.isMenuOpen ? "Stäng meny" : "Öppna meny"));
 </script>
 
 <template>
 	<button
 		@click="emit('toggle')"
-		aria-label="Öppna meny"
+		:aria-label="ariaLabel"
 		:aria-expanded="isMenuOpen"
 		aria-controls="mobile-menu"
 		class="p-xs space-y-2xs rounded-md z-50 cursor-pointer lg:hidden">

@@ -9,7 +9,13 @@ export default factories.createCoreController("api::contact-submission.contact-s
 		const { name, email, message } = ctx.request.body?.data || {};
 
 		if (!name || !email || !message) {
-			return ctx.badRequest("Missing required fields");
+			return ctx.badRequest("Missing required fields", {
+				missing: {
+					email: !email,
+					name: !name,
+					message: !message,
+				},
+			});
 		}
 
 		const entity = await strapi.documents("api::contact-submission.contact-submission").create({
