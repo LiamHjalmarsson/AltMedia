@@ -7,7 +7,7 @@ const cta = computed(() => footer.value?.cta);
 </script>
 
 <template>
-	<section v-if="cta" class="relative overflow-hidden text-white">
+	<section v-if="cta" aria-labelledby="cta-title" class="relative overflow-hidden text-white">
 		<div class="relative px-lg py-3xl lg:p-3xl">
 			<template v-if="cta.cover?.url">
 				<video
@@ -38,7 +38,7 @@ const cta = computed(() => footer.value?.cta);
 					{{ cta.subtitle }}
 				</p>
 
-				<h2 class="mt-lg text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
+				<h2 id="cta-title" class="mt-lg text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
 					{{ cta.title }}
 				</h2>
 
@@ -57,7 +57,6 @@ const cta = computed(() => footer.value?.cta);
 						:reversed="link.reversed"
 						:icon="link.icon"
 						:size="link.size || 'md'"
-						:aria-label="link.label"
 						class="max-lg:flex-1 max-lg:w-full" />
 				</div>
 			</div>

@@ -82,12 +82,10 @@ watch(
 				<li
 					v-for="link in header?.links"
 					:key="link.label"
-					role="menu"
-					class="text-lg font-semibold text-center py-xs cursor-pointer"
-					@click="emit('close')">
+					@click="emit('close')"
+					class="text-lg font-semibold text-center py-xs cursor-pointer">
 					<MenuLink
 						:link
-						role="menuitem"
 						@click="emit('close')"
 						class="px-md py-2xs block font-semibold text-lg text-center w-full" />
 				</li>

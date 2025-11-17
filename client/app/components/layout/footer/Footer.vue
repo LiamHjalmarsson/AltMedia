@@ -14,13 +14,21 @@ const year = new Date().getFullYear();
 					<NuxtImg
 						v-if="footer?.logo.url"
 						:src="footer.logo.url"
-						:alt="footer.logo.alternativeText || ''"
+						:alt="footer.logo.alternativeText || 'Alt media'"
+						loading="lazy"
+						width="450"
+						height="300"
+						format="webp,avif"
+						quality="85"
 						class="object-contain" />
-					<p class="text-white/80 leading-relaxed text-lg lg:text-xl" v-if="footer?.description">
+
+					<p v-if="footer?.description" class="text-white/80 leading-relaxed text-lg lg:text-xl">
 						{{ footer?.description }}
 					</p>
+
 					<SocialLinks :social-medias="contact?.social_medias || []" class="mx-auto w-fit mt-lg" />
 				</div>
+
 				<div class="flex flex-col md:grid md:grid-cols-4 gap-3xl mb-2xl lg:mb-4xl">
 					<FooterColumn
 						v-for="column in footer?.footer_columns"
@@ -31,10 +39,16 @@ const year = new Date().getFullYear();
 					<div class="space-y-md max-lg:text-center">
 						<h3 class="text-xl font-semibold">Kontakt</h3>
 
-						<div class="space-y-xs">
-							<p class="text-white/80 hover:text-white transition">{{ contact?.email }}</p>
-							<p class="text-white/80 hover:text-white transition">{{ contact?.phone }}</p>
-						</div>
+						<address class="space-y-xs not-italic">
+							<NuxtLink
+								:to="`mailto:${contact?.email}`"
+								class="text-white/80 hover:text-white transition"
+								>{{ contact?.email }}</NuxtLink
+							>
+							<NuxtLink :to="`tel:${contact?.phone}`" class="text-white/80 hover:text-white transition">{{
+								contact?.phone
+							}}</NuxtLink>
+						</address>
 					</div>
 				</div>
 			</div>
@@ -44,7 +58,9 @@ const year = new Date().getFullYear();
 			<div class="flex flex-col lg:flex-row justify-between items-center gap-xl lg:gap-lg mt-2xl lg:mt-4xl">
 				<p class="text-white/80 text-sm text-center">© {{ year }} Alt Media — Alla rättigheter förbehållna.</p>
 
-				<nav class="flex max-lg:flex-col max-lg:space-y-xl items-center lg:space-x-xl text-sm">
+				<nav
+					aria-label="Legal navigation"
+					class="flex max-lg:flex-col max-lg:space-y-xl items-center lg:space-x-xl text-sm">
 					<NuxtLink to="/policy" class="text-white/80 hover:text-white transition font-medium"
 						>Integritetspolicy</NuxtLink
 					>

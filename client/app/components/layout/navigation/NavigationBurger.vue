@@ -21,12 +21,14 @@ const ariaLabel = computed(() => (props.isMenuOpen ? "Stäng meny" : "Öppna men
 		:aria-label="ariaLabel"
 		:aria-expanded="isMenuOpen"
 		aria-controls="mobile-menu"
-		class="p-xs space-y-2xs rounded-md z-50 cursor-pointer lg:hidden">
+		type="button"
+		class="p-xs space-y-2xs rounded-md z-50 cursor-pointer lg:hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
 		<span
 			v-for="number in 3"
 			:key="number"
+			aria-hidden="true"
 			:class="[
-				'block h-[3px] w-8 rounded transition-all duration-300 ease-in-out',
+				'block h-[3px] w-8 rounded transition-all duration-300 ease-in-out origin-center',
 				barColor,
 				number === 1 && isMenuOpen ? 'rotate-45 translate-y-[7px]' : '',
 				number === 2 && isMenuOpen ? 'opacity-0 scale-0' : '',
