@@ -11,12 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "description": {
-      "type": "text"
-    },
     "show_summary_panel": {
       "type": "boolean",
       "default": false

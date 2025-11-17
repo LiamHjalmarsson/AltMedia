@@ -295,9 +295,7 @@ export interface ProjectBuildOption extends Struct.ComponentSchema {
     displayName: 'Option';
   };
   attributes: {
-    is_static: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     label: Schema.Attribute.String;
-    value: Schema.Attribute.String;
   };
 }
 
@@ -309,10 +307,11 @@ export interface ProjectBuildQuestion extends Struct.ComponentSchema {
   attributes: {
     conditional: Schema.Attribute.Component<'project-build.conditional', false>;
     help_text: Schema.Attribute.String;
+    input: Schema.Attribute.Component<'form.input', false>;
     options: Schema.Attribute.Component<'project-build.option', true>;
     title: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<
-      ['boolean', 'multi', 'single', 'budget_time', 'textarea', 'input']
+      ['boolean', 'single', 'textarea', 'input']
     >;
   };
 }

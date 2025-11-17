@@ -48,6 +48,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 				<h2 class="text-heading-lg lg:text-heading-xl xl:text-heading-2xl font-bold mb-xs">
 					{{ steps[activeStepIndex - 1]?.title }}
 				</h2>
+
 				<p class="text-black/80 mb-lg text-lg lg:text-2xl">{{ steps[activeStepIndex - 1]?.description }}</p>
 
 				<div ref="containerRef" class="min-h-[400px]">

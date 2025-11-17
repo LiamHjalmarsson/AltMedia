@@ -9,7 +9,7 @@ defineProps<{
 
 <template>
 	<div class="flex flex-col space-y-2xs">
-		<Label :for="name.toLowerCase()" :required>{{ label }}</Label>
+		<Label :for="name" :required>{{ label }}</Label>
 		<slot />
 		<p v-if="error" class="text-xs text-error">{{ error }}</p>
 	</div>

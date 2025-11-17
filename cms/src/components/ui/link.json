@@ -23,13 +23,6 @@
         "ghost"
       ]
     },
-    "is_external": {
-      "type": "boolean",
-      "default": false
-    },
-    "icon": {
-      "type": "string"
-    },
     "size": {
       "type": "enumeration",
       "default": "lg",
@@ -41,9 +34,16 @@
         "xl"
       ]
     },
+    "is_external": {
+      "type": "boolean",
+      "default": false
+    },
     "reversed": {
       "type": "boolean",
       "default": false
+    },
+    "icon": {
+      "type": "string"
     }
   },
   "config": {}

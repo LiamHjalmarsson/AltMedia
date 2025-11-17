@@ -545,7 +545,6 @@ export interface ApiBuildProjectPageBuildProjectPage
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -558,7 +557,6 @@ export interface ApiBuildProjectPageBuildProjectPage
     show_summary_panel: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     steps: Schema.Attribute.Component<'project-build.step', true>;
-    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

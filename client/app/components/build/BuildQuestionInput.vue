@@ -3,6 +3,8 @@ import type { Question } from "~/types";
 
 const props = defineProps<{ question: Question }>();
 
+props.question.input;
+
 const store = useBuildProjectStore();
 
 const { formData } = storeToRefs(store);
@@ -15,12 +17,25 @@ function onInput(e: Event) {
 </script>
 
 <template>
-	<FormField :label="question.title" :name="question.title">
+	<FormField :label="question.input?.label" :name="question.input?.name">
 		<Input
-			:value="formData[question.title] || ''"
-			:name="question.title"
+			v-if="question.input?.type === 'input'"
+			:id="question.input.name"
+			:name="question.input.name"
+			:value="formData[question.input.name] || ''"
 			@input="onInput"
-			type="text"
-			:placeholder="question.help_text || ''" />
+			:required="question.input.required"
+			:type="question.input.input_type"
+			:placeholder="question.input.placeholder || ''" />
+
+		<Textarea
+			v-if="question.input?.type === 'textarea'"
+			:id="question.input.name"
+			:rows="question.input.rows"
+			:required="question.input.required"
+			:name="question.input.name"
+			:value="formData[question.input.name] || ''"
+			@input="onInput"
+			:placeholder="question.input.placeholder || ''" />
 	</FormField>
 </template>

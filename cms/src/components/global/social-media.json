@@ -5,6 +5,10 @@
   },
   "options": {},
   "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
     "url": {
       "type": "string",
       "required": true
@@ -13,10 +17,6 @@
       "type": "component",
       "component": "ui.icon",
       "repeatable": false,
-      "required": true
-    },
-    "title": {
-      "type": "string",
       "required": true
     }
   },

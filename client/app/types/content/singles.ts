@@ -1,4 +1,4 @@
-import type { Image, Seo, Icon, Form, Color } from "../shared";
+import type { Image, Seo, Icon, Form, Color, Input } from "../shared";
 import type { Blocks, Cta, Hero } from "./blocks";
 import type { Service, Subservice } from "./collections";
 
@@ -83,8 +83,6 @@ export interface ContactPage {
 // 🔹 Byggprojekt-sida
 export interface BuildProjectPage {
 	id: number;
-	title: string;
-	description?: string;
 	steps: Step[];
 	show_summary_panel: boolean;
 	message?: string;
@@ -107,16 +105,15 @@ export interface Question {
 	id: number;
 	title: string;
 	help_text?: string;
-	type: "boolean" | "multi" | "single" | "budget_time" | "textarea" | "input";
+	type: "boolean" | "single" | "input";
 	options?: Option[];
 	conditional?: Conditional;
+	input?: Input;
 }
 
 export interface Option {
 	id: number;
 	label: string;
-	value: string;
-	is_static?: boolean;
 }
 
 export interface Conditional {

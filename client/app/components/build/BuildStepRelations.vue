@@ -4,6 +4,7 @@ import type { Step } from "~/types";
 const props = defineProps<{ step: Step }>();
 
 const store = useBuildProjectStore();
+
 const { formData } = storeToRefs(store);
 
 const isClickable = computed(() => store.isClickableRelations(props.step));

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Question, Option } from "~/types";
+import type { Question } from "~/types";
 
 const props = defineProps<{ question: Question }>();
 
@@ -22,7 +22,7 @@ function isSelected(option: string) {
 	<div class="flex flex-wrap gap-lg lg:gap-xl">
 		<div
 			v-for="option in props.question.options || []"
-			:key="option.value || option.label"
+			:key="option.label"
 			@click="onToggle(option.label)"
 			class="cursor-pointer border border-black/10 shadow-xl px-sm lg:px-3xl py-md text-xs lg:text-lg font-semibold transition select-none"
 			:class="

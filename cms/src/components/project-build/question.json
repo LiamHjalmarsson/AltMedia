@@ -1,30 +1,80 @@
 {
-	"collectionName": "components_project-build_questions",
-	"info": {
-		"displayName": "Question"
-	},
-	"options": {},
-	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"help_text": {
-			"type": "string"
-		},
-		"type": {
-			"type": "enumeration",
-			"enum": ["boolean", "multi", "single", "budget_time", "textarea", "input"]
-		},
-		"options": {
-			"type": "component",
-			"component": "project-build.option",
-			"repeatable": true
-		},
-		"conditional": {
-			"type": "component",
-			"component": "project-build.conditional",
-			"repeatable": false
-		}
-	},
-	"config": {}
+  "collectionName": "components_project-build_questions",
+  "info": {
+    "displayName": "Question"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "help_text": {
+      "type": "string",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "type"
+            },
+            "input"
+          ]
+        }
+      }
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "boolean",
+        "single",
+        "textarea",
+        "input"
+      ]
+    },
+    "options": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "single"
+          ]
+        }
+      },
+      "component": "project-build.option",
+      "repeatable": true
+    },
+    "conditional": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "!=": [
+            {
+              "var": "type"
+            },
+            "input"
+          ]
+        }
+      },
+      "component": "project-build.conditional",
+      "repeatable": false
+    },
+    "input": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "input"
+          ]
+        }
+      },
+      "component": "form.input",
+      "repeatable": false
+    }
+  },
+  "config": {}
 }

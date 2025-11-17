@@ -1,20 +1,13 @@
 {
-	"collectionName": "components_project-build_options",
-	"info": {
-		"displayName": "Option"
-	},
-	"options": {},
-	"attributes": {
-		"label": {
-			"type": "string"
-		},
-		"value": {
-			"type": "string"
-		},
-		"is_static": {
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"config": {}
+  "collectionName": "components_project-build_options",
+  "info": {
+    "displayName": "Option"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    }
+  },
+  "config": {}
 }

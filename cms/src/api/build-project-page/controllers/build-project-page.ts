@@ -7,7 +7,7 @@ import { factories } from "@strapi/strapi";
 export default factories.createCoreController("api::build-project-page.build-project-page", ({ strapi }) => ({
 	async find(ctx) {
 		const entity = await strapi.documents("api::build-project-page.build-project-page").findFirst({
-			fields: ["id", "title", "description", "show_summary_panel", "title"],
+			fields: ["id", "show_summary_panel", "message"],
 			populate: {
 				steps: {
 					fields: ["id", "title", "subtitle", "description", "type", "clickable_relations"],
@@ -22,7 +22,21 @@ export default factories.createCoreController("api::build-project-page.build-pro
 							fields: ["id", "help_text", "title", "type"],
 							populate: {
 								options: {
-									fields: ["id", "label", "value", "is_static"],
+									fields: ["id", "label"],
+								},
+								input: {
+									fields: [
+										"id",
+										"column_span",
+										"input_type",
+										"label",
+										"name",
+										"options",
+										"placeholder",
+										"required",
+										"rows",
+										"type",
+									],
 								},
 								conditional: {
 									fields: ["id", "trigger_value", "placeholder", "label", "type"],

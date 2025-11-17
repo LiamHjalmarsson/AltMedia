@@ -1,72 +1,85 @@
 {
-	"collectionName": "components_project-build_steps",
-	"info": {
-		"displayName": "Step"
-	},
-	"options": {},
-	"attributes": {
-		"title": {
-			"type": "string"
-		},
-		"subtitle": {
-			"type": "string"
-		},
-		"description": {
-			"type": "text"
-		},
-		"type": {
-			"type": "enumeration",
-			"enum": ["form", "relations"]
-		},
-		"clickable_relations": {
-			"type": "boolean",
-			"default": true
-		},
-		"services": {
-			"type": "relation",
-			"relation": "oneToMany",
-			"target": "api::service.service",
-			"conditions": {
-				"visible": {
-					"==": [
-						{
-							"var": "type"
-						},
-						"relations"
-					]
-				}
-			}
-		},
-		"subservices": {
-			"type": "relation",
-			"relation": "oneToMany",
-			"target": "api::subservice.subservice",
-			"conditions": {
-				"visible": {
-					"==": [
-						{
-							"var": "type"
-						},
-						"relations"
-					]
-				}
-			}
-		},
-		"questions": {
-			"type": "component",
-			"conditions": {
-				"visible": {
-					"==": [
-						{
-							"var": "type"
-						},
-						"form"
-					]
-				}
-			},
-			"component": "project-build.question",
-			"repeatable": true
-		}
-	},
-	"config": {}
+  "collectionName": "components_project-build_steps",
+  "info": {
+    "displayName": "Step"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "form",
+        "relations"
+      ]
+    },
+    "clickable_relations": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "relations"
+          ]
+        }
+      },
+      "default": true
+    },
+    "services": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::service.service",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "relations"
+          ]
+        }
+      }
+    },
+    "subservices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subservice.subservice",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "relations"
+          ]
+        }
+      }
+    },
+    "questions": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "type"
+            },
+            "form"
+          ]
+        }
+      },
+      "component": "project-build.question",
+      "repeatable": true
+    }
+  },
+  "config": {}
 }

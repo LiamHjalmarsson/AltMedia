@@ -15,16 +15,6 @@
       "type": "text",
       "unique": false
     },
-    "buttons": {
-      "type": "component",
-      "component": "ui.button",
-      "repeatable": true
-    },
-    "links": {
-      "type": "component",
-      "component": "ui.link",
-      "repeatable": true
-    },
     "cover": {
       "type": "media",
       "multiple": false,
@@ -35,15 +25,25 @@
         "audios"
       ]
     },
+    "background": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
+    },
     "color": {
       "type": "component",
       "component": "styles.color",
       "repeatable": false
     },
-    "background": {
+    "buttons": {
       "type": "component",
-      "component": "styles.color",
-      "repeatable": false
+      "component": "ui.button",
+      "repeatable": true
+    },
+    "links": {
+      "type": "component",
+      "component": "ui.link",
+      "repeatable": true
     }
   },
   "config": {}

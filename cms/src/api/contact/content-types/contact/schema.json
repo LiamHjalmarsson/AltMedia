@@ -17,16 +17,6 @@
     "description": {
       "type": "text"
     },
-    "form": {
-      "type": "component",
-      "component": "form.form",
-      "repeatable": false
-    },
-    "seo": {
-      "type": "component",
-      "component": "seo.seo",
-      "repeatable": false
-    },
     "cover": {
       "type": "media",
       "multiple": false,
@@ -40,6 +30,16 @@
     "color": {
       "type": "component",
       "component": "styles.color",
+      "repeatable": false
+    },
+    "form": {
+      "type": "component",
+      "component": "form.form",
+      "repeatable": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
       "repeatable": false
     }
   }
