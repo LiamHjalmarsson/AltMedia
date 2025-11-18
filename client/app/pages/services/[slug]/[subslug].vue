@@ -13,22 +13,9 @@ await useAsyncData(
 	{ server: true, lazy: true, watch: [subslug] }
 );
 
-watchEffect(() => {
-	const subservice = currentSubService.value;
-
-	useSeoMeta({
-		title: subservice?.title ?? "Delmoment",
-		description: "Delmoment i en tjänst.",
-		ogTitle: subservice?.title ?? "Delmoment",
-		ogDescription: "Delmoment i en tjänst.",
-		ogImage: "",
-		ogUrl: "",
-		twitterImage: "",
-		twitterTitle: subservice?.title ?? "Delmoment",
-		twitterDescription: "Delmoment i en tjänst.",
-		twitterCard: "summary_large_image",
-	});
-});
+// watchEffect(() => {
+// 	useAppHead(currentSubService.value?.seo || undefined);
+// });
 </script>
 
 <template>

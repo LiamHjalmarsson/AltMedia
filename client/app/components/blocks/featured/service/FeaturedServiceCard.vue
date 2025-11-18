@@ -7,7 +7,10 @@ defineProps<{ service: Service }>();
 </script>
 
 <template>
-	<Card @mouseenter="onEnter" @mouseleave="onLeave" class="overflow-hidden border border-white/40">
+	<div
+		@mouseenter="onEnter"
+		@mouseleave="onLeave"
+		class="overflow-hidden border border-white/40 relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
 		<NuxtLink
 			:to="`/services/${service.slug}`"
 			:aria-label="`Läs mer om ${service.title}`"
@@ -33,5 +36,5 @@ defineProps<{ service: Service }>();
 				ref="bgRef"
 				class="absolute -bottom-5 -left-5 rounded-full w-4 h-4 bg-gradient-to-tr from-secondary/5 via-secondary/10 to-primary/20" />
 		</NuxtLink>
-	</Card>
+	</div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Introduction } from "~/types/shared";
+import type { Introduction } from "~/types";
 
 defineProps<{
 	block: Introduction;

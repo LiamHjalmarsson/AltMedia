@@ -4,6 +4,8 @@ import type { Article } from "~/types";
 export const useArticleStore = defineStore("articles", () => {
 	const articles = ref<Article[]>([]);
 
+	const articlesLoaded = ref(false);
+
 	const currentArticle = ref<Article | null>(null);
 
 	const loading = ref(false);
@@ -11,7 +13,7 @@ export const useArticleStore = defineStore("articles", () => {
 	const { find, findOne } = useStrapi();
 
 	async function fetchArticles(params?: Record<string, any>) {
-		if (articles.value.length) {
+		if (articlesLoaded.value) {
 			return articles.value;
 		}
 
@@ -22,9 +24,15 @@ export const useArticleStore = defineStore("articles", () => {
 
 			articles.value = res.data || [];
 
+			articlesLoaded.value = true;
+
 			return articles.value;
 		} catch (error) {
 			articles.value = [];
+
+			articlesLoaded.value = true;
+
+			return [];
 		} finally {
 			loading.value = false;
 		}
@@ -49,5 +57,5 @@ export const useArticleStore = defineStore("articles", () => {
 		}
 	}
 
-	return { articles, currentArticle, loading, fetchArticles, fetchArticleBySlug };
+	return { articles, articlesLoaded, currentArticle, loading, fetchArticles, fetchArticleBySlug };
 });

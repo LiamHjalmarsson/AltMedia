@@ -1,4 +1,4 @@
-import { ref, watch, type Ref, nextTick } from "vue";
+import { ref, watch, type Ref, nextTick, computed } from "vue";
 import { useRouter } from "vue-router";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -8,6 +8,11 @@ import type { Theme } from "~/types/enums";
 
 extend([a11yPlugin]);
 
+/**
+ * Fullt explicit och detaljerad implementation av useAutoHeaderContrast.
+ * Inga förkortade variabelnamn eller enbokstavsidentifierare används.
+ */
+
 type AutoHeaderContrastOptions = {
 	baseSelector?: string;
 	debounceMilliseconds?: number;
@@ -15,280 +20,333 @@ type AutoHeaderContrastOptions = {
 };
 
 const LUMINANCE_THRESHOLD = 0.5;
-
-const DEFAULT_DEBOUNCE_MS = 100;
-
-const NAVIGATION_RETRY_DELAYS = [0, 50, 150, 400, 1000] as const;
-
-const forcedTheme = ref<Theme | null>(null);
+const DEFAULT_DEBOUNCE_MILLISECONDS = 100;
+const NAVIGATION_RETRY_DELAYS_MILLISECONDS = [0, 50, 150, 400, 1000] as const;
 
 /**
- * Composable that automatically determines whether a header should render
- * in light or dark theme based on background contrast.
- *
- * It samples pixels under the header, calculates luminance, and updates `theme`.
+ * Global forced theme. Use the returned `force` method to override.
  */
+const forcedThemeGlobal = ref<Theme | null>(null);
+
 export function useAutoHeaderContrast(
 	headerElementReference: Ref<HTMLElement | null>,
 	options: AutoHeaderContrastOptions = {}
 ) {
-	const currentTheme = ref<Theme>("dark");
+	const internalThemeState = ref<Theme>("dark");
 
+	const routerInstance = useRouter();
+
+	/* Debounce configuration */
+	const debounceMilliseconds = options.debounceMilliseconds ?? DEFAULT_DEBOUNCE_MILLISECONDS;
+
+	/* GSAP ScrollTrigger instance (if initialized) */
 	let scrollTriggerInstance: ScrollTrigger | null = null;
 
-	let resizeDebounceTimer: number | null = null;
-
-	let mutationDebounceTimer: number | null = null;
-
+	/* Timers and observers tracked for cleanup */
+	let resizeDebounceTimerIdentifier: number | null = null;
+	let mutationDebounceTimerIdentifier: number | null = null;
 	let mutationObserverInstance: MutationObserver | null = null;
 
-	const navigationRetryTimers: number[] = [];
+	/* Explicit arrays for registered timers and image listeners so we can clear them deterministically */
+	const navigationRetryTimeoutIdentifiers: number[] = [];
+	const registeredImageLoadListeners: Array<{ imageElement: HTMLImageElement; listener: EventListener }> = [];
 
-	const imageLoadEventListeners: Array<{ img: HTMLImageElement; handler: EventListener }> = [];
+	/* Exposed computed theme (respects forced override) */
+	const theme = computed(() => forcedThemeGlobal.value ?? internalThemeState.value);
 
-	const router = useRouter();
-
-	const debounceMs = options.debounceMilliseconds ?? DEFAULT_DEBOUNCE_MS;
+	/* ---------------------------
+	 * Utility helpers (very explicit)
+	 * --------------------------- */
 
 	/**
-	 * Calculates the median value of an array of numbers.
+	 * Calculate median of an array of numbers.
+	 * Returns undefined when array is empty.
 	 */
-	function calculateMedian(values: number[]) {
-		if (values.length === 0) {
-			return undefined;
-		}
+	function calculateMedianOfNumberArray(numbers: number[]): number | undefined {
+		if (!numbers.length) return undefined;
 
-		const sorted = [...values].sort((a, b) => a - b);
+		const numbersSorted = [...numbers].sort((firstValue, secondValue) => firstValue - secondValue);
 
-		return sorted[Math.floor(sorted.length / 2)];
+		const medianIndex = Math.floor(numbersSorted.length / 2);
+
+		return numbersSorted[medianIndex];
 	}
 
 	/**
-	 * Goes up the DOM until it finds a non-transparent background color.
-	 * Fall back to the <body> background.
+	 * Walk up DOM from provided element until a non-transparent background color is found.
+	 * Falls back to computed body background color or a hard-coded fallback.
 	 */
-	function resolveBackgroundColor(element: HTMLElement | null): string {
-		if (!element) {
-			return "#f9fafa";
-		}
+	function resolveNonTransparentBackgroundColorFromElement(startElement: HTMLElement | null): string {
+		let elementToInspect = startElement;
 
-		let current: HTMLElement | null = element;
-
-		while (current) {
-			const backgroundColor = getComputedStyle(current).backgroundColor;
-
-			if (backgroundColor && backgroundColor !== "transparent" && backgroundColor !== "rgba(0, 0, 0, 0)") {
-				return backgroundColor;
+		while (elementToInspect) {
+			const computedBackgroundColor = getComputedStyle(elementToInspect).backgroundColor;
+			// Check for common transparent representations explicitly
+			if (
+				computedBackgroundColor &&
+				computedBackgroundColor !== "transparent" &&
+				computedBackgroundColor !== "rgba(0, 0, 0, 0)"
+			) {
+				return computedBackgroundColor;
 			}
 
-			current = current.parentElement;
+			elementToInspect = elementToInspect.parentElement;
 		}
 
-		const bodyBackground = getComputedStyle(document.body).backgroundColor;
+		const bodyBackgroundColor = getComputedStyle(document.body).backgroundColor;
 
-		return bodyBackground || "#f9fafa";
+		return bodyBackgroundColor || "#f9fafa";
 	}
 
 	/**
-	 * Generates a grid of sample points across the header rectangle.
-	 * Example: 5 horizontal x 3 vertical = 15 sample points.
+	 * Resolve a base element to sample background from.
+	 * Priority:
+	 * 1. options.baseSelector (if provided and exists)
+	 * 2. element with class .hero
+	 * 3. the <main> element
+	 * 4. document.body
 	 */
-	function sampleHeaderPoints(headerRectangle: DOMRect, sampleCount = 5) {
-		const verticalPoints = [0.25, 0.5, 0.75].map((factor) => headerRectangle.top + headerRectangle.height * factor);
+	function resolveBackgroundSamplingBaseElement(): HTMLElement {
+		if (options.baseSelector) {
+			const explicitElement = document.querySelector<HTMLElement>(options.baseSelector);
 
-		const horizontalStep = headerRectangle.width / (sampleCount + 1);
+			if (explicitElement) return explicitElement;
+		}
 
-		const horizontalPoints = Array.from(
-			{ length: sampleCount },
-			(_, index) => headerRectangle.left + horizontalStep * (index + 1)
-		);
+		const heroElement = document.querySelector<HTMLElement>(".hero");
 
-		return verticalPoints.flatMap((y) => horizontalPoints.map((x) => [x, y] as [number, number]));
+		if (heroElement) return heroElement;
+
+		const mainElement = document.querySelector<HTMLElement>("main");
+
+		if (mainElement) return mainElement;
+
+		return document.body;
 	}
 
 	/**
-	 * Collects luminance values at each sampled point under the header.
-	 * Temporarily disables pointer-events so `elementFromPoint` ignores the header itself.
+	 * Create a grid of sampling points within the provided header rectangle.
+	 * horizontalSampleCount defines how many columns of sample points to create (default 5).
+	 * Vertical rows are fixed at 3 (25%, 50%, 75%).
 	 */
-	function collectLuminanceSamples(points: [number, number][], headerElement: HTMLElement) {
-		const luminances: number[] = [];
+	function generateHeaderSamplingPoints(headerRectangle: DOMRect, horizontalSampleCount = 5): [number, number][] {
+		const verticalFractionPositions = [0.25, 0.5, 0.75].map((verticalFraction) => {
+			return headerRectangle.top + headerRectangle.height * verticalFraction;
+		});
 
-		const previousPointerEvents = headerElement.style.pointerEvents;
+		const horizontalStep = headerRectangle.width / (horizontalSampleCount + 1);
+
+		const horizontalSamplePositions = Array.from({ length: horizontalSampleCount }, (_unused, index) => {
+			return headerRectangle.left + horizontalStep * (index + 1);
+		});
+
+		const samplingPoints: [number, number][] = [];
+
+		for (const verticalPosition of verticalFractionPositions) {
+			for (const horizontalPosition of horizontalSamplePositions) {
+				samplingPoints.push([horizontalPosition, verticalPosition]);
+			}
+		}
+
+		return samplingPoints;
+	}
+
+	/**
+	 * Collect luminance samples for an array of viewport points.
+	 * Temporarily disables pointer-events on the header so elementFromPoint picks elements behind it.
+	 */
+	function collectLuminanceSamplesAtViewportPoints(
+		viewportPoints: [number, number][],
+		headerElement: HTMLElement
+	): number[] {
+		const previousPointerEventsValue = headerElement.style.pointerEvents;
 
 		headerElement.style.pointerEvents = "none";
 
+		const luminanceValues: number[] = [];
+
 		try {
-			for (const [x, y] of points) {
-				const targetElement = document.elementFromPoint(x, y) as HTMLElement | null;
+			for (const [sampleX, sampleY] of viewportPoints) {
+				const elementAtPoint = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null;
 
-				if (!targetElement) {
-					continue;
-				}
+				if (!elementAtPoint) continue;
 
-				const backgroundColor = resolveBackgroundColor(targetElement);
+				const backgroundColorForElement = resolveNonTransparentBackgroundColorFromElement(elementAtPoint);
 
-				luminances.push(colord(backgroundColor).luminance());
+				const luminanceValue = colord(backgroundColorForElement).luminance();
+
+				luminanceValues.push(luminanceValue);
 			}
 		} finally {
-			headerElement.style.pointerEvents = previousPointerEvents;
+			// Always restore original pointer-events setting
+			headerElement.style.pointerEvents = previousPointerEventsValue;
 		}
 
-		return luminances;
+		return luminanceValues;
 	}
 
 	/**
-	 * Chooses the base element to sample from:
-	 * 1. custom selector
-	 * 2. hero
-	 * 3. main
-	 * 4. body
+	 * Update internal theme using samples directly behind the header element.
 	 */
-	function getBaseElement() {
-		const explicit = options.baseSelector ? document.querySelector<HTMLElement>(options.baseSelector) : null;
+	function updateThemeUsingHeaderBackgroundSamples(): void {
+		const headerElement = headerElementReference.value;
 
-		if (explicit) {
-			return explicit;
-		}
-
-		return (
-			document.querySelector<HTMLElement>(".hero") ?? document.querySelector<HTMLElement>("main") ?? document.body
-		);
-	}
-
-	/**
-	 * Updates theme based on the pixels directly behind the header.
-	 */
-	function updateThemeFromHeader() {
-		if (!headerElementReference.value) {
+		if (!headerElement) {
 			return;
 		}
 
-		const headerRectangle = headerElementReference.value.getBoundingClientRect();
+		const headerBoundingRectangle = headerElement.getBoundingClientRect();
 
-		const luminanceSamples = collectLuminanceSamples(
-			sampleHeaderPoints(headerRectangle),
-			headerElementReference.value
-		);
+		const samplingPoints = generateHeaderSamplingPoints(headerBoundingRectangle, 5);
 
-		const medianLuminance = calculateMedian(luminanceSamples);
+		const luminanceSampleValues = collectLuminanceSamplesAtViewportPoints(samplingPoints, headerElement);
 
-		if (medianLuminance !== undefined) {
-			currentTheme.value = medianLuminance < LUMINANCE_THRESHOLD ? "dark" : "light";
+		const medianLuminanceValue = calculateMedianOfNumberArray(luminanceSampleValues);
+
+		if (medianLuminanceValue !== undefined) {
+			internalThemeState.value = medianLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
 		}
 	}
 
 	/**
-	 * Updates theme from the hero element or fallback element.
-	 * Used when header sampling has no reliable data.
+	 * Update internal theme using the base element (hero/main/body) background color.
+	 * This is used as a fallback when header sampling is insufficient.
 	 */
-	function updateThemeFromBaseElement() {
-		const baseElement = getBaseElement();
+	function updateThemeUsingBaseElementBackground(): void {
+		const baseElementToSample = resolveBackgroundSamplingBaseElement();
 
-		const luminance = colord(resolveBackgroundColor(baseElement)).luminance();
+		const resolvedBaseBackgroundColor = resolveNonTransparentBackgroundColorFromElement(baseElementToSample);
 
-		currentTheme.value = luminance < LUMINANCE_THRESHOLD ? "dark" : "light";
+		const baseLuminanceValue = colord(resolvedBaseBackgroundColor).luminance();
+
+		internalThemeState.value = baseLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
 	}
 
 	/**
-	 * Refresh theme (base + header) and tell GSAP to refresh ScrollTrigger.
+	 * Refresh theme by first using base element then header samples, then asking ScrollTrigger to refresh.
 	 */
-	function refreshTheme() {
-		updateThemeFromBaseElement();
+	function refreshComputedTheme(): void {
+		updateThemeUsingBaseElementBackground();
 
-		updateThemeFromHeader();
+		updateThemeUsingHeaderBackgroundSamples();
 
+		// Ask GSAP ScrollTrigger to recalculate if present
 		ScrollTrigger.refresh();
 	}
 
-	/**
-	 * Clears all scheduled navigation retry timers.
-	 */
-	function clearNavigationRetryTimers() {
-		navigationRetryTimers.splice(0).forEach((timerId) => {
-			clearTimeout(timerId);
-		});
-	}
+	/* ---------------------------
+	 * Navigation retry timers management (explicit names)
+	 * --------------------------- */
 
 	/**
-	 * When navigating, schedule retries to re-check theme.
-	 * This accounts for async content and images that may load late.
+	 * Clear and remove all scheduled navigation retry timers.
+	 * Uses explicit naming for each identifier.
 	 */
-	function scheduleNavigationRetries() {
-		clearNavigationRetryTimers();
-
-		NAVIGATION_RETRY_DELAYS.forEach((delay) => {
-			navigationRetryTimers.push(window.setTimeout(refreshTheme, delay));
-		});
-	}
-
-	/**
-	 * Observes DOM changes and image loads on the hero/base element.
-	 * Ensures theme updates when background changes or images finish loading.
-	 */
-	function observeBaseElementAndImages() {
-		mutationObserverInstance?.disconnect();
-
-		mutationObserverInstance = null;
-
-		imageLoadEventListeners.forEach(({ img, handler }) => {
-			img.removeEventListener("load", handler);
-		});
-
-		imageLoadEventListeners.length = 0;
-
-		const baseElement = getBaseElement();
-
-		if (!baseElement) {
-			return;
+	function clearAllScheduledNavigationRetryTimeouts(): void {
+		for (const retryTimeoutIdentifier of navigationRetryTimeoutIdentifiers) {
+			clearTimeout(retryTimeoutIdentifier);
 		}
 
+		// Reset the array while keeping the same reference
+		navigationRetryTimeoutIdentifiers.length = 0;
+	}
+
+	/**
+	 * Schedule a set of navigation retry timers to repeatedly refresh theme after navigation completes.
+	 * This helps handle asynchronous content that appears shortly after route change (images, dynamic blocks).
+	 */
+	function scheduleNavigationRetryThemeRefreshTimers(): void {
+		// Always clear previous timers first
+		clearAllScheduledNavigationRetryTimeouts();
+
+		for (const retryDelayMilliseconds of NAVIGATION_RETRY_DELAYS_MILLISECONDS) {
+			const newTimeoutIdentifier = window.setTimeout(() => {
+				refreshComputedTheme();
+			}, retryDelayMilliseconds);
+
+			navigationRetryTimeoutIdentifiers.push(newTimeoutIdentifier);
+		}
+	}
+
+	/**
+	 * Disconnect previous mutation observer and remove registered image listeners.
+	 * Then set up a new observer and attach load listeners to images under the base element.
+	 */
+	function observeBaseElementMutationsAndImageLoads(): void {
+		// Disconnect previous observer if any
+		if (mutationObserverInstance) {
+			mutationObserverInstance.disconnect();
+
+			mutationObserverInstance = null;
+		}
+
+		// Remove previous image listeners
+		for (const registeredListener of registeredImageLoadListeners) {
+			registeredListener.imageElement.removeEventListener("load", registeredListener.listener);
+		}
+
+		registeredImageLoadListeners.length = 0;
+
+		const baseElementToObserve = resolveBackgroundSamplingBaseElement();
+
+		if (!baseElementToObserve) return;
+
+		// Create and observe DOM mutations
 		mutationObserverInstance = new MutationObserver(() => {
-			if (mutationDebounceTimer) {
-				clearTimeout(mutationDebounceTimer);
+			if (mutationDebounceTimerIdentifier) {
+				clearTimeout(mutationDebounceTimerIdentifier);
 			}
 
-			mutationDebounceTimer = window.setTimeout(refreshTheme, 50);
+			mutationDebounceTimerIdentifier = window.setTimeout(() => {
+				refreshComputedTheme();
+			}, 50);
 		});
 
-		mutationObserverInstance.observe(baseElement, {
+		mutationObserverInstance.observe(baseElementToObserve, {
 			attributes: true,
 			childList: true,
 			subtree: true,
 		});
 
-		baseElement.querySelectorAll<HTMLImageElement>("img").forEach((img) => {
-			if (!img.complete) {
-				const handler = () => {
-					refreshTheme();
+		// Attach load listeners to any images that are not yet complete
+		const imageElements = baseElementToObserve.querySelectorAll<HTMLImageElement>("img");
+		for (const imageElement of imageElements) {
+			if (!imageElement.complete) {
+				const loadEventListener = () => {
+					refreshComputedTheme();
 				};
 
-				img.addEventListener("load", handler);
+				imageElement.addEventListener("load", loadEventListener);
 
-				imageLoadEventListeners.push({ img, handler });
+				registeredImageLoadListeners.push({ imageElement, listener: loadEventListener });
 			}
-		});
+		}
 	}
 
 	/**
-	 * Debounced resize handler.
+	 * Debounced window resize handler that refreshes theme after configured debounce delay.
 	 */
-	function handleResize() {
-		if (resizeDebounceTimer) {
-			clearTimeout(resizeDebounceTimer);
+	function onWindowResizeDebounced(): void {
+		if (resizeDebounceTimerIdentifier) {
+			clearTimeout(resizeDebounceTimerIdentifier);
 		}
 
-		resizeDebounceTimer = window.setTimeout(refreshTheme, debounceMs);
+		resizeDebounceTimerIdentifier = window.setTimeout(() => {
+			refreshComputedTheme();
+		}, debounceMilliseconds);
 	}
 
 	/**
-	 * Initializes the composable:
-	 * - Sets up GSAP ScrollTrigger
-	 * - Adds resize listener
-	 * - Observes DOM + images
-	 * - Hooks into Vue Router navigation
+	 * Initialize the auto header contrast system:
+	 * - register GSAP ScrollTrigger
+	 * - create a ScrollTrigger instance that calls update on scroll/refresh
+	 * - attach resize listener
+	 * - observe base element mutations and image loads
+	 * - hook into router navigation to schedule retries
 	 */
-	function initAutoHeaderContrast() {
+	function initializeAutoHeaderContrast(): void {
 		if (typeof window === "undefined") {
+			// Do not initialize on server
 			return;
 		}
 
@@ -298,78 +356,104 @@ export function useAutoHeaderContrast(
 			trigger: document.documentElement,
 			start: "top top",
 			end: "bottom bottom",
-			onUpdate: updateThemeFromHeader,
-			onRefresh: updateThemeFromHeader,
+			onUpdate: updateThemeUsingHeaderBackgroundSamples,
+			onRefresh: updateThemeUsingHeaderBackgroundSamples,
 		});
 
-		window.addEventListener("resize", handleResize, { passive: true });
+		window.addEventListener("resize", onWindowResizeDebounced, { passive: true });
 
+		// Initial calculation and observation on the next animation frame
 		requestAnimationFrame(() => {
-			refreshTheme();
+			refreshComputedTheme();
 
-			observeBaseElementAndImages();
+			observeBaseElementMutationsAndImageLoads();
 		});
 
-		router.afterEach(() => {
+		// After every route change, schedule retries and re-observe
+		routerInstance.afterEach(() => {
 			nextTick().then(() => {
 				requestAnimationFrame(() => {
-					scheduleNavigationRetries();
+					scheduleNavigationRetryThemeRefreshTimers();
 
-					observeBaseElementAndImages();
+					observeBaseElementMutationsAndImageLoads();
 				});
 			});
 		});
 	}
 
 	/**
-	 * Cleans up everything created by init:
-	 * - Kills ScrollTrigger
-	 * - Removes listeners
-	 * - Disconnects observers
-	 * - Clears timers
+	 * Clean up everything created by initializeAutoHeaderContrast:
+	 * - kill ScrollTrigger
+	 * - clear timers
+	 * - disconnect mutation observer
+	 * - remove image listeners
+	 * - remove window event listeners
 	 */
-	function destroyAutoHeaderContrast() {
-		scrollTriggerInstance?.kill();
+	function destroyAutoHeaderContrast(): void {
+		if (scrollTriggerInstance) {
+			scrollTriggerInstance.kill();
 
-		scrollTriggerInstance = null;
-
-		if (resizeDebounceTimer) {
-			clearTimeout(resizeDebounceTimer);
+			scrollTriggerInstance = null;
 		}
 
-		if (mutationDebounceTimer) {
-			clearTimeout(mutationDebounceTimer);
+		if (resizeDebounceTimerIdentifier) {
+			clearTimeout(resizeDebounceTimerIdentifier);
+
+			resizeDebounceTimerIdentifier = null;
 		}
 
-		clearNavigationRetryTimers();
+		if (mutationDebounceTimerIdentifier) {
+			clearTimeout(mutationDebounceTimerIdentifier);
 
-		mutationObserverInstance?.disconnect();
+			mutationDebounceTimerIdentifier = null;
+		}
 
-		mutationObserverInstance = null;
+		// Clear navigation retry timers
+		clearAllScheduledNavigationRetryTimeouts();
 
-		imageLoadEventListeners.forEach(({ img, handler }) => {
-			img.removeEventListener("load", handler);
-		});
+		// Disconnect mutation observer
+		if (mutationObserverInstance) {
+			mutationObserverInstance.disconnect();
 
-		window.removeEventListener("resize", handleResize);
+			mutationObserverInstance = null;
+		}
+
+		// Remove image load listeners
+		for (const registeredListener of registeredImageLoadListeners) {
+			registeredListener.imageElement.removeEventListener("load", registeredListener.listener);
+		}
+
+		registeredImageLoadListeners.length = 0;
+
+		// Remove resize listener
+		window.removeEventListener("resize", onWindowResizeDebounced);
 	}
 
-	// Trigger onThemeChange callback if provided
+	/* ---------------------------
+	 * Optional callback watcher
+	 * --------------------------- */
+
 	if (options.onThemeChange) {
 		watch(
-			currentTheme,
-			(theme) => {
-				options.onThemeChange?.(theme);
+			theme,
+			(newTheme) => {
+				options.onThemeChange?.(newTheme);
 			},
 			{ immediate: true }
 		);
 	}
 
+	/* ---------------------------
+	 * Public API
+	 * --------------------------- */
+
 	return {
-		theme: computed(() => forcedTheme.value ?? currentTheme.value),
-		force: (value: Theme | null) => (forcedTheme.value = value),
-		init: initAutoHeaderContrast,
+		theme,
+		force: (value: Theme | null) => {
+			forcedThemeGlobal.value = value;
+		},
+		init: initializeAutoHeaderContrast,
 		destroy: destroyAutoHeaderContrast,
-		refresh: refreshTheme,
+		refresh: refreshComputedTheme,
 	};
 }

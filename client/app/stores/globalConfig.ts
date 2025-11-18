@@ -4,14 +4,14 @@ import type { GlobalConfig } from "~/types";
 export const useGlobalStore = defineStore("global-config", () => {
 	const globalConfig = ref<GlobalConfig | null>(null);
 
+	const globalConfigLoaded = ref(false);
+
 	const loading = ref(false);
 
 	const { findOne } = useStrapi();
 
 	async function fetchGlobalConfig() {
-		if (globalConfig.value) {
-			return;
-		}
+		if (globalConfigLoaded.value) return;
 
 		loading.value = true;
 
@@ -19,6 +19,8 @@ export const useGlobalStore = defineStore("global-config", () => {
 			const res: Strapi5ResponseSingle<GlobalConfig> = await findOne<GlobalConfig>("global-config");
 
 			globalConfig.value = res.data;
+
+			globalConfigLoaded.value = true;
 
 			return globalConfig.value;
 		} finally {
@@ -34,5 +36,5 @@ export const useGlobalStore = defineStore("global-config", () => {
 
 	const contact = computed(() => globalConfig.value?.contact);
 
-	return { globalConfig, header, footer, seo, contact, loading, fetchGlobalConfig };
+	return { globalConfig, globalConfigLoaded, header, footer, seo, contact, loading, fetchGlobalConfig };
 });

@@ -20,10 +20,12 @@ function isSelected(option: string) {
 
 <template>
 	<div class="flex flex-wrap gap-lg lg:gap-xl">
-		<div
+		<button
 			v-for="option in props.question.options || []"
 			:key="option.label"
+			type="button"
 			@click="onToggle(option.label)"
+			:aria-pressed="isSelected(option.label)"
 			class="cursor-pointer border border-black/10 shadow-xl px-sm lg:px-3xl py-md text-xs lg:text-lg font-semibold transition select-none"
 			:class="
 				isSelected(option.label)
@@ -31,6 +33,6 @@ function isSelected(option: string) {
 					: 'hover:border-primary hover:text-primary'
 			">
 			{{ option.label }}
-		</div>
+		</button>
 	</div>
 </template>

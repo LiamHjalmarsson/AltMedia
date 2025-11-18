@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { BuildItem } from "~/types";
 
-defineProps<{ item: BuildItem }>();
+const props = defineProps<{ item: BuildItem }>();
 </script>
 
 <template>
-	<Card class="overflow-hidden border border-white/40 flex flex-col justify-between items-center h-full p-xl">
+	<article
+		class="overflow-hidden border border-white/40 flex flex-col justify-between items-center p-xl relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full group">
 		<NuxtImg
 			v-if="item.icon?.is_image && item.icon.image?.url"
 			:src="item.icon.image.url"
@@ -13,7 +14,9 @@ defineProps<{ item: BuildItem }>();
 			format="webp,avif"
 			quality="85"
 			width="100"
-			height="100" />
+			height="100"
+			loading="lazy"
+			class="object-contain" />
 
 		<IconBadge v-if="item.icon?.icon_name" :icon="item.icon" variant="primary" :size="50" />
 
@@ -31,8 +34,8 @@ defineProps<{ item: BuildItem }>();
 				v-for="sub in item.subservices"
 				:key="sub.id"
 				class="flex items-center justify-center text-xs font-medium text-black/80">
-				<span>{{ sub.title }}</span>
+				{{ sub.title }}
 			</li>
 		</ul>
-	</Card>
+	</article>
 </template>

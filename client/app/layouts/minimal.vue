@@ -2,7 +2,7 @@
 	<div class="min-h-screen flex flex-col">
 		<Navigation />
 
-		<main class="grow">
+		<main id="main-content" class="grow">
 			<slot />
 		</main>
 	</div>

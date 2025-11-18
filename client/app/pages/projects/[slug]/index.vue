@@ -13,14 +13,9 @@ await useAsyncData(
 	{ server: true, lazy: true, watch: [slug] }
 );
 
-useSeoMeta({
-	title: "Kontakta oss",
-	description: "Kom i kontakt med vårt team på Alt Media.",
-	ogTitle: "s",
-	ogDescription: "",
-	ogImage: "",
-	twitterCard: "summary_large_image",
-});
+// watchEffect(() => {
+// 	useAppHead(currentProject.value?.seo || undefined);
+// });
 </script>
 
 <template>

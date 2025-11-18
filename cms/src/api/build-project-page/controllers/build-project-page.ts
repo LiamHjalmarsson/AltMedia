@@ -19,7 +19,7 @@ export default factories.createCoreController("api::build-project-page.build-pro
 							fields: ["id", "title"],
 						},
 						questions: {
-							fields: ["id", "help_text", "title", "type"],
+							fields: ["id", "help_text", "title", "type", "required"],
 							populate: {
 								options: {
 									fields: ["id", "label"],

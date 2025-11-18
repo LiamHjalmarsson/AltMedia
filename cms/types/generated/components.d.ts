@@ -309,6 +309,7 @@ export interface ProjectBuildQuestion extends Struct.ComponentSchema {
     help_text: Schema.Attribute.String;
     input: Schema.Attribute.Component<'form.input', false>;
     options: Schema.Attribute.Component<'project-build.option', true>;
+    required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     title: Schema.Attribute.String;
     type: Schema.Attribute.Enumeration<
       ['boolean', 'single', 'textarea', 'input']

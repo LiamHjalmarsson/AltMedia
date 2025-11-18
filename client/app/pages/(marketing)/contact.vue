@@ -13,6 +13,8 @@ definePageMeta({
 	layout: "minimal",
 });
 
+useAppHead(contactPage.value?.data?.seo || undefined);
+
 const payload = reactive<Record<string, string>>({
 	name: "",
 	email: "",
@@ -75,8 +77,12 @@ async function submitForm() {
 		<NuxtImg
 			v-if="contactPage?.data.cover"
 			:src="contactPage.data.cover.url"
-			class="absolute inset-0 w-full h-full object-cover opacity-40"
-			aria-hidden="true" />
+			format="webp,avif"
+			quality="85"
+			loading="lazy"
+			role="presentation"
+			aria-hidden="true"
+			class="absolute inset-0 w-full h-full object-cover opacity-40" />
 
 		<div
 			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl flex flex-col justify-center items-center md:grid md:grid-cols-2 gap-xl lg:gap-4xl">
@@ -115,7 +121,7 @@ async function submitForm() {
 
 			<div class="flex md:justify-end justify-center w-full">
 				<div class="text-white lg:p-2xl w-full max-w-[500px]">
-					<h3 class="text-heading-lg font-bold mb-xl">{{ contactPage?.data.form.title }}</h3>
+					<h2 class="text-heading-lg font-bold mb-xl">{{ contactPage?.data.form.title }}</h2>
 
 					<form @submit.prevent="submitForm" class="space-y-xl">
 						<FormField
@@ -143,6 +149,10 @@ async function submitForm() {
 								:placeholder="input.placeholder"
 								class="bg-white/20" />
 						</FormField>
+
+						<div aria-live="polite" class="sr-only">
+							<span v-if="success">Tack! Ditt meddelande har skickats.</span>
+						</div>
 
 						<Button
 							:type="contactPage?.data.form.button.type"

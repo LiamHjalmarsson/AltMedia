@@ -13,6 +13,8 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 	const activeStepIndex = ref(1);
 
+	const stepErrors = ref<Record<string, string>>({});
+
 	const loading = ref(false);
 
 	const { findOne, create } = useStrapi();
@@ -123,9 +125,9 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 	async function submitProjectRequest() {
 		try {
 			const payload = {
-				name: formData.value["Namn"],
-				email: formData.value["Email"],
-				phone: formData.value["Telefon"],
+				name: formData.value["name"],
+				email: formData.value["email"],
+				phone: formData.value["phone"],
 				data: summaryData.value,
 			};
 
@@ -135,6 +137,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 			return true;
 		} catch (error) {
+			console.error(error);
 			return false;
 		}
 	}
@@ -151,6 +154,72 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		}
 	}
 
+	function isRelationStep(step?: Step | null): boolean {
+		return step?.type === "relations";
+	}
+
+	function isClickableRelations(step?: Step | null): boolean {
+		return step?.clickable_relations === true;
+	}
+
+	function validateCurrentStep(): boolean {
+		const step = currentStep.value;
+
+		stepErrors.value = {};
+
+		if (!step) return true;
+
+		let valid = true;
+
+		for (const q of step.questions || []) {
+			if (!q.required) continue;
+
+			const key = q.input?.name || q.title;
+
+			const value = formData.value[key];
+
+			if (q.type === "boolean") {
+				if (value !== "Ja" && value !== "Nej") {
+					stepErrors.value[key] = "Detta fält är obligatoriskt.";
+
+					valid = false;
+				}
+			}
+
+			if (q.type === "single") {
+				if (!value) {
+					stepErrors.value[key] = "Detta fält är obligatoriskt.";
+
+					valid = false;
+				}
+
+				if (value === q.conditional?.trigger_value) {
+					const inputLabel = q.conditional?.label;
+
+					if (!inputLabel) continue;
+
+					const conditionalValue = formData.value[inputLabel];
+
+					if (!conditionalValue) {
+						stepErrors.value[inputLabel] = "Detta fält är obligatoriskt.";
+
+						valid = false;
+					}
+				}
+			}
+
+			if (q.type === "input") {
+				if (!value || String(value).trim().length === 0) {
+					stepErrors.value[key] = "Detta fält är obligatoriskt.";
+
+					valid = false;
+				}
+			}
+		}
+
+		return valid;
+	}
+
 	const totalStepCount = computed(() => steps.value.length);
 
 	const currentStep = computed(() => steps.value[activeStepIndex.value - 1] || null);
@@ -160,26 +229,19 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 	const isOnLastStep = computed(() => activeStepIndex.value === totalStepCount.value);
 
 	const summaryData = computed(() => {
-		const excluded = ["Namn", "Email", "Telefonnummer"];
+		const excluded = ["name", "email", "phone"];
 
 		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excluded.includes(key)));
 	});
 
 	const showSummaryPanel = computed(() => !!page.value?.show_summary_panel);
 
-	function isRelationStep(step?: Step | null): boolean {
-		return step?.type === "relations";
-	}
-
-	function isClickableRelations(step?: Step | null): boolean {
-		return step?.clickable_relations === true;
-	}
-
 	return {
 		page,
 		steps,
 		formData,
 		activeStepIndex,
+		stepErrors,
 		loading,
 
 		totalStepCount,
@@ -196,6 +258,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		setValue,
 		submitProjectRequest,
 		resetForm,
+		validateCurrentStep,
 
 		isRelationStep,
 		isClickableRelations,

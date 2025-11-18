@@ -4,10 +4,9 @@ export default defineNuxtPlugin(() => {
 	const { globalConfig } = storeToRefs(globalStore);
 
 	useHead({
-		titleTemplate: (titleChunk?: string) => {
-			const site = globalConfig.value?.site_name || "Alt Media";
-			if (!titleChunk) return site;
-			return `${titleChunk} | ${site}`;
+		titleTemplate: (pageTitle?: string) => {
+			const siteName = globalConfig.value?.site_name || "Alt Media";
+			return pageTitle ? `${pageTitle} | ${siteName}` : siteName;
 		},
 		htmlAttrs: { lang: "sv" },
 		link: computed(() =>
@@ -18,7 +17,7 @@ export default defineNuxtPlugin(() => {
 							type: "image/png",
 							href: globalConfig.value.favicon.url,
 						},
-					]
+				  ]
 				: []
 		),
 	});

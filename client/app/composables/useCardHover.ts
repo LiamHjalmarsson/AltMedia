@@ -4,29 +4,54 @@ import gsap from "gsap";
 export function useCardHover() {
 	const bgRef = ref<HTMLElement | null>(null);
 
+	const prefersReducedMotion = () =>
+		import.meta.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 	function onEnter() {
-		if (!bgRef.value) {
+		const element = bgRef.value;
+
+		if (!element) return;
+
+		gsap.killTweensOf(element);
+
+		if (prefersReducedMotion()) {
+			element.style.opacity = "1";
+
+			element.style.transform = "scale(1)";
+
 			return;
 		}
 
-		gsap.to(bgRef.value, {
+		gsap.to(element, {
 			scale: 90,
 			opacity: 1,
 			duration: 0.4,
-			ease: "power2.out",
+			// transformOrigin: "center",
+			ease: "power3.out",
 		});
 	}
 
 	function onLeave() {
-		if (!bgRef.value) {
+		const element = bgRef.value;
+
+		if (!element) {
 			return;
 		}
 
-		gsap.to(bgRef.value, {
+		if (prefersReducedMotion()) {
+			element.style.opacity = "0.3";
+
+			element.style.transform = "scale(1)";
+
+			return;
+		}
+
+		gsap.to(element, {
 			scale: 1,
 			opacity: 0.3,
 			duration: 0.4,
-			ease: "power2.inOut",
+			// transformOrigin: "center",
+			ease: "power3.inOut",
 		});
 	}
 

@@ -9,20 +9,28 @@ export function useCollapse() {
 		if (animating) {
 			return;
 		}
+
 		animating = true;
 
 		const el = element as HTMLElement;
 
 		if (prefersReduced()) {
 			el.style.height = "auto";
+
 			el.style.opacity = "1";
+
 			animating = false;
+
 			return done();
 		}
 
 		const targetHeight = el.scrollHeight;
 
-		gsap.set(el, { height: 0, opacity: 0, overflow: "hidden" });
+		gsap.set(el, {
+			height: 0,
+			opacity: 0,
+			overflow: "hidden",
+		});
 
 		gsap.to(el, {
 			height: targetHeight,
@@ -30,8 +38,13 @@ export function useCollapse() {
 			duration: 0.3,
 			ease: "power3.out",
 			onComplete: () => {
-				gsap.set(el, { height: "auto", clearProps: "overflow" });
+				gsap.set(el, {
+					height: "auto",
+					clearProps: "overflow",
+				});
+
 				animating = false;
+
 				done();
 			},
 		});
@@ -41,14 +54,18 @@ export function useCollapse() {
 		if (animating) {
 			return;
 		}
+
 		animating = true;
 
 		const el = element as HTMLElement;
 
 		if (prefersReduced()) {
 			el.style.height = "0px";
+
 			el.style.opacity = "0";
+
 			animating = false;
+
 			return done();
 		}
 
@@ -58,8 +75,12 @@ export function useCollapse() {
 			duration: 0.35,
 			ease: "power3.in",
 			onComplete: () => {
-				gsap.set(el, { clearProps: "all" });
+				gsap.set(el, {
+					clearProps: "all",
+				});
+
 				animating = false;
+
 				done();
 			},
 		});

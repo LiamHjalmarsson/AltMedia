@@ -3,19 +3,16 @@ const homeStore = useHomeStore();
 
 useAppHead();
 
-await useAsyncData("home-page", () => homeStore.fetchHomePage(), { server: true });
+await useAsyncData("home-page", () => homeStore.fetchHomePage(), {
+	server: true,
+	lazy: false,
+});
 
 const { hero, hasForm, form, blocks } = storeToRefs(homeStore);
 
-const payload = reactive<Record<string, string>>({
-	email: "",
-	url: "",
-});
+const payload = reactive<Record<string, string>>({ email: "", url: "" });
 
-const fieldErrors = reactive<Record<string, string>>({
-	email: "",
-	url: "",
-});
+const fieldErrors = reactive<Record<string, string>>({ email: "", url: "" });
 
 const loading = ref(false);
 
@@ -57,19 +54,14 @@ async function submitAnalysisRequest() {
 	}
 }
 </script>
-
 <template>
 	<Hero v-if="hero" :block="hero" :hasForm>
 		<div v-if="form" class="max-w-[450px] w-full hidden lg:flex justify-end">
 			<div class="w-full p-xs border border-white/10 overflow-hidden">
 				<div class="border border-white/10 bg-white/10 p-lg shadow-2xl backdrop-blur-xl h-full">
-					<h2 class="text-heading-lg text-white font-bold mb-md">
-						{{ form?.title }}
-					</h2>
+					<h2 class="text-heading-lg text-white font-bold mb-md">{{ form?.title }}</h2>
 
-					<p class="mb-xl text-md text-white">
-						{{ form?.description }}
-					</p>
+					<p class="mb-xl text-md text-white">{{ form?.description }}</p>
 
 					<form @submit.prevent="submitAnalysisRequest" class="space-y-xl">
 						<FormField

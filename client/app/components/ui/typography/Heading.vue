@@ -3,6 +3,8 @@ import type { Heading } from "~/types";
 
 const props = withDefaults(defineProps<Heading>(), {
 	align_content: "left",
+	tag: "h2",
+	has_link: false,
 });
 
 const alignClass = computed(() => {
@@ -22,16 +24,15 @@ const alignClass = computed(() => {
 <template>
 	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
 		<div class="flex-2 grow">
-			<div>
-				<h2
-					class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold tracking-tight">
-					{{ title }}
-				</h2>
+			<component
+				:is="props.tag"
+				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold tracking-tight">
+				{{ props.title }}
+			</component>
 
-				<p v-if="description" class="text-xl font-medium mt-md">
-					{{ description }}
-				</p>
-			</div>
+			<p v-if="description" class="text-xl font-medium mt-md">
+				{{ description }}
+			</p>
 		</div>
 
 		<ButtonLink

@@ -3,8 +3,6 @@ import type { PageContent } from "~/types";
 
 const serviceStore = useServiceStore();
 
-const { $setSeo } = useNuxtApp();
-
 await serviceStore.fetchServices();
 
 const { services } = storeToRefs(serviceStore);
@@ -12,9 +10,9 @@ const { services } = storeToRefs(serviceStore);
 const { findOne } = useStrapi();
 
 const { data: page } = await useAsyncData("servicesPage", async () => {
-	const res = await findOne<PageContent>("services-page");
+	const { data } = await findOne<PageContent>("services-page");
 
-	return res.data;
+	return data;
 });
 
 useAppHead(page?.value?.seo || undefined);
@@ -24,31 +22,32 @@ useAppHead(page?.value?.seo || undefined);
 	<section class="relative py-5xl flex justify-center">
 		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading
+				tag="h1"
 				:title="page?.title"
 				:description="page?.description"
 				:align_content="page?.align_content"
 				class="mt-xl mb-2xl" />
 
-			<div
+			<article
 				v-for="(service, index) in services"
 				:key="service.id"
 				class="mb-2xl lg:mb-4xl flex flex-col lg:flex-row gap-xl md:gap-2xl lg:gap-3xl"
 				:class="index % 2 === 1 ? 'lg:flex-row-reverse' : ''">
-				<div class="flex-1 flex">
+				<figure class="flex-1 flex">
 					<NuxtImg
 						v-if="service.image?.url"
 						:src="service.image.url"
 						:alt="service.image.alternativeText || service.title"
 						format="webp,avif"
 						quality="85"
-						class="w-full h-full object-cover shadow-2xl"
-						loading="lazy" />
-				</div>
+						loading="lazy"
+						class="w-full h-full object-cover shadow-2xl" />
+				</figure>
 
 				<div class="flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg">
-					<h3 class="font-bold text-heading-lg md:text-heading-xl leading-tight">
+					<h2 class="font-bold text-heading-lg md:text-heading-xl leading-tight">
 						{{ service.title }}
-					</h3>
+					</h2>
 
 					<p v-if="service.description" class="text-lg max-w-[600px] leading-relaxed">
 						{{ service.description }}
@@ -59,15 +58,15 @@ useAppHead(page?.value?.seo || undefined);
 							v-for="subservice in service.subservices"
 							:key="subservice.id"
 							class="font-semibold font-heading group">
-							<ReadMoreLink
+							<ReadMoreButton
 								:to="`/services/${service.slug}/${subservice.slug}`"
 								:label="subservice.title"
-								size="20"
+								:size="20"
 								class="text-lg inline-flex items-center font-semibold font-heading" />
 						</li>
 					</ul>
 				</div>
-			</div>
+			</article>
 		</div>
 	</section>
 </template>

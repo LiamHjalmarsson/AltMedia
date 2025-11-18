@@ -5,13 +5,15 @@ const route = useRoute();
 
 const { findOne } = useStrapi();
 
+const slug = computed(() => route.params.slug as string);
+
 const { data: page, error } = await useAsyncData(
 	`page-${route.params.slug}`,
 	async () => {
-		const res = await findOne<Page>("pages", route.params.slug as string);
+		const { data } = await findOne<Page>("pages", route.params.slug as string);
 
-		if (res?.data) {
-			return res.data;
+		if (data) {
+			return data;
 		} else {
 			throw createError({
 				statusCode: 404,
@@ -19,7 +21,7 @@ const { data: page, error } = await useAsyncData(
 			});
 		}
 	},
-	{ server: true, lazy: true }
+	{ server: true, lazy: false, watch: [slug] }
 );
 
 if (error.value) {

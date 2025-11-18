@@ -22,6 +22,8 @@ export const useHomeStore = defineStore("home-page", () => {
 
 			return homePage.value;
 		} catch (error) {
+			homePage.value = null;
+
 			return null;
 		} finally {
 			loading.value = false;

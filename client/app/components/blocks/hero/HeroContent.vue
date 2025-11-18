@@ -6,13 +6,14 @@ const { content } = defineProps<{ hasForm: boolean; content: Hero }>();
 function formatColoredWords(content: Hero): string {
 	let title = content.title;
 
-	if (content.colored_words) {
-		for (const [word, color] of Object.entries(content.colored_words)) {
-			const regex = new RegExp(`\\b${word}\\b`, "gi");
+	if (!content.colored_words) return title;
 
-			title = title.replace(regex, `<span style='color:${color}'>${word}</span>`);
-		}
+	for (const [word, color] of Object.entries(content.colored_words)) {
+		const regex = new RegExp(`\\b${word}\\b`, "gi");
+
+		title = title.replace(regex, `<span style='color:${color}'>${word}</span>`);
 	}
+
 	return title;
 }
 </script>

@@ -105,6 +105,7 @@ export interface Question {
 	id: number;
 	title: string;
 	help_text?: string;
+	required?: boolean;
 	type: "boolean" | "single" | "input";
 	options?: Option[];
 	conditional?: Conditional;

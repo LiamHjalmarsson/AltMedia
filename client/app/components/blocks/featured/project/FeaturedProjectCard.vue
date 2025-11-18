@@ -5,7 +5,8 @@ defineProps<{ project: Project }>();
 </script>
 
 <template>
-	<Card class="cursor-pointer overflow-hidden relative">
+	<div
+		class="cursor-pointer overflow-hidden relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
 		<NuxtLink :to="`/projects/${project?.slug}`" class="block w-full h-full relative">
 			<NuxtImg
 				v-if="project.cover?.url"
@@ -31,5 +32,5 @@ defineProps<{ project: Project }>();
 				</h3>
 			</div>
 		</NuxtLink>
-	</Card>
+	</div>
 </template>

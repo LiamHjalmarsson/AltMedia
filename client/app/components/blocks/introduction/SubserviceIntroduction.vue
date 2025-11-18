@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Subservice } from "~/types/content/collections";
+import type { Subservice } from "~/types";
 
 defineProps<{ subservice: Subservice }>();
 </script>

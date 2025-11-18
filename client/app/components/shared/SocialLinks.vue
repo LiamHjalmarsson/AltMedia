@@ -14,7 +14,7 @@ const sizeClass = {
 
 function getAriaLabel(media: SocialMedia) {
 	if (media.title) {
-		return `Besök vår ${media.title}`;
+		return `Besök oss på ${media.title}`;
 	}
 
 	try {
@@ -28,17 +28,17 @@ function getAriaLabel(media: SocialMedia) {
 </script>
 
 <template>
-	<div class="flex items-center space-x-lg">
-		<NuxtLink
-			v-for="social in socialMedias"
-			:key="social.id"
-			:to="social.url"
-			target="_blank"
-			:aria-label="getAriaLabel(social)"
-			rel="noopener noreferrer"
-			class="rounded-full bg-white/10 hover:bg-white/15 transition flex items-center justify-center"
-			:class="sizeClass[size || 'md']">
-			<Icon :name="social.icon?.icon_name" class="text-white" />
-		</NuxtLink>
-	</div>
+	<ul class="flex items-center space-x-lg">
+		<li v-for="social in socialMedias" :key="social.id">
+			<NuxtLink
+				:to="social.url"
+				target="_blank"
+				:aria-label="getAriaLabel(social)"
+				rel="noopener noreferrer"
+				class="rounded-full bg-white/10 hover:bg-white/15 transition flex items-center justify-center focus-visible:ring-2 focus-visible:ring-primary"
+				:class="sizeClass[size || 'md']">
+				<Icon :name="social.icon?.icon_name" class="text-white" />
+			</NuxtLink>
+		</li>
+	</ul>
 </template>

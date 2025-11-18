@@ -8,7 +8,7 @@ const props = defineProps<{
 
 const store = useBuildProjectStore();
 
-const isRelationStep = computed(() => store.isRelationStep(props.currentStep));
+const isRelationStep = computed(() => (props.currentStep ? store.isRelationStep(props.currentStep) : false));
 </script>
 
 <template>

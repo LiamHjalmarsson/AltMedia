@@ -31,6 +31,8 @@ const overlayClass = computed(() => {
 			muted
 			loop
 			playsinline
+			preload="none"
+			aria-hidden="true"
 			class="absolute inset-0 w-full h-full object-cover">
 			<source :src="media.url" :type="media.mime" />
 		</video>
@@ -39,9 +41,15 @@ const overlayClass = computed(() => {
 			v-else-if="media"
 			:src="media.url"
 			format="webp,avif"
-			class="absolute inset-0 w-full h-full object-cover"
-			aria-hidden="true" />
+			aria-hidden="true"
+			loading="lazy"
+			quality="85"
+			class="absolute inset-0 w-full h-full object-cover" />
 
-		<div v-if="showOverlay" class="absolute inset-0 pointer-events-none z-10" :class="overlayClass" />
+		<div
+			v-if="showOverlay"
+			aria-hidden="true"
+			class="absolute inset-0 pointer-events-none z-10"
+			:class="overlayClass" />
 	</div>
 </template>

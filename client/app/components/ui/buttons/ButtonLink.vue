@@ -27,7 +27,6 @@ const sizeClass: Record<Link["size"], string> = {
 		:to="url || '/'"
 		:target="is_external ? '_blank' : undefined"
 		:rel="is_external ? 'noopener noreferrer' : undefined"
-		:aria-label="label"
 		class="focus-visible:outline-primary flex">
 		<div
 			ref="linkWrapper"
@@ -36,6 +35,7 @@ const sizeClass: Record<Link["size"], string> = {
 				<Icon
 					v-if="icon"
 					:name="icon"
+					aria-hidden="true"
 					class="transition-all duration-200"
 					:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
 				<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>

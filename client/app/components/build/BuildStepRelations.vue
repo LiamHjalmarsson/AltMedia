@@ -7,6 +7,8 @@ const store = useBuildProjectStore();
 
 const { formData } = storeToRefs(store);
 
+const allItems = computed(() => [...(props.step.services || []), ...(props.step.subservices || [])]);
+
 const isClickable = computed(() => store.isClickableRelations(props.step));
 
 function onToggle(title: string) {
@@ -17,6 +19,7 @@ function onToggle(title: string) {
 
 function isSelected(title: string) {
 	const val = formData.value[props.step.title];
+
 	return Array.isArray(val) ? val.includes(title) : val === title;
 }
 
@@ -34,23 +37,18 @@ function relationClass(title: string) {
 <template>
 	<div>
 		<div class="grid grid-cols-2 md:grid-cols-3 gap-lg lg:gap-xl">
-			<div
-				v-for="service in step.services || []"
-				:key="service.id"
-				@click="onToggle(service.title)"
+			<button
+				v-for="item in allItems"
+				:key="item.id"
+				@click="onToggle(item.title)"
+				type="button"
+				:disabled="!isClickable"
+				:aria-pressed="isSelected(item.title)"
+				:aria-disabled="!isClickable"
 				class="border shadow-md px-sm lg:px-3xl py-sm text-center text-xs lg:text-lg font-semibold transition-all duration-150 select-none"
-				:class="relationClass(service.title)">
-				{{ service.title }}
-			</div>
-
-			<div
-				v-for="sub in step.subservices || []"
-				:key="sub.id"
-				@click="onToggle(sub.title)"
-				class="border shadow-md px-3xl py-sm text-center text-lg font-semibold transition-all duration-150 select-none"
-				:class="relationClass(sub.title)">
-				{{ sub.title }}
-			</div>
+				:class="relationClass(item.title)">
+				{{ item.title }}
+			</button>
 		</div>
 	</div>
 </template>

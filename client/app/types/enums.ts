@@ -13,3 +13,5 @@ export type InputType = "input" | "textarea" | "select";
 export type ColumnSpan = "full" | "half" | "two-thirds" | "one-third";
 
 export type Layout = "grid" | "alternating";
+
+export type Htag = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

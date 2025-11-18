@@ -12,7 +12,7 @@ const { formData } = storeToRefs(store);
 function onInput(e: Event) {
 	const value = (e.target as HTMLInputElement).value;
 
-	store.setValue(props.question.title, value);
+	store.setValue(props.question.input?.name || "", value);
 }
 </script>
 

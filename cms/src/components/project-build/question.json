@@ -74,6 +74,10 @@
       },
       "component": "form.input",
       "repeatable": false
+    },
+    "required": {
+      "type": "boolean",
+      "default": true
     }
   },
   "config": {}

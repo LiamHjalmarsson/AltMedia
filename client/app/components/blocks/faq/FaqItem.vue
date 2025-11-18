@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import type { FaqItem } from "~/types";
 
 const { item, activeId, number } = defineProps<{
@@ -25,6 +24,7 @@ function toggle() {
 		:class="isOpen ? 'shadow-2xl' : 'shadow-lg'"
 		@click="toggle">
 		<button
+			type="button"
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"
@@ -42,6 +42,7 @@ function toggle() {
 			<Icon
 				name="heroicons:chevron-down"
 				size="20"
+				aria-hidden="true"
 				:class="['transition-transform duration-500', isOpen ? 'rotate-180' : '']" />
 		</button>
 

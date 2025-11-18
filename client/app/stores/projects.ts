@@ -20,6 +20,8 @@ export const useProjectStore = defineStore("projects", () => {
 
 			return projects.value;
 		} catch (err) {
+			projects.value = [];
+
 			return [];
 		} finally {
 			loading.value = false;
@@ -36,6 +38,8 @@ export const useProjectStore = defineStore("projects", () => {
 
 			return currentProject.value;
 		} catch (err) {
+			currentProject.value = null;
+
 			return null;
 		} finally {
 			loading.value = false;

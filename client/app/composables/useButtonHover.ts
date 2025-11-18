@@ -3,6 +3,7 @@ import gsap from "gsap";
 
 export function useHoverAnimation(isReversed = false) {
 	const element = ref<HTMLElement | null>(null);
+
 	const backgroundColor = ref<HTMLElement | null>(null);
 
 	const onHover = (toRight = true) => {
@@ -47,7 +48,9 @@ export function useHoverAnimation(isReversed = false) {
 	};
 
 	function initAnimation() {
-		if (!element.value || !backgroundColor.value) return;
+		if (!element.value || !backgroundColor.value) {
+			return;
+		}
 
 		if (!isReversed) {
 			element.value.addEventListener("mouseenter", () => onHover(true));

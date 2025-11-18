@@ -4,9 +4,9 @@ import type { Service, Subservice } from "~/types";
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
-	const subservices = ref<Subservice[]>([]);
-
 	const currentService = ref<Service | null>(null);
+
+	const subservices = ref<Subservice[]>([]);
 
 	const currentSubService = ref<Subservice | null>(null);
 
@@ -20,12 +20,15 @@ export const useServiceStore = defineStore("services", () => {
 			const result: Strapi5ResponseMany<Service> = await find<Service>("services");
 
 			services.value = result.data ?? [];
+
+			return services.value;
 		} catch {
 			services.value = [];
+
+			return [];
 		} finally {
 			loading.value = false;
 		}
-		return services.value;
 	}
 
 	async function fetchService(slug: string) {
@@ -42,6 +45,7 @@ export const useServiceStore = defineStore("services", () => {
 			return currentService.value;
 		} catch {
 			currentService.value = null;
+
 			return null;
 		} finally {
 			loading.value = false;
@@ -56,6 +60,8 @@ export const useServiceStore = defineStore("services", () => {
 			subservices.value = result.data ?? [];
 		} catch {
 			subservices.value = [];
+
+			return [];
 		} finally {
 			loading.value = false;
 		}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
 	name: string;
 	label: string;
 	error?: string;
@@ -13,6 +13,6 @@ defineProps<{
 
 		<slot />
 
-		<p v-if="error" class="text-xs text-error">{{ error }}</p>
+		<p v-if="error" role="alert" class="text-xs text-error">{{ error }}</p>
 	</div>
 </template>

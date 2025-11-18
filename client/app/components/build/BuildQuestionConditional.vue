@@ -10,7 +10,9 @@ const { formData } = storeToRefs(store);
 const showConditional = computed(() => {
 	const trigger = props.question.conditional?.trigger_value;
 
-	if (trigger === undefined) return false;
+	if (trigger === undefined) {
+		return false;
+	}
 
 	const value = formData.value[props.question.title];
 
@@ -22,7 +24,9 @@ function onInput(e: Event) {
 
 	const label = props.question.conditional?.label || props.question.conditional?.trigger_value;
 
-	if (!label) return;
+	if (!label) {
+		return;
+	}
 
 	store.setValue(label, val);
 }

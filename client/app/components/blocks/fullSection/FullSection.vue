@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from "vue";
 import type { FullSectionBlock } from "~/types";
 
 const { block } = defineProps<{ block: FullSectionBlock }>();
@@ -45,9 +44,9 @@ const textColor = computed(() => {
 				{{ block.title }}
 			</h2>
 
-			<ClientOnly>
-				<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
-			</ClientOnly>
+			<!-- <ClientOnly> -->
+			<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
+			<!-- </ClientOnly> -->
 		</div>
 
 		<div v-if="block.link" class="absolute bottom-0 right-0 p-2xl m-2xl">

@@ -3,7 +3,7 @@ import gsap from "gsap";
 
 const store = useBuildProjectStore();
 
-const { steps, activeStepIndex, progress, isOnLastStep, summaryData, page } = storeToRefs(store);
+const { steps, activeStepIndex, progress, isOnLastStep, page } = storeToRefs(store);
 
 await useAsyncData("build-project-page", () => store.fetchBuildProjectPage(), { server: true });
 
@@ -36,6 +36,14 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 		{ y: direction === "next" ? 16 : -16, opacity: 0 },
 		{ y: 0, opacity: 1, duration: 0.35, stagger: 0.02 }
 	);
+}
+
+async function handleNextClick() {
+	if (!store.validateCurrentStep()) {
+		return;
+	}
+
+	await animate("next", store.nextStep);
 }
 </script>
 
@@ -72,7 +80,7 @@ async function animate(direction: "next" | "prev", stepFn: () => void) {
 						label="Nästa"
 						icon="lucide:arrow-right"
 						variant="primary"
-						@click="animate('next', store.nextStep)"
+						@click="handleNextClick"
 						type="button"
 						size="md"
 						class="ml-auto" />

@@ -1,5 +1,5 @@
 import type { Subservice } from "./content/collections";
-import type { AlignContent, ButtonType, ColumnSpan, InputType, Size, Theme, Variant } from "./enums";
+import type { AlignContent, ButtonType, ColumnSpan, Htag, InputType, Size, Theme, Variant } from "./enums";
 
 export interface ImageFormat {
 	url: string;
@@ -63,6 +63,7 @@ export interface Heading {
 	align_content: AlignContent;
 	has_link?: boolean;
 	link?: Link | null;
+	tag?: Htag;
 }
 
 export interface Color {

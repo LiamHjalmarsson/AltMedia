@@ -13,7 +13,9 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 				:description="block.heading.description"
 				class="mb-xl lg:mb-lg xl:mb-xl" />
 
-			<ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3xl sm:gap-lg lg:gap-2xl mt-lg md:mt-xl lg:mt-2xl">
+			<ul
+				role="list"
+				class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3xl sm:gap-lg lg:gap-2xl mt-lg md:mt-xl lg:mt-2xl">
 				<li v-for="(item, i) in block.items" :key="item.id">
 					<ExamplesBuildCard
 						:item="item"
