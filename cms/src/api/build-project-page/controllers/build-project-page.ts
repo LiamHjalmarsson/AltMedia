@@ -10,7 +10,7 @@ export default factories.createCoreController("api::build-project-page.build-pro
 			fields: ["id", "show_summary_panel", "message"],
 			populate: {
 				steps: {
-					fields: ["id", "title", "subtitle", "description", "type", "clickable_relations"],
+					fields: ["id", "title", "subtitle", "description", "type", "clickable_relations", "order"],
 					populate: {
 						services: {
 							fields: ["id", "title"],
@@ -19,7 +19,7 @@ export default factories.createCoreController("api::build-project-page.build-pro
 							fields: ["id", "title"],
 						},
 						questions: {
-							fields: ["id", "help_text", "title", "type", "required"],
+							fields: ["id", "help_text", "title", "type", "required", "order"],
 							populate: {
 								options: {
 									fields: ["id", "label"],

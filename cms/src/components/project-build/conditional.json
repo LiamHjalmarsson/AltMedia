@@ -1,23 +1,32 @@
 {
-	"collectionName": "components_project-build_conditionals",
-	"info": {
-		"displayName": "Conditional"
-	},
-	"options": {},
-	"attributes": {
-		"label": {
-			"type": "string"
-		},
-		"trigger_value": {
-			"type": "string"
-		},
-		"placeholder": {
-			"type": "string"
-		},
-		"type": {
-			"type": "enumeration",
-			"enum": ["input", "textarea", "number", "url"]
-		}
-	},
-	"config": {}
+  "collectionName": "components_project-build_conditionals",
+  "info": {
+    "displayName": "Conditional"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "minLength": 2,
+      "required": true
+    },
+    "trigger_value": {
+      "type": "string",
+      "required": true
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "default": "input",
+      "enum": [
+        "input",
+        "textarea",
+        "number",
+        "url"
+      ]
+    }
+  },
+  "config": {}
 }

@@ -21,7 +21,9 @@
     "steps": {
       "type": "component",
       "component": "project-build.step",
-      "repeatable": true
+      "repeatable": true,
+      "required": true,
+      "min": 1
     },
     "seo": {
       "type": "component",

@@ -6,7 +6,9 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "required": true
     },
     "subtitle": {
       "type": "string"
@@ -14,8 +16,13 @@
     "description": {
       "type": "text"
     },
+    "order": {
+      "type": "integer"
+    },
     "type": {
       "type": "enumeration",
+      "required": true,
+      "default": "form",
       "enum": [
         "form",
         "relations"

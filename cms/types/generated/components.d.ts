@@ -282,10 +282,15 @@ export interface ProjectBuildConditional extends Struct.ComponentSchema {
     displayName: 'Conditional';
   };
   attributes: {
-    label: Schema.Attribute.String;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
     placeholder: Schema.Attribute.String;
-    trigger_value: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']>;
+    trigger_value: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']> &
+      Schema.Attribute.DefaultTo<'input'>;
   };
 }
 
@@ -295,7 +300,11 @@ export interface ProjectBuildOption extends Struct.ComponentSchema {
     displayName: 'Option';
   };
   attributes: {
-    label: Schema.Attribute.String;
+    label: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -309,8 +318,13 @@ export interface ProjectBuildQuestion extends Struct.ComponentSchema {
     help_text: Schema.Attribute.String;
     input: Schema.Attribute.Component<'form.input', false>;
     options: Schema.Attribute.Component<'project-build.option', true>;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
     type: Schema.Attribute.Enumeration<
       ['boolean', 'single', 'textarea', 'input']
     >;
@@ -326,6 +340,7 @@ export interface ProjectBuildStep extends Struct.ComponentSchema {
     clickable_relations: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     description: Schema.Attribute.Text;
+    order: Schema.Attribute.Integer;
     questions: Schema.Attribute.Component<'project-build.question', true>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     subservices: Schema.Attribute.Relation<
@@ -333,8 +348,14 @@ export interface ProjectBuildStep extends Struct.ComponentSchema {
       'api::subservice.subservice'
     >;
     subtitle: Schema.Attribute.String;
-    title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['form', 'relations']>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
+    type: Schema.Attribute.Enumeration<['form', 'relations']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'form'>;
   };
 }
 

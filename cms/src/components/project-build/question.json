@@ -6,7 +6,9 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "required": true
     },
     "help_text": {
       "type": "string",
@@ -78,6 +80,10 @@
     "required": {
       "type": "boolean",
       "default": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
     }
   },
   "config": {}

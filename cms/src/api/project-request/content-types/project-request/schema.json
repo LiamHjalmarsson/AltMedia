@@ -12,7 +12,9 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "required": true
     },
     "email": {
       "type": "email",

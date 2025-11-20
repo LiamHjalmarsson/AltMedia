@@ -556,7 +556,14 @@ export interface ApiBuildProjectPageBuildProjectPage
     seo: Schema.Attribute.Component<'seo.seo', false>;
     show_summary_panel: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    steps: Schema.Attribute.Component<'project-build.step', true>;
+    steps: Schema.Attribute.Component<'project-build.step', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -763,7 +770,11 @@ export interface ApiProjectRequestProjectRequest
       'api::project-request.project-request'
     > &
       Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 2;
+      }>;
     phone: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;

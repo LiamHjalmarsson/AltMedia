@@ -12,7 +12,6 @@ export default factories.createCoreController("api::project-request.project-requ
 				missing: {
 					name: !name,
 					email: !email,
-					data: {},
 				},
 			});
 		}

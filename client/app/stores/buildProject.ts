@@ -13,7 +13,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 	const stepValidationErrors = ref<Record<string, string>>({});
 
-	const currentStepIndex = ref(1);
+	const currentStepIndex = ref(0);
 
 	const isSubmitted = ref(false);
 
