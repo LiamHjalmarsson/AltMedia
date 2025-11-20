@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
 	name: string;
 	label: string;
 	error?: string;
@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-	<div class="flex flex-col space-y-xs">
+	<div class="flex flex-col space-y-sm">
 		<Label :for="name" :required>{{ label }}</Label>
 
 		<slot />

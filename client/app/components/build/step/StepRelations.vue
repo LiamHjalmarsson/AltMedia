@@ -9,7 +9,7 @@ const { formData } = storeToRefs(store);
 
 const allItems = computed(() => [...(props.step.services || []), ...(props.step.subservices || [])]);
 
-const isClickable = computed(() => store.isClickableRelations(props.step));
+const isClickable = computed(() => props.step.clickable_relations);
 
 function onToggle(title: string) {
 	if (!isClickable.value) return;

@@ -3,7 +3,8 @@ import gsap from "gsap";
 
 const store = useBuildProjectStore();
 
-const { steps, activeStepIndex, progress, isOnLastStep, page } = storeToRefs(store);
+const { steps, currentStepIndex, activeStep, progressPercent, isLastStep, page, loading, isSubmitted } =
+	storeToRefs(store);
 
 await useAsyncData("build-project-page", () => store.fetchBuildProjectPage(), { server: true });
 
@@ -13,87 +14,78 @@ useAppHead(page.value?.seo || undefined);
 
 const containerRef = ref<HTMLElement | null>(null);
 
-async function animate(direction: "next" | "prev", stepFn: () => void) {
-	const element = containerRef.value;
+async function goToNextStep() {
+	const isValid = store.validateCurrentStep();
+	if (!isValid) return triggerErrorAnimation();
+	await animate("next", store.nextStep);
+}
 
-	if (!element) {
-		return stepFn();
+async function submitForm() {
+	const isValid = store.validateCurrentStep();
+	if (!isValid) return triggerErrorAnimation();
+
+	const ok = await store.submitProjectRequest();
+	if (ok) {
+		store.isSubmitted = true;
 	}
+}
 
-	await gsap.to(element.children, {
+function triggerErrorAnimation() {
+	if (!containerRef.value) return;
+	gsap.fromTo(containerRef.value, { x: -6 }, { x: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" });
+}
+
+async function animate(direction: "next" | "prev", action: () => void) {
+	const container = containerRef.value;
+	if (!container) return action();
+
+	await gsap.to(container.children, {
 		y: direction === "next" ? -16 : 16,
 		opacity: 0,
-		duration: 0.25,
+		duration: 0.22,
 		stagger: 0.015,
+		ease: "power2.out",
 	});
 
-	stepFn();
-
+	action();
 	await nextTick();
 
 	gsap.fromTo(
-		element.children,
+		container.children,
 		{ y: direction === "next" ? 16 : -16, opacity: 0 },
-		{ y: 0, opacity: 1, duration: 0.35, stagger: 0.02 }
+		{ y: 0, opacity: 1, duration: 0.32, stagger: 0.02, ease: "power2.out" }
 	);
-}
-
-async function handleNextClick() {
-	if (!store.validateCurrentStep()) {
-		return;
-	}
-
-	await animate("next", store.nextStep);
 }
 </script>
 
 <template>
 	<section class="relative py-5xl">
-		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
-			<div class="flex-1 xl:min-w-[850px]">
-				<Progressbar :steps="steps" :activeStepIndex="activeStepIndex" :progress="progress" />
+		<SuccessMessage v-if="isSubmitted" />
 
-				<h2 class="text-heading-lg lg:text-heading-xl xl:text-heading-2xl font-bold mb-xs">
-					{{ steps[activeStepIndex - 1]?.title }}
+		<div
+			v-else
+			class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
+			<div class="flex-1 xl:min-w-[850px]">
+				<Progressbar :steps="steps" :activeStepIndex="currentStepIndex" :progress="progressPercent" />
+
+				<h2 class="text-heading-lg lg:text-heading-xl xl:text-heading-2xl font-bold mb-md">
+					{{ activeStep?.title }}
 				</h2>
 
-				<p class="text-black/80 mb-lg text-lg lg:text-2xl">{{ steps[activeStepIndex - 1]?.description }}</p>
+				<p class="text-black/80 mb-lg text-lg lg:text-2xl">
+					{{ activeStep?.description }}
+				</p>
 
 				<div ref="containerRef" class="min-h-[400px]">
-					<BuildForm
-						:currentStep="steps[activeStepIndex - 1]"
-						:isOnLastStep="isOnLastStep"
-						:key="activeStepIndex" />
+					<StepRenderer :step="activeStep" :is-last-step="isLastStep" />
 				</div>
 
-				<div class="flex justify-between items-center pt-xl space-x-xl">
-					<Button
-						v-if="activeStepIndex > 1"
-						@click="animate('prev', store.previousStep)"
-						label="Tillbaka"
-						type="button"
-						size="md"
-						reversed
-						variant="outline" />
-					<Button
-						v-if="!isOnLastStep"
-						label="Nästa"
-						icon="lucide:arrow-right"
-						variant="primary"
-						@click="handleNextClick"
-						type="button"
-						size="md"
-						class="ml-auto" />
-					<Button
-						v-if="isOnLastStep"
-						label="Skicka"
-						icon="lucide:send"
-						variant="primary"
-						@click="store.submitProjectRequest"
-						type="submit"
-						size="md"
-						class="ml-auto" />
-				</div>
+				<BuildNavigation
+					:index="currentStepIndex"
+					:last="isLastStep"
+					:on-next="goToNextStep"
+					:on-prev="store.previousStep"
+					:on-submit="submitForm" />
 			</div>
 		</div>
 	</section>

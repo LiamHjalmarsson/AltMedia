@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { BuildProjectPage, Step, Question, Service, Subservice } from "~/types";
+import type { BuildProjectPage, Step } from "~/types";
 
 type FormDataRecord = Record<string, string | string[] | undefined>;
 
@@ -11,13 +11,84 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 	const formData = ref<FormDataRecord>({});
 
-	const activeStepIndex = ref(1);
+	const stepValidationErrors = ref<Record<string, string>>({});
 
-	const stepErrors = ref<Record<string, string>>({});
+	const currentStepIndex = ref(1);
+
+	const isSubmitted = ref(false);
 
 	const loading = ref(false);
 
 	const { findOne, create } = useStrapi();
+
+	const labels: Record<string, string> = {
+		name: "Namn",
+		email: "Email",
+		phone: "Telefon",
+		message: "Meddelande",
+		"Har du en befintlig webbplats?": "Har du en befintlig webbplats?",
+		"Har du en grafisk profil?": "Har du en grafisk profil?",
+		"Url till webbplats": "Url till webbplats",
+		"Ange din budget och tidsram?": "Ange din budget och tidsram?",
+		"När behöver du lansera?": "När behöver du lansera?",
+	};
+
+	const totalSteps = computed(() => steps.value.length);
+
+	const activeStep = computed(() => steps.value[currentStepIndex.value - 1] || null);
+
+	const isLastStep = computed(() => currentStepIndex.value === totalSteps.value);
+
+	const progressPercent = computed(() => (totalSteps.value ? (currentStepIndex.value / totalSteps.value) * 100 : 0));
+
+	const summaryFlat = computed(() => {
+		const summary: Record<string, string> = {};
+
+		for (const step of steps.value) {
+			for (const question of step.questions || []) {
+				const formKey = question.input?.name || question.title;
+
+				const key = labels[question.title] || labels[formKey] || question.title;
+
+				const val = formData.value[formKey];
+
+				if (!val) continue;
+
+				let result = Array.isArray(val) ? val.join(", ") : String(val);
+
+				if (key === "Url till webbplats" && formData.value["Har du en befintlig webbplats?"] !== "Ja") {
+					continue;
+				}
+
+				if (key === "Ange din budget och tidsram?") {
+					if (val === "Annat (specificera)" && formData.value["budget_custom"]) {
+						const custom = formData.value["budget_custom"];
+						result = Array.isArray(custom) ? custom.join(", ") : String(custom);
+					}
+				}
+
+				if (key === "När behöver du lansera?") {
+					if (val === "Annat (specificera)" && formData.value["timeline_custom"]) {
+						const custom = formData.value["timeline_custom"];
+						result = Array.isArray(custom) ? custom.join(", ") : String(custom);
+					}
+				}
+
+				summary[key] = result;
+			}
+
+			if (step.type === "relations") {
+				const key = step.title;
+				const val = formData.value[key];
+
+				if (val && Array.isArray(val) && val.length > 0) {
+					summary[key] = val.join(", ");
+				}
+			}
+		}
+
+		return summary;
+	});
 
 	async function fetchBuildProjectPage() {
 		if (page.value) {
@@ -27,99 +98,28 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<BuildProjectPage> = await findOne("build-project-page");
+			const { data }: Strapi5ResponseSingle<BuildProjectPage> = await findOne("build-project-page");
 
-			page.value = res.data;
+			page.value = data;
 
-			steps.value = normalizeSteps(page.value?.steps || []);
+			steps.value = transformSteps(page.value?.steps || []);
 
-			return page.value;
-		} catch (err) {
-			page.value = null;
-
-			return null;
+			return data;
 		} finally {
 			loading.value = false;
 		}
 	}
 
-	function normalizeSteps(rawSteps: Step[]): Step[] {
-		return rawSteps.map((step) => {
-			const relatedServices = step.services ?? [];
-
-			const relatedSubservices = step.subservices ?? [];
-
-			if (step.type === "relations") {
-				const relationTitles = [
-					...relatedServices.map((service) => service.title),
-					...relatedSubservices.map((subservice) => subservice.title),
-				].filter(Boolean);
-
-				return {
-					...step,
-					questions: [],
-					related_services: relatedServices,
-					related_subservices: relatedSubservices,
-					relation_titles: relationTitles,
-				};
-			}
-
-			const normalizedQuestions: Question[] = (step.questions || []).map((question) => ({
-				...question,
-				options: question.options ?? [],
-			}));
-
-			return { ...step, questions: normalizedQuestions };
-		});
+	function nextStep() {
+		if (currentStepIndex.value < totalSteps.value) {
+			currentStepIndex.value++;
+		}
 	}
 
-	function toggleOption(label: string, option: string) {
-		const step = steps.value.find((step) => step.questions?.some((question) => question.title === label));
-
-		const question = step?.questions?.find((question) => question.title === label);
-
-		if (!question) {
-			const current = Array.isArray(formData.value[label]) ? [...(formData.value[label] as string[])] : [];
-
-			const index = current.indexOf(option);
-
-			if (index !== -1) {
-				current.splice(index, 1);
-			} else {
-				current.push(option);
-			}
-
-			formData.value = { ...formData.value, [label]: current };
-			return;
+	function previousStep() {
+		if (currentStepIndex.value > 1) {
+			currentStepIndex.value--;
 		}
-
-		if (question.type === "single") {
-			formData.value = { ...formData.value, [label]: option };
-
-			return;
-		}
-
-		const current = Array.isArray(formData.value[label]) ? [...(formData.value[label] as string[])] : [];
-
-		const index = current.indexOf(option);
-
-		if (index !== -1) {
-			current.splice(index, 1);
-		} else {
-			current.push(option);
-		}
-
-		formData.value = { ...formData.value, [label]: current };
-	}
-
-	function setValue(label: string, value: string | string[]) {
-		formData.value[label] = value;
-	}
-
-	function resetForm() {
-		formData.value = {};
-
-		activeStepIndex.value = 1;
 	}
 
 	async function submitProjectRequest() {
@@ -128,128 +128,156 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 				name: formData.value["name"],
 				email: formData.value["email"],
 				phone: formData.value["phone"],
-				data: summaryData.value,
+				data: formData.value,
 			};
 
 			await create("project-requests", payload);
 
-			resetForm();
+			isSubmitted.value = true;
 
 			return true;
 		} catch (error) {
-			console.error(error);
 			return false;
 		}
 	}
 
-	function nextStep() {
-		if (activeStepIndex.value < totalStepCount.value) {
-			activeStepIndex.value++;
+	function setValue(label: string, value: string | string[]) {
+		formData.value[label] = value;
+	}
+
+	function toggleOption(questionTitle: string, selectedOption: string) {
+		const stepWithQuestion = steps.value.find((step) =>
+			step.questions?.some((question) => question.title === questionTitle)
+		);
+
+		const matchedQuestion = stepWithQuestion?.questions?.find((question) => question.title === questionTitle);
+
+		if (!matchedQuestion) {
+			const existingValues = Array.isArray(formData.value[questionTitle])
+				? [...(formData.value[questionTitle] as string[])]
+				: [];
+
+			const optionIndex = existingValues.indexOf(selectedOption);
+
+			if (optionIndex !== -1) {
+				existingValues.splice(optionIndex, 1);
+			} else {
+				existingValues.push(selectedOption);
+			}
+
+			formData.value = { ...formData.value, [questionTitle]: existingValues };
+
+			return;
 		}
-	}
 
-	function previousStep() {
-		if (activeStepIndex.value > 1) {
-			activeStepIndex.value--;
+		if (matchedQuestion.type === "single") {
+			formData.value = { ...formData.value, [questionTitle]: selectedOption };
+
+			return;
 		}
-	}
 
-	function isRelationStep(step?: Step | null): boolean {
-		return step?.type === "relations";
-	}
+		const existingValues = Array.isArray(formData.value[questionTitle])
+			? [...(formData.value[questionTitle] as string[])]
+			: [];
 
-	function isClickableRelations(step?: Step | null): boolean {
-		return step?.clickable_relations === true;
+		const optionIndex = existingValues.indexOf(selectedOption);
+
+		if (optionIndex !== -1) {
+			existingValues.splice(optionIndex, 1);
+		} else {
+			existingValues.push(selectedOption);
+		}
+
+		formData.value = { ...formData.value, [questionTitle]: existingValues };
 	}
 
 	function validateCurrentStep(): boolean {
-		const step = currentStep.value;
+		const step = activeStep.value;
 
-		stepErrors.value = {};
+		if (!step) {
+			return true;
+		}
 
-		if (!step) return true;
+		const validationErrors: Record<string, string> = {};
 
-		let valid = true;
+		for (const question of step.questions || []) {
+			const fieldName = question.input?.name || question.title;
 
-		for (const q of step.questions || []) {
-			if (!q.required) continue;
+			const fieldValue = formData.value[fieldName];
 
-			const key = q.input?.name || q.title;
+			const isRequired = question.required === true || question.input?.required === true;
 
-			const value = formData.value[key];
+			const isEmpty = !fieldValue || fieldValue.toString().trim() === "";
 
-			if (q.type === "boolean") {
-				if (value !== "Ja" && value !== "Nej") {
-					stepErrors.value[key] = "Detta fält är obligatoriskt.";
+			if (isRequired && isEmpty) {
+				validationErrors[fieldName] = "Detta fält är obligatoriskt.";
 
-					valid = false;
-				}
+				continue;
 			}
 
-			if (q.type === "single") {
-				if (!value) {
-					stepErrors.value[key] = "Detta fält är obligatoriskt.";
+			if (question.conditional && fieldValue === question.conditional.trigger_value) {
+				const dependentField = question.conditional.label;
 
-					valid = false;
-				}
+				if (typeof dependentField === "string") {
+					const dependentValue = formData.value[dependentField];
 
-				if (value === q.conditional?.trigger_value) {
-					const inputLabel = q.conditional?.label;
-
-					if (!inputLabel) continue;
-
-					const conditionalValue = formData.value[inputLabel];
-
-					if (!conditionalValue) {
-						stepErrors.value[inputLabel] = "Detta fält är obligatoriskt.";
-
-						valid = false;
+					if (!dependentValue || dependentValue.toString().trim() === "") {
+						validationErrors[dependentField] = "Detta fält är obligatoriskt.";
 					}
-				}
-			}
-
-			if (q.type === "input") {
-				if (!value || String(value).trim().length === 0) {
-					stepErrors.value[key] = "Detta fält är obligatoriskt.";
-
-					valid = false;
 				}
 			}
 		}
 
-		return valid;
+		stepValidationErrors.value = validationErrors;
+
+		return Object.keys(validationErrors).length === 0;
 	}
 
-	const totalStepCount = computed(() => steps.value.length);
+	function transformSteps(steps: Step[]): Step[] {
+		return steps.map((step) => {
+			if (step.type === "relations") {
+				return {
+					...step,
+					questions: [],
+					related_services: step.services ?? [],
+					related_subservices: step.subservices ?? [],
+					relation_titles: [
+						...(step.services?.map((service) => service.title) || []),
+						...(step.subservices?.map((subservice) => subservice.title) || []),
+					],
+				};
+			}
 
-	const currentStep = computed(() => steps.value[activeStepIndex.value - 1] || null);
+			return {
+				...step,
+				questions: (step.questions || []).map((question) => ({
+					...question,
+					options: question.options ?? [],
+				})),
+			};
+		});
+	}
 
-	const progress = computed(() => (totalStepCount.value ? (activeStepIndex.value / totalStepCount.value) * 100 : 0));
+	function resetForm() {
+		formData.value = {};
 
-	const isOnLastStep = computed(() => activeStepIndex.value === totalStepCount.value);
-
-	const summaryData = computed(() => {
-		const excluded = ["name", "email", "phone"];
-
-		return Object.fromEntries(Object.entries(formData.value).filter(([key]) => !excluded.includes(key)));
-	});
-
-	const showSummaryPanel = computed(() => !!page.value?.show_summary_panel);
+		currentStepIndex.value = 1;
+	}
 
 	return {
 		page,
 		steps,
+		currentStepIndex,
+		stepValidationErrors,
 		formData,
-		activeStepIndex,
-		stepErrors,
 		loading,
+		isSubmitted,
 
-		totalStepCount,
-		currentStep,
-		progress,
-		isOnLastStep,
-		summaryData,
-		showSummaryPanel,
+		totalSteps,
+		activeStep,
+		progressPercent,
+		isLastStep,
+		summaryFlat,
 
 		fetchBuildProjectPage,
 		nextStep,
@@ -259,8 +287,5 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		submitProjectRequest,
 		resetForm,
 		validateCurrentStep,
-
-		isRelationStep,
-		isClickableRelations,
 	};
 });

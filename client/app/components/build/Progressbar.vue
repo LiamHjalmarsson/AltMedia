@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import type { Step } from "~/types";
 
-defineProps<{
+const props = defineProps<{
 	steps: Step[];
 	activeStepIndex: number;
 	progress: number;
 }>();
+
+const totalSteps = computed(() => props.steps.length);
 </script>
 
 <template>
@@ -13,7 +15,7 @@ defineProps<{
 		v-if="steps.length"
 		role="progressbar"
 		:aria-valuemin="1"
-		:aria-valuemax="steps.length"
+		:aria-valuemax="totalSteps"
 		:aria-valuenow="activeStepIndex"
 		class="relative mb-sm md:mb-lg lg:mb-xl">
 		<div
