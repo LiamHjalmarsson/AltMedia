@@ -30,6 +30,12 @@
       "type": "text",
       "required": true
     },
+    "content": {
+      "type": "blocks"
+    },
+    "info_card": {
+      "type": "text"
+    },
     "icon": {
       "type": "component",
       "component": "ui.icon",
