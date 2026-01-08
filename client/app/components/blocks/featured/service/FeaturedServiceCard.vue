@@ -20,7 +20,7 @@ defineProps<{ service: Service }>();
 
 				<div class="flex-1">
 					<h3
-						class="font-semibold text-heading-md md:text-heading-lg my-md group-hover:text-primary transition">
+						class="font-semibold text-heading-md md:text-heading-lg my-md leading-snug group-hover:text-primary transition break-words">
 						{{ service.title }}
 					</h3>
 

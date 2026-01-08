@@ -29,7 +29,7 @@ const { contact } = useGlobalStore();
 
 			<div class="mt-3xl text-sm text-black/80">
 				<p>
-					<NuxtLink :href="`mailto:${contact?.email}`" class="text-primary hover:underline">
+					<NuxtLink :to="`mailto:${contact?.email}`" class="text-primary hover:underline">
 						{{ contact?.email }}
 					</NuxtLink>
 				</p>

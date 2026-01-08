@@ -37,10 +37,10 @@ export interface Service {
 	title: string;
 	slug: string;
 	description: string;
+	content: BlockNode[];
 	icon: Icon;
 	image: Image;
 	subservices: Subservice[];
-	// articles?: Article[];
 }
 
 export interface Subservice {

@@ -7,57 +7,34 @@ const store = useBuildProjectStore();
 
 const { formData, stepValidationErrors } = storeToRefs(store);
 
+const conditionalKey = computed(() => props.question.conditional?.label || `${props.question.title}_extra`);
+
 const showConditional = computed(() => {
-	const trigger = props.question.conditional?.trigger_value;
+	const triggerValue = props.question.conditional?.trigger_value;
 
-	if (trigger === undefined) {
-		return false;
-	}
+	const parentValue = formData.value[props.question.title];
 
-	const value = formData.value[props.question.title];
+	if (!triggerValue) return true;
 
-	return Array.isArray(value) ? value.includes(trigger) : value === trigger;
+	return Array.isArray(parentValue) ? parentValue.includes(triggerValue) : parentValue === triggerValue;
 });
 
-function updateValue(e: Event) {
-	const value = (e.target as HTMLInputElement | HTMLTextAreaElement).value;
-
-	const label = props.question.conditional?.label || props.question.conditional?.trigger_value;
-
-	if (!label) {
-		return;
-	}
-
-	store.setValue(label, value);
+function handleUpdate(value: string | number) {
+	store.setValue(conditionalKey.value, value as string);
 }
 
-const conditionalName = computed(() => props.question.conditional?.label || "");
-
-const errorMessage = computed(() => {
-	if (!conditionalName.value) return "";
-
-	return stepValidationErrors.value[conditionalName.value];
-});
+const errorMessage = computed(() => stepValidationErrors.value[conditionalKey.value]);
 </script>
 
 <template>
-	<div class="space-y-xl">
-		<div v-if="showConditional" class="mt-lg">
-			<FormField :label="question.conditional?.label" :name="question.conditional?.label" :error="errorMessage">
-				<Input
-					v-if="['input', 'url'].includes(question.conditional?.type || '')"
-					:name="question.conditional?.label"
-					type="text"
-					:value="formData[conditionalName] || ''"
-					@input="updateValue"
-					:placeholder="question.conditional?.placeholder || ''" />
-				<Textarea
-					v-else-if="question.conditional?.type === 'textarea'"
-					rows="5"
-					:name="question.conditional?.label"
-					@input="updateValue"
-					:placeholder="question.conditional?.placeholder || ''" />
-			</FormField>
-		</div>
+	<div v-if="showConditional" class="mt-lg">
+		<FormControl
+			:model-value="formData[conditionalKey]"
+			@update:modelValue="handleUpdate"
+			:label="question.conditional?.label"
+			:name="conditionalKey"
+			:type="question.conditional?.type === 'textarea' ? 'textarea' : 'text'"
+			:placeholder="question.conditional?.placeholder"
+			:error="errorMessage" />
 	</div>
 </template>

@@ -7,7 +7,7 @@ defineProps<{ block: FeaturedBlock }>();
 <template>
 	<section class="relative py-3xl lg:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-lg md:px-xl lg:px-3xl">
-			<Heading v-bind="block.heading" class="mb-xl lg:mb-lg xl:mb-xl" />
+			<Heading v-bind="block.heading" class="mb-xl lg:mb-xl xl:mb-2xl" />
 
 			<div
 				v-if="block.features === 'tjänster'"

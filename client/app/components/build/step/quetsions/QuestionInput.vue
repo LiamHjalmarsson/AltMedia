@@ -7,36 +7,27 @@ const store = useBuildProjectStore();
 
 const { formData, stepValidationErrors } = storeToRefs(store);
 
-function onInput(e: Event) {
-	const value = (e.target as HTMLInputElement).value;
+function handleUpdate(val: string | number) {
+	const key = store.fieldKey(props.question);
 
-	store.setValue(props.question.input?.name || "", value);
+	store.setValue(key, val as string);
 }
 
-const errorMessage = computed(() => stepValidationErrors.value[props.question.input?.name || ""]);
+const key = props.question.input?.name || props.question.title;
+
+const errorMessage = computed(() => stepValidationErrors.value[key]);
 </script>
 
 <template>
-	<div class="space-y-sm">
-		<FormField :label="question.input?.label" :name="question.input?.name" :error="errorMessage">
-			<Input
-				v-if="question.input?.type === 'input'"
-				:id="question.input.name"
-				:name="question.input.name"
-				:value="formData[question.input.name] || ''"
-				@input="onInput"
-				:required="question.input.required"
-				:type="question.input.input_type"
-				:placeholder="question.input.placeholder || ''" />
-
-			<Textarea
-				v-if="question.input?.type === 'textarea'"
-				:id="question.input.name"
-				:rows="question.input.rows || 5"
-				:name="question.input.name"
-				:value="formData[question.input.name] || ''"
-				@input="onInput"
-				:placeholder="question.input.placeholder || ''" />
-		</FormField>
-	</div>
+	<FormControl
+		v-if="question.input"
+		:model-value="formData[key]"
+		@update:modelValue="handleUpdate"
+		:label="question.input.label"
+		:name="key"
+		:type="question.input.type === 'textarea' ? 'textarea' : 'text'"
+		:placeholder="question.input.placeholder"
+		:required="question.input.required"
+		:rows="question.input.rows"
+		:error="errorMessage" />
 </template>

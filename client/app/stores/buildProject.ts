@@ -1,8 +1,10 @@
 import { defineStore } from "pinia";
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { BuildProjectPage, Step } from "~/types";
+import type { BuildProjectPage, Question, Step } from "~/types";
 
-type FormDataRecord = Record<string, string | string[] | undefined>;
+type FormValue = string | string[] | undefined;
+
+type FormDataRecord = Record<string, FormValue>;
 
 export const useBuildProjectStore = defineStore("build-project", () => {
 	const page = ref<BuildProjectPage | null>(null);
@@ -13,13 +15,28 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 	const stepValidationErrors = ref<Record<string, string>>({});
 
-	const currentStepIndex = ref(0);
+	const currentStepIndex = ref(1);
 
 	const isSubmitted = ref(false);
 
 	const loading = ref(false);
 
 	const { findOne, create } = useStrapi();
+
+	function fieldKey(question: Question): string {
+		return question.input?.name || question.title;
+	}
+
+	function toggleArrayValue(arr: string[] | undefined, val: string) {
+		const list = Array.isArray(arr) ? [...arr] : [];
+
+		const index = list.indexOf(val);
+
+		if (index >= 0) list.splice(index, 1);
+		else list.push(val);
+
+		return list;
+	}
 
 	const labels: Record<string, string> = {
 		name: "Namn",
@@ -44,25 +61,26 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 	const summaryFlat = computed(() => {
 		const summary: Record<string, string> = {};
 
-		for (const step of steps.value) {
-			for (const question of step.questions || []) {
+		steps.value.forEach((step) => {
+			step.questions?.forEach((question) => {
 				const formKey = question.input?.name || question.title;
 
 				const key = labels[question.title] || labels[formKey] || question.title;
 
 				const val = formData.value[formKey];
 
-				if (!val) continue;
+				if (!val) return;
 
 				let result = Array.isArray(val) ? val.join(", ") : String(val);
 
 				if (key === "Url till webbplats" && formData.value["Har du en befintlig webbplats?"] !== "Ja") {
-					continue;
+					return;
 				}
 
 				if (key === "Ange din budget och tidsram?") {
 					if (val === "Annat (specificera)" && formData.value["budget_custom"]) {
 						const custom = formData.value["budget_custom"];
+
 						result = Array.isArray(custom) ? custom.join(", ") : String(custom);
 					}
 				}
@@ -70,30 +88,20 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 				if (key === "När behöver du lansera?") {
 					if (val === "Annat (specificera)" && formData.value["timeline_custom"]) {
 						const custom = formData.value["timeline_custom"];
+
 						result = Array.isArray(custom) ? custom.join(", ") : String(custom);
 					}
 				}
 
 				summary[key] = result;
-			}
-
-			if (step.type === "relations") {
-				const key = step.title;
-				const val = formData.value[key];
-
-				if (val && Array.isArray(val) && val.length > 0) {
-					summary[key] = val.join(", ");
-				}
-			}
-		}
+			});
+		});
 
 		return summary;
 	});
 
 	async function fetchBuildProjectPage() {
-		if (page.value) {
-			return page.value;
-		}
+		if (page.value) return page.value;
 
 		loading.value = true;
 
@@ -113,24 +121,28 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 	function nextStep() {
 		if (currentStepIndex.value < totalSteps.value) {
 			currentStepIndex.value++;
+
+			stepValidationErrors.value = {};
 		}
 	}
 
 	function previousStep() {
 		if (currentStepIndex.value > 1) {
 			currentStepIndex.value--;
+
+			stepValidationErrors.value = {};
 		}
 	}
 
 	async function submitProjectRequest() {
-		try {
-			const payload = {
-				name: formData.value["name"],
-				email: formData.value["email"],
-				phone: formData.value["phone"],
-				data: formData.value,
-			};
+		const payload = {
+			name: formData.value["name"],
+			email: formData.value["email"],
+			phone: formData.value["phone"],
+			data: formData.value,
+		};
 
+		try {
 			await create("project-requests", payload);
 
 			isSubmitted.value = true;
@@ -141,96 +153,66 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		}
 	}
 
-	function setValue(label: string, value: string | string[]) {
-		formData.value[label] = value;
+	function setValue(field: string, value: FormValue) {
+		formData.value[field] = value;
 	}
 
-	function toggleOption(questionTitle: string, selectedOption: string) {
-		const stepWithQuestion = steps.value.find((step) =>
-			step.questions?.some((question) => question.title === questionTitle)
-		);
+	function toggleOption(field: string, option: string) {
+		const stepWithQuestion = steps.value.find((step) => step.questions?.some((q) => q.title === field));
 
-		const matchedQuestion = stepWithQuestion?.questions?.find((question) => question.title === questionTitle);
+		const matchedQuestion = stepWithQuestion?.questions?.find((q) => q.title === field);
 
 		if (!matchedQuestion) {
-			const existingValues = Array.isArray(formData.value[questionTitle])
-				? [...(formData.value[questionTitle] as string[])]
-				: [];
-
-			const optionIndex = existingValues.indexOf(selectedOption);
-
-			if (optionIndex !== -1) {
-				existingValues.splice(optionIndex, 1);
-			} else {
-				existingValues.push(selectedOption);
-			}
-
-			formData.value = { ...formData.value, [questionTitle]: existingValues };
-
+			formData.value[field] = toggleArrayValue(formData.value[field] as string[], option);
 			return;
 		}
 
 		if (matchedQuestion.type === "single") {
-			formData.value = { ...formData.value, [questionTitle]: selectedOption };
-
+			formData.value[field] = option;
 			return;
 		}
 
-		const existingValues = Array.isArray(formData.value[questionTitle])
-			? [...(formData.value[questionTitle] as string[])]
-			: [];
-
-		const optionIndex = existingValues.indexOf(selectedOption);
-
-		if (optionIndex !== -1) {
-			existingValues.splice(optionIndex, 1);
-		} else {
-			existingValues.push(selectedOption);
-		}
-
-		formData.value = { ...formData.value, [questionTitle]: existingValues };
+		formData.value[field] = toggleArrayValue(formData.value[field] as string[], option);
 	}
 
 	function validateCurrentStep(): boolean {
 		const step = activeStep.value;
 
-		if (!step) {
-			return true;
-		}
+		if (!step?.questions) return true;
 
-		const validationErrors: Record<string, string> = {};
+		const errors: Record<string, string> = {};
 
-		for (const question of step.questions || []) {
-			const fieldName = question.input?.name || question.title;
+		step.questions.forEach((question) => {
+			const key = fieldKey(question);
 
-			const fieldValue = formData.value[fieldName];
+			const value = formData.value[key];
 
-			const isRequired = question.required === true || question.input?.required === true;
+			const isRequired = question.required || question.input?.required;
 
-			const isEmpty = !fieldValue || fieldValue.toString().trim() === "";
+			const isEmpty = !value || value.toString().trim() === "";
 
 			if (isRequired && isEmpty) {
-				validationErrors[fieldName] = "Detta fält är obligatoriskt.";
+				errors[key] = "Detta fält är obligatoriskt.";
 
-				continue;
+				return;
 			}
 
-			if (question.conditional && fieldValue === question.conditional.trigger_value) {
+			if (question.conditional && value === question.conditional.trigger_value) {
 				const dependentField = question.conditional.label;
 
 				if (typeof dependentField === "string") {
 					const dependentValue = formData.value[dependentField];
 
 					if (!dependentValue || dependentValue.toString().trim() === "") {
-						validationErrors[dependentField] = "Detta fält är obligatoriskt.";
+						errors[dependentField] = "Detta fält är obligatoriskt.";
 					}
 				}
 			}
-		}
+		});
 
-		stepValidationErrors.value = validationErrors;
+		stepValidationErrors.value = errors;
 
-		return Object.keys(validationErrors).length === 0;
+		return Object.keys(errors).length === 0;
 	}
 
 	function transformSteps(steps: Step[]): Step[] {
@@ -262,6 +244,10 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		formData.value = {};
 
 		currentStepIndex.value = 1;
+
+		stepValidationErrors.value = {};
+
+		isSubmitted.value = false;
 	}
 
 	return {
@@ -287,5 +273,6 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		submitProjectRequest,
 		resetForm,
 		validateCurrentStep,
+		fieldKey,
 	};
 });

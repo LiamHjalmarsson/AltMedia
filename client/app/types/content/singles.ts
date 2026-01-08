@@ -99,6 +99,7 @@ export interface Step {
 	services?: Pick<Service, "id" | "title">[];
 	subservices?: Pick<Subservice, "id" | "title">[];
 	questions: Question[];
+	order: number;
 }
 
 export interface Question {
@@ -110,6 +111,7 @@ export interface Question {
 	options?: Option[];
 	conditional?: Conditional;
 	input?: Input;
+	order: number;
 }
 
 export interface Option {
@@ -119,8 +121,8 @@ export interface Option {
 
 export interface Conditional {
 	id: number;
+	label: string;
 	trigger_value: string;
 	placeholder?: string;
-	label?: string;
-	type?: "input" | "textarea" | "number" | "url";
+	type: "input" | "textarea" | "number" | "url";
 }

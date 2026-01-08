@@ -1,10 +1,13 @@
 <script setup lang="ts">
-const props = defineProps<{
+defineProps<{
 	index: number;
 	last: boolean;
-	onNext: () => void;
-	onPrev: () => void;
-	onSubmit: () => void;
+}>();
+
+const emit = defineEmits<{
+	(e: "prev"): void;
+	(e: "next"): void;
+	(e: "submit"): void;
 }>();
 </script>
 
@@ -18,7 +21,7 @@ const props = defineProps<{
 			variant="outline"
 			size="md"
 			reversed
-			@click="onPrev" />
+			@click="emit('prev')" />
 
 		<Button
 			v-if="!last"
@@ -28,7 +31,7 @@ const props = defineProps<{
 			variant="primary"
 			size="md"
 			class="ml-auto"
-			@click="onNext" />
+			@click="emit('next')" />
 
 		<Button
 			v-if="last"
@@ -38,6 +41,6 @@ const props = defineProps<{
 			variant="primary"
 			size="md"
 			class="ml-auto"
-			@click="onSubmit" />
+			@click="emit('submit')" />
 	</div>
 </template>

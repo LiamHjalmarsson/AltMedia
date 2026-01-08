@@ -10,33 +10,37 @@ await useAsyncData("build-project-page", () => store.fetchBuildProjectPage(), { 
 
 definePageMeta({ layout: "minimal" });
 
-useAppHead(page.value?.seo || undefined);
+useAppHead(page.value?.seo);
 
 const containerRef = ref<HTMLElement | null>(null);
 
-async function goToNextStep() {
-	const isValid = store.validateCurrentStep();
-	if (!isValid) return triggerErrorAnimation();
-	await animate("next", store.nextStep);
+async function onNext() {
+	if (!store.validateCurrentStep()) return animateError();
+
+	await animateStep("next", store.nextStep);
 }
 
-async function submitForm() {
-	const isValid = store.validateCurrentStep();
-	if (!isValid) return triggerErrorAnimation();
-
-	const ok = await store.submitProjectRequest();
-	if (ok) {
-		store.isSubmitted = true;
-	}
+async function handlePrev() {
+	await animateStep("prev", () => store.previousStep());
 }
 
-function triggerErrorAnimation() {
-	if (!containerRef.value) return;
-	gsap.fromTo(containerRef.value, { x: -6 }, { x: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" });
+async function handleSubmit() {
+	if (!store.validateCurrentStep()) return animateError();
+
+	await store.submitProjectRequest();
 }
 
-async function animate(direction: "next" | "prev", action: () => void) {
+function animateError() {
 	const container = containerRef.value;
+
+	if (!container) return;
+
+	gsap.fromTo(container, { x: -6 }, { x: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" });
+}
+
+async function animateStep(direction: "next" | "prev", action: () => void) {
+	const container = containerRef.value;
+
 	if (!container) return action();
 
 	await gsap.to(container.children, {
@@ -48,12 +52,13 @@ async function animate(direction: "next" | "prev", action: () => void) {
 	});
 
 	action();
+
 	await nextTick();
 
 	gsap.fromTo(
 		container.children,
 		{ y: direction === "next" ? 16 : -16, opacity: 0 },
-		{ y: 0, opacity: 1, duration: 0.32, stagger: 0.02, ease: "power2.out" }
+		{ y: 0, opacity: 1, duration: 0.32, stagger: 0.02 }
 	);
 }
 </script>
@@ -66,11 +71,11 @@ async function animate(direction: "next" | "prev", action: () => void) {
 			v-else
 			class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
 			<div class="flex-1 xl:min-w-[850px]">
-				<Progressbar :steps="steps" :activeStepIndex="currentStepIndex" :progress="progressPercent" />
+				<Progressbar :steps="steps" :active-step-index="currentStepIndex" :progress="progressPercent" />
 
-				<h2 class="text-heading-lg lg:text-heading-xl xl:text-heading-2xl font-bold mb-md">
+				<h1 class="font-bold mb-md text-heading-lg lg:text-heading-xl xl:text-heading-2xl">
 					{{ activeStep?.title }}
-				</h2>
+				</h1>
 
 				<p class="text-black/80 mb-lg text-lg lg:text-2xl">
 					{{ activeStep?.description }}
@@ -83,9 +88,9 @@ async function animate(direction: "next" | "prev", action: () => void) {
 				<BuildNavigation
 					:index="currentStepIndex"
 					:last="isLastStep"
-					:on-next="goToNextStep"
-					:on-prev="store.previousStep"
-					:on-submit="submitForm" />
+					@next="onNext"
+					@prev="handlePrev"
+					@submit="handleSubmit" />
 			</div>
 		</div>
 	</section>

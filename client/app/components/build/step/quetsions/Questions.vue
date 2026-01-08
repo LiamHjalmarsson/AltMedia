@@ -19,19 +19,23 @@ defineProps<{
 			]">
 			<fieldset :class="[isLastStep ? 'space-y-md' : 'space-y-xl']">
 				<div v-if="!isLastStep" class="mb-md">
-					<legend class="font-semibold text-lg">{{ question.title }}</legend>
-					<p v-if="question.help_text" class="text-black/80 text-sm mt-2xs">
+					<legend class="font-semibold text-lg">
+						{{ question.title }} <span v-if="question.required" class="text-primary">*</span>
+					</legend>
+					<p v-if="question.help_text" class="text-black/80 text-sm mt-xs">
 						{{ question.help_text }}
 					</p>
 				</div>
 
-				<QuestionBoolean v-if="question.type === 'boolean'" :question />
+				<div class="space-y-md">
+					<QuestionBoolean v-if="question.type === 'boolean'" :question />
 
-				<QuestionOptions v-else-if="question.type === 'single'" :question />
+					<QuestionOptions v-else-if="question.type === 'single'" :question />
 
-				<QuestionInput v-else-if="question.type === 'input'" :question />
+					<QuestionInput v-else-if="question.type === 'input'" :question />
 
-				<QuestionConditional v-if="question.conditional" :question />
+					<QuestionConditional v-if="question.conditional" :question />
+				</div>
 			</fieldset>
 		</div>
 	</div>
