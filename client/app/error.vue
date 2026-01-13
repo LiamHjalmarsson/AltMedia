@@ -15,7 +15,7 @@ const props = defineProps<{
 
 			<h1 class="text-heading-3xl font-extrabold tracking-tight text-black">Sidan kunde inte hittas</h1>
 
-			<p class="mt-sm text-black/80 leading-relaxed text-md">
+			<p class="mt-sm text-black/80 text-md">
 				Länken du följde verkar vara trasig eller sidan har flyttats. Du kan försöka gå tillbaka till
 				startsidan.
 			</p>

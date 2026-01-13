@@ -24,15 +24,15 @@ useAppHead(page?.value?.seo || undefined);
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
 			<Heading
 				tag="h1"
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="my-xl" />
+				class="my-4xl" />
 
-			<div class="grid md:grid-cols-3 gap-2xl lg:gap-2xl">
+			<div class="grid md:grid-cols-2 gap-2xl lg:gap-4xl">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
 					<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<figure class="overflow-hidden block shadow-lg">
@@ -43,25 +43,24 @@ useAppHead(page?.value?.seo || undefined);
 								format="webp,avif"
 								quality="85"
 								loading="lazy"
-								class="w-full h-[250px] md:h-[300px] object-cover" />
+								class="w-full h-[250px] md:h-[300px] object-cover group-hover:scale-105 transition duration-300" />
 						</figure>
 
 						<header class="mt-lg">
 							<h2
-								class="text-heading-md font-bold leading-tight tracking-tight lg:group-hover:text-primary transition-colors duration-300">
+								class="text-heading-md sm:text-heading-md md:text-heading-lg font-bold lg:group-hover:text-primary transition-colors duration-300">
 								{{ article.title }}
 							</h2>
 
-							<div class="flex justify-between items-center mt-xs">
-								<div
-									class="text-sm text-black/80 flex items-center gap-xs"
-									v-if="article.published_date">
-									<span>{{ article.published_date }}</span>
-									<span aria-hidden="true"> / </span>
-									<span>{{ article.reading_time_min || "10" }} min läsning</span>
-								</div>
+							<p class="mt-md text-black/80 line-clamp-3">
+								{{ article.description }}
+							</p>
 
-								<ReadMoreButton class="group-hover:text-primary" />
+							<div
+								v-if="article.published_date"
+								class="flex justify-between items-center mt-md text-black/80">
+								<span>{{ article.published_date }}</span>
+								<span>{{ article.reading_time_min || "10" }} min läsning</span>
 							</div>
 						</header>
 					</NuxtLink>

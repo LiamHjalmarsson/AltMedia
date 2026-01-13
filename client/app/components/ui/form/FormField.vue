@@ -4,12 +4,13 @@ defineProps<{
 	label: string;
 	error?: string;
 	required?: boolean;
+	hidden?: boolean;
 }>();
 </script>
 
 <template>
 	<div class="flex flex-col space-y-sm">
-		<Label :for="name" :required>{{ label }}</Label>
+		<Label :for="name" :required :class="{ hidden: hidden }">{{ label }}</Label>
 
 		<slot />
 

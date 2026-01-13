@@ -20,20 +20,20 @@ const props = defineProps<{ item: BuildItem }>();
 
 		<IconBadge v-if="item.icon?.icon_name" :icon="item.icon" variant="primary" :size="50" />
 
-		<div class="flex-1 text-center">
-			<h3 class="font-semibold text-heading-sm md:text-heading-lg my-md">
+		<div class="text-center">
+			<h3 class="font-semibold text-heading-sm md:text-heading-lg my-lg">
 				{{ item.title }}
 			</h3>
 
-			<p v-if="item.description" class="text-md md:text-lg text-black/80 leading-relaxed mb-sm md:mb-md">
+			<p v-if="item.description" class="text-md md:text-lg text-black/80 mb-sm md:mb-lg">
 				{{ item.description }}
 			</p>
 		</div>
-		<ul v-if="item.subservices?.length" class="space-y-xs w-full">
+		<ul v-if="item.subservices?.length" class="space-y-xs w-full flex-1">
 			<li
 				v-for="sub in item.subservices"
 				:key="sub.id"
-				class="flex items-center justify-center text-xs font-medium text-black/80">
+				class="flex items-center justify-center text-sm font-medium text-black/80">
 				{{ sub.title }}
 			</li>
 		</ul>

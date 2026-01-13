@@ -44,7 +44,7 @@ const textAlignClass = computed(() => {
 				</div>
 
 				<div :class="[hasImage ? (block.reverse ? 'md:order-1' : 'md:order-2') : '', textAlignClass]">
-					<StrapiBlocksText v-if="content?.length" :nodes="content" class="mb-lg leading-relaxed" />
+					<StrapiBlocksText v-if="content?.length" :nodes="content" class="mb-lg" />
 				</div>
 			</div>
 		</div>

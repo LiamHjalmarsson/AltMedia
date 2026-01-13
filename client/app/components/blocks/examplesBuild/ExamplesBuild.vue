@@ -5,23 +5,23 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-5xl">
+	<section class="relative pt-3xl lg:pt-5xl">
 		<div class="mx-auto max-w-[1300px] px-lg md:px-xl lg:px-3xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
-				class="mb-xl lg:mb-lg xl:mb-xl" />
+				class="mb-2xl lg:mb-xl xl:mb-2xl" />
 
-			<ul
+			<!-- <ul
 				role="list"
-				class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3xl sm:gap-lg lg:gap-2xl mt-lg md:mt-xl lg:mt-2xl">
+				class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-xl xl:gap-2xl mt-xl md:mt-2xl lg:mt-3xl">
 				<li v-for="(item, i) in block.items" :key="item.id">
 					<ExamplesBuildCard
 						:item="item"
-						:class="['transition-transform duration-300', i % 3 === 1 ? 'lg:scale-105' : '']" />
+						:class="['transition-transform duration-300', i % 3 === 1 ? 'xl:scale-105' : '']" />
 				</li>
-			</ul>
+			</ul> -->
 
 			<div class="mt-3xl w-full flex justify-center items-center">
 				<ButtonLink

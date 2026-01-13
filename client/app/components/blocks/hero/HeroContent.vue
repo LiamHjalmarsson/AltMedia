@@ -29,9 +29,10 @@ function formatColoredWords(content: Hero): string {
 		</span>
 
 		<h1
-			class="text-heading-2xl md:text-heading-3xl xl:text-heading-4xl font-extrabold leading-tight tracking-tight"
+			class="text-heading-2xl md:text-heading-3xl xl:text-heading-4xl font-extrabold tracking-tighter"
 			v-html="formatColoredWords(content)" />
-		<p v-if="content.description" class="text-lg md:text-xl lg:text-2xl text-white">
+
+		<p v-if="content.description" class="text-lg md:text-xl lg:text-heading-md text-white tracking-tighter">
 			{{ content.description }}
 		</p>
 

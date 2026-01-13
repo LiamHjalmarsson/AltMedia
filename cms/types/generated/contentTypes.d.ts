@@ -875,13 +875,13 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     icon: Schema.Attribute.Component<'ui.icon', false> &
       Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    info_card: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::service.service'
     > &
       Schema.Attribute.Private;
+    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     seo: Schema.Attribute.Component<'seo.seo', false>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;

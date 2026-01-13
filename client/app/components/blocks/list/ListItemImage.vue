@@ -16,6 +16,6 @@ defineProps<{ image: Image; title: string }>();
 			height="450"
 			sizes="(max-width: 768px) 100vw, 50vw"
 			loading="lazy"
-			class="w-full h-full object-contain max-h-[200px] lg:max-h-[450px]" />
+			class="w-full h-full object-contain object-bottom-left max-h-[260px] lg:max-h-[380px]" />
 	</div>
 </template>

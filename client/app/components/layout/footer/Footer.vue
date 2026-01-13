@@ -22,7 +22,7 @@ const year = new Date().getFullYear();
 						quality="85"
 						class="object-contain" />
 
-					<p v-if="footer?.description" class="text-white/80 leading-relaxed text-lg lg:text-xl">
+					<p v-if="footer?.description" class="text-white/80 text-xl max-w-[950px]">
 						{{ footer?.description }}
 					</p>
 
@@ -37,17 +37,19 @@ const year = new Date().getFullYear();
 						class="max-lg:text-center" />
 
 					<div class="space-y-md max-lg:text-center">
-						<h3 class="text-xl font-semibold">Kontakt</h3>
+						<span class="block font-medium text-heading-md">Kontakt</span>
 
-						<address class="space-y-xs not-italic">
+						<address class="space-y-xs not-italic flex flex-col">
 							<NuxtLink
 								:to="`mailto:${contact?.email}`"
-								class="text-white/80 hover:text-white transition"
+								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
 								>{{ contact?.email }}</NuxtLink
 							>
-							<NuxtLink :to="`tel:${contact?.phone}`" class="text-white/80 hover:text-white transition">{{
-								contact?.phone
-							}}</NuxtLink>
+							<NuxtLink
+								:to="`tel:${contact?.phone}`"
+								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+								>{{ contact?.phone }}</NuxtLink
+							>
 						</address>
 					</div>
 				</div>
@@ -56,7 +58,9 @@ const year = new Date().getFullYear();
 			<div class="w-full h-px bg-white/10 my-2xl" />
 
 			<div class="flex flex-col lg:flex-row justify-between items-center gap-xl lg:gap-lg mt-2xl lg:mt-4xl">
-				<p class="text-white/80 text-sm text-center">© {{ year }} Alt Media — Alla rättigheter förbehållna.</p>
+				<p class="text-white/80 text-sm text-center leading-[1.4]">
+					© {{ year }} Alt Media — Alla rättigheter förbehållna.
+				</p>
 
 				<nav
 					aria-label="Legal navigation"

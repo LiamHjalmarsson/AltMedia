@@ -40,13 +40,11 @@ const textColor = computed(() => {
 		<div class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg px-lg" :class="textColor">
 			<h2
 				v-if="block.title"
-				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold text-secondary mb-lg">
+				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold text-secondary mb-xl">
 				{{ block.title }}
 			</h2>
 
-			<!-- <ClientOnly> -->
 			<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
-			<!-- </ClientOnly> -->
 		</div>
 
 		<div v-if="block.link" class="absolute bottom-0 right-0 p-2xl m-2xl">

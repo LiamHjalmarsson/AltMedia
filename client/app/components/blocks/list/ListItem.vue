@@ -46,20 +46,20 @@ const textThemeClass = computed(() => {
 </script>
 
 <template>
-	<li class="grid lg:grid-cols-2 lg:gap-3xl items-center group">
+	<li class="grid lg:grid-cols-3 lg:gap-4xl items-center group">
 		<ListItemImage
 			v-if="item.image"
 			:image="item.image"
 			:title="item.title"
-			:class="['hidden lg:block', isEven ? 'order-2' : 'order-1']" />
+			:class="['hidden lg:block object-none scale-105', isEven ? 'order-2' : 'order-1']" />
 
 		<div
-			class="relative flex flex-col justify-center max-lg:bg-white/5 max-lg:shadow-2xl max-lg:backdrop-blur-md h-full"
+			class="relative flex flex-col justify-center h-full col-span-2"
 			:class="[isEven ? 'lg:order-1' : 'lg:order-2', textThemeClass]">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
-			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left space-y-md">
-				<div class="flex items-center justify-center max-lg:flex-wrap lg:justify-start space-x-md">
+			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left">
+				<div class="lg:flex items-center justify-center max-lg:flex-wrap lg:justify-start space-x-lg">
 					<span
 						v-if="showNumbers"
 						class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading"
@@ -67,7 +67,7 @@ const textThemeClass = computed(() => {
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-md md:text-heading-lg font-semibold leading-wide">
+					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter max-lg:mt-sm">
 						{{ item.title }}
 					</h3>
 				</div>

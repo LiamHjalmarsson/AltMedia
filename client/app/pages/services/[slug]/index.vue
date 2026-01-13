@@ -34,11 +34,11 @@ await useAsyncData(
 				</figure>
 
 				<div class="flex-1 flex flex-col justify-center h-full">
-					<h1 class="font-bold text-heading-xl md:text-heading-2xl mb-lg leading-tight">
+					<h1 class="font-bold text-heading-xl md:text-heading-2xl mb-lg">
 						{{ currentService.title }}
 					</h1>
 
-					<p v-if="currentService.description" class="text-lg mb-xl max-w-[600px] leading-relaxed">
+					<p v-if="currentService.description" class="text-lg mb-xl max-w-[600px]">
 						{{ currentService.description }}
 					</p>
 				</div>
@@ -57,7 +57,7 @@ await useAsyncData(
 							{{ sub.title }}
 						</h3>
 
-						<p class="text-sm leading-relaxed mt-xs line-clamp-3">XX</p>
+						<p class="text-sm mt-xs line-clamp-3">XX</p>
 
 						<div class="mt-lg flex justify-between items-center">
 							<NuxtLink

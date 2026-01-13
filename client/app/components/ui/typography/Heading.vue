@@ -22,15 +22,15 @@ const alignClass = computed(() => {
 </script>
 
 <template>
-	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full' : '']">
+	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full space-x-lg' : '']">
 		<div class="flex-2 grow">
 			<component
 				:is="props.tag"
-				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold tracking-tight">
+				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold">
 				{{ props.title }}
 			</component>
 
-			<p v-if="description" class="text-xl font-medium mt-lg">
+			<p v-if="description" class="text-heading-md mt-lg tracking-tight">
 				{{ description }}
 			</p>
 		</div>

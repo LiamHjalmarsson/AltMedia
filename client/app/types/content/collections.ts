@@ -41,6 +41,7 @@ export interface Service {
 	icon: Icon;
 	image: Image;
 	subservices: Subservice[];
+	order?: number;
 }
 
 export interface Subservice {

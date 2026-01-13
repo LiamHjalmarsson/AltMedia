@@ -8,8 +8,8 @@ defineProps<{ article: Article }>();
 	<NuxtLink
 		:to="`/articles/${article.slug}`"
 		:aria-label="`Läs artikel: ${article.title}`"
-		class="block overflow-hidden group cursor-pointer relative">
-		<div class="h-48 relative overflow-hidden">
+		class="overflow-hidden group cursor-pointer relative pb-2xl border-b flex space-x-2xl">
+		<div class="h-56 xl:h-48 relative overflow-hidden w-2/5">
 			<NuxtImg
 				:src="article.cover.url"
 				:alt="article.cover.alternativeText || article.title"
@@ -21,14 +21,15 @@ defineProps<{ article: Article }>();
 
 		<div class="flex flex-col justify-between flex-1 mt-md">
 			<div class="flex-1">
-				<h3 class="text-heading-sm font-bold duration-300 group-hover:text-primary">
+				<h3 class="text-heading-md font-bold duration-300 group-hover:text-primary">
 					{{ article.title }}
 				</h3>
+				<p class="mt-sm text-black/80 line-clamp-3 xl:hidden">
+					{{ article.description }}
+				</p>
 			</div>
 
-			<div class="flex items-center justify-between mt-xs">
-				<ReadMoreButton class="group-hover:text-primary" />
-
+			<div class="flex items-center justify-between mt-sm">
 				<div class="text-xs text-black/80">
 					<span v-if="article.published_date">
 						{{ article.published_date }}

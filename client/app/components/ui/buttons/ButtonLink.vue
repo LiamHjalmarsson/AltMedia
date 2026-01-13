@@ -36,7 +36,7 @@ const sizeClass: Record<Link["size"], string> = {
 					v-if="icon"
 					:name="icon"
 					aria-hidden="true"
-					class="transition-all duration-200"
+					class="transition-all duration-200 leading-[1.8]"
 					:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
 				<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>
 			</span>

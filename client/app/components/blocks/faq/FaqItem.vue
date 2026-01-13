@@ -20,23 +20,21 @@ function toggle() {
 
 <template>
 	<li
-		class="p-md lg:p-lg border border-black/5 transition duration-300"
-		:class="isOpen ? 'shadow-2xl' : 'shadow-lg'"
+		class="px-md lg:px-lg py-xl lg:py-xl transition duration-300 border-b border-black/60 last:border-0"
 		@click="toggle">
 		<button
 			type="button"
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"
-			class="flex items-start justify-between w-full px-xs">
-			<div class="flex items-center space-x-md">
+			class="flex items-start justify-between w-full">
+			<div class="flex items-center space-x-xl">
 				<span class="max-lg:hidden text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
 					{{ number }}
 				</span>
-
-				<h3 class="text-md lg:text-heading-xs font-semibold flex-1 text-start">
+				<div class="text-heading-md font-bold flex-1 text-start leading-[1.25]">
 					{{ item.question }}
-				</h3>
+				</div>
 			</div>
 
 			<Icon
@@ -51,7 +49,7 @@ function toggle() {
 				v-show="isOpen"
 				:id="`faq-answer-${item.id}`"
 				:aria-labelledby="`faq-title-${item.id}`"
-				class="overflow-hidden mt-sm px-sm lg:px-xl leading-relaxed">
+				class="overflow-hidden mt-sm">
 				<StrapiBlocksText :nodes="item.answer" />
 			</div>
 		</Transition>

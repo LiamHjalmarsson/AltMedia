@@ -93,7 +93,7 @@ async function submitForm() {
 						{{ contactPage?.data.title }}
 					</h1>
 
-					<p class="max-w-[450px] text-lg leading-relaxed text-white/80">
+					<p class="max-w-[450px] text-lg text-white/80">
 						{{ contactPage?.data.description }}
 					</p>
 				</div>

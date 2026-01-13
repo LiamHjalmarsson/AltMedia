@@ -12,11 +12,11 @@ function toggleAnswer(id: number) {
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-4xl">
+	<section class="relative mt-3xl lg:mt-4xl">
 		<div class="mx-auto max-w-[1300px] px-lg lg:px-3xl">
-			<Heading v-bind="block.heading" class="mb-xl lg:mb-lg xl:mb-xl" />
+			<Heading v-bind="block.heading" class="mb-xl" />
 
-			<ul class="flex flex-col w-full space-y-xl">
+			<ul class="flex flex-col w-full">
 				<FaqItem
 					v-for="(item, i) in block.items"
 					:key="item.id"

@@ -53,10 +53,10 @@ const textColor = computed(() => {
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
-				class="mb-xl lg:mb-lg xl:mb-2xl"
+				class="mb-xl lg:mb-2xl xl:mb-2xl"
 				:class="textColor" />
 
-			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-4xl">
+			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-2xl">
 				<ListItem
 					v-for="(item, index) in block.items"
 					:key="item.id"

@@ -24,26 +24,27 @@ useAppHead(page?.value?.seo || undefined);
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
 			<Heading
 				tag="h1"
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="my-xl" />
+				class="my-4xl" />
 
-			<ul class="grid md:grid-cols-2 gap-3xl">
+			<ul class="grid md:grid-cols-2 gap-4xl">
 				<li
 					v-for="(project, i) in projects"
 					:key="project.id"
 					class="group transition-transform duration-500"
-					:class="[i % 4 === 1 ? 'md:pt-3xl' : '', i % 4 === 2 ? 'md:pt-3xl' : '']">
+					:class="{
+						'md:pt-3xl': i % 2 !== 0,
+					}">
 					<article>
 						<NuxtLink
 							:to="`/projects/${project.slug}`"
-							:aria-label="`Läs mer om projektet ${project.title}`"
-							class="space-y-lg">
-							<figure class="overflow-hidden block shadow-lg">
+							:aria-label="`Läs mer om projektet ${project.title}`">
+							<figure class="overflow-hidden block shadow-lg mb-xl">
 								<NuxtImg
 									v-if="project.cover?.url"
 									:src="project.cover.url"
@@ -51,18 +52,18 @@ useAppHead(page?.value?.seo || undefined);
 									format="webp,avif"
 									quality="85"
 									loading="lazy"
-									class="w-full h-[300px] object-cover" />
+									class="w-full h-[400px] object-cover" />
 							</figure>
 
-							<header class="space-y-xs">
+							<header>
 								<h3
-									class="text-heading-md font-bold leading-tight tracking-tight group-hover:text-primary transition-colors duration-300">
+									class="text-heading-md sm:text-heading-md md:text-heading-lg xl:text-heading-xl font-bold group-hover:text-primary transition-colors duration-300 mb-sm">
 									{{ project.title }}
 								</h3>
 
 								<div
 									v-if="project.services?.length"
-									class="flex flex-wrap gap-xs text-sm text-black/80">
+									class="flex flex-wrap gap-xs text-md text-black/80">
 									<span
 										v-for="service in project.services"
 										:key="service.id"

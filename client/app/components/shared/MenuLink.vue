@@ -14,7 +14,7 @@ const isActive = computed(() => {
 	<NuxtLink
 		:to="link.url"
 		:aria-current="isActive ? 'page' : undefined"
-		class="font-bold text-md relative inline-block transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+		class="font-bold leading-[1.8] text-md relative inline-block transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 		{{ link.label }}
 
 		<span

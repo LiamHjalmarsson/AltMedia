@@ -10,7 +10,7 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 		const sanitizedQuery = await this.sanitizeQuery(ctx);
 
 		const results = await strapi.documents("api::service.service").findMany({
-			fields: ["id", "title", "slug", "description"],
+			fields: ["id", "title", "slug", "description", "content", "order"],
 			populate: {
 				icon: {
 					fields: ["icon_name", "is_image"],
@@ -55,7 +55,7 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 
 		const entity = await strapi.documents("api::service.service").findFirst({
 			filters: { slug },
-			fields: ["id", "title", "slug", "description"],
+			fields: ["id", "title", "slug", "description", "content", "order"],
 			populate: {
 				icon: {
 					fields: ["icon_name", "is_image"],

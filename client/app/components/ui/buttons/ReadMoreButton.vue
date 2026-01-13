@@ -13,7 +13,7 @@ const visibleLabel = computed(() => props.label?.trim() || "Läs mer");
 const isLink = computed(() => typeof props.to === "string" && props.to.length > 0);
 
 const baseClasses = computed(() => {
-	return "inline-flex items-center font-semibold transition group cursor-pointer min-w-[44px] focus-visible:outline-primary";
+	return "inline-flex items-center font-semibold transition group cursor-pointer min-w-[44px] focus-visible:outline-primary ";
 });
 
 const iconClasses =
