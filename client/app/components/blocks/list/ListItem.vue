@@ -59,15 +59,12 @@ const textThemeClass = computed(() => {
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
 			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left">
-				<div class="lg:flex items-center justify-center max-lg:flex-wrap lg:justify-start space-x-lg">
-					<span
-						v-if="showNumbers"
-						class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading"
-						:style="colorClass">
+				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start space-x-lg mb-md">
+					<span v-if="showNumbers" class="text-heading-xs lg:text-heading-sm font-extrabold font-heading">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter max-lg:mt-sm">
+					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter mt-sm">
 						{{ item.title }}
 					</h3>
 				</div>

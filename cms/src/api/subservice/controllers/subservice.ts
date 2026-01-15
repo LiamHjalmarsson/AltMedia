@@ -41,6 +41,9 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 							fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
 						},
 					},
+					color: {
+						fields: ["type", "hex", "theme"],
+					},
 				},
 				introduction: {
 					populate: {

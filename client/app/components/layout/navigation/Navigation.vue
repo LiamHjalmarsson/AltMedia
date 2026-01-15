@@ -21,7 +21,7 @@ onBeforeUnmount(destroy);
 </script>
 
 <template>
-	<header v-if="header" ref="headerRef" class="fixed p-md lg:p-xl z-50 w-full flex justify-center items-center">
+	<header v-if="header" ref="headerRef" class="fixed p-md lg:p-lg z-50 w-full flex justify-center items-center">
 		<nav
 			aria-label="main navigation"
 			class="flex items-center justify-between w-[100%] py-lg lg:w-[80%] max-w-[1400px] px-md lg:px-lg border border-white/20 bg-white/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-xl"

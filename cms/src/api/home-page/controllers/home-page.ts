@@ -17,6 +17,9 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 						links: {
 							fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
 						},
+						color: {
+							fields: ["type", "hex", "theme"],
+						},
 					},
 				},
 				form: {

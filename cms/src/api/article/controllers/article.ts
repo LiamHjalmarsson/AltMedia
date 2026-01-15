@@ -46,6 +46,9 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 							fields: ["alternativeText", "formats", "height", "width", "url", "provider", "mime"],
 						},
 						links: "*",
+						color: {
+							fields: ["type", "hex", "theme"],
+						},
 					},
 				},
 				introduction: {

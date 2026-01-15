@@ -126,6 +126,7 @@ export interface BlockHero extends Struct.ComponentSchema {
       'images' | 'files' | 'videos' | 'audios'
     >;
     badge: Schema.Attribute.String;
+    color: Schema.Attribute.Component<'styles.color', false>;
     colored_words: Schema.Attribute.JSON;
     description: Schema.Attribute.Text;
     links: Schema.Attribute.Component<'ui.link', true>;

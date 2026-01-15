@@ -61,6 +61,9 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 								links: {
 									fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
 								},
+								color: {
+									fields: ["type", "hex", "theme"],
+								},
 							},
 						},
 						"block.info": {

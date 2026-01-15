@@ -26,7 +26,7 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:description="page?.description"
 				:align_content="page?.align_content"
-				class="my-4xl" />
+				class="mt-4xl mb-3xl" />
 
 			<div class="flex flex-col space-y-4xl">
 				<article

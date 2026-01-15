@@ -17,9 +17,13 @@ export const useServiceStore = defineStore("services", () => {
 	async function fetchServices() {
 		loading.value = true;
 		try {
-			const result: Strapi5ResponseMany<Service> = await find<Service>("services");
+			const result: Strapi5ResponseMany<Service> = await find<Service>("services", {
+				sort: ["order:asc"],
+			});
 
-			services.value = result.data ?? [];
+			services.value = (result.data ?? []).slice().sort((a, b) => {
+				return (a.order ?? 999) - (b.order ?? 999);
+			});
 
 			return services.value;
 		} catch {

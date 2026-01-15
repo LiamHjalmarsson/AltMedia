@@ -51,6 +51,9 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 						links: {
 							fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
 						},
+						color: {
+							fields: ["type", "hex", "theme"],
+						},
 					},
 				},
 				introduction: {

@@ -50,6 +50,11 @@
       "type": "component",
       "component": "ui.link",
       "repeatable": true
+    },
+    "color": {
+      "type": "component",
+      "component": "styles.color",
+      "repeatable": false
     }
   },
   "config": {}
