@@ -49,7 +49,7 @@ export interface Subservice {
 	title: string;
 	slug: string;
 	price_once?: number | null;
-	price_month?: number | null;
+	has_page: boolean;
 	content: BlockNode[];
 	service?: Service;
 	tags?: Tag[];

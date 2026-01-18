@@ -35,7 +35,6 @@ export interface BlockItemsListItem extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    color: Schema.Attribute.Component<'styles.color', false>;
     content: Schema.Attribute.Blocks;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     title: Schema.Attribute.String;
@@ -79,7 +78,6 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     items: Schema.Attribute.Component<'block-items.faq-item', true>;
   };
 }
@@ -125,7 +123,6 @@ export interface BlockHero extends Struct.ComponentSchema {
     background: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    badge: Schema.Attribute.String;
     color: Schema.Attribute.Component<'styles.color', false>;
     colored_words: Schema.Attribute.JSON;
     description: Schema.Attribute.Text;
@@ -143,7 +140,15 @@ export interface BlockInfo extends Struct.ComponentSchema {
     align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
     button: Schema.Attribute.Component<'ui.button', false>;
     content: Schema.Attribute.Blocks;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    image_fade: Schema.Attribute.Enumeration<
+      ['top', 'bottom', 'right', 'left', 'all']
+    >;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    images_overlap: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
@@ -259,6 +264,7 @@ export interface GlobalNavigation extends Struct.ComponentSchema {
   };
   attributes: {
     aria_label: Schema.Attribute.String;
+    cta: Schema.Attribute.Component<'ui.link', false>;
     links: Schema.Attribute.Component<'global.menu-link', true>;
     logo: Schema.Attribute.Media<'images' | 'files'>;
   };

@@ -1,3 +1,4 @@
+import type { Size, Variant } from "../enums";
 import type { Image, Seo, Icon, Form, Color, Input } from "../shared";
 import type { Blocks, Cta, Hero } from "./blocks";
 import type { Service, Subservice } from "./collections";
@@ -21,6 +22,12 @@ export interface Navigation {
 	aria_label?: string;
 	logo?: Image;
 	links: MenuLink[];
+	cta: {
+		label: string;
+		url: string;
+		variant: Variant;
+		size: Size;
+	};
 }
 
 export interface FooterColumn {

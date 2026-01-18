@@ -33,9 +33,6 @@
     "price_once": {
       "type": "integer"
     },
-    "price_month": {
-      "type": "integer"
-    },
     "content": {
       "type": "blocks"
     },
@@ -56,6 +53,10 @@
         "block.info",
         "block.full-section"
       ]
+    },
+    "has_page": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

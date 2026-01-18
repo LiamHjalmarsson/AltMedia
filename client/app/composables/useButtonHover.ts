@@ -1,30 +1,54 @@
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import gsap from "gsap";
+
+const PILL = 64;
 
 export function useHoverAnimation(isReversed = false) {
 	const element = ref<HTMLElement | null>(null);
-
 	const backgroundColor = ref<HTMLElement | null>(null);
 
-	const onHover = (toRight = true) => {
-		if (!backgroundColor.value) return;
+	let cleanup: (() => void) | null = null;
 
-		gsap.killTweensOf(backgroundColor.value);
+	const rightLeftPx = () => {
+		const el = element.value;
+		if (!el) return 0;
+		return Math.max(0, el.clientWidth - PILL);
+	};
 
-		const leftValue = toRight ? "calc(100% - 44px)" : 0;
+	const setStart = () => {
+		const bg = backgroundColor.value;
+		if (!bg) return;
+
+		gsap.set(bg, {
+			width: PILL,
+			left: isReversed ? rightLeftPx() : 0,
+			scale: 1,
+			clearProps: "boxShadow",
+		});
+	};
+
+	const animateCollapseTo = (side: "left" | "right") => {
+		const el = element.value;
+		const bg = backgroundColor.value;
+		if (!el || !bg) return;
+
+		gsap.killTweensOf(bg);
+
+		const fullW = el.clientWidth;
+		const targetLeft = side === "left" ? 0 : rightLeftPx();
 
 		gsap.timeline({ overwrite: "auto" })
-			.to(backgroundColor.value, {
-				width: "100%",
+			.to(bg, {
+				width: fullW,
 				left: 0,
 				scale: 1.05,
 				boxShadow: "0 8px 20px rgba(0,0,0,0.2)",
 				duration: 0.2,
 				ease: "power2.in",
 			})
-			.to(backgroundColor.value, {
-				width: "44px",
-				left: leftValue,
+			.to(bg, {
+				width: PILL,
+				left: targetLeft,
 				scale: 1,
 				boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
 				duration: 0.2,
@@ -33,39 +57,54 @@ export function useHoverAnimation(isReversed = false) {
 	};
 
 	const onClick = () => {
-		if (!backgroundColor.value) return;
+		const el = element.value;
+		const bg = backgroundColor.value;
+		if (!el || !bg) return;
 
-		gsap.killTweensOf(backgroundColor.value);
+		gsap.killTweensOf(bg);
 
-		gsap.timeline({ overwrite: "auto" }).to(backgroundColor.value, {
-			width: "100%",
+		gsap.to(bg, {
+			width: el.clientWidth,
+			left: 0,
 			scale: 1.1,
 			boxShadow: "0 12px 25px rgba(0,0,0,0.3)",
-			left: 0,
 			duration: 0.2,
 			ease: "power2.out",
+			overwrite: "auto",
 		});
 	};
 
 	function initAnimation() {
-		if (!element.value || !backgroundColor.value) {
-			return;
-		}
+		const el = element.value;
+		const bg = backgroundColor.value;
+		if (!el || !bg) return;
 
-		if (!isReversed) {
-			element.value.addEventListener("mouseenter", () => onHover(true));
+		// Startläge per knapp
+		setStart();
 
-			element.value.addEventListener("mouseleave", () => onHover(false));
-		} else {
-			element.value.addEventListener("mouseenter", () => onHover(false));
+		// Standard: hover -> right, leave -> left
+		// Reversed: hover -> left, leave -> right
+		const enter = () => animateCollapseTo(isReversed ? "left" : "right");
+		const leave = () => animateCollapseTo(isReversed ? "right" : "left");
 
-			element.value.addEventListener("mouseleave", () => onHover(true));
-		}
+		el.addEventListener("mouseenter", enter);
+		el.addEventListener("mouseleave", leave);
+		el.addEventListener("click", onClick);
 
-		element.value.addEventListener("click", onClick);
+		// Om knappen får annan bredd (responsive), håll rätt startkant
+		const ro = new ResizeObserver(() => setStart());
+		ro.observe(el);
+
+		cleanup = () => {
+			ro.disconnect();
+			el.removeEventListener("mouseenter", enter);
+			el.removeEventListener("mouseleave", leave);
+			el.removeEventListener("click", onClick);
+		};
 	}
 
 	onMounted(initAnimation);
+	onBeforeUnmount(() => cleanup?.());
 
-	return { element, backgroundColor, onHover, onClick };
+	return { element, backgroundColor, onClick };
 }

@@ -9,7 +9,7 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 			fields: ["id", "has_form"],
 			populate: {
 				hero: {
-					fields: ["title", "description", "colored_words", "align_content", "badge"],
+					fields: ["title", "description", "colored_words", "align_content"],
 					populate: {
 						background: {
 							fields: ["url", "formats", "width", "height", "alternativeText", "mime"],
@@ -134,9 +134,6 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 										image: {
 											fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 										},
-										color: {
-											fields: ["type", "hex", "theme"],
-										},
 									},
 								},
 							},
@@ -199,8 +196,25 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 								items: {
 									fields: ["question", "answer"],
 								},
-								image: {
+							},
+						},
+						"block.cta": {
+							populate: {
+								fields: ["id", "title", "subtitle", "description"],
+								buttons: {
+									fields: ["label", "variant", "type", "icon", "size"],
+								},
+								links: {
+									fields: ["label", "url", "variant", "is_external", "size"],
+								},
+								cover: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								color: {
+									fields: ["type", "hex", "theme"],
+								},
+								background: {
+									fields: ["type", "hex", "theme"],
 								},
 							},
 						},

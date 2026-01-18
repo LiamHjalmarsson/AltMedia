@@ -61,6 +61,7 @@ useAppHead(page?.value?.seo || undefined);
 									:to="`/services/${service.slug}/${subservice.slug}`"
 									:label="subservice.title"
 									:size="20"
+									:has_page="subservice.has_page"
 									class="text-heading-sm inline-flex items-center" />
 							</li>
 						</ul>

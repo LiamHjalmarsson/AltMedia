@@ -27,14 +27,14 @@ const textColor = computed(() => {
 		return "text-white";
 	}
 
-	return block.color.theme === "dark" ? "text-black" : "text-white";
+	return block.color.theme === "dark" ? "text-white" : "text-black";
 });
 </script>
 
 <template>
 	<section
 		class="pt-4xl pb-5xl relative"
-		:class="!block.color?.hex ? bgColor : ''"
+		:class="(!block.color?.hex ? bgColor : '', textColor)"
 		:style="block.color?.hex ? bgColor : ''">
 		<NuxtImg
 			v-if="block.background?.url"

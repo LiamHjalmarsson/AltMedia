@@ -11,24 +11,12 @@ const props = defineProps<{
 const wrapperSize = computed(() => props.size ?? 48);
 
 const iconSize = computed(() => (props.size || 48) * 0.6);
-
-const variantClasses = computed(() => {
-	switch (props.variant) {
-		case "primary":
-			return "bg-primary/10 text-primary border-primary/20";
-		case "secondary":
-			return "bg-secondary/10 text-secondary border-secondary/20";
-		default:
-			return "bg-white/5 text-white border-white/10";
-	}
-});
 </script>
 
 <template>
 	<span
 		role="img"
-		class="shadow-primary/40 relative flex justify-center items-center rounded-full shadow-lg p-xs mb-md"
-		:class="[variantClasses]"
+		class="relative flex justify-center items-center"
 		:style="{ width: `${wrapperSize}px`, height: `${wrapperSize}px` }">
 		<NuxtImg
 			v-if="icon.is_image && icon.image?.url"
@@ -38,7 +26,7 @@ const variantClasses = computed(() => {
 			quality="85"
 			placeholder
 			loading="lazy"
-			class="object-contain" />
+			class="object-cover" />
 
 		<Icon v-else-if="icon.icon_name" :name="icon.icon_name" :size="iconSize" aria-hidden="true" />
 

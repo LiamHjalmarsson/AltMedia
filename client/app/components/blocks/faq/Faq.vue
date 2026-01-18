@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import type { FaqBlock } from "~/types/content/blocks";
 
 const { block } = defineProps<{ block: FaqBlock }>();

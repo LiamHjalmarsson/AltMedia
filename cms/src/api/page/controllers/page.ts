@@ -45,7 +45,7 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								link: {
-									fields: ["label", "url", "variant", "is_external"],
+									fields: ["label", "url", "variant", "is_external", "size"],
 								},
 								color: {
 									fields: ["type", "hex", "theme"],
@@ -53,7 +53,7 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 							},
 						},
 						"block.hero": {
-							fields: ["title", "description", "colored_words", "align_content", "badge"],
+							fields: ["title", "description", "colored_words", "align_content"],
 							populate: {
 								background: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
@@ -68,8 +68,8 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 						},
 						"block.info": {
 							populate: {
-								fields: ["id", "align_content", "content", "reverse"],
-								image: {
+								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
+								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								button: {
@@ -108,9 +108,6 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 										image: {
 											fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 										},
-										color: {
-											fields: ["type", "hex", "theme"],
-										},
 									},
 								},
 							},
@@ -119,7 +116,7 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 							populate: {
 								fields: ["id", "title", "subtitle", "description"],
 								subservices: {
-									fields: ["title", "content"],
+									fields: ["title", "content", "has_page"],
 									populate: {
 										tags: {
 											fields: ["title"],

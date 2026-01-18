@@ -43,7 +43,7 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 					fields: ["title", "slug"],
 				},
 				hero: {
-					fields: ["title", "description", "colored_words", "align_content", "badge"],
+					fields: ["title", "description", "colored_words", "align_content"],
 					populate: {
 						background: {
 							fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
@@ -76,8 +76,8 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 					on: {
 						"block.info": {
 							populate: {
-								fields: ["id", "align_content", "content", "reverse"],
-								image: {
+								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
+								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								button: {

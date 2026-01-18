@@ -8,6 +8,8 @@ const bgColor = computed(() => {
 		return "bg-bg-dark text-white";
 	}
 
+	console.log(block);
+
 	if (block.color.hex) {
 		return { backgroundColor: block.color.hex };
 	}
@@ -40,7 +42,7 @@ const textColor = computed(() => {
 		<div class="relative z-10 text-center mx-auto max-w-screen-md lg:max-w-screen-lg px-lg" :class="textColor">
 			<h2
 				v-if="block.title"
-				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold text-secondary mb-xl">
+				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-bold mb-xl">
 				{{ block.title }}
 			</h2>
 

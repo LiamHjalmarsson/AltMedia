@@ -1,32 +1,54 @@
 {
-	"collectionName": "components_block_infos",
-	"info": {
-		"displayName": "Info"
-	},
-	"options": {},
-	"attributes": {
-		"image": {
-			"type": "media",
-			"multiple": false,
-			"allowedTypes": ["images", "files", "videos", "audios"]
-		},
-		"align_content": {
-			"type": "enumeration",
-			"enum": ["left", "center", "right"]
-		},
-		"button": {
-			"type": "component",
-			"component": "ui.button",
-			"repeatable": false
-		},
-		"content": {
-			"type": "blocks"
-		},
-		"reverse": {
-			"type": "boolean",
-			"default": false
-		}
-	},
-	"config": {}
+  "collectionName": "components_block_infos",
+  "info": {
+    "displayName": "Info"
+  },
+  "options": {},
+  "attributes": {
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "align_content": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "center",
+        "right"
+      ]
+    },
+    "button": {
+      "type": "component",
+      "component": "ui.button",
+      "repeatable": false
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "reverse": {
+      "type": "boolean",
+      "default": false
+    },
+    "images_overlap": {
+      "type": "boolean",
+      "default": false
+    },
+    "image_fade": {
+      "type": "enumeration",
+      "enum": [
+        "top",
+        "bottom",
+        "right",
+        "left",
+        "all"
+      ]
+    }
+  },
+  "config": {}
 }
-

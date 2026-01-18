@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import type { ButtonType } from "~/types";
-
 const props = defineProps<{
 	label?: string;
 	icon?: string;
 	size?: number;
 	to?: string;
+	has_page?: boolean;
 }>();
 
 const visibleLabel = computed(() => props.label?.trim() || "Läs mer");

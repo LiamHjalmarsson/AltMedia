@@ -10,57 +10,26 @@ interface Item {
 const props = defineProps<Item>();
 
 const isEven = computed(() => (props.index + 1) % 2 === 0);
-
-const colorClass = computed(() => {
-	const color = props.item.color;
-
-	if (!color) {
-		return "";
-	}
-
-	if (color.hex) {
-		return {
-			color: color.hex,
-		};
-	}
-
-	switch (color.type) {
-		case "primary":
-			return { color: "var(--color-primary)" };
-		case "secondary":
-			return { color: "var(--color-secondary)" };
-		default:
-			return { color: "var(--color-primary)" };
-	}
-});
-
-const textThemeClass = computed(() => {
-	const color = props.item.color;
-
-	if (!color) {
-		return "";
-	}
-
-	return color.theme === "dark" ? "text-black" : "text-white";
-});
 </script>
 
 <template>
 	<li class="grid lg:grid-cols-3 lg:gap-4xl items-center group">
-		<ListItemImage
-			v-if="item.image"
-			:image="item.image"
-			:title="item.title"
-			:class="['hidden lg:block object-none scale-105', isEven ? 'order-2' : 'order-1']" />
+		<div :class="['hidden lg:block ', isEven ? 'order-2' : 'order-1']">
+			<ListItemImage
+				v-if="item.image"
+				:image="item.image"
+				:title="item.title"
+				enter-class="object-none scale-105" />
+		</div>
 
 		<div
 			class="relative flex flex-col justify-center h-full col-span-2"
-			:class="[isEven ? 'lg:order-1' : 'lg:order-2', textThemeClass]">
+			:class="[isEven ? 'lg:order-1' : 'lg:order-2']">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
 			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left">
 				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start space-x-lg mb-md">
-					<span v-if="showNumbers" class="text-heading-xs lg:text-heading-sm font-extrabold font-heading">
+					<span v-if="showNumbers" class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 

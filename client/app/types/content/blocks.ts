@@ -9,7 +9,6 @@ export interface ListItem {
 	title: string;
 	content: BlockNode[];
 	image: Image;
-	color?: Color;
 }
 
 export interface ListBlock {
@@ -26,11 +25,13 @@ export interface ListBlock {
 export interface InfoBlock {
 	__component: "block.info";
 	id: number;
-	image?: Image;
+	images?: Image;
 	align_content: AlignContent;
 	reverse: boolean;
 	content: BlockNode[];
 	button?: Button;
+	images_overlap?: boolean;
+	image_fade?: "top" | "bottom" | "right" | "left" | "all" | null;
 }
 
 export interface FullSectionBlock {
@@ -47,11 +48,12 @@ export interface Hero {
 	id: number;
 	title: string;
 	description?: string;
-	badge?: string;
 	colored_words?: Record<string, string>;
 	align_content: AlignContent;
 	background: Image;
+	cover: Image;
 	links?: Link[];
+	color?: Color;
 }
 
 export interface HeroBlock extends Hero {
@@ -69,7 +71,6 @@ export interface FaqBlock {
 	id: number;
 	heading: Heading;
 	items: FaqItem[];
-	image: Image;
 }
 
 export interface FeaturedBlock {

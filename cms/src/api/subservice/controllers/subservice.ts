@@ -10,7 +10,7 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 		const sanitizedQuery = await this.sanitizeQuery(ctx);
 
 		const results = await strapi.documents("api::subservice.subservice").findMany({
-			fields: ["id", "title", "slug", "content", "price_once", "price_month"],
+			fields: ["id", "title", "slug", "content", "price_once"],
 			populate: {
 				tags: { fields: ["id", "title"] },
 				service: { fields: ["id", "title", "slug"] },
@@ -30,7 +30,7 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 
 		const entity = await strapi.documents("api::subservice.subservice").findFirst({
 			filters: { slug },
-			fields: ["id", "title", "slug", "content", "price_once", "price_month"],
+			fields: ["id", "title", "slug", "content", "price_once"],
 			populate: {
 				tags: { fields: ["id", "title"] },
 				service: { fields: ["id", "title", "slug"] },
@@ -90,17 +90,14 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 										image: {
 											fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 										},
-										color: {
-											fields: ["type", "hex", "theme"],
-										},
 									},
 								},
 							},
 						},
 						"block.info": {
 							populate: {
-								fields: ["id", "align_content", "content", "reverse"],
-								image: {
+								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
+								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								button: {

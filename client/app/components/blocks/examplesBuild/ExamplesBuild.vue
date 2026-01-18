@@ -5,7 +5,7 @@ const { block } = defineProps<{ block: ExamplesBuildBlock }>();
 </script>
 
 <template>
-	<section class="relative pt-3xl lg:pt-5xl">
+	<section class="relative py-3xl lg:py-5xl h-screen flex justify-center items-center">
 		<div class="mx-auto max-w-[1300px] px-lg md:px-xl lg:px-3xl">
 			<Heading
 				:title="block.heading.title"

@@ -7,41 +7,48 @@ const props = withDefaults(defineProps<Heading>(), {
 	has_link: false,
 });
 
-const alignClass = computed(() => {
-	const align = props.align_content || "left";
-
-	switch (align) {
+const alignment = computed(() => {
+	switch (props.align_content) {
 		case "center":
-			return "text-center";
+			return {
+				wrapper: "text-center",
+				content: "items-center",
+			};
 		case "right":
-			return "text-right";
+			return {
+				wrapper: "text-right",
+				content: "items-end",
+			};
 		default:
-			return "text-left";
+			return {
+				wrapper: "text-left",
+				content: "items-start",
+			};
 	}
 });
 </script>
 
 <template>
-	<div :class="[alignClass, has_link ? 'flex justify-between items-center w-full space-x-lg' : '']">
-		<div class="flex-2 grow">
+	<div :class="[alignment.wrapper, has_link ? 'flex justify-between items-center w-full gap-lg' : '']">
+		<div class="flex-2 grow flex flex-col" :class="[alignment.content]">
 			<component
 				:is="props.tag"
 				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold">
 				{{ props.title }}
 			</component>
 
-			<p v-if="description" class="text-heading-md mt-lg tracking-tight">
-				{{ description }}
+			<p v-if="props.description" class="text-heading-md mt-lg font-medium leading-[1.25] max-w-[850px]">
+				{{ props.description }}
 			</p>
 		</div>
 
 		<ButtonLink
-			v-if="has_link && link?.url"
-			:url="link.url"
-			:label="link.label"
-			:variant="link.variant"
-			:size="link.size || 'md'"
-			:icon="link?.icon || 'material-symbols:arrow-forward'"
+			v-if="props.has_link && props.link?.url"
+			:url="props.link.url"
+			:label="props.link.label"
+			:variant="props.link.variant"
+			:size="props.link.size || 'md'"
+			:icon="props.link.icon || 'material-symbols:arrow-forward'"
 			class="max-lg:hidden w-fit shrink" />
 	</div>
 </template>

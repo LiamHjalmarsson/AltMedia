@@ -20,15 +20,15 @@ function toggle() {
 
 <template>
 	<li
-		class="px-md lg:px-lg py-xl lg:py-xl transition duration-300 border-b border-black/60 last:border-0"
+		class="px-md lg:px-xl py-xl lg:py-xl transition duration-300 border-b border-black/60 last:border-0"
 		@click="toggle">
 		<button
 			type="button"
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"
-			class="flex items-start justify-between w-full">
-			<div class="flex items-center space-x-xl">
+			class="flex items-center justify-between w-full">
+			<div class="flex items-center space-x-lg">
 				<span class="max-lg:hidden text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
 					{{ number }}
 				</span>
@@ -49,7 +49,7 @@ function toggle() {
 				v-show="isOpen"
 				:id="`faq-answer-${item.id}`"
 				:aria-labelledby="`faq-title-${item.id}`"
-				class="overflow-hidden mt-sm">
+				class="overflow-hidden mt-sm px-xl">
 				<StrapiBlocksText :nodes="item.answer" />
 			</div>
 		</Transition>

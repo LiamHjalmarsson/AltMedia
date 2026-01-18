@@ -19,6 +19,9 @@ export default factories.createCoreController("api::global-config.global-config"
 						logo: {
 							fields: ["url", "alternativeText"],
 						},
+						cta: {
+							fields: ["label", "url", "variant", "size"],
+						},
 					},
 				},
 				footer: {

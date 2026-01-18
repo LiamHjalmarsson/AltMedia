@@ -22,17 +22,11 @@ function formatColoredWords(content: Hero): string {
 	<div
 		class="flex flex-col space-y-lg lg:space-y-xl"
 		:class="hasForm ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
-		<span
-			v-if="content.badge"
-			class="inline-flex items-center border border-secondary/30 bg-secondary/20 px-md py-sm text-xs font-semibold uppercase tracking-widest text-secondary w-fit">
-			{{ content.badge }}
-		</span>
-
 		<h1
-			class="text-heading-2xl md:text-heading-3xl xl:text-heading-4xl font-extrabold tracking-tighter"
+			class="text-heading-4xl md:text-heading-5xl xl:text-heading-6xl font-extrabold"
 			v-html="formatColoredWords(content)" />
 
-		<p v-if="content.description" class="text-lg md:text-xl lg:text-heading-md text-white tracking-tighter">
+		<p v-if="content.description" class="text-lg md:text-xl lg:text-heading-md max-w-[1050px]">
 			{{ content.description }}
 		</p>
 

@@ -21,7 +21,7 @@ const { data: page, error } = await useAsyncData(
 			});
 		}
 	},
-	{ server: true, lazy: false, watch: [slug] }
+	{ server: true, lazy: false, watch: [slug] },
 );
 
 if (error.value) {
@@ -35,7 +35,7 @@ useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>
-	<section v-if="page">
+	<section v-if="page" class="pt-5xl">
 		<BlockRenderer v-if="page.blocks?.length" :blocks="page.blocks" />
 	</section>
 </template>

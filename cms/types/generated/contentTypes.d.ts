@@ -686,6 +686,7 @@ export interface ApiHomePageHomePage extends Struct.SingleTypeSchema {
         'block.faq',
         'block.featured',
         'block.examples-build',
+        'block.cta',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -948,6 +949,7 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    has_page: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hero: Schema.Attribute.Component<'block.hero', false>;
     introduction: Schema.Attribute.Component<'sections.introduction', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -956,7 +958,6 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
       'api::subservice.subservice'
     > &
       Schema.Attribute.Private;
-    price_month: Schema.Attribute.Integer;
     price_once: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     service: Schema.Attribute.Relation<'oneToOne', 'api::service.service'>;

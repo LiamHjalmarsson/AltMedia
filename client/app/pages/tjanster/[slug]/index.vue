@@ -29,7 +29,7 @@ await useAsyncData(
 						:alt="currentService.image.alternativeText || currentService.title"
 						format="webp,avif"
 						quality="85"
-						class="w-full h-full object-cover"
+						class="w-full h-full object-cover rounded-2xl shadow-2xl"
 						loading="lazy" />
 				</figure>
 

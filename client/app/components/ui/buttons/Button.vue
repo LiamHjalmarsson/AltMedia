@@ -26,9 +26,9 @@ const sizeClass: Record<Button["size"], string> = {
 	<button
 		ref="button"
 		v-bind="$attrs"
-		class="relative flex items-center justify-center font-bold px-xl cursor-pointer min-h-[44px] min-w-[44px] rounded-full focus-visible:outline-primary transition"
+		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition"
 		:class="[sizeClass[size]]">
-		<span class="relative flex items-center z-10 px-sm">
+		<span class="relative flex items-center z-10 px-lg">
 			<Icon
 				v-if="icon"
 				:name="icon"
@@ -39,13 +39,8 @@ const sizeClass: Record<Button["size"], string> = {
 
 		<span
 			ref="backgroundColor"
-			class="absolute top-0 h-11 w-11 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
-			:class="variantClass[variant]"
-			:style="{
-				left: reversed ? 'calc(100% - 44px)' : '0',
-				right: 'auto',
-			}" />
-
+			class="absolute top-0 left-0 h-16 w-16 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
+			:class="variantClass[variant]" />
 		<span class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden" :class="variantClass[variant]" />
 	</button>
 </template>

@@ -64,7 +64,17 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 				blocks: {
 					on: {
 						"block.list": { populate: "*" },
-						"block.info": { populate: "*" },
+						"block.info": {
+							populate: {
+								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
+								images: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
+								},
+								button: {
+									fields: ["label", "variant", "type", "icon", "size", "reversed"],
+								},
+							},
+						},
 						"block.full-section": { populate: "*" },
 					},
 				},

@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
 <template>
 	<footer class="bg-black text-white py-5xl">
 		<div class="max-w-[1300px] mx-auto px-xl">
-			<div class="space-y-2xl lg:space-y-4xl">
+			<div class="space-y-2xl lg:space-y-3xl">
 				<div class="space-y-md flex flex-col items-center justify-center text-center">
 					<NuxtImg
 						v-if="footer?.logo.url"
@@ -22,14 +22,14 @@ const year = new Date().getFullYear();
 						quality="85"
 						class="object-contain" />
 
-					<p v-if="footer?.description" class="text-white/80 text-xl max-w-[950px]">
+					<p v-if="footer?.description" class="text-white/90 text-heading-xs max-w-[950px] mt-xl">
 						{{ footer?.description }}
 					</p>
 
-					<SocialLinks :social-medias="contact?.social_medias || []" class="mx-auto w-fit mt-lg" />
+					<SocialLinks :social-medias="contact?.social_medias || []" class="mx-auto w-fit mt-md" />
 				</div>
 
-				<div class="flex flex-col md:grid md:grid-cols-4 gap-3xl mb-2xl lg:mb-4xl">
+				<div class="flex flex-col md:flex-row justify-between gap-3xl mb-2xl lg:mb-4xl">
 					<FooterColumn
 						v-for="column in footer?.footer_columns"
 						:key="column.title"

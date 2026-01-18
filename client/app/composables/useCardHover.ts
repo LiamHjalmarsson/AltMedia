@@ -17,13 +17,13 @@ export function useCardHover() {
 		if (prefersReducedMotion()) {
 			element.style.opacity = "1";
 
-			element.style.transform = "scale(1.3)";
+			element.style.transform = "scale(1.1)";
 
 			return;
 		}
 
 		gsap.to(element, {
-			scale: 90,
+			scale: 95,
 			opacity: 1,
 			duration: 0.4,
 			// transformOrigin: "center",
@@ -41,13 +41,13 @@ export function useCardHover() {
 		if (prefersReducedMotion()) {
 			element.style.opacity = "0.3";
 
-			element.style.transform = "scale(1.3)";
+			element.style.transform = "scale(1.1)";
 
 			return;
 		}
 
 		gsap.to(element, {
-			scale: 1.3,
+			scale: 0,
 			opacity: 0.3,
 			duration: 0.4,
 			// transformOrigin: "center",
