@@ -19,15 +19,29 @@
     "description": {
       "type": "text"
     },
-    "cta": {
-      "type": "component",
-      "component": "block.cta",
-      "repeatable": false
-    },
     "footer_columns": {
       "type": "component",
       "component": "global.footer-column",
       "repeatable": true
+    },
+    "cta": {
+      "type": "component",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": "has_cta"
+            },
+            true
+          ]
+        }
+      },
+      "component": "block.cta",
+      "repeatable": false
+    },
+    "has_cta": {
+      "type": "boolean",
+      "default": false
     }
   },
   "config": {}

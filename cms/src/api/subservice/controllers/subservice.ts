@@ -40,14 +40,14 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 						background: {
 							fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
 						},
-					},
-					color: {
-						fields: ["type", "hex", "theme"],
+						color: {
+							fields: ["type", "hex", "theme"],
+						},
 					},
 				},
 				introduction: {
+					fields: ["id", "title", "subtitle", "description"],
 					populate: {
-						fields: ["id", "title", "subtitle", "description"],
 						subservices: {
 							fields: ["title", "slug"],
 							populate: {
@@ -60,8 +60,8 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 				blocks: {
 					on: {
 						"block.list": {
+							fields: ["id", "show_numbers", "layout"],
 							populate: {
-								fields: ["id", "show_numbers", "layout"],
 								heading: {
 									fields: ["title", "align_content", "has_link", "description"],
 									populate: {
@@ -95,8 +95,8 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 							},
 						},
 						"block.info": {
+							fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 							populate: {
-								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -106,8 +106,8 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 							},
 						},
 						"block.full-section": {
+							fields: ["id", "title", "content"],
 							populate: {
-								fields: ["id", "title", "content"],
 								cover: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -133,4 +133,3 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

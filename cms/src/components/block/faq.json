@@ -13,7 +13,9 @@
     "items": {
       "type": "component",
       "component": "block-items.faq-item",
-      "repeatable": true
+      "repeatable": true,
+      "required": true,
+      "min": 3
     }
   },
   "config": {}

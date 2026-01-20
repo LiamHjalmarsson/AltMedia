@@ -65,8 +65,8 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 					on: {
 						"block.list": { populate: "*" },
 						"block.info": {
+							fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 							populate: {
-								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -89,11 +89,12 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 			},
 		});
 
-		if (!entity) return ctx.notFound("Artikeln kunde inte hittas");
+		if (!entity) {
+			return ctx.notFound("Artikeln kunde inte hittas");
+		}
 
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
 
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

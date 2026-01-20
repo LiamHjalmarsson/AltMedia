@@ -4,7 +4,14 @@ export default factories.createCoreController("api::services-page.services-page"
 	async find(ctx) {
 		const entity = await strapi.documents("api::services-page.services-page").findFirst({
 			fields: ["id", "title", "description", "align_content"],
-			populate: ["seo"],
+			populate: {
+				seo: {
+					fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],
+					populate: {
+						meta_image: { fields: ["alternativeText", "width", "url", "provider"] },
+					},
+				},
+			},
 		});
 
 		if (!entity) {
@@ -16,4 +23,3 @@ export default factories.createCoreController("api::services-page.services-page"
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

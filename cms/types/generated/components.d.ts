@@ -1,22 +1,5 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
-export interface BlockItemsBuildItem extends Struct.ComponentSchema {
-  collectionName: 'components_block_items_build_items';
-  info: {
-    displayName: 'Build Item';
-    icon: 'apps';
-  };
-  attributes: {
-    description: Schema.Attribute.Text;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    subservices: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::subservice.subservice'
-    >;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface BlockItemsFaqItem extends Struct.ComponentSchema {
   collectionName: 'components_block_items_faq_items';
   info: {
@@ -24,7 +7,11 @@ export interface BlockItemsFaqItem extends Struct.ComponentSchema {
   };
   attributes: {
     answer: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    question: Schema.Attribute.String & Schema.Attribute.Required;
+    question: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 3;
+      }>;
   };
 }
 
@@ -35,9 +22,13 @@ export interface BlockItemsListItem extends Struct.ComponentSchema {
     icon: 'bulletList';
   };
   attributes: {
-    content: Schema.Attribute.Blocks;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        minLength: 1;
+      }>;
   };
 }
 
@@ -58,19 +49,6 @@ export interface BlockCta extends Struct.ComponentSchema {
   };
 }
 
-export interface BlockExamplesBuild extends Struct.ComponentSchema {
-  collectionName: 'components_block_examples_builds';
-  info: {
-    displayName: 'Examples Build';
-    icon: 'bulletList';
-  };
-  attributes: {
-    button: Schema.Attribute.Component<'ui.link', false>;
-    heading: Schema.Attribute.Component<'ui.heading', false>;
-    items: Schema.Attribute.Component<'block-items.build-item', true>;
-  };
-}
-
 export interface BlockFaq extends Struct.ComponentSchema {
   collectionName: 'components_block_faqs';
   info: {
@@ -78,7 +56,14 @@ export interface BlockFaq extends Struct.ComponentSchema {
   };
   attributes: {
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    items: Schema.Attribute.Component<'block-items.faq-item', true>;
+    items: Schema.Attribute.Component<'block-items.faq-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 3;
+        },
+        number
+      >;
   };
 }
 
@@ -92,7 +77,8 @@ export interface BlockFeatured extends Struct.ComponentSchema {
     features: Schema.Attribute.Enumeration<
       ['tj\u00E4nster', 'projekt', 'artiklar']
     > &
-      Schema.Attribute.Required;
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'tj\u00E4nster'>;
     heading: Schema.Attribute.Component<'ui.heading', false>;
     projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
@@ -119,14 +105,21 @@ export interface BlockHero extends Struct.ComponentSchema {
     displayName: 'Hero';
   };
   attributes: {
-    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']> &
+      Schema.Attribute.DefaultTo<'left'>;
     background: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
     color: Schema.Attribute.Component<'styles.color', false>;
     colored_words: Schema.Attribute.JSON;
     description: Schema.Attribute.Text;
-    links: Schema.Attribute.Component<'ui.link', true>;
+    links: Schema.Attribute.Component<'ui.link', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 2;
+        },
+        number
+      >;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
@@ -137,12 +130,16 @@ export interface BlockInfo extends Struct.ComponentSchema {
     displayName: 'Info';
   };
   attributes: {
-    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']>;
+    align_content: Schema.Attribute.Enumeration<['left', 'center', 'right']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'left'>;
     button: Schema.Attribute.Component<'ui.button', false>;
     content: Schema.Attribute.Blocks;
     image_fade: Schema.Attribute.Enumeration<
-      ['top', 'bottom', 'right', 'left', 'all']
-    >;
+      ['top', 'bottom', 'right', 'left', 'all', 'none']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'none'>;
     images: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -164,7 +161,14 @@ export interface BlockList extends Struct.ComponentSchema {
     >;
     color: Schema.Attribute.Component<'styles.color', false>;
     heading: Schema.Attribute.Component<'ui.heading', false>;
-    items: Schema.Attribute.Component<'block-items.list-item', true>;
+    items: Schema.Attribute.Component<'block-items.list-item', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     layout: Schema.Attribute.Enumeration<['alternating', 'grid']> &
       Schema.Attribute.DefaultTo<'alternating'>;
     show_numbers: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
@@ -177,10 +181,26 @@ export interface FormForm extends Struct.ComponentSchema {
     displayName: 'Form';
   };
   attributes: {
-    button: Schema.Attribute.Component<'ui.button', false>;
-    columns: Schema.Attribute.Integer;
+    button: Schema.Attribute.Component<'ui.button', false> &
+      Schema.Attribute.Required;
+    columns: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+          min: 1;
+        },
+        number
+      > &
+      Schema.Attribute.DefaultTo<1>;
     description: Schema.Attribute.Text;
-    inputs: Schema.Attribute.Component<'form.input', true>;
+    inputs: Schema.Attribute.Component<'form.input', true> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     title: Schema.Attribute.String;
   };
 }
@@ -201,10 +221,18 @@ export interface FormInput extends Struct.ComponentSchema {
     options: Schema.Attribute.JSON;
     placeholder: Schema.Attribute.String;
     required: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
-    rows: Schema.Attribute.Integer;
+    rows: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 1;
+        },
+        number
+      >;
     select_multiple: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
-    type: Schema.Attribute.Enumeration<['input', 'textarea', 'select']>;
+    type: Schema.Attribute.Enumeration<['input', 'textarea', 'select']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'input'>;
   };
 }
 
@@ -229,6 +257,7 @@ export interface GlobalFooter extends Struct.ComponentSchema {
     cta: Schema.Attribute.Component<'block.cta', false>;
     description: Schema.Attribute.Text;
     footer_columns: Schema.Attribute.Component<'global.footer-column', true>;
+    has_cta: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     logo: Schema.Attribute.Media<'images' | 'files'>;
     title: Schema.Attribute.String;
   };
@@ -241,8 +270,8 @@ export interface GlobalFooterColumn extends Struct.ComponentSchema {
   };
   attributes: {
     links: Schema.Attribute.Component<'global.menu-link', true>;
-    title: Schema.Attribute.String;
-    url: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
@@ -263,9 +292,14 @@ export interface GlobalNavigation extends Struct.ComponentSchema {
     displayName: 'Navigation';
   };
   attributes: {
-    aria_label: Schema.Attribute.String;
     cta: Schema.Attribute.Component<'ui.link', false>;
-    links: Schema.Attribute.Component<'global.menu-link', true>;
+    links: Schema.Attribute.Component<'global.menu-link', true> &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
     logo: Schema.Attribute.Media<'images' | 'files'>;
   };
 }
@@ -297,6 +331,7 @@ export interface ProjectBuildConditional extends Struct.ComponentSchema {
     placeholder: Schema.Attribute.String;
     trigger_value: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<['input', 'textarea', 'number', 'url']> &
+      Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'input'>;
   };
 }
@@ -334,7 +369,9 @@ export interface ProjectBuildQuestion extends Struct.ComponentSchema {
       }>;
     type: Schema.Attribute.Enumeration<
       ['boolean', 'single', 'textarea', 'input']
-    >;
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'input'>;
   };
 }
 
@@ -347,7 +384,14 @@ export interface ProjectBuildStep extends Struct.ComponentSchema {
     clickable_relations: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     description: Schema.Attribute.Text;
-    order: Schema.Attribute.Integer;
+    order: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
     questions: Schema.Attribute.Component<'project-build.question', true>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     subservices: Schema.Attribute.Relation<
@@ -377,9 +421,8 @@ export interface SectionsIntroduction extends Struct.ComponentSchema {
       'oneToMany',
       'api::subservice.subservice'
     >;
-    subtitle: Schema.Attribute.String &
-      Schema.Attribute.DefaultTo<'Vad vi gjort'>;
-    title: Schema.Attribute.String & Schema.Attribute.DefaultTo<'Om '>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -403,11 +446,14 @@ export interface StylesColor extends Struct.ComponentSchema {
     displayName: 'Color';
   };
   attributes: {
-    hex: Schema.Attribute.String;
+    hex: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 7;
+      }>;
     theme: Schema.Attribute.Enumeration<['light', 'dark', 'gradient']> &
       Schema.Attribute.DefaultTo<'dark'>;
     type: Schema.Attribute.Enumeration<
-      ['primary', 'secondary', 'tertiary', 'ghost', 'outline', 'white', 'black']
+      ['primary', 'secondary', 'tertiary', 'white', 'black']
     > &
       Schema.Attribute.DefaultTo<'primary'>;
   };
@@ -433,18 +479,6 @@ export interface UiButton extends Struct.ComponentSchema {
   };
 }
 
-export interface UiCard extends Struct.ComponentSchema {
-  collectionName: 'components_ui_cards';
-  info: {
-    displayName: 'Card';
-  };
-  attributes: {
-    content: Schema.Attribute.Blocks;
-    icon: Schema.Attribute.Component<'ui.icon', false>;
-    title: Schema.Attribute.String;
-  };
-}
-
 export interface UiHeading extends Struct.ComponentSchema {
   collectionName: 'components_ui_headings';
   info: {
@@ -467,7 +501,7 @@ export interface UiIcon extends Struct.ComponentSchema {
   };
   attributes: {
     icon_name: Schema.Attribute.String;
-    image: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+    image: Schema.Attribute.Media<'images' | 'files'>;
     is_image: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
   };
 }
@@ -495,11 +529,9 @@ export interface UiLink extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
-      'block-items.build-item': BlockItemsBuildItem;
       'block-items.faq-item': BlockItemsFaqItem;
       'block-items.list-item': BlockItemsListItem;
       'block.cta': BlockCta;
-      'block.examples-build': BlockExamplesBuild;
       'block.faq': BlockFaq;
       'block.featured': BlockFeatured;
       'block.full-section': BlockFullSection;
@@ -522,7 +554,6 @@ declare module '@strapi/strapi' {
       'seo.seo': SeoSeo;
       'styles.color': StylesColor;
       'ui.button': UiButton;
-      'ui.card': UiCard;
       'ui.heading': UiHeading;
       'ui.icon': UiIcon;
       'ui.link': UiLink;

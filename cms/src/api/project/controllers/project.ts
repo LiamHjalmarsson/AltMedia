@@ -75,8 +75,8 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 				blocks: {
 					on: {
 						"block.info": {
+							fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 							populate: {
-								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
 								images: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -86,8 +86,8 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 							},
 						},
 						"block.full-section": {
+							fields: ["id", "title", "content"],
 							populate: {
-								fields: ["id", "title", "content"],
 								cover: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -121,4 +121,3 @@ export default factories.createCoreController("api::project.project", ({ strapi 
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

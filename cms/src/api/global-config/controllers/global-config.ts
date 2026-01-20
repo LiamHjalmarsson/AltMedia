@@ -25,7 +25,7 @@ export default factories.createCoreController("api::global-config.global-config"
 					},
 				},
 				footer: {
-					fields: ["description", "title"],
+					fields: ["description", "title", "has_cta"],
 					populate: {
 						logo: {
 							fields: ["alternativeText", "formats", "height", "width", "name", "url", "provider"],
@@ -89,7 +89,7 @@ export default factories.createCoreController("api::global-config.global-config"
 		}
 
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

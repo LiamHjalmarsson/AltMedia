@@ -10,11 +10,6 @@
       "component": "ui.heading",
       "repeatable": false
     },
-    "items": {
-      "type": "component",
-      "component": "block-items.list-item",
-      "repeatable": true
-    },
     "show_numbers": {
       "type": "boolean",
       "default": true
@@ -41,6 +36,13 @@
       "type": "component",
       "component": "styles.color",
       "repeatable": false
+    },
+    "items": {
+      "type": "component",
+      "component": "block-items.list-item",
+      "repeatable": true,
+      "required": true,
+      "min": 1
     }
   },
   "config": {}

@@ -13,6 +13,7 @@
     "features": {
       "type": "enumeration",
       "required": true,
+      "default": "tjänster",
       "enum": [
         "tjänster",
         "projekt",

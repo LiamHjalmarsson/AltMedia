@@ -27,16 +27,8 @@
     },
     "align_content": {
       "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "has_form"
-            },
-            false
-          ]
-        }
-      },
+      "required": false,
+      "default": "left",
       "enum": [
         "left",
         "center",
@@ -46,7 +38,8 @@
     "links": {
       "type": "component",
       "component": "ui.link",
-      "repeatable": true
+      "repeatable": true,
+      "max": 2
     },
     "color": {
       "type": "component",

@@ -20,10 +20,11 @@
       "targetField": "title",
       "required": true
     },
-    "service": {
+    "services": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::service.service"
+      "relation": "oneToMany",
+      "target": "api::service.service",
+      "mappedBy": "under_tjaenster"
     },
     "tags": {
       "type": "relation",

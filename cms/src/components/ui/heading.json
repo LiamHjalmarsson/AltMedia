@@ -1,56 +1,52 @@
 {
-  "collectionName": "components_ui_headings",
-  "info": {
-    "displayName": "Heading"
-  },
-  "options": {},
-  "attributes": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "description": {
-      "type": "text"
-    },
-    "align_content": {
-      "type": "enumeration",
-      "default": "left",
-      "enum": [
-        "left",
-        "right",
-        "center"
-      ]
-    },
-    "has_link": {
-      "type": "boolean",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "align_content"
-            },
-            "left"
-          ]
-        }
-      },
-      "default": false
-    },
-    "link": {
-      "type": "component",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": "has_link"
-            },
-            true
-          ]
-        }
-      },
-      "component": "ui.link",
-      "repeatable": false,
-      "required": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_ui_headings",
+	"info": {
+		"displayName": "Heading"
+	},
+	"options": {},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"required": true
+		},
+		"description": {
+			"type": "text"
+		},
+		"align_content": {
+			"type": "enumeration",
+			"default": "left",
+			"enum": ["left", "right", "center"]
+		},
+		"has_link": {
+			"type": "boolean",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "align_content"
+						},
+						"left"
+					]
+				}
+			},
+			"default": false
+		},
+		"link": {
+			"type": "component",
+			"conditions": {
+				"visible": {
+					"==": [
+						{
+							"var": "has_link"
+						},
+						true
+					]
+				}
+			},
+			"component": "ui.link",
+			"repeatable": false,
+			"required": false
+		}
+	},
+	"config": {}
 }

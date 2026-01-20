@@ -42,6 +42,7 @@ export interface Footer {
 	logo: Image;
 	title: string;
 	description: string;
+	has_cta: boolean;
 	cta?: Cta;
 	footer_columns?: FooterColumn[];
 }
@@ -50,7 +51,6 @@ export interface MenuLink {
 	id: number;
 	label: string;
 	url: string;
-	aria_label?: string;
 }
 
 export interface ContactDetails {

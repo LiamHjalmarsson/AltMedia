@@ -62,7 +62,7 @@ export interface Heading {
 	description?: string;
 	align_content: AlignContent;
 	has_link?: boolean;
-	link?: Link | null;
+	link?: Link;
 	tag?: Htag;
 }
 

@@ -46,8 +46,8 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 				blocks: {
 					on: {
 						"block.featured": {
+							fields: ["id", "features"],
 							populate: {
-								fields: ["id", "features"],
 								heading: {
 									fields: ["title", "align_content", "has_link", "description"],
 									populate: {
@@ -104,8 +104,8 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 							},
 						},
 						"block.list": {
+							fields: ["id", "show_numbers", "layout"],
 							populate: {
-								fields: ["id", "show_numbers", "layout"],
 								heading: {
 									fields: ["title", "align_content", "has_link", "description"],
 									populate: {
@@ -138,44 +138,9 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 								},
 							},
 						},
-						"block.examples-build": {
-							populate: {
-								fields: ["id"],
-								heading: {
-									fields: ["title", "align_content", "has_link", "description"],
-								},
-								button: {
-									fields: ["label", "url", "variant", "is_external", "icon", "size", "reversed"],
-								},
-								items: {
-									fields: ["title", "description"],
-									populate: {
-										icon: {
-											fields: ["icon_name", "is_image"],
-											populate: {
-												image: {
-													fields: [
-														"formats",
-														"name",
-														"width",
-														"height",
-														"url",
-														"provider",
-														"mime",
-													],
-												},
-											},
-										},
-										subservices: {
-											fields: ["title"],
-										},
-									},
-								},
-							},
-						},
 						"block.full-section": {
+							fields: ["id", "title", "content"],
 							populate: {
-								fields: ["id", "title", "content"],
 								cover: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
@@ -188,8 +153,8 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 							},
 						},
 						"block.faq": {
+							fields: ["id"],
 							populate: {
-								fields: ["id"],
 								heading: {
 									fields: ["title", "align_content", "has_link", "description"],
 								},
@@ -199,8 +164,8 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 							},
 						},
 						"block.cta": {
+							fields: ["id", "title", "subtitle", "description"],
 							populate: {
-								fields: ["id", "title", "subtitle", "description"],
 								buttons: {
 									fields: ["label", "variant", "type", "icon", "size"],
 								},
@@ -232,4 +197,3 @@ export default factories.createCoreController("api::home-page.home-page", ({ str
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

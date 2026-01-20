@@ -24,7 +24,7 @@ export default factories.createCoreController("api::projects-page.projects-page"
 		}
 
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

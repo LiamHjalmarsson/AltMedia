@@ -1,51 +1,36 @@
 {
-  "collectionName": "components_ui_buttons",
-  "info": {
-    "displayName": "Button"
-  },
-  "options": {},
-  "attributes": {
-    "label": {
-      "type": "string",
-      "required": true
-    },
-    "variant": {
-      "type": "enumeration",
-      "default": "primary",
-      "enum": [
-        "primary",
-        "secondary",
-        "outline",
-        "ghost"
-      ]
-    },
-    "type": {
-      "type": "enumeration",
-      "default": "button",
-      "enum": [
-        "button",
-        "submit",
-        "reset"
-      ]
-    },
-    "size": {
-      "type": "enumeration",
-      "default": "lg",
-      "enum": [
-        "xs",
-        "sm",
-        "md",
-        "lg",
-        "xl"
-      ]
-    },
-    "icon": {
-      "type": "string"
-    },
-    "reversed": {
-      "type": "boolean",
-      "default": false
-    }
-  },
-  "config": {}
+	"collectionName": "components_ui_buttons",
+	"info": {
+		"displayName": "Button"
+	},
+	"options": {},
+	"attributes": {
+		"label": {
+			"type": "string",
+			"required": true
+		},
+		"variant": {
+			"type": "enumeration",
+			"default": "primary",
+			"enum": ["primary", "secondary", "outline", "ghost"]
+		},
+		"type": {
+			"type": "enumeration",
+			"default": "button",
+			"enum": ["button", "submit", "reset"]
+		},
+		"size": {
+			"type": "enumeration",
+			"default": "lg",
+			"enum": ["xs", "sm", "md", "lg", "xl"]
+		},
+		"icon": {
+			"type": "string"
+		},
+		"reversed": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"config": {}
 }

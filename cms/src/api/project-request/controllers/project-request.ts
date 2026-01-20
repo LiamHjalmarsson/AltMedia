@@ -5,14 +5,21 @@ import { factories } from "@strapi/strapi";
 
 export default factories.createCoreController("api::project-request.project-request", ({ strapi }) => ({
 	async create(ctx) {
-		const { name, email, phone, data } = ctx.request.body?.data || {};
+		const body = ctx.request.body?.data ?? {};
+
+		const name = typeof body.name === "string" ? body.name.trim() : "";
+
+		const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+
+		const phoneRaw = typeof body.phone === "string" ? body.phone.trim() : "";
+
+		const phone = phoneRaw.length ? phoneRaw : null;
+
+		const data = body.data ?? null;
 
 		if (!name || !email) {
 			return ctx.badRequest("Missing required fields: name and email", {
-				missing: {
-					name: !name,
-					email: !email,
-				},
+				missing: { name: !name, email: !email },
 			});
 		}
 
@@ -26,20 +33,34 @@ export default factories.createCoreController("api::project-request.project-requ
 			},
 		});
 
-		try {
-			await fetch(`${strapi.config.get("server.url") || "http://localhost:1337"}/api/discord`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Authorization: `Bearer ${process.env.WEBHOOK_SECRET}`,
-				},
-				body: JSON.stringify({
-					model: "project-request",
-					entry: { name, email, phone, data: data, documentId: entity.documentId },
-				}),
-			});
-		} catch (err) {
-			strapi.log.error("Failed to send Discord notification:", err);
+		const webhookSecret = process.env.WEBHOOK_SECRET;
+
+		if (!webhookSecret) {
+			strapi.log.warn("WEBHOOK_SECRET is not set; skipping Discord notification.");
+		} else {
+			try {
+				const baseUrl = strapi.config.get("server.url") || "http://localhost:1337";
+
+				const res = await fetch(`${baseUrl}/api/discord`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${webhookSecret}`,
+					},
+					body: JSON.stringify({
+						model: "project-request",
+						entry: { name, email, phone, data, documentId: entity.documentId },
+					}),
+				});
+
+				if (!res.ok) {
+					const text = await res.text().catch(() => "");
+
+					strapi.log.error(`Discord notify failed: ${res.status} ${res.statusText} ${text}`);
+				}
+			} catch (err) {
+				strapi.log.error("Failed to send Discord notification:", err);
+			}
 		}
 
 		const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
@@ -47,4 +68,3 @@ export default factories.createCoreController("api::project-request.project-requ
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

@@ -16,7 +16,8 @@
       "default": false
     },
     "message": {
-      "type": "text"
+      "type": "text",
+      "maxLength": 1000
     },
     "steps": {
       "type": "component",

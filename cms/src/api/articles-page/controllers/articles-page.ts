@@ -29,4 +29,3 @@ export default factories.createCoreController("api::articles-page.articles-page"
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

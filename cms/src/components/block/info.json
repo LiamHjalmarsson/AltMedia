@@ -17,6 +17,8 @@
     },
     "align_content": {
       "type": "enumeration",
+      "required": true,
+      "default": "left",
       "enum": [
         "left",
         "center",
@@ -41,12 +43,15 @@
     },
     "image_fade": {
       "type": "enumeration",
+      "required": true,
+      "default": "none",
       "enum": [
         "top",
         "bottom",
         "right",
         "left",
-        "all"
+        "all",
+        "none"
       ]
     }
   },

@@ -12,8 +12,6 @@
         "primary",
         "secondary",
         "tertiary",
-        "ghost",
-        "outline",
         "white",
         "black"
       ]
@@ -28,7 +26,9 @@
       ]
     },
     "hex": {
-      "type": "string"
+      "type": "string",
+      "maxLength": 7,
+      "regex": "^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$"
     }
   },
   "config": {}

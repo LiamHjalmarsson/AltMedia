@@ -7,6 +7,7 @@
   "attributes": {
     "question": {
       "type": "string",
+      "minLength": 3,
       "required": true
     },
     "answer": {

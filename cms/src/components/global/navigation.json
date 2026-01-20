@@ -16,10 +16,8 @@
     "links": {
       "type": "component",
       "component": "global.menu-link",
-      "repeatable": true
-    },
-    "aria_label": {
-      "type": "string"
+      "repeatable": true,
+      "min": 1
     },
     "cta": {
       "type": "component",

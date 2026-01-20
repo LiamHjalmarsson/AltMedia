@@ -25,6 +25,8 @@
     },
     "type": {
       "type": "enumeration",
+      "required": true,
+      "default": "input",
       "enum": [
         "boolean",
         "single",
