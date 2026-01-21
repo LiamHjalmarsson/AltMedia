@@ -903,6 +903,10 @@ export interface ApiServiceService extends Struct.CollectionTypeSchema {
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    under_tjaenster: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::subservice.subservice'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -962,6 +966,7 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     has_page: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hero: Schema.Attribute.Component<'block.hero', false>;
+    icon: Schema.Attribute.Component<'ui.icon', false>;
     introduction: Schema.Attribute.Component<'sections.introduction', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -971,6 +976,7 @@ export interface ApiSubserviceSubservice extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     price_once: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'seo.seo', false>;
     services: Schema.Attribute.Relation<'oneToMany', 'api::service.service'>;
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     tags: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;

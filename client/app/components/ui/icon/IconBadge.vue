@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Variant } from "~/types/enums";
-import type { Icon } from "~/types/shared";
+import type { Variant } from "~/types";
+import type { Icon } from "~/types";
 
 const props = defineProps<{
 	icon: Icon;

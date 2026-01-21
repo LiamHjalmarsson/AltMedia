@@ -7,7 +7,7 @@ const cta = computed(() => footer.value?.cta);
 </script>
 
 <template>
-	<section v-if="cta" aria-labelledby="cta-title" class="relative overflow-hidden text-white">
+	<section v-if="cta && footer?.has_cta" aria-labelledby="cta-title" class="relative overflow-hidden text-white">
 		<div class="relative px-lg py-3xl lg:p-3xl">
 			<template v-if="cta.cover?.url">
 				<video

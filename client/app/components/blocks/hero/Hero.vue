@@ -18,12 +18,33 @@ const alignClass = computed(() => {
 	}
 });
 
-const colorTheme = computed(() => {
-	// IMPORTANT: default should match HeroBackground (light)
-	if (!block.color) return "bg-white text-dark";
+const bgColor = computed(() => {
+	if (!block.color) {
+		return "bg-bg-dark";
+	}
 
-	if (block.color.theme === "light") return "bg-white text-dark";
-	if (block.color.theme === "dark") return "bg-dark text-white";
+	console.log(block.color);
+
+	if (block.color.hex) {
+		return { backgroundColor: block.color.hex };
+	}
+
+	switch (block.color.type) {
+		case "primary":
+			return "bg-primary";
+		case "secondary":
+			return "bg-secondary";
+		default:
+			return "bg-bg-dark";
+	}
+});
+
+const colorTheme = computed(() => {
+	if (!block.color) return "text-dark";
+
+	if (block.color.theme === "light") return "text-dark";
+
+	if (block.color.theme === "dark") return "text-white";
 
 	if (block.color.hex) {
 		return { backgroundColor: block.color.hex };
@@ -37,8 +58,10 @@ const colorTheme = computed(() => {
 		:class="[colorTheme]"
 		:style="block.color?.hex ? colorTheme : ''"
 		:data-header-theme="!block.background ? 'light' : undefined">
-		<HeroBackground v-if="!block.background" />
-		<CoverBackground v-else :media="block.background" class="opacity-60" />
+		<div :class="!block.color?.hex ? bgColor : ''" :style="block.color?.hex ? bgColor : ''">
+			<HeroBackground v-if="!block.background" />
+			<CoverBackground v-else :media="block.background" />
+		</div>
 
 		<div class="pt-xl relative z-10">
 			<div class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl lg:max-w-[1600px]">

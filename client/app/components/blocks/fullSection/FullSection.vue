@@ -8,8 +8,6 @@ const bgColor = computed(() => {
 		return "bg-bg-dark text-white";
 	}
 
-	console.log(block);
-
 	if (block.color.hex) {
 		return { backgroundColor: block.color.hex };
 	}
@@ -46,7 +44,9 @@ const textColor = computed(() => {
 				{{ block.title }}
 			</h2>
 
-			<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
+			<div class="space-y-xl">
+				<StrapiBlocksText v-if="block.content?.length" :nodes="block.content || []" />
+			</div>
 		</div>
 
 		<div v-if="block.link" class="absolute bottom-0 right-0 p-2xl m-2xl">

@@ -1,7 +1,12 @@
-import type { Icon, Image, ImageFormat, Introduction, Seo } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
-import type { Blocks, CollectionBlocks, Hero } from "./blocks";
+import type { Image, ImageFormat } from "../shared/media";
+import type { Introduction } from "../shared/sections";
+import type { Seo } from "../shared/seo";
+import type { Icon } from "../shared/ui";
+import type { Blocks, Hero } from "./blocks";
 import type { SocialMedia } from "./singles";
+
+export type RelatedService = Pick<Service, "id" | "title" | "slug">;
 
 export interface Article {
 	id: number;
@@ -14,10 +19,9 @@ export interface Article {
 	services?: RelatedService[];
 	hero?: Hero;
 	introduction?: Introduction;
-	blocks?: CollectionBlocks[];
+	blocks?: Blocks[];
+	seo: Seo | null;
 }
-
-export type RelatedService = Pick<Service, "id" | "title" | "slug">;
 
 export interface Project {
 	id: string;
@@ -29,7 +33,8 @@ export interface Project {
 	services: RelatedService[];
 	hero?: Hero;
 	introduction?: Introduction;
-	blocks?: CollectionBlocks[];
+	blocks?: Blocks[];
+	seo: Seo | null;
 }
 
 export interface Service {
@@ -40,8 +45,10 @@ export interface Service {
 	content: BlockNode[];
 	icon: Icon;
 	image: Image;
-	subservices: Subservice[];
+	subservices: Pick<Subservice, "id" | "title" | "slug" | "content" | "image">[];
+	articles?: Pick<Article, "id" | "title" | "slug">[];
 	order?: number;
+	seo?: Seo | null;
 }
 
 export interface Subservice {
@@ -52,10 +59,12 @@ export interface Subservice {
 	has_page: boolean;
 	content: BlockNode[];
 	service?: Service;
+	image: Image;
 	tags?: Tag[];
 	hero?: Hero;
 	introduction?: Introduction;
-	blocks?: CollectionBlocks[];
+	blocks?: Blocks[];
+	seo?: Seo | null;
 }
 
 export interface Tag {

@@ -19,6 +19,24 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
+	ssr: true,
+
+	nitro: {
+		preset: "static",
+		prerender: {
+			crawlLinks: true,
+
+			routes: ["/", "/__prerender"],
+		},
+	},
+
+	runtimeConfig: {
+		public: {
+			strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337",
+			strapiToken: process.env.NUXT_PUBLIC_STRAPI_TOKEN ?? "",
+		},
+	},
+
 	// app: {
 	// 	head: {
 	// 		link: [
@@ -85,4 +103,3 @@ export default defineNuxtConfig({
 		options: {},
 	},
 });
-

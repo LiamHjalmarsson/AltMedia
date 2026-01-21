@@ -1,5 +1,9 @@
 import type { Size, Variant } from "../enums";
-import type { Image, Seo, Icon, Form, Color, Input } from "../shared";
+import type { Form, Input } from "../shared/form";
+import type { Image } from "../shared/media";
+import type { Seo } from "../shared/seo";
+import type { Color } from "../shared/styles";
+import type { Icon } from "../shared/ui";
 import type { Blocks, Cta, Hero } from "./blocks";
 import type { Service, Subservice } from "./collections";
 

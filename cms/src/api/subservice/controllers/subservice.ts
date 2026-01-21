@@ -12,6 +12,14 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 		const results = await strapi.documents("api::subservice.subservice").findMany({
 			fields: ["id", "title", "slug", "content", "price_once"],
 			populate: {
+				icon: {
+					fields: ["icon_name", "is_image"],
+					populate: {
+						image: {
+							fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
+						},
+					},
+				},
 				tags: { fields: ["id", "title"] },
 				service: { fields: ["id", "title", "slug"] },
 			},
@@ -34,6 +42,14 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 			populate: {
 				tags: { fields: ["id", "title"] },
 				service: { fields: ["id", "title", "slug"] },
+				icon: {
+					fields: ["icon_name", "is_image"],
+					populate: {
+						image: {
+							fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
+						},
+					},
+				},
 				hero: {
 					fields: ["title", "description", "colored_words", "align_content"],
 					populate: {
@@ -118,6 +134,14 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 									fields: ["type", "hex", "theme"],
 								},
 							},
+						},
+					},
+				},
+				seo: {
+					fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],
+					populate: {
+						meta_image: {
+							fields: ["url", "width", "height", "alternativeText"],
 						},
 					},
 				},

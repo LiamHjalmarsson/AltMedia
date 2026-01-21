@@ -37,6 +37,11 @@
     "content": {
       "type": "blocks"
     },
+    "icon": {
+      "type": "component",
+      "component": "ui.icon",
+      "repeatable": false
+    },
     "hero": {
       "type": "component",
       "component": "block.hero",
@@ -58,6 +63,11 @@
     "has_page": {
       "type": "boolean",
       "default": false
+    },
+    "seo": {
+      "type": "component",
+      "component": "seo.seo",
+      "repeatable": false
     }
   }
 }

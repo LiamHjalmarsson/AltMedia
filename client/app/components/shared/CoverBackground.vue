@@ -45,11 +45,11 @@ const overlayClass = computed(() => {
 			loading="lazy"
 			quality="85"
 			class="absolute inset-0 w-full h-full object-cover" />
-
+		<!-- 
 		<div
 			v-if="showOverlay"
 			aria-hidden="true"
 			class="absolute inset-0 pointer-events-none z-10"
-			:class="overlayClass" />
+			:class="overlayClass" /> -->
 	</div>
 </template>

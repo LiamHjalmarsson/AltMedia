@@ -1,14 +1,16 @@
-import type { Button, Heading, Icon } from "../shared";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
-import type { Color, Image, Link } from "../shared";
 import type { AlignContent, Layout } from "../enums";
+import type { Image } from "../shared/media";
+import type { Color } from "../shared/styles";
+import type { Button, Heading, Icon, Link } from "../shared/ui";
 import type { Article, Project, Service, Subservice } from "./collections";
 
+// List
 export interface ListItem {
 	id: number;
 	title: string;
 	content: BlockNode[];
-	image: Image;
+	image?: Image | null;
 }
 
 export interface ListBlock {
@@ -22,18 +24,21 @@ export interface ListBlock {
 	items: ListItem[];
 }
 
+// Info
+
 export interface InfoBlock {
 	__component: "block.info";
 	id: number;
-	images?: Image;
+	images?: Image[];
 	align_content: AlignContent;
 	reverse: boolean;
 	content: BlockNode[];
 	button?: Button;
 	images_overlap?: boolean;
-	image_fade?: "top" | "bottom" | "right" | "left" | "all" | null;
+	image_fade?: "top" | "bottom" | "right" | "left" | "all" | "none" | null;
 }
 
+// Full Section
 export interface FullSectionBlock {
 	__component: "block.full-section";
 	id: number;
@@ -44,14 +49,14 @@ export interface FullSectionBlock {
 	color?: Color | null;
 }
 
+// Hero
 export interface Hero {
 	id: number;
 	title: string;
 	description?: string;
 	colored_words?: Record<string, string>;
 	align_content: AlignContent;
-	background: Image;
-	cover: Image;
+	background?: Image | null;
 	links?: Link[];
 	color?: Color;
 }
@@ -60,6 +65,7 @@ export interface HeroBlock extends Hero {
 	__component: "block.hero";
 }
 
+// FAQ
 export interface FaqItem {
 	id: number;
 	question: string;
@@ -73,6 +79,7 @@ export interface FaqBlock {
 	items: FaqItem[];
 }
 
+//  Featured
 export interface FeaturedBlock {
 	__component: "block.featured";
 	id: number;
@@ -83,6 +90,7 @@ export interface FeaturedBlock {
 	articles?: Article[];
 }
 
+//  Examples Build
 export interface BuildItem {
 	id: number;
 	title: string;
@@ -100,6 +108,7 @@ export interface ExamplesBuildBlock {
 	items: BuildItem[];
 }
 
+// CTA
 export interface Cta {
 	id: number;
 	title: string;
@@ -116,8 +125,12 @@ export interface CtaBlock extends Cta {
 	__component: "block.cta";
 }
 
-export type MarketingBlocks = HeroBlock | CtaBlock | FullSectionBlock;
-
-export type CollectionBlocks = InfoBlock | ListBlock | FaqBlock;
-
-export type Blocks = MarketingBlocks | CollectionBlocks | FeaturedBlock | ExamplesBuildBlock;
+export type Blocks =
+	| HeroBlock
+	| CtaBlock
+	| FullSectionBlock
+	| InfoBlock
+	| ListBlock
+	| FaqBlock
+	| FeaturedBlock
+	| ExamplesBuildBlock;
