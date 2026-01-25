@@ -1,4 +1,32 @@
 import tailwindcss from "@tailwindcss/vite";
+import type { NuxtPage } from "@nuxt/schema";
+
+type PathRewriteRule = {
+	sourcePrefix: string;
+	targetPrefix: string;
+};
+
+function forEachNuxtPage(pages: NuxtPage[], handlePage: (page: NuxtPage) => void): void {
+	for (const currentPage of pages) {
+		handlePage(currentPage);
+
+		if (currentPage.children?.length) forEachNuxtPage(currentPage.children, handlePage);
+	}
+}
+
+function rewritePagePath(originalPath: string, rewriteRules: PathRewriteRule[]): string {
+	for (const rule of rewriteRules) {
+		if (originalPath === rule.sourcePrefix) return rule.targetPrefix;
+
+		const sourcePrefixWithSlash = `${rule.sourcePrefix}/`;
+
+		if (originalPath.startsWith(sourcePrefixWithSlash)) {
+			return originalPath.replace(rule.sourcePrefix, rule.targetPrefix);
+		}
+	}
+
+	return originalPath;
+}
 
 export default defineNuxtConfig({
 	compatibilityDate: "2025-07-15",
@@ -19,21 +47,39 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
-	ssr: true,
+	// nitro: {
+	// 	preset: "static",
+	// 	prerender: {
+	// 		crawlLinks: true,
 
-	nitro: {
-		preset: "static",
-		prerender: {
-			crawlLinks: true,
-
-			routes: ["/", "/__prerender"],
-		},
-	},
+	// 		routes: ["/", "/__prerender"],
+	// 	},
+	// },
 
 	runtimeConfig: {
 		public: {
 			strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337",
 			strapiToken: process.env.NUXT_PUBLIC_STRAPI_TOKEN ?? "",
+		},
+	},
+
+	hooks: {
+		"pages:extend"(scannedPages) {
+			const rewriteRules: PathRewriteRule[] = [
+				{ sourcePrefix: "/contact-us", targetPrefix: "/kontakta-oss" },
+				{ sourcePrefix: "/start-a-project", targetPrefix: "/starta-projekt" },
+				{ sourcePrefix: "/about", targetPrefix: "/om-oss" },
+
+				{ sourcePrefix: "/services", targetPrefix: "/tjanster" },
+				{ sourcePrefix: "/projects", targetPrefix: "/projekt" },
+				{ sourcePrefix: "/blog", targetPrefix: "/blogg" },
+			];
+
+			forEachNuxtPage(scannedPages, (page) => {
+				if (!page.path) return;
+
+				page.path = rewritePagePath(page.path, rewriteRules);
+			});
 		},
 	},
 

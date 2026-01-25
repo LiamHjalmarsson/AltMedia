@@ -54,7 +54,8 @@
           ]
         }
       },
-      "max": 1
+      "min": 2,
+      "max": 10
     },
     "input_type": {
       "type": "string",

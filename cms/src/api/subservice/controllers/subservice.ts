@@ -111,9 +111,9 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 							},
 						},
 						"block.info": {
-							fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
+							fields: ["id", "align_content", "content", "reverse", "image_fade"],
 							populate: {
-								images: {
+								image: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								button: {

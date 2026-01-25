@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import type { FeaturedBlock } from "~/types";
 
-defineProps<{ block: FeaturedBlock }>();
+type FeaturedMode = "tjänster" | "projekt" | "artiklar";
+
+const { block } = defineProps<{ block: FeaturedBlock }>();
+
+const featuredMode = computed(() => block.features as FeaturedMode);
+
+const hasServices = computed(() => featuredMode.value === "tjänster" && (block.services?.length ?? 0) > 0);
+
+const hasProjects = computed(() => featuredMode.value === "projekt" && (block.projects?.length ?? 0) > 0);
+
+const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.articles?.length ?? 0) > 0);
 </script>
 
 <template>
@@ -9,13 +19,13 @@ defineProps<{ block: FeaturedBlock }>();
 		<div class="mx-auto max-w-[1300px] px-lg lg:px-3xl">
 			<Heading v-bind="block.heading" class="mb-2xl" />
 
-			<div v-if="block.features === 'tjänster'" class="grid grid-cols-1 sm:grid-cols-2 gap-lg lg:gap-2xl">
+			<div v-if="hasServices" class="grid grid-cols-1 sm:grid-cols-2 gap-lg lg:gap-2xl">
 				<FeaturedServiceCard v-for="service in block.services" :key="service.id" :service="service" />
 			</div>
 
-			<FeaturedProjects v-else-if="block.features === 'projekt'" :projects="block.projects" />
+			<FeaturedProjects v-else-if="hasProjects" :projects="block.projects" />
 
-			<div v-else-if="block.features === 'artiklar'">
+			<div v-else-if="hasArticles">
 				<ul class="grid gap-2xl">
 					<li v-for="article in block.articles" :key="article.id">
 						<FeaturedArticleCard :article="article" />

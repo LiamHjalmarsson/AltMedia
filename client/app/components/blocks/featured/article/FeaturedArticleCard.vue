@@ -6,17 +6,19 @@ defineProps<{ article: Article }>();
 
 <template>
 	<NuxtLink
-		:to="`/articles/${article.slug}`"
+		:to="buildBlogPostPath(article.slug)"
 		:aria-label="`Läs artikel: ${article.title}`"
 		class="overflow-hidden group cursor-pointer relative pb-2xl border-b flex space-x-2xl">
 		<div class="h-56 relative overflow-hidden w-2/5">
 			<NuxtImg
+				v-if="article.cover.url"
 				:src="article.cover.url"
 				:alt="article.cover.alternativeText || article.title"
 				format="webp,avif"
 				quality="85"
 				loading="lazy"
 				class="h-full w-full object-cover group-hover:scale-110 duration-300" />
+			<div v-else class="h-full w-full bg-black/5" aria-hidden="true" />
 		</div>
 
 		<div class="flex flex-col justify-between flex-1 mt-md">

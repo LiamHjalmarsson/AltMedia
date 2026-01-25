@@ -1,90 +1,112 @@
 import gsap from "gsap";
 
-export function useCollapse() {
-	let animating = false;
+type CollapseTransitionOptions = {
+	expandDurationSeconds?: number;
+	collapseDurationSeconds?: number;
+	expandEase?: string;
+	collapseEase?: string;
+};
+
+function setExpandedInstantStyles(targetElement: HTMLElement): void {
+	targetElement.style.height = "auto";
+
+	targetElement.style.opacity = "1";
+}
+
+function setCollapsedInstantStyles(targetElement: HTMLElement): void {
+	targetElement.style.height = "0px";
+
+	targetElement.style.opacity = "0";
+}
+
+export function useCollapse(options: CollapseTransitionOptions = {}) {
+	const {
+		expandDurationSeconds = 0.3,
+		collapseDurationSeconds = 0.35,
+		expandEase = "power3.out",
+		collapseEase = "power3.in",
+	} = options;
+
+	let isAnimating = false;
 
 	const prefersReduced = () => import.meta.client && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-	function onEnter(element: Element, done: gsap.Callback) {
-		if (animating) {
+	function expandAnimation(element: Element, done: gsap.Callback) {
+		if (isAnimating) {
 			return;
 		}
 
-		animating = true;
+		isAnimating = true;
 
-		const el = element as HTMLElement;
+		const htmlElement = element as HTMLElement;
 
 		if (prefersReduced()) {
-			el.style.height = "auto";
+			setExpandedInstantStyles(htmlElement);
 
-			el.style.opacity = "1";
-
-			animating = false;
+			isAnimating = false;
 
 			return done();
 		}
 
-		const targetHeight = el.scrollHeight;
+		const expandedHeight = htmlElement.scrollHeight;
 
-		gsap.set(el, {
+		gsap.set(htmlElement, {
 			height: 0,
 			opacity: 0,
 			overflow: "hidden",
 		});
 
-		gsap.to(el, {
-			height: targetHeight,
+		gsap.to(htmlElement, {
+			height: expandedHeight,
 			opacity: 1,
-			duration: 0.3,
-			ease: "power3.out",
+			duration: expandDurationSeconds,
+			ease: expandEase,
 			onComplete: () => {
-				gsap.set(el, {
+				gsap.set(htmlElement, {
 					height: "auto",
 					clearProps: "overflow",
 				});
 
-				animating = false;
+				isAnimating = false;
 
 				done();
 			},
 		});
 	}
 
-	function onLeave(element: Element, done: gsap.Callback) {
-		if (animating) {
+	function collapseAnimation(element: Element, done: gsap.Callback) {
+		if (isAnimating) {
 			return;
 		}
 
-		animating = true;
+		isAnimating = true;
 
-		const el = element as HTMLElement;
+		const htmlElement = element as HTMLElement;
 
 		if (prefersReduced()) {
-			el.style.height = "0px";
+			setCollapsedInstantStyles(htmlElement);
 
-			el.style.opacity = "0";
-
-			animating = false;
+			isAnimating = false;
 
 			return done();
 		}
 
-		gsap.to(el, {
+		gsap.to(htmlElement, {
 			height: 0,
 			opacity: 0,
-			duration: 0.35,
-			ease: "power3.in",
+			duration: collapseDurationSeconds,
+			ease: collapseEase,
 			onComplete: () => {
-				gsap.set(el, {
+				gsap.set(htmlElement, {
 					clearProps: "all",
 				});
 
-				animating = false;
+				isAnimating = false;
 
 				done();
 			},
 		});
 	}
 
-	return { onEnter, onLeave };
+	return { expandAnimation, collapseAnimation };
 }

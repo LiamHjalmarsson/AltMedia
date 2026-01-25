@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { FaqBlock } from "~/types/content/blocks";
+import type { FaqBlock } from "~/types";
 
 const { block } = defineProps<{ block: FaqBlock }>();
 
-const activeId = ref<number | null>(null);
+const expandedQuestionId = ref<number | null>(null);
 
-function toggleAnswer(id: number) {
-	activeId.value = activeId.value === id ? null : id;
+function toggleExpandedQuestion(questionId: number) {
+	expandedQuestionId.value = expandedQuestionId.value === questionId ? null : questionId;
 }
 </script>
 
@@ -20,9 +20,9 @@ function toggleAnswer(id: number) {
 					v-for="(item, i) in block.items"
 					:key="item.id"
 					:item="item"
-					:number="i + 1"
-					:activeId="activeId"
-					@toggle="toggleAnswer" />
+					:questionNumber="i + 1"
+					:expandedQuestionId
+					@toggle="toggleExpandedQuestion" />
 			</ul>
 		</div>
 	</section>

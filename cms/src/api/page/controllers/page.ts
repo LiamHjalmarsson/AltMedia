@@ -68,12 +68,20 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 						},
 						"block.info": {
 							populate: {
-								fields: ["id", "align_content", "content", "reverse", "images_overlap", "image_fade"],
-								images: {
+								fields: ["id", "align_content", "content", "reverse", "image_fade"],
+								image: {
 									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 								button: {
 									fields: ["label", "variant", "type", "icon"],
+								},
+							},
+						},
+						"block.story-split": {
+							populate: {
+								fields: ["id", "title", "content", "reverse"],
+								images: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 							},
 						},
@@ -115,17 +123,17 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 						"sections.introduction": {
 							populate: {
 								fields: ["id", "title", "subtitle", "description"],
-								subservices: {
-									fields: ["title", "content", "has_page"],
-									populate: {
-										tags: {
-											fields: ["title"],
-										},
-										service: {
-											fields: ["slug"],
-										},
-									},
-								},
+								// subservices: {
+								// 	fields: ["title", "content", "has_page"],
+								// 	populate: {
+								// 		tags: {
+								// 			fields: ["title"],
+								// 		},
+								// 		service: {
+								// 			fields: ["slug"],
+								// 		},
+								// 	},
+								// },
 							},
 						},
 					},

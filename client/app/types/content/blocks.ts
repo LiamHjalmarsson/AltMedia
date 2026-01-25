@@ -29,13 +29,23 @@ export interface ListBlock {
 export interface InfoBlock {
 	__component: "block.info";
 	id: number;
-	images?: Image[];
+	image?: Image;
 	align_content: AlignContent;
 	reverse: boolean;
 	content: BlockNode[];
 	button?: Button;
-	images_overlap?: boolean;
 	image_fade?: "top" | "bottom" | "right" | "left" | "all" | "none" | null;
+}
+
+// Story Split
+
+export interface StorySplitBlock {
+	__component: "block.story-split";
+	id: number;
+	title: string;
+	images?: Image[];
+	reverse: boolean;
+	content: BlockNode[];
 }
 
 // Full Section

@@ -42,7 +42,7 @@ useAppHead(page?.value?.seo || undefined);
 							format="webp,avif"
 							quality="85"
 							loading="lazy"
-							class="w-full h-full object-cover" />
+							class="w-full h-full object-contain" />
 					</figure>
 
 					<div class="flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg">
@@ -52,16 +52,21 @@ useAppHead(page?.value?.seo || undefined);
 
 						<StrapiBlocksText v-if="service.content" :nodes="service.content" class="max-w-[600px]" />
 
-						<ul class="space-y-xs">
+						<ul class="space-y-sm">
 							<li
 								v-for="subservice in service.subservices"
 								:key="subservice.id"
-								class="font-semibold font-heading group">
-								<ReadMoreButton
-									:to="`/services/${service.slug}/${subservice.slug}`"
-									:label="subservice.title"
-									:size="20"
-									class="text-heading-sm inline-flex items-center" />
+								class="block font-semibold font-heading text-heading-xs">
+								<NuxtLink
+									v-if="subservice.has_page"
+									:to="buildSubservicePath(service.slug, subservice.slug)"
+									class="hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+									{{ subservice.title }}
+								</NuxtLink>
+
+								<span v-else class="">
+									{{ subservice.title }}
+								</span>
 							</li>
 						</ul>
 					</div>

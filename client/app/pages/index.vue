@@ -1,4 +1,9 @@
 <script setup lang="ts">
+type AnalysisRequestPayload = {
+	email: string;
+	url: string;
+};
+
 const homeStore = useHomeStore();
 
 useAppHead();
@@ -10,11 +15,11 @@ await useAsyncData("home-page", () => homeStore.fetchHomePage(), {
 
 const { hero, hasForm, form, blocks } = storeToRefs(homeStore);
 
-const payload = reactive<Record<string, string>>({ email: "", url: "" });
+const payload = reactive<AnalysisRequestPayload>({ email: "", url: "" });
 
-const fieldErrors = reactive<Record<string, string>>({ email: "", url: "" });
+const fieldErrors = reactive<AnalysisRequestPayload>({ email: "", url: "" });
 
-const loading = ref(false);
+const submiting = ref(false);
 
 const success = ref(false);
 
@@ -22,35 +27,47 @@ const errorMessage = ref("");
 
 const { create } = useStrapi();
 
+function resetAnalysisRequestErrors() {
+	payload.email = "";
+
+	payload.url = "";
+
+	errorMessage.value = "";
+}
+
+function setMissingFieldErrors(strapiError: any) {
+	const missingFields = strapiError?.error?.details?.missing;
+
+	if (!missingFields) {
+		return;
+	}
+
+	if (missingFields.email) {
+		fieldErrors.email = "E-post är obligatoriskt.";
+	}
+
+	if (missingFields.url) {
+		fieldErrors.url = "URL är obligatoriskt.";
+	}
+}
+
 async function submitAnalysisRequest() {
-	loading.value = true;
+	submiting.value = true;
 
 	success.value = false;
 
-	errorMessage.value = "";
-
-	fieldErrors.email = "";
-
-	fieldErrors.url = "";
+	resetAnalysisRequestErrors();
 
 	try {
 		await create("analysis-requests", payload);
 
 		success.value = true;
 	} catch (err: any) {
-		console.log(err.error);
-
 		errorMessage.value = err?.error?.message || "Ett oväntat fel uppstod.";
 
-		const missing = err?.error?.details?.missing;
-
-		if (missing) {
-			if (missing.email) fieldErrors.email = "E-post är obligatoriskt.";
-
-			if (missing.url) fieldErrors.url = "URL är obligatoriskt.";
-		}
+		setMissingFieldErrors(err);
 	} finally {
-		loading.value = false;
+		submiting.value = false;
 	}
 }
 </script>
@@ -58,7 +75,7 @@ async function submitAnalysisRequest() {
 	<Hero v-if="hero" :block="hero" :hasForm>
 		<div v-if="form" class="max-w-[450px] w-full hidden lg:flex justify-end">
 			<div class="w-full p-lg overflow-hidden">
-				<div class="border border-black/5 bg-black/3 p-xl shadow-2xl backdrop-blur-2xl h-full">
+				<div class="border border-white/30 bg-white/30 p-xl shadow-2xl backdrop-blur-2xl h-full">
 					<h2 class="text-heading-lg font-bold mb-md">{{ form?.title }}</h2>
 
 					<p class="mb-xl text-lg">{{ form?.description }}</p>
@@ -70,12 +87,12 @@ async function submitAnalysisRequest() {
 							:name="input.name"
 							:label="input.label"
 							hidden
-							:error="fieldErrors[input.name]">
+							:error="fieldErrors[input.name as keyof AnalysisRequestPayload]">
 							<Input
 								v-if="input.type === 'input'"
 								:id="input.name"
 								:name="input.name"
-								v-model="payload[input.name]"
+								v-model="payload[input.name as keyof AnalysisRequestPayload]"
 								:placeholder="input.placeholder"
 								:required="input.required"
 								:type="input.input_type"
@@ -88,7 +105,8 @@ async function submitAnalysisRequest() {
 								:label="form.button?.label"
 								:icon="form.button.icon"
 								:size="form.button.size || 'md'"
-								:variant="form.button.variant" />
+								:variant="form.button.variant"
+								:disabled="submiting" />
 						</div>
 					</form>
 				</div>

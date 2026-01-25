@@ -3,11 +3,11 @@ import type { ContactPage } from "~/types";
 
 const globalStore = useGlobalStore();
 
+const { contact } = storeToRefs(globalStore);
+
 const { findOne } = useStrapi();
 
 const { data: contactPage } = await useAsyncData("contact-page", () => findOne<ContactPage>("contact"));
-
-const { contact } = storeToRefs(globalStore);
 
 definePageMeta({
 	layout: "minimal",
@@ -34,6 +34,8 @@ const loading = ref(false);
 const success = ref(false);
 
 const errorMessage = ref("");
+
+const theme = computed(() => themeClasses(contactPage.value?.data.color));
 
 async function submitForm() {
 	loading.value = true;
@@ -71,8 +73,15 @@ async function submitForm() {
 </script>
 
 <template>
-	<section class="relative min-h-screen flex items-center bg-bg-dark text-white overflow-hidden">
-		<div class="absolute inset-0 bg-primary/60 mix-blend-multiply pointer-events-none" aria-hidden="true" />
+	<section
+		data-header-theme="dark"
+		class="relative min-h-screen flex items-center overflow-hidden"
+		:class="[theme.contentTextClass, contactPage?.data?.color?.theme === 'dark' ? 'bg-dark' : 'bg-white']">
+		<div
+			class="absolute inset-0 mix-blend-multiply pointer-events-none opacity-90"
+			:class="theme.sectionClassName"
+			:style="theme.sectionStyle"
+			aria-hidden="true" />
 
 		<NuxtImg
 			v-if="contactPage?.data.cover"
@@ -82,7 +91,7 @@ async function submitForm() {
 			loading="lazy"
 			role="presentation"
 			aria-hidden="true"
-			class="absolute inset-0 w-full h-full object-cover opacity-40" />
+			class="absolute inset-0 w-full h-full object-cover opacity-20" />
 
 		<div
 			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl flex flex-col justify-center items-center md:grid md:grid-cols-2 gap-xl lg:gap-4xl">
@@ -93,12 +102,12 @@ async function submitForm() {
 						{{ contactPage?.data.title }}
 					</h1>
 
-					<p class="max-w-[450px] text-lg text-white/80">
+					<p class="max-w-[450px] text-lg">
 						{{ contactPage?.data.description }}
 					</p>
 				</div>
 
-				<div class="space-y-md text-white/80">
+				<div class="space-y-md">
 					<p v-if="contact?.phone" class="flex items-center gap-sm">
 						<Icon name="mdi:phone" size="20" /> {{ contact.phone }}
 					</p>
@@ -120,7 +129,7 @@ async function submitForm() {
 			</div>
 
 			<div class="flex md:justify-end justify-center w-full">
-				<div class="text-white lg:p-2xl w-full max-w-[500px]">
+				<div class="lg:p-2xl w-full max-w-[500px]">
 					<h2 class="text-heading-lg font-bold mb-xl">{{ contactPage?.data.form.title }}</h2>
 
 					<form @submit.prevent="submitForm" class="space-y-xl">

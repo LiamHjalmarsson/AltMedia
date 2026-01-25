@@ -28,7 +28,8 @@
         "block.hero",
         "block.info",
         "block.list",
-        "sections.introduction"
+        "sections.introduction",
+        "block.story-split"
       ]
     },
     "seo": {

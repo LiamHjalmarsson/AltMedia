@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<Heading>(), {
 	has_link: false,
 });
 
-const alignment = computed(() => {
+const textAlignment = computed(() => {
 	switch (props.align_content) {
 		case "center":
 			return {
@@ -29,8 +29,8 @@ const alignment = computed(() => {
 </script>
 
 <template>
-	<div :class="[alignment.wrapper, has_link ? 'flex justify-between items-center w-full gap-lg' : '']">
-		<div class="flex-2 grow flex flex-col" :class="[alignment.content]">
+	<div :class="[textAlignment.wrapper, has_link ? 'flex justify-between items-center w-full gap-lg' : '']">
+		<div class="flex-2 grow flex flex-col" :class="[textAlignment.content]">
 			<component
 				:is="props.tag"
 				class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold">

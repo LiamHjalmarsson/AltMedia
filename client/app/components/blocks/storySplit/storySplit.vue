@@ -1,0 +1,65 @@
+<script setup lang="ts">
+import type { StorySplitBlock } from "~/types";
+
+const { block } = defineProps<{ block: StorySplitBlock }>();
+
+const primaryImage = computed(() => block.images?.[0] ?? null);
+
+const secondaryImage = computed(() => block.images?.[1] ?? null);
+
+const mediaOrder = computed(() => (block.reverse ? "lg:order-1" : "lg:order-2"));
+
+const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
+</script>
+
+<template>
+	<section class="relative py-3xl lg:py-5xl">
+		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
+			<div class="flex items-center gap-lg">
+				<div :class="['flex-1', textOrder]">
+					<h2 class="text-heading-2xl font-semibold">
+						{{ block.title }}
+					</h2>
+
+					<div class="mt-lg space-y-lg">
+						<StrapiBlocksText v-if="block.content?.length" :nodes="block.content" />
+					</div>
+				</div>
+
+				<div :class="['flex-1', mediaOrder]">
+					<div class="relative mx-auto w-full max-w-[420px]">
+						<div class="relative z-10 ml-auto w-[62%]">
+							<div class="overflow-hidden">
+								<NuxtImg
+									v-if="primaryImage?.url"
+									:src="primaryImage.url"
+									:alt="primaryImage.alternativeText || ''"
+									format="webp,avif"
+									quality="88"
+									loading="lazy"
+									placeholder
+									sizes="(min-width:1024px) 260px, 60vw"
+									class="aspect-[3/4] w-full object-cover" />
+							</div>
+						</div>
+
+						<div class="relative z-0 -mt-lg w-[78%]">
+							<div class="overflow-hidden">
+								<NuxtImg
+									v-if="secondaryImage?.url"
+									:src="secondaryImage.url"
+									:alt="secondaryImage.alternativeText || ''"
+									format="webp,avif"
+									quality="88"
+									loading="lazy"
+									placeholder
+									sizes="(min-width:1024px) 320px, 70vw"
+									class="aspect-[4/3] w-full object-cover" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</template>

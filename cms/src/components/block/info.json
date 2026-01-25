@@ -5,9 +5,9 @@
   },
   "options": {},
   "attributes": {
-    "images": {
+    "image": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "allowedTypes": [
         "images",
         "files",
@@ -34,10 +34,6 @@
       "type": "blocks"
     },
     "reverse": {
-      "type": "boolean",
-      "default": false
-    },
-    "images_overlap": {
       "type": "boolean",
       "default": false
     },

@@ -1,25 +1,9 @@
 <script setup lang="ts">
-import type { Variant } from "~/types";
 import type { Link } from "~/types";
 
 defineProps<Link>();
 
 const { element: linkWrapper, backgroundColor } = useHoverAnimation();
-
-const variantClass: Record<Variant, string> = {
-	primary: "bg-gradient-to-br from-primary to-primary-hover max-lg:text-white",
-	secondary: "bg-primary/10",
-	ghost: "text-primary",
-	outline: "border-2 border-primary",
-};
-
-const sizeClass: Record<Link["size"], string> = {
-	xs: "text-sm ",
-	sm: "text-md ",
-	md: "text-lg ",
-	lg: "text-xl ",
-	xl: "text-2xl ",
-};
 </script>
 
 <template>
@@ -31,7 +15,7 @@ const sizeClass: Record<Link["size"], string> = {
 		<div
 			ref="linkWrapper"
 			class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition">
-			<span class="relative flex items-center z-10 px-lg" :class="[sizeClass[size]]">
+			<span class="relative flex items-center z-10 px-lg" :class="[textSizeClassBySize[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"
@@ -44,13 +28,15 @@ const sizeClass: Record<Link["size"], string> = {
 			<span
 				ref="backgroundColor"
 				class="absolute top-0 h-16 w-16 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
-				:class="variantClass[variant]"
+				:class="variantClassByVariant[variant]"
 				:style="{
 					left: reversed ? 'calc(100% - 64px)' : '0',
 					right: 'auto',
 				}" />
 
-			<span class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden" :class="variantClass[variant]" />
+			<span
+				class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden"
+				:class="variantClassByVariant[variant]" />
 		</div>
 	</NuxtLink>
 </template>

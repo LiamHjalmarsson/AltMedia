@@ -135,17 +135,12 @@ export interface BlockInfo extends Struct.ComponentSchema {
       Schema.Attribute.DefaultTo<'left'>;
     button: Schema.Attribute.Component<'ui.button', false>;
     content: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     image_fade: Schema.Attribute.Enumeration<
       ['top', 'bottom', 'right', 'left', 'all', 'none']
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'none'>;
-    images: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    images_overlap: Schema.Attribute.Boolean &
-      Schema.Attribute.DefaultTo<false>;
     reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
   };
 }
@@ -172,6 +167,22 @@ export interface BlockList extends Struct.ComponentSchema {
     layout: Schema.Attribute.Enumeration<['alternating', 'grid']> &
       Schema.Attribute.DefaultTo<'alternating'>;
     show_numbers: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+  };
+}
+
+export interface BlockStorySplit extends Struct.ComponentSchema {
+  collectionName: 'components_block_story_splits';
+  info: {
+    displayName: 'Story split';
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    images: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    title: Schema.Attribute.String;
   };
 }
 
@@ -224,7 +235,8 @@ export interface FormInput extends Struct.ComponentSchema {
     rows: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
-          max: 1;
+          max: 10;
+          min: 2;
         },
         number
       >;
@@ -450,7 +462,7 @@ export interface StylesColor extends Struct.ComponentSchema {
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 7;
       }>;
-    theme: Schema.Attribute.Enumeration<['light', 'dark', 'gradient']> &
+    theme: Schema.Attribute.Enumeration<['light', 'dark']> &
       Schema.Attribute.DefaultTo<'dark'>;
     type: Schema.Attribute.Enumeration<
       ['primary', 'secondary', 'tertiary', 'white', 'black']
@@ -538,6 +550,7 @@ declare module '@strapi/strapi' {
       'block.hero': BlockHero;
       'block.info': BlockInfo;
       'block.list': BlockList;
+      'block.story-split': BlockStorySplit;
       'form.form': FormForm;
       'form.input': FormInput;
       'global.contact': GlobalContact;

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import gsap from "gsap";
-
 const store = useBuildProjectStore();
 
 const { steps, currentStepIndex, activeStep, progressPercent, isLastStep, page, loading, isSubmitted } =
@@ -58,7 +57,7 @@ async function animateStep(direction: "next" | "prev", action: () => void) {
 	gsap.fromTo(
 		container.children,
 		{ y: direction === "next" ? 16 : -16, opacity: 0 },
-		{ y: 0, opacity: 1, duration: 0.32, stagger: 0.02 }
+		{ y: 0, opacity: 1, duration: 0.32, stagger: 0.02 },
 	);
 }
 </script>

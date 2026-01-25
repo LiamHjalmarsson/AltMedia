@@ -1,8 +1,8 @@
 <script setup lang="ts">
+const { animateBubbleToHoverState, animateBubbleToIdleState } = useBackgroundBubble();
+
 const route = useRoute();
-
 const serviceStore = useServiceStore();
-
 const { currentService } = storeToRefs(serviceStore);
 
 const slug = computed(() => route.params.slug as string);
@@ -10,12 +10,28 @@ const slug = computed(() => route.params.slug as string);
 await useAsyncData(
 	() => `service:${slug.value}`,
 	() => serviceStore.fetchService(slug.value),
-	{ server: true, lazy: true, watch: [slug] }
+	{ server: true, lazy: true, watch: [slug] },
 );
 
-// watchEffect(() => {
-// 	useAppHead(currentService.value?.seo || undefined);
-// });
+/**
+ * FIX: En composable-instans + "ref i v-for" gör att samma element/animation triggas för alla.
+ * Lösning: spara bubble-element per kort och skicka elementet till animate-funktionerna.
+ */
+const bubbleRefs = ref<HTMLElement[]>([]);
+
+function setBubbleRef(el: Element | ComponentPublicInstance | null, index: number) {
+	if (!el) return;
+	const element = (el as any)?.$el || el;
+	bubbleRefs.value[index] = element as HTMLElement;
+}
+
+function onEnter(index: number) {
+	animateBubbleToHoverState();
+}
+
+function onLeave(index: number) {
+	animateBubbleToIdleState();
+}
 </script>
 
 <template>
@@ -47,30 +63,33 @@ await useAsyncData(
 			<section v-if="currentService?.subservices?.length" class="mt-4xl">
 				<h2 class="font-bold text-heading-lg md:text-heading-xl mb-xl text-primary">Våra delmoment</h2>
 
-				<ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-xl">
+				<ul class="mt-2xl grid sm:grid-cols-2 lg:grid-cols-3 gap-xl">
 					<li
-						v-for="sub in currentService.subservices"
+						v-for="(sub, i) in currentService.subservices"
 						:key="sub.id"
-						class="group rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-xl shadow-lg hover:shadow-2xl transition-all duration-300">
-						<h3
-							class="font-semibold text-heading-sm md:text-heading-md group-hover:text-primary transition">
-							{{ sub.title }}
-						</h3>
+						@mouseenter="onEnter(i)"
+						@mouseleave="onLeave(i)"
+						class="overflow-hidden border border-white/40 relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
+						<NuxtLink class="flex flex-col justify-between h-full p-xl focus-visible:outline-primary">
+							<h3 class="font-semibold text-heading-sm md:text-heading-md transition">
+								{{ sub.title }}
+							</h3>
 
-						<p class="text-sm mt-xs line-clamp-3">XX</p>
+							<p class="text-sm mt-sm line-clamp-3">Kort beskrivning saknas ännu.</p>
 
-						<div class="mt-lg flex justify-between items-center">
-							<NuxtLink
-								:to="`/services/${currentService.slug}/${sub.slug}`"
-								:aria-label="`Läs mer om tjänsten ${sub.title}`"
-								class="inline-flex items-center space-x-xs text-primary text-sm font-semibold">
-								<span>Läs mer</span>
-								<Icon
-									name="lucide:arrow-right"
-									size="16"
-									class="translate-x-0 group-hover:translate-x-1 transition" />
-							</NuxtLink>
-						</div>
+							<div class="mt-lg flex items-center justify-between">
+								<ReadMoreButton />
+
+								<span
+									class="h-9 w-9 rounded-2xl border border-white/12 bg-white/5 grid place-items-center">
+									<Icon name="lucide:sparkles" size="16" />
+								</span>
+							</div>
+
+							<div
+								:ref="(el) => setBubbleRef(el, i)"
+								class="pointer-events-none absolute -bottom-5 -left-5 rounded-full w-4 h-4 bg-gradient-to-tr from-secondary/5 via-secondary/10 to-primary/20" />
+						</NuxtLink>
 					</li>
 				</ul>
 			</section>

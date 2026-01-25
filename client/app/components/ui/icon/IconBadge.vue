@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { Variant } from "~/types";
-import type { Icon } from "~/types";
+import type { Icon, Variant } from "~/types";
 
 const props = defineProps<{
 	icon: Icon;

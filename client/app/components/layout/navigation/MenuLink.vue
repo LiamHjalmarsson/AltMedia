@@ -5,7 +5,7 @@ const props = defineProps<{ link: MenuLink }>();
 
 const route = useRoute();
 
-const isActive = computed(() => {
+const isCurrentPage = computed(() => {
 	return route.path === props.link.url;
 });
 </script>
@@ -13,7 +13,7 @@ const isActive = computed(() => {
 <template>
 	<NuxtLink
 		:to="link.url"
-		:aria-current="isActive ? 'page' : undefined"
+		:aria-current="isCurrentPage ? 'page' : undefined"
 		class="font-bold leading-[1.8] text-md relative inline-block transition-colors duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 		{{ link.label }}
 

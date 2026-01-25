@@ -736,6 +736,7 @@ export interface ApiPagePage extends Struct.CollectionTypeSchema {
         'block.info',
         'block.list',
         'sections.introduction',
+        'block.story-split',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

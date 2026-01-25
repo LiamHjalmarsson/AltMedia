@@ -9,22 +9,16 @@ interface Item {
 
 const props = defineProps<Item>();
 
-const isEven = computed(() => (props.index + 1) % 2 === 0);
+const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 </script>
 
 <template>
-	<li class="grid lg:grid-cols-3 lg:gap-4xl items-center group">
-		<div :class="['hidden lg:block ', isEven ? 'order-2' : 'order-1']">
-			<ListItemImage
-				v-if="item.image"
-				:image="item.image"
-				:title="item.title"
-				enter-class="object-none scale-105" />
+	<li class="grid lg:grid-cols-2 lg:gap-4xl items-center group">
+		<div :class="['hidden lg:block ', isEvenRow ? 'order-2' : 'order-1']">
+			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" />
 		</div>
 
-		<div
-			class="relative flex flex-col justify-center h-full col-span-2"
-			:class="[isEven ? 'lg:order-1' : 'lg:order-2']">
+		<div class="relative flex flex-col justify-center h-full" :class="[isEvenRow ? 'lg:order-1' : 'lg:order-2']">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
 			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left">

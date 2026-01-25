@@ -45,7 +45,7 @@ export interface Service {
 	content: BlockNode[];
 	icon: Icon;
 	image: Image;
-	subservices: Pick<Subservice, "id" | "title" | "slug" | "content" | "image">[];
+	subservices: Pick<Subservice, "id" | "title" | "slug" | "content" | "image" | "has_page">[];
 	articles?: Pick<Article, "id" | "title" | "slug">[];
 	order?: number;
 	seo?: Seo | null;

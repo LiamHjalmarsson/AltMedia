@@ -1,33 +1,16 @@
 <script setup lang="ts">
-import type { Cta } from "~/types/content/blocks";
+import type { Cta } from "~/types";
 
 const { block } = defineProps<{ block: Cta }>();
 
-const bgColor = computed(() => {
-	if (!block.color) {
-		return "bg-bg-dark text-white";
-	}
+const theme = computed(() => themeClasses(block.color));
 
-	if (block.color.hex) {
-		return { backgroundColor: block.color.hex };
-	}
+const hasCoverMedia = computed(() => block.cover?.url);
 
-	switch (block.color.type) {
-		case "primary":
-			return "bg-primary";
-		case "secondary":
-			return "bg-secondary";
-		default:
-			return "bg-bg-dark";
-	}
-});
+const isCoverVideo = computed(() => {
+	const mime = block.cover?.mime;
 
-const textColor = computed(() => {
-	if (!block.color) {
-		return "text-white";
-	}
-
-	return block.color.theme === "dark" ? "text-white" : "text-black";
+	return mime && mime.startsWith("video/");
 });
 </script>
 
@@ -35,12 +18,12 @@ const textColor = computed(() => {
 	<section
 		aria-labelledby="cta-title"
 		class="relative overflow-hidden"
-		:class="(!block.color?.hex ? bgColor : '', textColor)"
-		:style="block.color?.hex ? bgColor : ''">
-		<div class="relative px-lg py-3xl lg:p-3xl" :class="textColor">
-			<template v-if="block.cover?.url">
+		:class="theme.sectionClassName"
+		:style="theme.sectionStyle">
+		<div class="relative px-lg py-3xl lg:p-3xl" :class="theme.contentTextClass">
+			<template v-if="hasCoverMedia">
 				<video
-					v-if="block.cover.mime"
+					v-if="isCoverVideo"
 					class="absolute inset-0 w-full h-full object-cover opacity-90"
 					aria-hidden="true"
 					preload="none"
@@ -48,12 +31,12 @@ const textColor = computed(() => {
 					muted
 					loop
 					playsinline>
-					<source :src="block.cover.url" type="video/mp4" />
+					<source :src="block.cover!.url" type="video/mp4" />
 				</video>
 
 				<NuxtImg
 					v-else
-					:src="block.cover.url"
+					:src="block.cover!.url"
 					format="webp,avif"
 					quality="85"
 					class="absolute inset-0 w-full h-full object-cover opacity-20"

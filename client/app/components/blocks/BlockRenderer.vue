@@ -10,8 +10,8 @@ const map: Record<string, any> = {
 	"block.cta": defineAsyncComponent(() => import("~/components/blocks/cta/Cta.vue")),
 	"block.faq": defineAsyncComponent(() => import("~/components/blocks/faq/Faq.vue")),
 	"block.info": defineAsyncComponent(() => import("~/components/blocks/info/Info.vue")),
+	"block.story-split": defineAsyncComponent(() => import("~/components/blocks/storySplit/storySplit.vue")),
 	"block.featured": defineAsyncComponent(() => import("~/components/blocks/featured/Featured.vue")),
-	"block.examples-build": defineAsyncComponent(() => import("~/components/blocks/examplesBuild/ExamplesBuild.vue")),
 };
 </script>
 

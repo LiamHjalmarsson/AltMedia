@@ -1,41 +1,14 @@
 <script setup lang="ts">
 import type { ListBlock } from "~/types";
+import { themeClasses } from "~/utils/theme";
 
 const { block } = defineProps<{ block: ListBlock }>();
 
-const bgColor = computed(() => {
-	if (!block.color) {
-		return "bg-bg-dark text-white";
-	}
-
-	if (block.color.hex) {
-		return { backgroundColor: block.color.hex };
-	}
-
-	switch (block.color.type) {
-		case "primary":
-			return "bg-primary";
-		case "secondary":
-			return "bg-secondary";
-		default:
-			return "bg-bg-dark";
-	}
-});
-
-const textColor = computed(() => {
-	if (!block.color) {
-		return "text-white";
-	}
-
-	return block.color.theme === "dark" ? "text-white" : "text-black";
-});
+const theme = computed(() => themeClasses(block.color));
 </script>
 
 <template>
-	<section
-		class="pt-4xl pb-5xl relative"
-		:class="(!block.color?.hex ? bgColor : '', textColor)"
-		:style="block.color?.hex ? bgColor : ''">
+	<section class="pt-4xl pb-5xl relative" :class="theme.sectionClassName" :style="theme.sectionStyle">
 		<NuxtImg
 			v-if="block.background?.url"
 			:src="block.background.url"
@@ -54,9 +27,10 @@ const textColor = computed(() => {
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
 				class="mb-xl lg:mb-2xl xl:mb-2xl"
-				:class="textColor" />
+				:class="theme.contentTextClass" />
 
-			<ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-2xl">
+			<ul
+				class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-2xl xl:gap-4xl pt-2xl">
 				<ListItem
 					v-for="(item, index) in block.items"
 					:key="item.id"

@@ -4,6 +4,12 @@ const globalStore = useGlobalStore();
 const { footer, contact } = storeToRefs(globalStore);
 
 const year = new Date().getFullYear();
+
+const socialMedias = computed(() => contact.value?.social_medias ?? []);
+
+const contactEmail = computed(() => contact.value?.email?.trim() || "");
+
+const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 </script>
 
 <template>
@@ -16,17 +22,17 @@ const year = new Date().getFullYear();
 						:src="footer.logo.url"
 						:alt="footer.logo.alternativeText || 'Alt media'"
 						loading="lazy"
-						width="450"
-						height="300"
+						width="350"
+						height="250"
 						format="webp,avif"
 						quality="85"
 						class="object-contain" />
 
-					<p v-if="footer?.description" class="text-white/90 text-heading-xs max-w-[950px] mt-xl">
+					<p v-if="footer?.description" class="text-white/80 text-heading-xs max-w-[950px] mt-xl">
 						{{ footer?.description }}
 					</p>
 
-					<SocialLinks :social-medias="contact?.social_medias || []" class="mx-auto w-fit mt-md" />
+					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-md" />
 				</div>
 
 				<div class="flex flex-col md:flex-row justify-between gap-3xl mb-2xl lg:mb-4xl">
@@ -41,14 +47,16 @@ const year = new Date().getFullYear();
 
 						<address class="space-y-xs not-italic flex flex-col">
 							<NuxtLink
-								:to="`mailto:${contact?.email}`"
+								v-if="contactEmail"
+								:to="`mailto:${contactEmail}`"
 								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-								>{{ contact?.email }}</NuxtLink
+								>{{ contactEmail }}</NuxtLink
 							>
 							<NuxtLink
-								:to="`tel:${contact?.phone}`"
+								v-if="contactPhone"
+								:to="`tel:${contactPhone}`"
 								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-								>{{ contact?.phone }}</NuxtLink
+								>{{ contactPhone }}</NuxtLink
 							>
 						</address>
 					</div>

@@ -15,76 +15,79 @@ type AutoHeaderContrastOptions = {
 };
 
 const LUMINANCE_THRESHOLD = 0.5;
+
 const DEFAULT_DEBOUNCE_MILLISECONDS = 100;
+
 const NAVIGATION_RETRY_DELAYS_MILLISECONDS = [0, 50, 150, 400, 1000] as const;
 
 /**
  * Global forced theme. Use the returned `force` method to override.
  */
-const forcedThemeGlobal = ref<Theme | null>(null);
+const forcedHeaderThemeRef = ref<Theme | null>(null);
 
 export function useAutoHeaderContrast(
 	headerElementReference: Ref<HTMLElement | null>,
-	options: AutoHeaderContrastOptions = {}
+	options: AutoHeaderContrastOptions = {},
 ) {
-	const internalThemeState = ref<Theme>("dark");
+	const detectedHeaderThemeRef = ref<Theme>("dark");
 
-	const routerInstance = useRouter();
+	const router = useRouter();
 
 	const debounceMilliseconds = options.debounceMilliseconds ?? DEFAULT_DEBOUNCE_MILLISECONDS;
 
 	let scrollTriggerInstance: ScrollTrigger | null = null;
 
 	let resizeDebounceTimerIdentifier: number | null = null;
+
 	let mutationDebounceTimerIdentifier: number | null = null;
+
 	let mutationObserverInstance: MutationObserver | null = null;
 
 	const navigationRetryTimeoutIdentifiers: number[] = [];
+
 	const registeredImageLoadListeners: Array<{ imageElement: HTMLImageElement; listener: EventListener }> = [];
 
-	const theme = computed(() => forcedThemeGlobal.value ?? internalThemeState.value);
+	const theme = computed(() => forcedHeaderThemeRef.value ?? detectedHeaderThemeRef.value);
 
 	function calculateMedianOfNumberArray(numbers: number[]): number | undefined {
 		if (!numbers.length) return undefined;
 
-		const numbersSorted = [...numbers].sort((firstValue, secondValue) => firstValue - secondValue);
-		const medianIndex = Math.floor(numbersSorted.length / 2);
+		const sortedAscending = [...numbers].sort((firstValue, secondValue) => firstValue - secondValue);
 
-		return numbersSorted[medianIndex];
+		const medianIndex = Math.floor(sortedAscending.length / 2);
+
+		return sortedAscending[medianIndex];
 	}
 
-	function resolveNonTransparentBackgroundColorFromElement(startElement: HTMLElement | null): string {
-		let elementToInspect = startElement;
+	function getEffectiveBackgroundColor(startElement: HTMLElement | null): string {
+		let current = startElement;
 
-		while (elementToInspect) {
-			const computedBackgroundColor = getComputedStyle(elementToInspect).backgroundColor;
+		while (current) {
+			const backgroundColor = getComputedStyle(current).backgroundColor;
 
-			if (
-				computedBackgroundColor &&
-				computedBackgroundColor !== "transparent" &&
-				computedBackgroundColor !== "rgba(0, 0, 0, 0)"
-			) {
-				return computedBackgroundColor;
+			if (backgroundColor && backgroundColor !== "transparent" && backgroundColor !== "rgba(0, 0, 0, 0)") {
+				return backgroundColor;
 			}
 
-			elementToInspect = elementToInspect.parentElement;
+			current = current.parentElement;
 		}
 
-		const bodyBackgroundColor = getComputedStyle(document.body).backgroundColor;
-
-		return bodyBackgroundColor || "#f9fafa";
+		return getComputedStyle(document.body).backgroundColor || "#f9fafa";
 	}
 
-	function resolveBackgroundSamplingBaseElement(): HTMLElement {
+	function resolveBackgroundBaseElement(): HTMLElement {
 		if (options.baseSelector) {
 			const explicitElement = document.querySelector<HTMLElement>(options.baseSelector);
+
 			if (explicitElement) return explicitElement;
 		}
 
 		const heroElement = document.querySelector<HTMLElement>(".hero");
+
 		if (heroElement) return heroElement;
 
 		const mainElement = document.querySelector<HTMLElement>("main");
+
 		if (mainElement) return mainElement;
 
 		return document.body;
@@ -112,9 +115,22 @@ export function useAutoHeaderContrast(
 		return samplingPoints;
 	}
 
-	function collectLuminanceSamplesAtViewportPoints(
+	function findNearestHeaderThemeOverride(startElement: HTMLElement | null): Theme | null {
+		let current: HTMLElement | null = startElement;
+
+		while (current) {
+			const override = current.getAttribute("data-header-theme");
+			if (override === "light" || override === "dark") return override;
+
+			current = current.parentElement;
+		}
+
+		return null;
+	}
+
+	function sampleBackgroundLuminanceAtPoints(
 		viewportPoints: [number, number][],
-		headerElement: HTMLElement
+		headerElement: HTMLElement,
 	): number[] {
 		const previousPointerEventsValue = headerElement.style.pointerEvents;
 
@@ -125,10 +141,12 @@ export function useAutoHeaderContrast(
 		try {
 			for (const [sampleX, sampleY] of viewportPoints) {
 				const elementAtPoint = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null;
+
 				if (!elementAtPoint) continue;
 
-				const backgroundColorForElement = resolveNonTransparentBackgroundColorFromElement(elementAtPoint);
-				const luminanceValue = colord(backgroundColorForElement).luminance();
+				const backgroundColor = getEffectiveBackgroundColor(elementAtPoint);
+
+				const luminanceValue = colord(backgroundColor).luminance();
 
 				luminanceValues.push(luminanceValue);
 			}
@@ -139,80 +157,66 @@ export function useAutoHeaderContrast(
 		return luminanceValues;
 	}
 
-	/**
-	 * NEW: explicit override via data attribute
-	 * Example: <section class="hero" data-header-theme="light">
-	 */
-	function resolveThemeOverrideFromElement(startElement: HTMLElement | null): Theme | null {
-		let elementToInspect = startElement;
+	function detectThemeFromBaseBackground(): void {
+		const baseElementToSample = resolveBackgroundBaseElement();
 
-		while (elementToInspect) {
-			const overrideValue = elementToInspect.getAttribute("data-header-theme");
+		const overrideTheme = findNearestHeaderThemeOverride(baseElementToSample);
 
-			if (overrideValue === "light" || overrideValue === "dark") {
-				return overrideValue as Theme;
-			}
-
-			elementToInspect = elementToInspect.parentElement;
+		if (overrideTheme) {
+			detectedHeaderThemeRef.value = overrideTheme;
+			return;
 		}
 
-		return null;
+		const resolvedBaseBackgroundColor = getEffectiveBackgroundColor(baseElementToSample);
+
+		const baseLuminanceValue = colord(resolvedBaseBackgroundColor).luminance();
+
+		detectedHeaderThemeRef.value = baseLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
 	}
 
-	function updateThemeUsingHeaderBackgroundSamples(): void {
+	function detectThemeFromElementsBehindHeader(): void {
 		const headerElement = headerElementReference.value;
+
 		if (!headerElement) return;
 
 		const headerBoundingRectangle = headerElement.getBoundingClientRect();
+
 		const samplingPoints = generateHeaderSamplingPoints(headerBoundingRectangle, 5);
 
 		const previousPointerEventsValue = headerElement.style.pointerEvents;
+
 		headerElement.style.pointerEvents = "none";
 
 		try {
-			// 1) override wins (fixes gradients/background-image/canvas)
 			for (const [sampleX, sampleY] of samplingPoints) {
 				const elementAtPoint = document.elementFromPoint(sampleX, sampleY) as HTMLElement | null;
+
 				if (!elementAtPoint) continue;
 
-				const overrideTheme = resolveThemeOverrideFromElement(elementAtPoint);
+				const overrideTheme = findNearestHeaderThemeOverride(elementAtPoint);
+
 				if (overrideTheme) {
-					internalThemeState.value = overrideTheme;
+					detectedHeaderThemeRef.value = overrideTheme;
+
 					return;
 				}
 			}
 
-			// 2) fallback to luminance for solid colors
-			const luminanceSampleValues = collectLuminanceSamplesAtViewportPoints(samplingPoints, headerElement);
+			const luminanceSampleValues = sampleBackgroundLuminanceAtPoints(samplingPoints, headerElement);
+
 			const medianLuminanceValue = calculateMedianOfNumberArray(luminanceSampleValues);
 
 			if (medianLuminanceValue !== undefined) {
-				internalThemeState.value = medianLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
+				detectedHeaderThemeRef.value = medianLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
 			}
 		} finally {
 			headerElement.style.pointerEvents = previousPointerEventsValue;
 		}
 	}
 
-	function updateThemeUsingBaseElementBackground(): void {
-		const baseElementToSample = resolveBackgroundSamplingBaseElement();
-
-		// override first
-		const overrideTheme = resolveThemeOverrideFromElement(baseElementToSample);
-		if (overrideTheme) {
-			internalThemeState.value = overrideTheme;
-			return;
-		}
-
-		const resolvedBaseBackgroundColor = resolveNonTransparentBackgroundColorFromElement(baseElementToSample);
-		const baseLuminanceValue = colord(resolvedBaseBackgroundColor).luminance();
-
-		internalThemeState.value = baseLuminanceValue < LUMINANCE_THRESHOLD ? "dark" : "light";
-	}
-
 	function refreshComputedTheme(): void {
-		updateThemeUsingBaseElementBackground();
-		updateThemeUsingHeaderBackgroundSamples();
+		detectThemeFromBaseBackground();
+		detectThemeFromElementsBehindHeader();
 		ScrollTrigger.refresh();
 	}
 
@@ -220,10 +224,11 @@ export function useAutoHeaderContrast(
 		for (const retryTimeoutIdentifier of navigationRetryTimeoutIdentifiers) {
 			clearTimeout(retryTimeoutIdentifier);
 		}
+
 		navigationRetryTimeoutIdentifiers.length = 0;
 	}
 
-	function scheduleNavigationRetryThemeRefreshTimers(): void {
+	function scheduleRouteChangeThemeRetries(): void {
 		clearAllScheduledNavigationRetryTimeouts();
 
 		for (const retryDelayMilliseconds of NAVIGATION_RETRY_DELAYS_MILLISECONDS) {
@@ -235,18 +240,25 @@ export function useAutoHeaderContrast(
 		}
 	}
 
-	function observeBaseElementMutationsAndImageLoads(): void {
-		if (mutationObserverInstance) {
-			mutationObserverInstance.disconnect();
-			mutationObserverInstance = null;
-		}
-
+	function stopListeningToImageLoads(): void {
 		for (const registeredListener of registeredImageLoadListeners) {
 			registeredListener.imageElement.removeEventListener("load", registeredListener.listener);
 		}
-		registeredImageLoadListeners.length = 0;
 
-		const baseElementToObserve = resolveBackgroundSamplingBaseElement();
+		registeredImageLoadListeners.length = 0;
+	}
+
+	function observeBaseElementMutationsAndImageLoads(): void {
+		if (mutationObserverInstance) {
+			mutationObserverInstance.disconnect();
+
+			mutationObserverInstance = null;
+		}
+
+		stopListeningToImageLoads();
+
+		const baseElementToObserve = resolveBackgroundBaseElement();
+
 		if (!baseElementToObserve) return;
 
 		mutationObserverInstance = new MutationObserver(() => {
@@ -266,6 +278,7 @@ export function useAutoHeaderContrast(
 		});
 
 		const imageElements = baseElementToObserve.querySelectorAll<HTMLImageElement>("img");
+
 		for (const imageElement of imageElements) {
 			if (!imageElement.complete) {
 				const loadEventListener = () => {
@@ -273,6 +286,7 @@ export function useAutoHeaderContrast(
 				};
 
 				imageElement.addEventListener("load", loadEventListener);
+
 				registeredImageLoadListeners.push({ imageElement, listener: loadEventListener });
 			}
 		}
@@ -297,21 +311,23 @@ export function useAutoHeaderContrast(
 			trigger: document.documentElement,
 			start: "top top",
 			end: "bottom bottom",
-			onUpdate: updateThemeUsingHeaderBackgroundSamples,
-			onRefresh: updateThemeUsingHeaderBackgroundSamples,
+			onUpdate: detectThemeFromElementsBehindHeader,
+			onRefresh: detectThemeFromElementsBehindHeader,
 		});
 
 		window.addEventListener("resize", onWindowResizeDebounced, { passive: true });
 
 		requestAnimationFrame(() => {
 			refreshComputedTheme();
+
 			observeBaseElementMutationsAndImageLoads();
 		});
 
-		routerInstance.afterEach(() => {
+		router.afterEach(() => {
 			nextTick().then(() => {
 				requestAnimationFrame(() => {
-					scheduleNavigationRetryThemeRefreshTimers();
+					scheduleRouteChangeThemeRetries();
+
 					observeBaseElementMutationsAndImageLoads();
 				});
 			});
@@ -321,16 +337,19 @@ export function useAutoHeaderContrast(
 	function destroyAutoHeaderContrast(): void {
 		if (scrollTriggerInstance) {
 			scrollTriggerInstance.kill();
+
 			scrollTriggerInstance = null;
 		}
 
 		if (resizeDebounceTimerIdentifier) {
 			clearTimeout(resizeDebounceTimerIdentifier);
+
 			resizeDebounceTimerIdentifier = null;
 		}
 
 		if (mutationDebounceTimerIdentifier) {
 			clearTimeout(mutationDebounceTimerIdentifier);
+
 			mutationDebounceTimerIdentifier = null;
 		}
 
@@ -338,13 +357,11 @@ export function useAutoHeaderContrast(
 
 		if (mutationObserverInstance) {
 			mutationObserverInstance.disconnect();
+
 			mutationObserverInstance = null;
 		}
 
-		for (const registeredListener of registeredImageLoadListeners) {
-			registeredListener.imageElement.removeEventListener("load", registeredListener.listener);
-		}
-		registeredImageLoadListeners.length = 0;
+		stopListeningToImageLoads();
 
 		window.removeEventListener("resize", onWindowResizeDebounced);
 	}
@@ -355,14 +372,14 @@ export function useAutoHeaderContrast(
 			(newTheme) => {
 				options.onThemeChange?.(newTheme);
 			},
-			{ immediate: true }
+			{ immediate: true },
 		);
 	}
 
 	return {
 		theme,
 		force: (value: Theme | null) => {
-			forcedThemeGlobal.value = value;
+			forcedHeaderThemeRef.value = value;
 		},
 		init: initializeAutoHeaderContrast,
 		destroy: destroyAutoHeaderContrast,

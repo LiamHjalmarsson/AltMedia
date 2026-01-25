@@ -9,14 +9,12 @@ const { findOne } = useStrapi();
 await useAsyncData("articles", () => articleStore.fetchArticles(), {
 	server: true,
 	lazy: true,
-	default: () => [],
-	transform: (data) => data,
 });
 
 const { data: page } = await useAsyncData("articlesPage", async () => {
-	const res = await findOne<PageContent>("articles-page");
+	const { data } = await findOne<PageContent>("articles-page");
 
-	return res.data;
+	return data;
 });
 
 useAppHead(page?.value?.seo || undefined);
@@ -30,11 +28,11 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="my-4xl" />
+				class="mt-4xl mb-3xl" />
 
-			<div class="grid md:grid-cols-2 gap-2xl lg:gap-4xl">
+			<div class="grid lg:grid-cols-2 gap-2xl lg:gap-4xl">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
-					<NuxtLink :to="`/articles/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
+					<NuxtLink :to="`/blogg/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<figure class="overflow-hidden block shadow-lg">
 							<NuxtImg
 								v-if="article.cover?.url"

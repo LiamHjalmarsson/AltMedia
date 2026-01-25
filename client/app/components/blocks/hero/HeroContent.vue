@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Hero } from "~/types";
 
-const { content } = defineProps<{ hasForm: boolean; content: Hero }>();
+const { content } = defineProps<{ splitLayout: boolean; content: Hero }>();
 
 function formatColoredWords(content: Hero): string {
 	let title = content.title;
@@ -21,7 +21,7 @@ function formatColoredWords(content: Hero): string {
 <template>
 	<div
 		class="flex flex-col space-y-lg lg:space-y-xl"
-		:class="hasForm ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
+		:class="splitLayout ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
 		<h1
 			class="text-heading-4xl md:text-heading-5xl xl:text-heading-6xl font-extrabold"
 			v-html="formatColoredWords(content)" />
