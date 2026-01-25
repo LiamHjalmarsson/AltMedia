@@ -10,7 +10,7 @@ const slug = computed(() => route.params.slug as string);
 await useAsyncData(
 	() => `article:${slug.value}`,
 	() => articleStore.fetchArticleBySlug(slug.value),
-	{ server: true, lazy: true, watch: [slug] }
+	{ server: true, lazy: true, watch: [slug] },
 );
 
 // watchEffect(() => {
@@ -20,10 +20,10 @@ await useAsyncData(
 
 <template>
 	<section
-		class="hero overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[80vh] max-lg:h-screen">
+		class="hero overflow-hidden relative flex justify-center items-center px-xl py-4xl lg:px-lg xl:px-xl lg:py-5xl min-h-[100vh] max-lg:h-screen">
 		<div class="pt-xl relative z-10">
 			<div class="flex lg:space-x-3xl items-center relative z-10 max-w-[1600px]">
-				<div class="flex-1">
+				<div class="w-1/2">
 					<h1 class="text-heading-4xl md:text-heading-5xl xl:text-heading-6xl font-extrabold mb-xl">
 						{{ currentArticle?.title }}
 					</h1>
@@ -32,20 +32,17 @@ await useAsyncData(
 					</span>
 				</div>
 
-				<div class="w-1/3">
+				<div class="flex-1">
 					<NuxtImg
 						:src="currentArticle?.cover.url"
 						:alt="currentArticle?.cover.alternativeText || currentArticle?.title"
 						format="webp,avif"
 						quality="85"
-						class="h-[350px]"
 						loading="lazy" />
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<Introduction v-if="currentArticle?.introduction" :block="currentArticle.introduction" />
 
 	<BlockRenderer v-if="currentArticle?.blocks" :blocks="currentArticle.blocks" />
 </template>

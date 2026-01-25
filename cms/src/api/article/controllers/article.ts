@@ -40,17 +40,6 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 				services: {
 					fields: ["id", "title", "slug", "description"],
 				},
-				hero: {
-					populate: {
-						background: {
-							fields: ["alternativeText", "formats", "height", "width", "url", "provider", "mime"],
-						},
-						links: "*",
-						color: {
-							fields: ["type", "hex", "theme"],
-						},
-					},
-				},
 				blocks: {
 					on: {
 						"block.list": { populate: "*" },
@@ -62,6 +51,14 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 								},
 								button: {
 									fields: ["label", "variant", "type", "icon", "size", "reversed"],
+								},
+							},
+						},
+						"block.story-split": {
+							populate: {
+								fields: ["id", "title", "content", "reverse"],
+								images: {
+									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
 								},
 							},
 						},

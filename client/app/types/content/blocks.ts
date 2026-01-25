@@ -143,4 +143,5 @@ export type Blocks =
 	| ListBlock
 	| FaqBlock
 	| FeaturedBlock
-	| ExamplesBuildBlock;
+	| ExamplesBuildBlock
+	| StorySplitBlock;

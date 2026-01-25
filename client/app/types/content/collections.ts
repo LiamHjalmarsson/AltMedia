@@ -17,8 +17,6 @@ export interface Article {
 	reading_time_min?: number | null;
 	cover: Image;
 	services?: RelatedService[];
-	hero?: Hero;
-	introduction?: Introduction;
 	blocks?: Blocks[];
 	seo: Seo | null;
 }

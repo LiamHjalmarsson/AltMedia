@@ -75,27 +75,6 @@
       "target": "api::service.service",
       "mappedBy": "articles"
     },
-    "hero": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "block.hero",
-      "repeatable": false
-    },
-    "introduction": {
-      "type": "component",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      },
-      "component": "sections.introduction",
-      "repeatable": false,
-      "required": true
-    },
     "blocks": {
       "type": "dynamiczone",
       "pluginOptions": {
@@ -106,7 +85,8 @@
       "components": [
         "block.full-section",
         "block.list",
-        "block.info"
+        "block.info",
+        "block.story-split"
       ]
     },
     "seo": {
