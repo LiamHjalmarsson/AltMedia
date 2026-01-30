@@ -14,8 +14,8 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 		class="focus-visible:outline-primary flex">
 		<div
 			ref="linkWrapper"
-			class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition">
-			<span class="relative flex items-center z-10 px-lg" :class="[textSizeClassBySize[size]]">
+			class="relative flex items-center justify-center font-bold px-xl max-lg:w-full cursor-pointer min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition">
+			<span class="relative flex items-center z-10 px-lg max-lg:text-white" :class="[textSizeClassBySize[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"
@@ -35,7 +35,7 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 				}" />
 
 			<span
-				class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden"
+				class="absolute top-0 left-0 h-16 w-full rounded-full lg:hidden"
 				:class="variantClassByVariant[variant]" />
 		</div>
 	</NuxtLink>

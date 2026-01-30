@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_block_introductions",
+  "info": {
+    "displayName": "Introduction"
+  },
+  "options": {},
+  "attributes": {
+    "heading": {
+      "type": "component",
+      "component": "ui.heading",
+      "repeatable": false
+    },
+    "content": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

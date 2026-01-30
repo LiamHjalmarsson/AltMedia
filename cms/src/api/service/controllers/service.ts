@@ -69,10 +69,26 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 					fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
 				},
 				subservices: {
-					fields: ["id", "title", "slug", "content"],
+					fields: ["id", "title", "slug", "description", "has_page"],
 					populate: {
 						tags: {
 							fields: ["title"],
+						},
+						icon: {
+							fields: ["is_image", "icon_name"],
+							populate: {
+								image: {
+									fields: [
+										"url",
+										"alternativeText",
+										"formats",
+										"width",
+										"height",
+										"mime",
+										"provider",
+									],
+								},
+							},
 						},
 					},
 				},
@@ -104,4 +120,3 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 		return this.transformResponse(sanitizedEntity);
 	},
 }));
-

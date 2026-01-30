@@ -21,18 +21,20 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 		<div class="relative flex flex-col justify-center h-full" :class="[isEvenRow ? 'lg:order-1' : 'lg:order-2']">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
 
-			<div class="pb-xl px-xl pt-md lg:p-md text-center lg:text-left">
-				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start space-x-lg mb-md">
+			<div class="lg:p-md text-center lg:text-left">
+				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start lg:space-x-lg mb-sm lg:mb-md">
 					<span v-if="showNumbers" class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter mt-sm">
+					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter">
 						{{ item.title }}
 					</h3>
 				</div>
 
-				<StrapiBlocksText v-if="item.content?.length" :nodes="item.content" />
+				<div class="space-y-lg">
+					<StrapiBlocksText v-if="item.content?.length" :nodes="item.content" />
+				</div>
 			</div>
 		</div>
 	</li>

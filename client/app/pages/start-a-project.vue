@@ -63,12 +63,10 @@ async function animateStep(direction: "next" | "prev", action: () => void) {
 </script>
 
 <template>
-	<section class="relative py-5xl">
+	<section class="relative pt-5xl min-h-screen">
 		<SuccessMessage v-if="isSubmitted" />
 
-		<div
-			v-else
-			class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
+		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl">
 			<div class="flex-1 xl:min-w-[850px]">
 				<Progressbar :steps="steps" :active-step-index="currentStepIndex" :progress="progressPercent" />
 

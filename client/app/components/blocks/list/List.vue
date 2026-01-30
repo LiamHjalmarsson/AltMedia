@@ -8,7 +8,7 @@ const theme = computed(() => themeClasses(block.color));
 </script>
 
 <template>
-	<section class="pt-4xl pb-5xl relative" :class="theme.sectionClassName" :style="theme.sectionStyle">
+	<section class="py-3xl lg:py-5xl relative" :class="theme.sectionClassName" :style="theme.sectionStyle">
 		<NuxtImg
 			v-if="block.background?.url"
 			:src="block.background.url"
@@ -29,8 +29,7 @@ const theme = computed(() => themeClasses(block.color));
 				class="mb-xl lg:mb-2xl xl:mb-2xl"
 				:class="theme.contentTextClass" />
 
-			<ul
-				class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 max-sm:gap-2xl sm:gap-xl lg:gap-2xl xl:gap-4xl pt-2xl">
+			<ul class="grid grid-cols-1 gap-3xl sm:gap-2xl md:gap-3xl lg:gap-4xl xl:gap-5xl pt-2xl">
 				<ListItem
 					v-for="(item, index) in block.items"
 					:key="item.id"

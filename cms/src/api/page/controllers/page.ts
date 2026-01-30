@@ -123,17 +123,6 @@ export default factories.createCoreController("api::page.page", ({ strapi }) => 
 						"sections.introduction": {
 							populate: {
 								fields: ["id", "title", "subtitle", "description"],
-								// subservices: {
-								// 	fields: ["title", "content", "has_page"],
-								// 	populate: {
-								// 		tags: {
-								// 			fields: ["title"],
-								// 		},
-								// 		service: {
-								// 			fields: ["slug"],
-								// 		},
-								// 	},
-								// },
 							},
 						},
 					},

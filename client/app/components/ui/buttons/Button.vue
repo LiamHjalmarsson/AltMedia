@@ -28,7 +28,7 @@ const { element: button, backgroundColor } = useHoverAnimation(props.reversed ??
 			:class="variantClassByVariant[variant]" />
 
 		<span
-			class="absolute top-0 left-0 h-11 w-full rounded-full lg:hidden"
+			class="absolute top-0 left-0 h-16 w-full rounded-full lg:hidden"
 			:class="variantClassByVariant[variant]" />
 	</button>
 </template>

@@ -19,9 +19,7 @@ function toggle() {
 </script>
 
 <template>
-	<li
-		class="px-md lg:px-xl py-xl lg:py-xl transition duration-300 border-b border-black/60 last:border-0"
-		@click="toggle">
+	<li class="lg:px-xl py-xl lg:py-xl transition duration-300 border-b border-black/60 last:border-0" @click="toggle">
 		<button
 			type="button"
 			:id="`faq-title-${item.id}`"
@@ -29,10 +27,12 @@ function toggle() {
 			:aria-controls="`faq-answer-${item.id}`"
 			class="flex items-center justify-between w-full">
 			<div class="flex items-center space-x-lg">
-				<span class="max-lg:hidden text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
+				<span
+					class="max-lg:hidden text-heading-xs md:text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
 					{{ questionNumber }}
 				</span>
-				<div class="text-heading-md font-bold flex-1 text-start leading-[1.25]">
+				<div
+					class="text-heading-xs md:text-heading-sm lg:text-heading-md font-bold flex-1 text-start leading-[1.25]">
 					{{ item.question }}
 				</div>
 			</div>
@@ -49,7 +49,7 @@ function toggle() {
 				v-show="isOpen"
 				:id="`faq-answer-${item.id}`"
 				:aria-labelledby="`faq-title-${item.id}`"
-				class="overflow-hidden mt-sm px-xl space-y-md">
+				class="overflow-hidden mt-sm lg:px-xl space-y-md">
 				<StrapiBlocksText :nodes="item.answer" />
 			</div>
 		</Transition>

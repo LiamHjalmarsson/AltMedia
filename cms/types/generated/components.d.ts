@@ -32,6 +32,18 @@ export interface BlockItemsListItem extends Struct.ComponentSchema {
   };
 }
 
+export interface BlockContentSection extends Struct.ComponentSchema {
+  collectionName: 'components_block_content_sections';
+  info: {
+    displayName: 'Content Section';
+  };
+  attributes: {
+    anchor: Schema.Attribute.String;
+    body: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface BlockCta extends Struct.ComponentSchema {
   collectionName: 'components_block_ctas';
   info: {
@@ -142,6 +154,17 @@ export interface BlockInfo extends Struct.ComponentSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'none'>;
     reverse: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+  };
+}
+
+export interface BlockIntroduction extends Struct.ComponentSchema {
+  collectionName: 'components_block_introductions';
+  info: {
+    displayName: 'Introduction';
+  };
+  attributes: {
+    content: Schema.Attribute.Blocks;
+    heading: Schema.Attribute.Component<'ui.heading', false>;
   };
 }
 
@@ -491,6 +514,14 @@ export interface UiButton extends Struct.ComponentSchema {
   };
 }
 
+export interface UiDivider extends Struct.ComponentSchema {
+  collectionName: 'components_ui_dividers';
+  info: {
+    displayName: 'Divider';
+  };
+  attributes: {};
+}
+
 export interface UiHeading extends Struct.ComponentSchema {
   collectionName: 'components_ui_headings';
   info: {
@@ -543,12 +574,14 @@ declare module '@strapi/strapi' {
     export interface ComponentSchemas {
       'block-items.faq-item': BlockItemsFaqItem;
       'block-items.list-item': BlockItemsListItem;
+      'block.content-section': BlockContentSection;
       'block.cta': BlockCta;
       'block.faq': BlockFaq;
       'block.featured': BlockFeatured;
       'block.full-section': BlockFullSection;
       'block.hero': BlockHero;
       'block.info': BlockInfo;
+      'block.introduction': BlockIntroduction;
       'block.list': BlockList;
       'block.story-split': BlockStorySplit;
       'form.form': FormForm;
@@ -567,6 +600,7 @@ declare module '@strapi/strapi' {
       'seo.seo': SeoSeo;
       'styles.color': StylesColor;
       'ui.button': UiButton;
+      'ui.divider': UiDivider;
       'ui.heading': UiHeading;
       'ui.icon': UiIcon;
       'ui.link': UiLink;

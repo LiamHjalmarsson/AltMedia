@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_block_content_sections",
+  "info": {
+    "displayName": "Content Section"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "blocks"
+    },
+    "anchor": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

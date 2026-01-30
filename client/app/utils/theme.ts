@@ -5,11 +5,17 @@ type BlockColor =
 	| undefined
 	| {
 			hex?: string | null;
-			type?: Variant;
+			type?: Variant | "white" | "black";
 			theme?: Theme;
 	  };
 
-export function themeClasses(color: BlockColor) {
+type ThemeClassesResult = {
+	sectionClassName: string;
+	sectionStyle?: { backgroundColor: string } | undefined;
+	contentTextClass: string;
+};
+
+export function themeClasses(color: BlockColor): ThemeClassesResult {
 	const defaultBackgroundClassName = "bg-bg-dark";
 
 	const defaultTextClassName = "text-white";
@@ -23,7 +29,9 @@ export function themeClasses(color: BlockColor) {
 	}
 
 	if (color.hex) {
-		const textClassName = color.theme === "dark" ? "text-white" : "text-black";
+		const theme: Theme = color.theme ?? "dark";
+
+		const textClassName = theme === "dark" ? "text-white" : "text-black";
 
 		return {
 			sectionClassName: textClassName,
@@ -37,9 +45,15 @@ export function themeClasses(color: BlockColor) {
 			? "bg-primary"
 			: color.type === "secondary"
 				? "bg-secondary"
-				: defaultBackgroundClassName;
+				: color.type === "white"
+					? "bg-white"
+					: color.type === "black"
+						? "bg-black"
+						: defaultBackgroundClassName;
 
-	const textClassName = color.theme === "dark" ? "text-white" : "text-black";
+	const theme: Theme = color.theme ?? (color.type === "white" ? "light" : "dark");
+
+	const textClassName = theme === "dark" ? "text-white" : "text-black";
 
 	return {
 		sectionClassName: `${backgroundClassName} ${textClassName}`,

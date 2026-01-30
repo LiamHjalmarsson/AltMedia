@@ -135,6 +135,26 @@ export interface CtaBlock extends Cta {
 	__component: "block.cta";
 }
 
+export interface IntroductionBlock {
+	__component: "block.introduction";
+	id: number;
+	heading: Heading;
+	content: BlockNode[];
+}
+
+export interface ContentSectionBlock {
+	__component: "block.content-section";
+	id: number;
+	title: string;
+	anchor: string;
+	body: BlockNode[];
+}
+
+export interface DividerBlock {
+	__component: "ui.divider";
+	id: number;
+}
+
 export type Blocks =
 	| HeroBlock
 	| CtaBlock
@@ -143,5 +163,4 @@ export type Blocks =
 	| ListBlock
 	| FaqBlock
 	| FeaturedBlock
-	| ExamplesBuildBlock
 	| StorySplitBlock;

@@ -5,7 +5,7 @@ defineProps<{ image: Image; title: string }>();
 </script>
 
 <template>
-	<div class="overflow-hidden">
+	<div class="overflow-hidden max-lg:w-72 max-lg:m-auto">
 		<NuxtImg
 			v-if="image.url"
 			:src="image.url"

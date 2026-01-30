@@ -69,6 +69,32 @@
         }
       }
     },
+    "display_table_of_contents": {
+      "type": "boolean",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": true
+    },
+    "table_of_contents_title": {
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "default": "I den här artikeln"
+    },
+    "content": {
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "services": {
       "type": "relation",
       "relation": "manyToMany",
@@ -83,10 +109,9 @@
         }
       },
       "components": [
-        "block.full-section",
-        "block.list",
-        "block.info",
-        "block.story-split"
+        "block.introduction",
+        "block.content-section",
+        "ui.divider"
       ]
     },
     "seo": {

@@ -32,7 +32,17 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 
 		const entity = await strapi.documents("api::article.article").findFirst({
 			filters: { slug },
-			fields: ["id", "title", "slug", "description", "published_date", "reading_time_min"],
+			fields: [
+				"id",
+				"title",
+				"slug",
+				"description",
+				"published_date",
+				"reading_time_min",
+				"table_of_contents_title",
+				"display_table_of_contents",
+				"content",
+			],
 			populate: {
 				cover: {
 					fields: ["alternativeText", "formats", "height", "width", "url", "provider", "mime"],
@@ -42,27 +52,18 @@ export default factories.createCoreController("api::article.article", ({ strapi 
 				},
 				blocks: {
 					on: {
-						"block.list": { populate: "*" },
-						"block.info": {
-							fields: ["id", "align_content", "content", "reverse", "image_fade"],
+						"block.introduction": {
+							fields: ["content"],
 							populate: {
-								image: {
-									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
-								},
-								button: {
-									fields: ["label", "variant", "type", "icon", "size", "reversed"],
+								heading: {
+									fields: ["align_content", "title"],
 								},
 							},
 						},
-						"block.story-split": {
-							populate: {
-								fields: ["id", "title", "content", "reverse"],
-								images: {
-									fields: ["formats", "name", "width", "height", "url", "provider", "mime"],
-								},
-							},
+						"block.content-section": {
+							fields: ["anchor", "body", "title", "id"],
 						},
-						"block.full-section": { populate: "*" },
+						"ui.divider": { populate: "*" },
 					},
 				},
 				seo: {

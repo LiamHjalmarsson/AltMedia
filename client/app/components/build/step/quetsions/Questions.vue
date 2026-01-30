@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Step } from "~/types";
 
-defineProps<{
+const props = defineProps<{
 	step: Step;
 	isLastStep: boolean;
 }>();
@@ -22,6 +22,7 @@ defineProps<{
 					<legend class="font-semibold text-lg">
 						{{ question.title }} <span v-if="question.required" class="text-primary">*</span>
 					</legend>
+
 					<p v-if="question.help_text" class="text-black/80 text-sm mt-xs">
 						{{ question.help_text }}
 					</p>

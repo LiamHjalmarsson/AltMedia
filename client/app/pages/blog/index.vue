@@ -24,13 +24,14 @@ useAppHead(page?.value?.seo || undefined);
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
 		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
 			<Heading
+				v-if="page?.title"
 				tag="h1"
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="mt-4xl mb-3xl" />
+				class="lg:mt-4xl mb-3xl" />
 
-			<div class="grid lg:grid-cols-2 gap-2xl lg:gap-4xl">
+			<div class="grid md:grid-cols-2 gap-2xl lg:gap-4xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
 					<NuxtLink :to="`/blogg/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<figure class="overflow-hidden block shadow-lg">
@@ -46,7 +47,7 @@ useAppHead(page?.value?.seo || undefined);
 
 						<header class="mt-lg">
 							<h2
-								class="text-heading-md sm:text-heading-md md:text-heading-lg font-bold lg:group-hover:text-primary transition-colors duration-300">
+								class="font-bold text-heading-md sm:text-heading-lg md:text-heading-xl lg:group-hover:text-primary transition-colors duration-300">
 								{{ article.title }}
 							</h2>
 
@@ -56,7 +57,7 @@ useAppHead(page?.value?.seo || undefined);
 
 							<div
 								v-if="article.published_date"
-								class="flex justify-between items-center mt-md text-black/80">
+								class="flex justify-between items-center text-xs mt-md text-black/80">
 								<span>{{ article.published_date }}</span>
 								<span>{{ article.reading_time_min || "10" }} min läsning</span>
 							</div>

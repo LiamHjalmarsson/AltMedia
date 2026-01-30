@@ -34,8 +34,15 @@
     "price_once": {
       "type": "integer"
     },
+    "description": {
+      "type": "text"
+    },
     "content": {
       "type": "blocks"
+    },
+    "has_page": {
+      "type": "boolean",
+      "default": false
     },
     "icon": {
       "type": "component",
@@ -59,10 +66,6 @@
         "block.info",
         "block.full-section"
       ]
-    },
-    "has_page": {
-      "type": "boolean",
-      "default": false
     },
     "seo": {
       "type": "component",

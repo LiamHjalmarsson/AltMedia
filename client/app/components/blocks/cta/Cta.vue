@@ -12,6 +12,8 @@ const isCoverVideo = computed(() => {
 
 	return mime && mime.startsWith("video/");
 });
+
+console.log(block.background?.theme);
 </script>
 
 <template>
@@ -19,8 +21,9 @@ const isCoverVideo = computed(() => {
 		aria-labelledby="cta-title"
 		class="relative overflow-hidden"
 		:class="theme.sectionClassName"
+		:data-header-theme="block.background?.theme"
 		:style="theme.sectionStyle">
-		<div class="relative px-lg py-3xl lg:p-3xl" :class="theme.contentTextClass">
+		<div class="relative p-lg md:px-2xl py-3xl lg:p-3xl" :class="theme.contentTextClass">
 			<template v-if="hasCoverMedia">
 				<video
 					v-if="isCoverVideo"
@@ -44,20 +47,20 @@ const isCoverVideo = computed(() => {
 			</template>
 
 			<div class="relative text-center lg:p-3xl w-full max-w-[1050px] mx-auto bg-bg-dark/0">
-				<p v-if="block.subtitle" class="text-sm font-semibold tracking-widest uppercase text-secondary">
+				<p v-if="block.subtitle" class="text-sm font-semibold tracking-widest uppercase text-secondary mb-xl">
 					{{ block.subtitle }}
 				</p>
 
-				<h2 id="cta-title" class="mt-xl text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
+				<h2 id="cta-title" class="text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
 					{{ block.title }}
 				</h2>
 
-				<p v-if="block.description" class="mx-auto mt-xl text-xl">
+				<p v-if="block.description" class="mx-auto mt-lg lg:mt-xl text-lg lg:text-xl">
 					{{ block.description }}
 				</p>
 
 				<div
-					class="mt-3xl w-full flex flex-col items-center justify-center max-md:space-y-lg md:space-x-xl max-md:max-w-[250px] max-w-[500px] lg:max-w-[600px] md:flex-row mx-auto">
+					class="mt-xl lg:mt-2xl w-full flex flex-col items-center justify-center max-md:space-y-lg md:space-x-xl max-md:max-w-[250px] max-w-[500px] lg:max-w-[600px] md:flex-row mx-auto">
 					<ButtonLink
 						v-for="link in block.links"
 						:key="link.id"

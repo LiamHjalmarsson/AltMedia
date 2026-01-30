@@ -10,7 +10,7 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 		const sanitizedQuery = await this.sanitizeQuery(ctx);
 
 		const results = await strapi.documents("api::subservice.subservice").findMany({
-			fields: ["id", "title", "slug", "content", "price_once"],
+			fields: ["id", "title", "slug", "content", "price_once", "description"],
 			populate: {
 				icon: {
 					fields: ["icon_name", "is_image"],
@@ -38,7 +38,7 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 
 		const entity = await strapi.documents("api::subservice.subservice").findFirst({
 			filters: { slug },
-			fields: ["id", "title", "slug", "content", "price_once"],
+			fields: ["id", "title", "slug", "content", "price_once", "description"],
 			populate: {
 				tags: { fields: ["id", "title"] },
 				service: { fields: ["id", "title", "slug"] },
@@ -63,15 +63,6 @@ export default factories.createCoreController("api::subservice.subservice", ({ s
 				},
 				introduction: {
 					fields: ["id", "title", "subtitle", "description"],
-					populate: {
-						subservices: {
-							fields: ["title", "slug"],
-							populate: {
-								tags: { fields: ["title"] },
-								service: { fields: ["slug"] },
-							},
-						},
-					},
 				},
 				blocks: {
 					on: {

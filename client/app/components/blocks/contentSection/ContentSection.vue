@@ -1,19 +1,20 @@
 <script setup lang="ts">
-import type { Heading } from "~/types";
 import type { BlockNode } from "#strapi-blocks-renderer/types";
 
 defineProps<{
-	heading: Heading;
+	title: string;
+	anchor: string;
 	content: BlockNode[];
 }>();
 </script>
 
 <template>
-	<header class="max-w-[78ch]">
-		<Heading v-bind="heading" class="mb-xl" tag="h2" />
-
+	<section :id="anchor" class="scroll-mt-6xl">
+		<h3 class="font-semibold text-heading-md sm:text-heading-lg mb-sm">
+			{{ title }}
+		</h3>
 		<div class="space-y-lg" v-if="content?.length">
 			<StrapiBlocksText :nodes="content" />
 		</div>
-	</header>
+	</section>
 </template>

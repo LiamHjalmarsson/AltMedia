@@ -2,8 +2,8 @@ import type { BlockNode } from "#strapi-blocks-renderer/types";
 import type { Image, ImageFormat } from "../shared/media";
 import type { Introduction } from "../shared/sections";
 import type { Seo } from "../shared/seo";
-import type { Icon } from "../shared/ui";
-import type { Blocks, Hero } from "./blocks";
+import type { Heading, Icon } from "../shared/ui";
+import type { Blocks, ContentSectionBlock, DividerBlock, Hero, IntroductionBlock } from "./blocks";
 import type { SocialMedia } from "./singles";
 
 export type RelatedService = Pick<Service, "id" | "title" | "slug">;
@@ -15,11 +15,16 @@ export interface Article {
 	description?: string;
 	published_date: Date;
 	reading_time_min?: number | null;
+	display_table_of_contents: boolean;
+	table_of_contents_title?: string;
+	content: BlockNode[];
 	cover: Image;
 	services?: RelatedService[];
-	blocks?: Blocks[];
+	blocks?: ArticleBlock[];
 	seo: Seo | null;
 }
+
+export type ArticleBlock = IntroductionBlock | ContentSectionBlock | DividerBlock;
 
 export interface Project {
 	id: string;
@@ -43,7 +48,7 @@ export interface Service {
 	content: BlockNode[];
 	icon: Icon;
 	image: Image;
-	subservices: Pick<Subservice, "id" | "title" | "slug" | "content" | "image" | "has_page">[];
+	subservices: Pick<Subservice, "id" | "title" | "slug" | "content" | "icon" | "has_page" | "description">[];
 	articles?: Pick<Article, "id" | "title" | "slug">[];
 	order?: number;
 	seo?: Seo | null;
@@ -54,10 +59,11 @@ export interface Subservice {
 	title: string;
 	slug: string;
 	price_once?: number | null;
+	description: string;
 	has_page: boolean;
 	content: BlockNode[];
 	service?: Service;
-	image: Image;
+	icon: Icon;
 	tags?: Tag[];
 	hero?: Hero;
 	introduction?: Introduction;
