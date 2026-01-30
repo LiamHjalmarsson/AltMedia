@@ -24,12 +24,7 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 					fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
 				},
 				subservices: {
-					fields: ["id", "title", "slug", "content", "has_page"],
-					populate: {
-						tags: {
-							fields: ["title"],
-						},
-					},
+					fields: ["id", "title", "slug", "has_page"],
 				},
 				seo: {
 					fields: ["meta_title", "meta_description", "meta_canonical_url", "prevent_index"],
@@ -69,29 +64,31 @@ export default factories.createCoreController("api::service.service", ({ strapi 
 					fields: ["url", "alternativeText", "formats", "width", "height", "mime", "provider"],
 				},
 				subservices: {
-					fields: ["id", "title", "slug", "description", "has_page"],
-					populate: {
-						tags: {
-							fields: ["title"],
-						},
-						icon: {
-							fields: ["is_image", "icon_name"],
-							populate: {
-								image: {
-									fields: [
-										"url",
-										"alternativeText",
-										"formats",
-										"width",
-										"height",
-										"mime",
-										"provider",
-									],
-								},
-							},
-						},
-					},
+					fields: ["id", "title", "slug", "description", "content", "has_page"],
 				},
+				// subservices: {
+				// 	populate: {
+				// 		tags: {
+				// 			fields: ["title"],
+				// 		},
+				// 		icon: {
+				// 			fields: ["is_image", "icon_name"],
+				// 			populate: {
+				// 				image: {
+				// 					fields: [
+				// 						"url",
+				// 						"alternativeText",
+				// 						"formats",
+				// 						"width",
+				// 						"height",
+				// 						"mime",
+				// 						"provider",
+				// 					],
+				// 				},
+				// 			},
+				// 		},
+				// 	},
+				// },
 				articles: {
 					fields: ["id", "title", "slug", "published_date", "description"],
 					populate: {

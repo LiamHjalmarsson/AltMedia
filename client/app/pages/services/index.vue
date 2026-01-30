@@ -27,9 +27,9 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:description="page?.description"
 				:align_content="page?.align_content"
-				class="mt-4xl mb-3xl" />
+				class="mt-4xl mb-3xl lg:mb-4xl xl:mb-5xl" />
 
-			<div class="flex flex-col space-y-2xl lg:space-y-4xl" :class="[page?.title ? '' : 'pt-2xl']">
+			<div class="flex flex-col space-y-3xl lg:space-y-4xl xl:space-y-6xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article
 					v-for="(service, index) in services"
 					:key="service.id"

@@ -18,31 +18,13 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 		@mouseleave="animateBubbleToIdleState"
 		class="group relative overflow-hidden transition-all duration-300">
 		<div class="grid lg:grid-cols-2 lg:gap-4xl items-center p-lg lg:p-xl">
-			<div :class="['hidden lg:flex justify-center', isEvenRow ? 'order-1' : 'order-2']">
-				<NuxtImg
-					v-if="subservice.icon.is_image"
-					:src="subservice.icon.image?.url"
-					:alt="subservice.icon.image?.alternativeText || subservice.title"
-					format="webp,avif"
-					quality="85"
-					class="w-full h-auto object-contain"
-					loading="lazy" />
-			</div>
+			<div :class="['hidden lg:flex justify-center', isEvenRow ? 'order-1' : 'order-2']"></div>
 
 			<div
 				:class="[
 					'relative z-10 flex flex-col justify-between h-full',
 					isEvenRow ? 'lg:order-2' : 'lg:order-1',
 				]">
-				<NuxtImg
-					v-if="subservice.icon.is_image"
-					:src="subservice.icon.image?.url"
-					:alt="subservice.icon.image?.alternativeText || subservice.title"
-					format="webp,avif"
-					quality="85"
-					class="lg:hidden mb-lg w-full h-auto object-contain"
-					loading="lazy" />
-
 				<NuxtLink
 					v-if="subservice.has_page"
 					:to="buildSubservicePath(serviceSlug, subservice.slug)"

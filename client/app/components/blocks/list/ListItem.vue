@@ -32,7 +32,7 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 					</h3>
 				</div>
 
-				<div class="space-y-lg">
+				<div class="space-y-md">
 					<StrapiBlocksText v-if="item.content?.length" :nodes="item.content" />
 				</div>
 			</div>

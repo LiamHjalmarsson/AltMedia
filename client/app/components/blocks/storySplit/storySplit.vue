@@ -21,7 +21,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 						{{ block.title }}
 					</h2>
 
-					<div class="mt-lg space-y-lg">
+					<div class="mt-lg space-y-md">
 						<StrapiBlocksText v-if="block.content?.length" :nodes="block.content" />
 					</div>
 				</div>

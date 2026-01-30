@@ -21,7 +21,7 @@ const theme = computed(() => themeClasses(block.color));
 			aria-hidden="true"
 			class="absolute inset-0 w-full h-full object-cover opacity-10" />
 
-		<div class="mx-auto w-full h-full max-w-[1300px] px-lg lg:px-3xl">
+		<div class="mx-auto w-full h-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"

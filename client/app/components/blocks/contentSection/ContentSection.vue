@@ -13,7 +13,7 @@ defineProps<{
 		<h3 class="font-semibold text-heading-md sm:text-heading-lg mb-sm">
 			{{ title }}
 		</h3>
-		<div class="space-y-lg" v-if="content?.length">
+		<div class="space-y-md" v-if="content?.length">
 			<StrapiBlocksText :nodes="content" />
 		</div>
 	</section>

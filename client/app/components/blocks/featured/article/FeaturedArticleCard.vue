@@ -17,8 +17,7 @@ defineProps<{ article: Article }>();
 				format="webp,avif"
 				quality="85"
 				loading="lazy"
-				class="h-full w-full object-cover group-hover:scale-110 duration-300" />
-			<div v-else class="h-full w-full bg-black/5" aria-hidden="true" />
+				class="h-full w-full object-cover absolute inset-0 group-hover:scale-110 duration-300" />
 		</div>
 
 		<div class="flex flex-col justify-between flex-1 mt-md">

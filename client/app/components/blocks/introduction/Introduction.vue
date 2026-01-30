@@ -9,10 +9,10 @@ defineProps<{
 </script>
 
 <template>
-	<header class="max-w-[78ch]">
-		<Heading v-bind="heading" class="mb-xl" tag="h2" />
+	<header class="">
+		<Heading v-bind="heading" class="mb-md lg:mb-lg" tag="h2" />
 
-		<div class="space-y-lg" v-if="content?.length">
+		<div class="space-y-md" v-if="content?.length">
 			<StrapiBlocksText :nodes="content" />
 		</div>
 	</header>
