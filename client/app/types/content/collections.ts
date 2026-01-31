@@ -8,6 +8,8 @@ import type { SocialMedia } from "./singles";
 
 export type RelatedService = Pick<Service, "id" | "title" | "slug">;
 
+export type ArticleBlock = IntroductionBlock | ContentSectionBlock | DividerBlock;
+
 export interface Article {
 	id: number;
 	title: string;
@@ -23,8 +25,6 @@ export interface Article {
 	blocks?: ArticleBlock[];
 	seo: Seo | null;
 }
-
-export type ArticleBlock = IntroductionBlock | ContentSectionBlock | DividerBlock;
 
 export interface Project {
 	id: string;

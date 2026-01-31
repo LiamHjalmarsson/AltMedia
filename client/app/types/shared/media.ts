@@ -7,20 +7,26 @@ export interface ImageFormat {
 	path?: string | null;
 }
 
+export type ImageFormatKey = "thumbnail" | "small" | "medium" | "large";
+
+export type ImageFormats = Partial<Record<ImageFormatKey, ImageFormat>>;
+
 export interface Image {
-	id: number;
-	formats?: {
-		thumbnail?: ImageFormat;
-		small?: ImageFormat;
-		medium?: ImageFormat;
-		large?: ImageFormat;
-	};
 	name: string;
-	width: number;
-	height: number;
+	alternativeText: string | null;
+	caption: string | null;
+	width: number | null;
+	height: number | null;
+
+	formats: ImageFormats | null;
+
+	hash: string;
+	ext: string | null;
+	mime: string;
+	size: number;
+
 	url: string;
-	provider?: string;
-	alternativeText?: string;
-	caption?: string;
-	mime?: string;
+	previewUrl: string | null;
+	provider: string;
+	provider_metadata: Record<string, unknown> | null;
 }
