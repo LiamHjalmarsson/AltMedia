@@ -24,7 +24,7 @@ const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.a
 			<FeaturedProjects v-else-if="hasProjects" :projects="block.projects" />
 
 			<div v-else-if="hasArticles">
-				<ul class="grid gap-2xl">
+				<ul class="grid gap-lg lg:gap-2xl">
 					<li v-for="article in block.articles" :key="article.id">
 						<FeaturedArticleCard :article="article" />
 					</li>

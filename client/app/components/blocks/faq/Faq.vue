@@ -13,7 +13,7 @@ function toggleExpandedQuestion(questionId: number) {
 <template>
 	<section class="relative mt-3xl lg:mt-4xl">
 		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl">
-			<Heading v-bind="block.heading" class="mb-lg lg:mb-xl" />
+			<Heading v-bind="block.heading" class="mb-sm md:mb-lg lg:mb-xl" />
 
 			<ul class="flex flex-col w-full">
 				<FaqItem

@@ -9,7 +9,7 @@ defineProps<{ article: Article }>();
 		:to="buildBlogPostPath(article.slug)"
 		:aria-label="`Läs artikel: ${article.title}`"
 		class="overflow-hidden group cursor-pointer relative pb-lg lg:pb-2xl border-b flex max-md:flex-col space-x-2xl">
-		<div class="h-56 relative overflow-hidden w-full md:w-2/5">
+		<div class="h-40 lg:h-56 relative overflow-hidden w-full md:w-2/5">
 			<NuxtImg
 				v-if="article.cover.url"
 				:src="article.cover.url"
@@ -22,16 +22,17 @@ defineProps<{ article: Article }>();
 
 		<div class="flex flex-col justify-between flex-1 mt-md">
 			<div class="flex-1">
-				<h3 class="text-heading-md font-bold duration-300 group-hover:text-primary">
+				<h3
+					class="font-semibold text-heading-sm md:text-heading-md lg:text-heading-lg tracking-tighter duration-300 group-hover:text-primary">
 					{{ article.title }}
 				</h3>
-				<p class="mt-sm text-black/80 text-lg lg:text-xl line-clamp-3">
+				<p class="mt-sm text-black/80 text-sm md:text-md lg:text-lg line-clamp-3">
 					{{ article.description }}
 				</p>
 			</div>
 
-			<div class="flex items-center justify-between mt-md">
-				<div class="text-xs text-black/80">
+			<div class="flex items-center justify-between mt-sm lg:mt-md">
+				<div class="text-xs text-black/70">
 					<span v-if="article.published_date">
 						{{ article.published_date }}
 					</span>
