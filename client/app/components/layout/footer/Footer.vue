@@ -30,11 +30,11 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 					<p
 						v-if="footer?.description"
-						class="text-white/80 text-sm md:text-lg lg:text-xl max-w-[950px] mt-lg">
+						class="text-white/80 text-sm md:text-lg lg:text-xl max-w-[950px] mt-xl">
 						{{ footer?.description }}
 					</p>
 
-					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-md" />
+					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-xl" />
 				</div>
 
 				<div class="flex flex-col md:flex-row justify-between gap-xl md:gap-2xl lg:gap-3xl mb-2xl lg:mb-4xl">
