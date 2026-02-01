@@ -11,8 +11,8 @@ const logoAltText = computed(() => props.logo?.alternativeText || "Alt Media");
 		<NuxtImg
 			:src="logo?.url"
 			:alt="logoAltText"
-			width="60"
-			height="60"
+			width="40"
+			height="40"
 			format="webp,avif"
 			quality="85"
 			loading="eager" />
