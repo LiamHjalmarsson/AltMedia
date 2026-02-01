@@ -44,13 +44,14 @@ function scrollToSection(anchor: string) {
 		<div class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
 			<div class="flex flex-wrap gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
 				<div class="order-2 xl:order-1 flex-1">
-					<h1 class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl font-semibold leading-[1.05]">
+					<h1
+						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-semibold leading-[1.05]">
 						{{ currentArticle?.title }}
 					</h1>
 
 					<p
 						v-if="currentArticle?.description"
-						class="mt-lg text-lg sm:text-xl text-black/75 leading-relaxed max-w-[62ch]">
+						class="mt-lg text-sm md:text-md lg:text-lg text-black/80 leading-relaxed max-w-[62ch]">
 						{{ currentArticle.description }}
 					</p>
 
@@ -61,7 +62,7 @@ function scrollToSection(anchor: string) {
 					</div>
 				</div>
 
-				<div class="order-1 xl:order-2 flex-1 min-w-[400px]">
+				<div class="order-1 xl:order-2 flex-1 lg:min-w-[400px]">
 					<div
 						class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-xl:max-h-[300px]">
 						<NuxtImg
