@@ -5,7 +5,7 @@ defineProps<{ image: Media; title: string }>();
 </script>
 
 <template>
-	<div class="overflow-hidden max-lg:w-72 max-lg:m-auto">
+	<div class="overflow-hidden max-lg:m-auto">
 		<NuxtImg
 			v-if="image.url"
 			:src="image.url"
@@ -16,6 +16,6 @@ defineProps<{ image: Media; title: string }>();
 			height="450"
 			sizes="(max-width: 768px) 100vw, 50vw"
 			loading="lazy"
-			class="w-full h-full object-contain object-bottom-left max-h-[260px] lg:max-h-[380px]" />
+			class="w-full h-full object-contain object-bottom-left max-h-[140px] md:max-h-[260px] lg:max-h-[380px]" />
 	</div>
 </template>

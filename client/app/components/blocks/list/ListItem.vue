@@ -23,11 +23,13 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 
 			<div class="lg:p-md text-center lg:text-left">
 				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start lg:space-x-lg mb-sm lg:mb-md">
-					<span v-if="showNumbers" class="text-heading-xl lg:text-heading-2xl font-extrabold font-heading">
+					<span
+						v-if="showNumbers"
+						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl font-extrabold font-heading">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-lg md:text-heading-xl font-semibold tracking-tighter">
+					<h3 class="text-heading-md md:text-heading-lg lg:text-heading-xl font-semibold tracking-tighter">
 						{{ item.title }}
 					</h3>
 				</div>

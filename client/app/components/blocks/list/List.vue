@@ -27,10 +27,10 @@ const theme = computed(() => themeClasses(block.color as StylesColorComponent));
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
-				class="mb-xl lg:mb-2xl xl:mb-2xl"
+				class="mb-lg md:mb-xl lg:mb-2xl xl:mb-2xl"
 				:class="theme.contentTextClass" />
 
-			<ul class="grid grid-cols-1 gap-3xl sm:gap-2xl md:gap-3xl lg:gap-4xl xl:gap-5xl pt-2xl">
+			<ul class="grid grid-cols-1 gap-2xl md:gap-3xl lg:gap-4xl xl:gap-5xl pt-lg lg:pt-2xl">
 				<ListItem
 					v-for="(item, index) in block.items"
 					:key="item.id"
