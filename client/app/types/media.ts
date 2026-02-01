@@ -11,15 +11,25 @@ export interface MediaFormat {
 
 export type MediaFormats = Partial<Record<"thumbnail" | "small" | "medium" | "large", MediaFormat>>;
 
+export type ImageFormats = Partial<MediaFormats>;
 export interface Media {
 	id: number;
-	formats: MediaFormats | null;
+
 	name: string;
-	width: number;
-	height: number;
+	alternativeText: string | null;
+	caption: string | null;
+	width: number | null;
+	height: number | null;
+
+	formats: ImageFormats | null;
+
+	hash: string;
+	ext: string | null;
+	mime: string;
+	size: number;
+
 	url: string;
-	provider?: string;
-	alternativeText?: string;
-	caption?: string;
-	mime?: string;
+	previewUrl: string | null;
+	provider: string;
+	provider_metadata: Record<string, unknown> | null;
 }
