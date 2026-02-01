@@ -97,7 +97,7 @@ async function submitForm() {
 		<div
 			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl flex flex-col justify-center items-center md:grid md:grid-cols-2 gap-xl lg:gap-4xl">
 			<div
-				class="max-md:min-h-screen flex flex-col justify-center max-md:items-center max-md:text-center space-y-lg lg:space-y-2xl">
+				class="max-lg:pt-xl flex flex-col justify-center max-md:items-center max-md:text-center space-y-lg lg:space-y-2xl">
 				<div>
 					<h1
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-extrabold mb-md drop-shadow-lg">
