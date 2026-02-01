@@ -20,7 +20,7 @@ const map: BlockMap = {
 	"block.cta": lazy(() => import("~/components/blocks/cta/Cta.vue")),
 	"block.faq": lazy(() => import("~/components/blocks/faq/Faq.vue")),
 	"block.info": lazy(() => import("~/components/blocks/info/Info.vue")),
-	"block.story-split": lazy(() => import("~/components/blocks/storySplit/StorySplit.vue")),
+	"block.story-split": lazy(() => import("~/components/blocks/storySplit/storySplit.vue")),
 	"block.featured": lazy(() => import("~/components/blocks/featured/Featured.vue")),
 };
 </script>
