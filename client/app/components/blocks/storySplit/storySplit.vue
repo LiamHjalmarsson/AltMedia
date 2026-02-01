@@ -26,6 +26,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 					</div>
 				</div>
 
+				<!-- s -->
 				<div :class="['flex-1', mediaOrder]">
 					<div class="relative mx-auto w-full max-w-[420px]">
 						<div class="relative z-10 ml-auto w-[62%]">
