@@ -20,7 +20,7 @@ useAppHead(page?.value?.seo || undefined);
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1400px] px-lg lg:px-2xl">
 			<Heading
 				v-if="page?.title"
 				tag="h1"
@@ -33,9 +33,9 @@ useAppHead(page?.value?.seo || undefined);
 				<article
 					v-for="(service, index) in services"
 					:key="service.id"
-					class="flex flex-col max-lg:items-center lg:flex-row gap-xl lg:gap-4xl"
+					class="flex flex-col max-lg:items-center lg:flex-row gap-xl lg:gap-4xl max-md:min-h-screen max-md:justify-start max-md:items-center"
 					:class="index % 2 === 1 ? 'lg:flex-row-reverse' : ''">
-					<figure class="flex-1 flex max-lg:w-2/3 max-lg:h-36">
+					<figure class="lg:flex-1 flex max-lg:w-2/3 max-lg:h-36">
 						<NuxtImg
 							v-if="service.image?.url"
 							:src="service.image.url"
@@ -47,7 +47,7 @@ useAppHead(page?.value?.seo || undefined);
 					</figure>
 
 					<div
-						class="flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg max-w-[750px] lg:max-w-[600px] max-md:text-center">
+						class="lg:flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg max-w-[750px] lg:max-w-[600px] max-md:text-center">
 						<h2
 							class="font-bold text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl leading-tight">
 							{{ service.title }}
@@ -57,7 +57,7 @@ useAppHead(page?.value?.seo || undefined);
 							<StrapiBlocksText v-if="service.content" :nodes="service.content" />
 						</div>
 
-						<ul class="flex flex-col space-y-sm lg:space-y-md">
+						<ul class="flex flex-col space-y-sm lg:space-y-md max-md:mt-md">
 							<li
 								v-for="subservice in service.subservices"
 								:key="subservice.id"

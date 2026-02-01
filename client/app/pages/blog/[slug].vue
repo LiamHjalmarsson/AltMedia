@@ -62,7 +62,7 @@ function scrollToSection(anchor: string) {
 					</div>
 				</div>
 
-				<div class="order-1 xl:order-2 flex-1 lg:min-w-[400px]">
+				<div class="order-1 xl:order-2 flex-1 min-w-[300px] lg:min-w-[400px]">
 					<div
 						class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-xl:max-h-[300px]">
 						<NuxtImg
