@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Heading } from "~/types";
+import type { UiHeadingComponent } from "~/types/components/ui/heading";
 
-const props = withDefaults(defineProps<Heading>(), {
+const props = withDefaults(defineProps<UiHeadingComponent>(), {
 	align_content: "left",
 	tag: "h2",
 	has_link: false,

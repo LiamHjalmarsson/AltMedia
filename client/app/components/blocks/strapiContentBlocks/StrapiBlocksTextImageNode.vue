@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import type { Media } from "~/types/media";
+
 defineProps<{
-	image: any;
+	image: Media;
 }>();
 </script>
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Image } from "~/types";
+import type { Media } from "~/types/media";
 
-const props = defineProps<{ logo: Image }>();
+const props = defineProps<{ logo: Media }>();
 
 const logoAltText = computed(() => props.logo?.alternativeText || "Alt Media");
 </script>

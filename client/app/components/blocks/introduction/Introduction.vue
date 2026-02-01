@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { Heading } from "~/types";
-import type { BlockNode } from "#strapi-blocks-renderer/types";
+import type { StrapiBlocksContent } from "~/types/blocks";
+import type { UiHeadingComponent } from "~/types/components/ui/heading";
 
 defineProps<{
-	heading: Heading;
-	content: BlockNode[];
+	heading: UiHeadingComponent;
+	content: StrapiBlocksContent;
 }>();
 </script>
 

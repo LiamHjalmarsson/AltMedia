@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Question } from "~/types";
+import type { UiQuestionComponent } from "~/types/components/buildProject/question";
 
-const props = defineProps<{ question: Question }>();
+const props = defineProps<{ question: UiQuestionComponent }>();
 
 const store = useBuildProjectStore();
 

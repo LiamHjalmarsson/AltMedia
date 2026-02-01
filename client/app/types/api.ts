@@ -12,4 +12,14 @@ export interface PaginationMeta {
 	};
 }
 
+export interface ErrorResponse {
+	data: null;
+	error: {
+		status: number;
+		name: string;
+		message: string;
+		details: Record<string, unknown>;
+	};
+}
+
 export type QueryParams = Record<string, string | number | boolean>;

@@ -1,13 +1,13 @@
-import type { Seo } from "~/types";
+import type { SeoComponent } from "~/types/components/seo/seo";
 
-export function useAppHead(seo?: Seo) {
+export function useAppHead(seo?: SeoComponent) {
 	const globalStore = useGlobalStore();
 
-	const { globalConfig, seo: defaultSeo } = storeToRefs(globalStore);
+	const { globalConfigData, seo: defaultSeo } = storeToRefs(globalStore);
 
 	const resolvedSeo = computed(() => seo || defaultSeo.value);
 
-	const fallbackTitle = globalConfig.value?.site_name || "Alt Media";
+	const fallbackTitle = globalConfigData.value?.site_name || "Alt Media";
 
 	const fallbackDesc = "Digital byrå som skapar varumärken, design och teknik som växer.";
 
@@ -15,10 +15,10 @@ export function useAppHead(seo?: Seo) {
 
 	const metaDesc = computed(() => resolvedSeo.value?.meta_description || fallbackDesc);
 
-	const metaImage = computed(() => resolvedSeo.value?.meta_image?.url || globalConfig.value?.seo.meta_image?.url);
+	const metaImage = computed(() => resolvedSeo.value?.meta_image?.url || globalConfigData.value?.seo.meta_image?.url);
 
 	const canonicalUrl = computed(
-		() => resolvedSeo.value?.meta_canonical_url || globalConfig.value?.seo.meta_canonical_url
+		() => resolvedSeo.value?.meta_canonical_url || globalConfigData.value?.seo.meta_canonical_url,
 	);
 
 	// useHead({

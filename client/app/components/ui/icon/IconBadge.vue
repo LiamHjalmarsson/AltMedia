@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { Icon, Variant } from "~/types";
+import type { Variant } from "~/types";
+import type { UiIconComponent } from "~/types/components/ui/icon";
 
 const props = defineProps<{
-	icon: Icon;
+	icon: UiIconComponent;
 	size?: number;
 	variant?: Variant;
 }>();

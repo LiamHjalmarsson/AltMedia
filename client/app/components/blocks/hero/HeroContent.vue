@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Hero } from "~/types";
+import type { BlockHeroComponent } from "~/types/components/block/hero";
 
-const { content } = defineProps<{ splitLayout: boolean; content: Hero }>();
+const { content } = defineProps<{ splitLayout: boolean; content: BlockHeroComponent }>();
 
-function formatColoredWords(content: Hero): string {
+function formatColoredWords(content: BlockHeroComponent): string {
 	let title = content.title;
 
 	if (!content.colored_words) return title;

@@ -1,8 +1,7 @@
-import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { GlobalConfig } from "~/types";
+import type { GlobalConfig } from "~/types/singelTypes/globalConfig";
 
 export const useGlobalStore = defineStore("global-config", () => {
-	const globalConfig = ref<GlobalConfig | null>(null);
+	const globalConfigData = ref<GlobalConfig | null>(null);
 
 	const globalConfigLoaded = ref(false);
 
@@ -10,31 +9,35 @@ export const useGlobalStore = defineStore("global-config", () => {
 
 	const { findOne } = useStrapi();
 
-	async function fetchGlobalConfig() {
-		if (globalConfigLoaded.value) return;
+	async function fetchGlobalConfig(): Promise<GlobalConfig | null> {
+		if (globalConfigLoaded.value) return globalConfigData.value;
 
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseSingle<GlobalConfig> = await findOne<GlobalConfig>("global-config");
+			const res = await findOne<GlobalConfig>("global-config");
 
-			globalConfig.value = res.data;
+			globalConfigData.value = res.data;
 
 			globalConfigLoaded.value = true;
 
-			return globalConfig.value;
+			return globalConfigData.value;
+		} catch (err) {
+			globalConfigData.value = null;
+
+			return null;
 		} finally {
 			loading.value = false;
 		}
 	}
 
-	const header = computed(() => globalConfig.value?.navigation);
+	const header = computed(() => globalConfigData.value?.navigation);
 
-	const footer = computed(() => globalConfig.value?.footer);
+	const footer = computed(() => globalConfigData.value?.footer);
 
-	const seo = computed(() => globalConfig.value?.seo);
+	const seo = computed(() => globalConfigData.value?.seo);
 
-	const contact = computed(() => globalConfig.value?.contact);
+	const contact = computed(() => globalConfigData.value?.contact);
 
-	return { globalConfig, globalConfigLoaded, header, footer, seo, contact, loading, fetchGlobalConfig };
+	return { globalConfigData, globalConfigLoaded, header, footer, seo, contact, loading, fetchGlobalConfig };
 });

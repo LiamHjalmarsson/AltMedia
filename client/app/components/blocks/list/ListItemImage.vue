@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Image } from "~/types";
+import type { Media } from "~/types/media";
 
-defineProps<{ image: Image; title: string }>();
+defineProps<{ image: Media; title: string }>();
 </script>
 
 <template>

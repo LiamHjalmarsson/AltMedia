@@ -1,20 +1,19 @@
-export interface ImageFormat {
+export interface MediaFormat {
 	url: string;
 	name: string;
+	hash: string;
+	mime: string;
 	width: number;
 	height: number;
 	size: number;
-	path?: string | null;
+	path: string;
 }
 
-export interface Image {
+export type MediaFormats = Partial<Record<"thumbnail" | "small" | "medium" | "large", MediaFormat>>;
+
+export interface Media {
 	id: number;
-	formats?: {
-		thumbnail?: ImageFormat;
-		small?: ImageFormat;
-		medium?: ImageFormat;
-		large?: ImageFormat;
-	};
+	formats: MediaFormats | null;
 	name: string;
 	width: number;
 	height: number;

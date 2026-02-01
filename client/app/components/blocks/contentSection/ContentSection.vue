@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { BlockNode } from "#strapi-blocks-renderer/types";
+import type { StrapiBlocksContent } from "~/types/blocks";
 
 defineProps<{
 	title: string;
 	anchor: string;
-	content: BlockNode[];
+	content: StrapiBlocksContent;
 }>();
 </script>
 

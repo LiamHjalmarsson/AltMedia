@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Hero } from "~/types";
+import type { BlockHeroComponent } from "~/types/components/block/hero";
 
-const { block, hasForm } = defineProps<{ hasForm?: boolean; block: Hero }>();
+const { block, hasForm } = defineProps<{ hasForm?: boolean; block: BlockHeroComponent }>();
 
 const splitLayout = computed(() => Boolean(hasForm));
 

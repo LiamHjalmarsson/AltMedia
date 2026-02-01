@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { FaqBlock } from "~/types";
+import type { BlockFaqComponent } from "~/types/components/block/faq";
 
-const { block } = defineProps<{ block: FaqBlock }>();
+const { block } = defineProps<{ block: BlockFaqComponent }>();
 
 const expandedQuestionId = ref<number | null>(null);
 

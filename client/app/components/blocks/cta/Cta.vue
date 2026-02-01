@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import type { Cta } from "~/types";
+import type { BlockCtaComponent } from "~/types/components/block/cta";
+import type { StylesColorComponent } from "~/types/components/styles/color";
 
-const { block } = defineProps<{ block: Cta }>();
+const { block } = defineProps<{ block: BlockCtaComponent }>();
 
-const theme = computed(() => themeClasses(block.color));
+const theme = computed(() => themeClasses(block.color as StylesColorComponent));
 
 const hasCoverMedia = computed(() => block.cover?.url);
 

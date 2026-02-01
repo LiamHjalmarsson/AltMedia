@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Subservice } from "~/types";
+import type { Subservice } from "~/types/collectionTypes/subservice";
 
 const { hoverBubbleElementRef, animateBubbleToHoverState, animateBubbleToIdleState } = useBackgroundBubble();
 

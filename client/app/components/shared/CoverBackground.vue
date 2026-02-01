@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Image } from "~/types";
+import type { Media } from "~/types/media";
 
 const props = defineProps<{
-	media: Image | null;
+	media: Media | null;
 }>();
 
 const isVideo = computed(() => {

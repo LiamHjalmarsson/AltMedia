@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { ListBlock } from "~/types";
+import type { BlockListComponent } from "~/types/components/block/list";
+import type { StylesColorComponent } from "~/types/components/styles/color";
 import { themeClasses } from "~/utils/theme";
 
-const { block } = defineProps<{ block: ListBlock }>();
+const { block } = defineProps<{ block: BlockListComponent }>();
 
-const theme = computed(() => themeClasses(block.color));
+const theme = computed(() => themeClasses(block.color as StylesColorComponent));
 </script>
 
 <template>

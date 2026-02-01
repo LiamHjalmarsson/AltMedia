@@ -1,6 +1,7 @@
-import { defineStore } from "pinia";
 import type { Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { BuildProjectPage, Question, Step } from "~/types";
+import type { BuildProjectPage } from "~/types/singelTypes/buildProjectPage";
+import type { UiStepComponent } from "~/types/components/buildProject/step";
+import type { UiQuestionComponent } from "~/types/components/buildProject/question";
 
 type FormValue = string | string[] | undefined;
 
@@ -9,7 +10,7 @@ type FormDataRecord = Record<string, FormValue>;
 export const useBuildProjectStore = defineStore("build-project", () => {
 	const page = ref<BuildProjectPage | null>(null);
 
-	const steps = ref<Step[]>([]);
+	const steps = ref<UiStepComponent[]>([]);
 
 	const formData = ref<FormDataRecord>({});
 
@@ -23,7 +24,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 
 	const { findOne, create } = useStrapi();
 
-	function fieldKey(question: Question): string {
+	function fieldKey(question: UiQuestionComponent): string {
 		return question.input?.name || question.title;
 	}
 
@@ -215,7 +216,7 @@ export const useBuildProjectStore = defineStore("build-project", () => {
 		return Object.keys(errors).length === 0;
 	}
 
-	function transformSteps(steps: Step[]): Step[] {
+	function transformSteps(steps: UiStepComponent[]): UiStepComponent[] {
 		return steps.map((step) => {
 			if (step.type === "relations") {
 				return {

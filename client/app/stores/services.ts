@@ -1,31 +1,37 @@
-import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Service, Subservice } from "~/types";
+import type { Service } from "~/types/collectionTypes/service";
+import type { Subservice } from "~/types/collectionTypes/subservice";
 
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
-	const currentService = ref<Service | null>(null);
-
 	const subservices = ref<Subservice[]>([]);
 
+	const currentService = ref<Service | null>(null);
+
 	const currentSubService = ref<Subservice | null>(null);
+
+	const servicesLoaded = ref(false);
 
 	const loading = ref(false);
 
 	const { find, findOne } = useStrapi();
 
+	const servicesSorted = computed(() => services.value.slice().sort((a, b) => (a.order ?? 999) - (b.order ?? 999)));
+
 	async function fetchServices() {
+		if (servicesLoaded.value) return servicesSorted.value;
+
 		loading.value = true;
 		try {
-			const result: Strapi5ResponseMany<Service> = await find<Service>("services", {
+			const res = await find<Service>("services", {
 				sort: ["order:asc"],
 			});
 
-			services.value = (result.data ?? []).slice().sort((a, b) => {
-				return (a.order ?? 999) - (b.order ?? 999);
-			});
+			services.value = res.data ?? [];
 
-			return services.value;
+			servicesLoaded.value = true;
+
+			return servicesSorted.value;
 		} catch {
 			services.value = [];
 
@@ -36,15 +42,22 @@ export const useServiceStore = defineStore("services", () => {
 	}
 
 	async function fetchService(slug: string) {
-		if (currentService.value?.slug === slug) {
-			return currentService.value;
+		if (currentService.value?.slug === slug) return currentService.value;
+
+		const cached = services.value.find((service) => service.slug === slug);
+
+		if (cached) {
+			currentService.value = cached;
+
+			return cached;
 		}
 
 		loading.value = true;
-		try {
-			const result: Strapi5ResponseSingle<Service> = await findOne<Service>("services", slug);
 
-			currentService.value = result.data;
+		try {
+			const res = await findOne<Service>("services", slug);
+
+			currentService.value = res.data ?? null;
 
 			return currentService.value;
 		} catch {
@@ -56,32 +69,22 @@ export const useServiceStore = defineStore("services", () => {
 		}
 	}
 
-	async function fetchSubServices() {
-		loading.value = true;
-		try {
-			const result: Strapi5ResponseMany<Subservice> = await find<Subservice>("subservices");
-
-			subservices.value = result.data ?? [];
-		} catch {
-			subservices.value = [];
-
-			return [];
-		} finally {
-			loading.value = false;
-		}
-		return subservices.value;
-	}
-
 	async function fetchSubService(slug: string) {
-		if (currentSubService.value?.slug === slug) {
-			return currentSubService.value;
+		if (currentSubService.value?.slug === slug) return currentSubService.value;
+
+		const cached = subservices.value.find((s) => s.slug === slug);
+
+		if (cached) {
+			currentSubService.value = cached;
+
+			return cached;
 		}
 
 		loading.value = true;
 		try {
-			const result: Strapi5ResponseSingle<Subservice> = await findOne<Subservice>("subservices", slug);
+			const res = await findOne<Subservice>("subservices", slug);
 
-			currentSubService.value = result.data;
+			currentSubService.value = res.data ?? null;
 
 			return currentSubService.value;
 		} catch {
@@ -101,7 +104,6 @@ export const useServiceStore = defineStore("services", () => {
 		loading,
 		fetchServices,
 		fetchService,
-		fetchSubServices,
 		fetchSubService,
 	};
 });

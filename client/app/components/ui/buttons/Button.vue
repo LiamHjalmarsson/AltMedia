@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Button } from "~/types";
+import type { UiButtonComponent } from "~/types/components/ui/button";
 
-const props = defineProps<Button>();
+const props = defineProps<UiButtonComponent>();
 
 const { element: button, backgroundColor } = useHoverAnimation(props.reversed ?? false);
 </script>

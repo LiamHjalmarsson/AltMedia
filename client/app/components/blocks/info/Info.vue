@@ -1,11 +1,11 @@
 <!-- components/blocks/info/Info.vue -->
 <script setup lang="ts">
-import type { BlockNode } from "#strapi-blocks-renderer/types";
-import type { InfoBlock } from "~/types";
+import type { StrapiBlocksContent } from "~/types/blocks";
+import type { BlockInfoComponent } from "~/types/components/block/info";
 
-const { block } = defineProps<{ block: InfoBlock }>();
+const { block } = defineProps<{ block: BlockInfoComponent }>();
 
-const content: BlockNode[] = block.content || [];
+const content: StrapiBlocksContent = block.content || [];
 
 const hasImage = computed(() => Boolean(block.image?.url));
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { FooterColumn } from "~/types";
+import type { UiFooterColumnComponent } from "~/types/components/global/footer";
 
-defineProps<{ column: FooterColumn }>();
+defineProps<{ column: UiFooterColumnComponent }>();
 </script>
 
 <template>

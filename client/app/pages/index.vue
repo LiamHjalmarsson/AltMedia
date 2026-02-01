@@ -1,7 +1,13 @@
 <script setup lang="ts">
-type AnalysisRequestPayload = {
-	email: string;
-	url: string;
+import type { AnalysisRequest } from "~/types/collectionTypes/analysisRequest";
+
+type StrapiValidationError = {
+	error?: {
+		message?: string;
+		details?: {
+			missing?: Partial<Record<keyof AnalysisRequest, boolean>>;
+		};
+	};
 };
 
 const homeStore = useHomeStore();
@@ -15,9 +21,9 @@ await useAsyncData("home-page", () => homeStore.fetchHomePage(), {
 
 const { hero, hasForm, form, blocks } = storeToRefs(homeStore);
 
-const payload = reactive<AnalysisRequestPayload>({ email: "", url: "" });
+const payload = reactive<AnalysisRequest>({ email: "", url: "" });
 
-const fieldErrors = reactive<AnalysisRequestPayload>({ email: "", url: "" });
+const fieldErrors = reactive<AnalysisRequest>({ email: "", url: "" });
 
 const submiting = ref(false);
 
@@ -35,8 +41,12 @@ function resetAnalysisRequestErrors() {
 	errorMessage.value = "";
 }
 
-function setMissingFieldErrors(strapiError: any) {
-	const missingFields = strapiError?.error?.details?.missing;
+function isStrapiValidationError(error: unknown): error is StrapiValidationError {
+	return typeof error === "object" && error !== null && "error" in error;
+}
+
+function setMissingFieldErrors(strapiError: StrapiValidationError) {
+	const missingFields = strapiError.error?.details?.missing;
 
 	if (!missingFields) {
 		return;
@@ -63,7 +73,9 @@ async function submitAnalysisRequest() {
 
 		success.value = true;
 	} catch (err: any) {
-		errorMessage.value = err?.error?.message || "Ett oväntat fel uppstod.";
+		const strapiError = isStrapiValidationError(err) ? err : null;
+
+		errorMessage.value = strapiError?.error?.message || "Ett oväntat fel uppstod.";
 
 		setMissingFieldErrors(err);
 	} finally {
@@ -87,12 +99,12 @@ async function submitAnalysisRequest() {
 							:name="input.name"
 							:label="input.label"
 							hidden
-							:error="fieldErrors[input.name as keyof AnalysisRequestPayload]">
+							:error="fieldErrors[input.name as keyof AnalysisRequest]">
 							<Input
 								v-if="input.type === 'input'"
 								:id="input.name"
 								:name="input.name"
-								v-model="payload[input.name as keyof AnalysisRequestPayload]"
+								v-model="payload[input.name as keyof AnalysisRequest]"
 								:placeholder="input.placeholder"
 								:required="input.required"
 								:type="input.input_type"

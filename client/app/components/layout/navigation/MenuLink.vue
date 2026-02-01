@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { MenuLink } from "~/types";
+import type { UiMenuLinkComponent } from "~/types/components/global/menuLink";
 
-const props = defineProps<{ link: MenuLink }>();
+const props = defineProps<{ link: UiMenuLinkComponent }>();
 
 const route = useRoute();
 

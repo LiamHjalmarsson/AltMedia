@@ -1,11 +1,11 @@
-import type { Theme, Variant } from "~/types";
+import type { ColorType, Theme, Variant } from "~/types";
 
 type BlockColor =
 	| null
 	| undefined
 	| {
 			hex?: string | null;
-			type?: Variant | "white" | "black";
+			type?: ColorType;
 			theme?: Theme;
 	  };
 

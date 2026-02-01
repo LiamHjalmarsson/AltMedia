@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { FaqItem } from "~/types";
+import type { FaqItemComponent } from "~/types/components/block/faq";
 
 const { item, expandedQuestionId, questionNumber } = defineProps<{
-	item: FaqItem;
+	item: FaqItemComponent;
 	expandedQuestionId: number | null;
 	questionNumber: number;
 }>();

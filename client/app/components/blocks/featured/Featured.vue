@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import type { FeaturedBlock } from "~/types";
+import type { BlockFeaturedComponent } from "~/types/components/block/featured";
 
-type FeaturedMode = "tjänster" | "projekt" | "artiklar";
+const { block } = defineProps<{ block: BlockFeaturedComponent }>();
 
-const { block } = defineProps<{ block: FeaturedBlock }>();
-
-const featuredMode = computed(() => block.features as FeaturedMode);
+const featuredMode = computed(() => block.features);
 
 const hasServices = computed(() => featuredMode.value === "tjänster" && (block.services?.length ?? 0) > 0);
 
@@ -16,7 +14,7 @@ const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.a
 
 <template>
 	<section class="relative py-3xl lg:py-5xl">
-		<div class="mx-auto max-w-[1400px] px-md md:px-lg lg:px-2xl">
+		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl">
 			<Heading v-bind="block.heading" class="mb-2xl" />
 
 			<div v-if="hasServices" class="grid grid-cols-1 md:grid-cols-2 md:gap-xl xl:gap-2xl gap-2xl">

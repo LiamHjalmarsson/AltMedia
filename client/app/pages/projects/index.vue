@@ -60,17 +60,6 @@ useAppHead(page?.value?.seo || undefined);
 									class="text-heading-md sm:text-heading-md md:text-heading-lg xl:text-heading-xl font-bold group-hover:text-primary transition-colors duration-300 mb-sm">
 									{{ project.title }}
 								</h3>
-
-								<div
-									v-if="project.services?.length"
-									class="flex flex-wrap gap-xs text-md text-black/80">
-									<span
-										v-for="service in project.services"
-										:key="service.id"
-										class="after:content-['·'] last:after:hidden after:px-xs">
-										{{ service.title }}
-									</span>
-								</div>
 							</header>
 						</NuxtLink>
 					</article>

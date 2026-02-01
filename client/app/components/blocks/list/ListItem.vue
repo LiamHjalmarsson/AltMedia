@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ListItem } from "~/types";
+import type { ListItem } from "~/types/components/block/list";
 
 interface Item {
 	item: ListItem;

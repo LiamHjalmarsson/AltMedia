@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Step } from "~/types";
+import type { UiStepComponent } from "~/types/components/buildProject/step";
 
-const props = defineProps<{ step: Step }>();
+const props = defineProps<{ step: UiStepComponent }>();
 
 const store = useBuildProjectStore();
 

@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { FullSectionBlock } from "~/types";
+import type { BlockFullSectionComponent } from "~/types/components/block/fullSection";
+import type { StylesColorComponent } from "~/types/components/styles/color";
 import { themeClasses } from "~/utils/theme";
 
-const props = defineProps<{ block: FullSectionBlock }>();
+const props = defineProps<{ block: BlockFullSectionComponent }>();
 
-const theme = computed(() => themeClasses(props.block.color));
+const theme = computed(() => themeClasses(props.block.color as StylesColorComponent));
 </script>
 
 <template>

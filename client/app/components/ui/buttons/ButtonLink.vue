@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { Link } from "~/types";
+import type { UiLinkComponent } from "~/types/components/ui/link";
 
-defineProps<Link>();
+defineProps<UiLinkComponent>();
 
 const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 </script>

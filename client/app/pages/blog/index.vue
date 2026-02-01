@@ -29,9 +29,9 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="lg:mt-4xl mb-3xl" />
+				class="lg:mt-4xl mb-xl" />
 
-			<div class="grid md:grid-cols-2 gap-2xl lg:gap-4xl" :class="[page?.title ? '' : 'pt-2xl']">
+			<div class="grid md:grid-cols-2 gap-2xl xl:gap-4xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
 					<NuxtLink :to="`/blogg/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
 						<figure class="overflow-hidden block shadow-lg">
@@ -47,7 +47,7 @@ useAppHead(page?.value?.seo || undefined);
 
 						<header class="mt-lg">
 							<h2
-								class="font-bold text-heading-md sm:text-heading-lg md:text-heading-xl lg:group-hover:text-primary transition-colors duration-300">
+								class="font-bold text-heading-md sm:text-heading-lg md:text-heading-xl lg:group-hover:text-primary transition-colors duration-300 line-clamp-2">
 								{{ article.title }}
 							</h2>
 

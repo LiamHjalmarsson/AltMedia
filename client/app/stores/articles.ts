@@ -1,5 +1,5 @@
-import type { Strapi5ResponseMany, Strapi5ResponseSingle } from "@nuxtjs/strapi";
-import type { Article } from "~/types";
+import type { QueryParams } from "~/types";
+import type { Article } from "~/types/collectionTypes/article";
 
 export const useArticleStore = defineStore("articles", () => {
 	const articles = ref<Article[]>([]);
@@ -12,7 +12,7 @@ export const useArticleStore = defineStore("articles", () => {
 
 	const { find, findOne } = useStrapi();
 
-	async function fetchArticles(params?: Record<string, any>) {
+	async function fetchArticles(params?: QueryParams) {
 		if (articlesLoaded.value) {
 			return articles.value;
 		}
@@ -20,7 +20,7 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const res: Strapi5ResponseMany<Article> = await find<Article>("articles", params);
+			const res = await find<Article>("articles", params);
 
 			articles.value = res.data || [];
 
@@ -46,12 +46,15 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const result: Strapi5ResponseSingle<Article> = await findOne<Article>("articles", slug);
+			const res = await findOne<Article>("articles", slug);
 
-			currentArticle.value = result.data;
+			currentArticle.value = res.data;
 
 			return currentArticle.value;
 		} catch (error) {
+			currentArticle.value = null;
+
+			return null;
 		} finally {
 			loading.value = false;
 		}

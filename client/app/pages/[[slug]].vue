@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Page } from "~/types";
+import type { Page } from "~/types/collectionTypes/page";
 
 const route = useRoute();
 

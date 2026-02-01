@@ -1,5 +1,5 @@
+import type { SeoComponent } from "./components/seo/seo";
 import type { AlignContent } from "./enums";
-import type { Seo } from "./shared/seo";
 
 export interface MetaPage {
 	id: string;
@@ -7,7 +7,7 @@ export interface MetaPage {
 	description?: string;
 	slug?: string;
 	align_content?: AlignContent;
-	seo?: Seo;
+	seo?: SeoComponent;
 }
 
 export interface PageContent {
@@ -16,5 +16,5 @@ export interface PageContent {
 	description?: string;
 	slug?: string;
 	align_content?: AlignContent;
-	seo?: Seo | null;
+	seo?: SeoComponent | null;
 }

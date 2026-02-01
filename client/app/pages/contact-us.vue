@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import type { ContactPage } from "~/types";
+import type { StylesColorComponent } from "~/types/components/styles/color";
+import type { ContactPage } from "~/types/singelTypes/contactPage";
 
 const globalStore = useGlobalStore();
 
@@ -35,7 +36,7 @@ const success = ref(false);
 
 const errorMessage = ref("");
 
-const theme = computed(() => themeClasses(contactPage.value?.data.color));
+const theme = computed(() => themeClasses(contactPage.value?.data.color as StylesColorComponent));
 
 async function submitForm() {
 	loading.value = true;

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { SocialMedia } from "~/types";
+import type { UiSocialMediaComponent } from "~/types/components/global/contactDetails";
 
 defineProps<{
-	socialMedias: SocialMedia[];
+	socialMedias: UiSocialMediaComponent[];
 	size?: "sm" | "md" | "lg";
 }>();
 
@@ -12,7 +12,7 @@ const sizeClass = {
 	lg: "w-14 h-14 text-xl",
 };
 
-function getAriaLabel(media: SocialMedia) {
+function getAriaLabel(media: UiSocialMediaComponent) {
 	if (media.title) {
 		return `Besök oss på ${media.title}`;
 	}

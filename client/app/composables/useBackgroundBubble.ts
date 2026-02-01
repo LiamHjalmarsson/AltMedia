@@ -23,7 +23,7 @@ function setInlineBubbleStyles(bubbleEl: HTMLElement, scale: number, opacity: nu
 
 export function useBackgroundBubble(options: CardHoverBackgroundBubbleOptions = {}) {
 	const {
-		hoverScale = 95,
+		hoverScale = 100,
 		idleScale = 0,
 		hoverOpacity = 1,
 		idleOpacity = 0.3,

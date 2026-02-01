@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { StorySplitBlock } from "~/types";
+import type { BlockStorySplitComponent } from "~/types/components/block/storySplit";
 
-const { block } = defineProps<{ block: StorySplitBlock }>();
+const { block } = defineProps<{ block: BlockStorySplitComponent }>();
 
 const primaryImage = computed(() => block.images?.[0] ?? null);
 
