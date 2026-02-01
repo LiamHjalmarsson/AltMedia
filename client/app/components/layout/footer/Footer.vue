@@ -16,7 +16,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 	<footer class="bg-black text-white py-5xl">
 		<div class="max-w-[1300px] mx-auto px-xl">
 			<div class="space-y-2xl lg:space-y-3xl">
-				<div class="space-y-md flex flex-col items-center justify-center text-center">
+				<div class="flex flex-col items-center justify-center text-center">
 					<NuxtImg
 						v-if="footer?.logo.url"
 						:src="footer.logo.url"
@@ -28,34 +28,36 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 						quality="85"
 						class="object-contain" />
 
-					<p v-if="footer?.description" class="text-white/80 text-heading-xs max-w-[950px] mt-xl">
+					<p
+						v-if="footer?.description"
+						class="text-white/80 text-sm md:text-lg lg:text-xl max-w-[950px] mt-lg">
 						{{ footer?.description }}
 					</p>
 
 					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-md" />
 				</div>
 
-				<div class="flex flex-col md:flex-row justify-between gap-3xl mb-2xl lg:mb-4xl">
+				<div class="flex flex-col md:flex-row justify-between gap-xl md:gap-2xl lg:gap-3xl mb-2xl lg:mb-4xl">
 					<FooterColumn
 						v-for="column in footer?.footer_columns"
 						:key="column.title"
 						:column="column"
 						class="max-lg:text-center" />
 
-					<div class="space-y-md max-lg:text-center">
-						<span class="block font-medium text-heading-md">Kontakt</span>
+					<div class="space-y-sm lg:space-y-md max-lg:text-center">
+						<span class="block font-medium text-heading-sm lg:text-heading-md">Kontakt</span>
 
 						<address class="space-y-xs not-italic flex flex-col">
 							<NuxtLink
 								v-if="contactEmail"
 								:to="`mailto:${contactEmail}`"
-								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+								class="block text-white/80 text-sm lg:text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
 								>{{ contactEmail }}</NuxtLink
 							>
 							<NuxtLink
 								v-if="contactPhone"
 								:to="`tel:${contactPhone}`"
-								class="block text-white/80 text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+								class="block text-white/80 text-sm lg:text-lg hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
 								>{{ contactPhone }}</NuxtLink
 							>
 						</address>
@@ -72,7 +74,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 				<nav
 					aria-label="Legal navigation"
-					class="flex max-lg:flex-col max-lg:space-y-xl items-center lg:space-x-xl text-sm">
+					class="flex max-lg:flex-col items-center space-y-md lg:space-x-xl text-sm">
 					<NuxtLink to="/policy" class="text-white/80 hover:text-white transition font-medium"
 						>Integritetspolicy</NuxtLink
 					>

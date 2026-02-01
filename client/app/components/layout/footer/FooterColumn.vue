@@ -5,10 +5,10 @@ defineProps<{ column: UiFooterColumnComponent }>();
 </script>
 
 <template>
-	<div class="space-y-md">
+	<div class="space-y-sm lg:space-y-md">
 		<NuxtLink
 			:to="column.url"
-			class="block font-medium text-heading-md leading-[1.8] transition hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+			class="block font-medium text-heading-sm lg:text-heading-md leading-[1.8] transition hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 			{{ column.title }}
 		</NuxtLink>
 
@@ -16,7 +16,7 @@ defineProps<{ column: UiFooterColumnComponent }>();
 			<li v-for="link in column.links" :key="link.label">
 				<NuxtLink
 					:to="link.url"
-					class="block text-white/80 text-lg leading-[1.8] hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+					class="block text-white/80 text-sm lg:text-lg leading-[1.8] hover:text-white transition font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 					{{ link.label }}
 				</NuxtLink>
 			</li>
