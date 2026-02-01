@@ -42,7 +42,7 @@ function scrollToSection(anchor: string) {
 <template>
 	<section class="relative overflow-hidden pt-6xl flex justify-center items-center lg:min-h-[80ch]">
 		<div class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
-			<div class="flex flex-wrap gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
+			<div class="flex max-lg:flex-col gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
 				<div class="order-2 xl:order-1 flex-1">
 					<h1
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-semibold leading-[1.05]">
@@ -62,7 +62,7 @@ function scrollToSection(anchor: string) {
 					</div>
 				</div>
 
-				<div class="order-1 xl:order-2 flex-1 min-w-[300px] lg:min-w-[400px]">
+				<div class="order-1 xl:order-2 flex-1 lg:min-w-[400px]">
 					<div
 						class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-xl:max-h-[300px]">
 						<NuxtImg
@@ -84,8 +84,8 @@ function scrollToSection(anchor: string) {
 			<article
 				:class="[
 					currentArticle?.display_table_of_contents
-						? 'flex-1 space-y-lg xl:space-y-2xl'
-						: 'w-full space-y-lg',
+						? 'flex-1 space-y-xl xl:space-y-2xl'
+						: 'w-full space-y-xl',
 				]">
 				<template v-for="block in blocks" :key="block.id">
 					<Introduction
