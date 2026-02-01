@@ -29,7 +29,7 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:align_content="page?.align_content || 'left'"
 				:description="page?.description"
-				class="lg:mt-4xl mb-xl" />
+				class="mt-2xl lg:mt-4xl mb-xl" />
 
 			<div class="grid md:grid-cols-2 gap-2xl xl:gap-4xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">

@@ -106,7 +106,7 @@ function scrollToSection(anchor: string) {
 				</div>
 			</article>
 
-			<aside v-if="currentArticle?.display_table_of_contents" class="sticky top-6xl max-w-72">
+			<aside v-if="currentArticle?.display_table_of_contents" class="max-md:hidden sticky top-6xl max-w-72">
 				<div class="px-lg md:px-2xl">
 					<p class="text-lg font-semibold text-black/80">
 						{{ title || "I den här artikeln" }}

@@ -27,9 +27,9 @@ useAppHead(page?.value?.seo || undefined);
 				:title="page?.title"
 				:description="page?.description"
 				:align_content="page?.align_content"
-				class="mt-4xl mb-3xl lg:mb-4xl xl:mb-5xl" />
+				class="mt-2xl lg:mt-4xl mb-3xl lg:mb-4xl xl:mb-5xl" />
 
-			<div class="flex flex-col space-y-3xl lg:space-y-4xl xl:space-y-6xl" :class="[page?.title ? '' : 'pt-2xl']">
+			<div class="flex flex-col space-y-2xl lg:space-y-4xl xl:space-y-6xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article
 					v-for="(service, index) in services"
 					:key="service.id"
@@ -47,16 +47,16 @@ useAppHead(page?.value?.seo || undefined);
 					</figure>
 
 					<div
-						class="flex-1 flex flex-col justify-center h-full space-y-xl lg:space-y-lg max-w-[750px] lg:max-w-[600px]">
+						class="flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg max-w-[750px] lg:max-w-[600px]">
 						<h2 class="font-bold text-heading-lg md:text-heading-xl lg:text-heading-2xl leading-tight">
 							{{ service.title }}
 						</h2>
 
-						<div class="space-y-md">
+						<div class="space-y-sm lg:space-y-md">
 							<StrapiBlocksText v-if="service.content" :nodes="service.content" />
 						</div>
 
-						<ul class="space-y-sm flex flex-wrap space-x-xl">
+						<ul class="space-y-xs md:space-y-sm flex flex-wrap space-x-xl">
 							<li
 								v-for="subservice in service.subservices"
 								:key="subservice.id"

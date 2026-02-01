@@ -15,9 +15,9 @@ const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.a
 <template>
 	<section class="relative py-3xl lg:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-md md:px-lg lg:px-2xl">
-			<Heading v-bind="block.heading" class="mb-2xl" />
+			<Heading v-bind="block.heading" class="mb-xl lg:mb-2xl" />
 
-			<div v-if="hasServices" class="grid grid-cols-1 md:grid-cols-2 md:gap-xl xl:gap-2xl gap-2xl">
+			<div v-if="hasServices" class="grid grid-cols-1 md:grid-cols-2 md:gap-lg xl:gap-2xl gap-2xl">
 				<FeaturedServiceCard v-for="service in block.services" :key="service.id" :service="service" />
 			</div>
 

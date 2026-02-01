@@ -26,7 +26,9 @@ function formatColoredWords(content: BlockHeroComponent): string {
 			class="text-heading-2xl sm:text-heading-2xl md:text-heading-3xl lg:text-heading-3xl 2xl:text-heading-4xl 3xl:text-heading-6xl font-extrabold"
 			v-html="formatColoredWords(content)" />
 
-		<p v-if="content.description" class="text-xl lg:text-heading-sm xl:text-heading-md max-w-[1050px]">
+		<p
+			v-if="content.description"
+			class="text-xl lg:text-heading-sm xl:text-heading-md max-w-[1050px] max-lg:hidden">
 			{{ content.description }}
 		</p>
 

@@ -59,7 +59,7 @@ const imageFadeOverlayClass = computed(() => {
 <template>
 	<section class="relative py-3xl lg:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<div class="flex flex-col gap-3xl md:flex-row md:items-stretch">
+			<div class="flex flex-col gap-lg lg:gap-3xl md:flex-row md:items-stretch">
 				<div v-if="hasImage" :class="mediaColOrder" class="relative w-full md:w-1/2 md:flex-1">
 					<div class="relative h-full min-h-[340px] overflow-hidden scale-y-110">
 						<NuxtImg

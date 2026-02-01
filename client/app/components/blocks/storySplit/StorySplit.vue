@@ -15,7 +15,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 <template>
 	<section class="relative py-3xl lg:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<div class="flex items-center gap-lg">
+			<div class="flex flex-wrap items-center gap-lg">
 				<div :class="['flex-1', textOrder]">
 					<h2 class="text-heading-2xl font-semibold">
 						{{ block.title }}
@@ -26,7 +26,6 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 					</div>
 				</div>
 
-				<!-- s -->
 				<div :class="['flex-1', mediaOrder]">
 					<div class="relative mx-auto w-full max-w-[420px]">
 						<div class="relative z-10 ml-auto w-[62%]">

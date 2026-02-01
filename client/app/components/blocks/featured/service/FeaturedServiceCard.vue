@@ -14,17 +14,17 @@ defineProps<{ service: Service }>();
 		<NuxtLink
 			:to="buildServiceDetailsPath(service.slug)"
 			:aria-label="`Läs mer om ${service.title}`"
-			class="flex flex-col justify-between h-full p-lg lg:p-xl focus-visible:outline-primary">
+			class="flex flex-col justify-between h-full p-md md:p-lg lg:p-xl focus-visible:outline-primary">
 			<div class="flex flex-col justify-between relative z-10 h-full">
 				<IconBadge v-if="service.icon" :icon="service.icon" :size="155" />
 
 				<div class="flex-1">
 					<h3
-						class="font-semibold text-heading-lg md:text-heading-xl tracking-tighter mb-md group-hover:text-primary transition break-words">
+						class="font-semibold text-heading-lg md:text-heading-xl tracking-tighter mb-sm lg:mb-md group-hover:text-primary transition break-words">
 						{{ service.title }}
 					</h3>
 
-					<p class="text-lg lg:text-xl text-black/90 leading-relaxed mb-sm md:mb-md">
+					<p class="text-md md:text-lg lg:text-xl text-black/90 leading-relaxed mb-sm lg:mb-md">
 						{{ service.description }}
 					</p>
 				</div>

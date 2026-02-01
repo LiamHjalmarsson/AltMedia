@@ -20,7 +20,7 @@ console.log(block.background?.theme);
 <template>
 	<section
 		aria-labelledby="cta-title"
-		class="relative overflow-hidden"
+		class="relative overflow-hidden max-md:h-screen"
 		:class="theme.sectionClassName"
 		:data-header-theme="block.background?.theme"
 		:style="theme.sectionStyle">
