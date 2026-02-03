@@ -15,7 +15,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 <template>
 	<section class="relative py-2xl md:py-3xl xl:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<div class="flex items-center gap-lg">
+			<div class="flex max-sm:flex-col items-center gap-lg">
 				<div :class="['flex-1', textOrder]">
 					<h2
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-semibold">
@@ -40,7 +40,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 									loading="lazy"
 									placeholder
 									sizes="(min-width:1024px) 260px, 60vw"
-									class="aspect-[3/4] w-full object-cover" />
+									class="aspect-[3/4] w-full object-cover max-sm:max-h-60" />
 							</div>
 						</div>
 
@@ -55,7 +55,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 									loading="lazy"
 									placeholder
 									sizes="(min-width:1024px) 320px, 70vw"
-									class="aspect-[4/3] w-full object-cover" />
+									class="aspect-[4/3] w-full object-cover max-sm:max-h-60" />
 							</div>
 						</div>
 					</div>
