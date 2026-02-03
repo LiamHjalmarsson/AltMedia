@@ -12,7 +12,11 @@ const { element: button, backgroundColor } = useHoverAnimation(props.reversed ??
 		v-bind="$attrs"
 		:type="type"
 		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-12 lg:min-h-[64px] min-w-[84px] focus-visible:outline-primary transition text-xs md:text-md lg:text-lg max-sm:w-full"
-		:class="[textSizeClassBySize[size], variant === 'primary' ? 'max-lg:text-white' : '']">
+		:class="[
+			textSizeClassBySize[size],
+			variant === 'primary' ? 'max-lg:text-white' : '',
+			variant === 'ghost' ? 'text-primary' : '',
+		]">
 		<span class="relative flex items-center z-10 px-lg">
 			<Icon
 				v-if="icon"

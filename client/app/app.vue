@@ -5,5 +5,6 @@
 	<NuxtLayout>
 		<NuxtPage />
 	</NuxtLayout>
+	<CookieConsentBanner />
 	<NuxtRouteAnnouncer />
 </template>

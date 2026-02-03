@@ -5,19 +5,19 @@ const props = defineProps<{ question: UiQuestionComponent }>();
 
 const store = useBuildProjectStore();
 
-const { formData, stepValidationErrors } = storeToRefs(store);
+const { buildProjectFormData, activeStepValidationErrors } = storeToRefs(store);
 
 const options = ["Ja", "Nej"];
 
 function onSelect(option: string) {
-	store.setValue(props.question.title, option);
+	store.setFormFieldValue(props.question.title, option);
 }
 
 function isSelected(option: string) {
-	return formData.value[props.question.title] === option;
+	return buildProjectFormData.value[props.question.title] === option;
 }
 
-const errorMessage = computed(() => stepValidationErrors.value[props.question.title]);
+const errorMessage = computed(() => activeStepValidationErrors.value[props.question.title]);
 </script>
 
 <template>

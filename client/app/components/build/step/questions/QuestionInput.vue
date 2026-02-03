@@ -5,23 +5,23 @@ const props = defineProps<{ question: UiQuestionComponent }>();
 
 const store = useBuildProjectStore();
 
-const { formData, stepValidationErrors } = storeToRefs(store);
+const { buildProjectFormData, activeStepValidationErrors } = storeToRefs(store);
 
 function handleUpdate(val: string | number) {
-	const key = store.fieldKey(props.question);
+	const key = store.getFormFieldKeyFromQuestion(props.question);
 
-	store.setValue(key, val as string);
+	store.setFormFieldValue(key, val as string);
 }
 
 const key = props.question.input?.name || props.question.title;
 
-const errorMessage = computed(() => stepValidationErrors.value[key]);
+const errorMessage = computed(() => activeStepValidationErrors.value[key]);
 </script>
 
 <template>
 	<FormControl
 		v-if="question.input"
-		:model-value="formData[key]"
+		:model-value="buildProjectFormData[key]"
 		@update:modelValue="handleUpdate"
 		:label="question.input.label"
 		:name="key"

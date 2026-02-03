@@ -23,9 +23,9 @@ export const useHomeStore = defineStore("home-page", () => {
 		loading.value = true;
 
 		try {
-			const res = await findOne<HomePage>("home-page");
+			const { data } = await findOne<HomePage>("home-page");
 
-			homePage.value = res.data;
+			homePage.value = data;
 
 			loaded.value = true;
 

@@ -9,15 +9,23 @@ export const useGlobalStore = defineStore("global-config", () => {
 
 	const { findOne } = useStrapi();
 
+	const header = computed(() => globalConfigData.value?.navigation);
+
+	const footer = computed(() => globalConfigData.value?.footer);
+
+	const seo = computed(() => globalConfigData.value?.seo);
+
+	const contact = computed(() => globalConfigData.value?.contact);
+
 	async function fetchGlobalConfig(): Promise<GlobalConfig | null> {
 		if (globalConfigLoaded.value) return globalConfigData.value;
 
 		loading.value = true;
 
 		try {
-			const res = await findOne<GlobalConfig>("global-config");
+			const { data } = await findOne<GlobalConfig>("global-config");
 
-			globalConfigData.value = res.data;
+			globalConfigData.value = data;
 
 			globalConfigLoaded.value = true;
 
@@ -30,14 +38,6 @@ export const useGlobalStore = defineStore("global-config", () => {
 			loading.value = false;
 		}
 	}
-
-	const header = computed(() => globalConfigData.value?.navigation);
-
-	const footer = computed(() => globalConfigData.value?.footer);
-
-	const seo = computed(() => globalConfigData.value?.seo);
-
-	const contact = computed(() => globalConfigData.value?.contact);
 
 	return { globalConfigData, globalConfigLoaded, header, footer, seo, contact, loading, fetchGlobalConfig };
 });

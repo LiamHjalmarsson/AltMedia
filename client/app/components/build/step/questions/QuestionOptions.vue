@@ -5,19 +5,19 @@ const props = defineProps<{ question: UiQuestionComponent }>();
 
 const store = useBuildProjectStore();
 
-const { formData, stepValidationErrors } = storeToRefs(store);
+const { buildProjectFormData, activeStepValidationErrors } = storeToRefs(store);
 
 function onToggle(option: string) {
-	store.toggleOption(props.question.title, option);
+	store.toggleQuestionOptionValue(props.question.title, option);
 }
 
 function isSelected(option: string) {
-	const value = formData.value[props.question.title];
+	const value = buildProjectFormData.value[props.question.title];
 
 	return Array.isArray(value) ? value.includes(option) : value === option;
 }
 
-const errorMessage = computed(() => stepValidationErrors.value[props.question.title]);
+const errorMessage = computed(() => activeStepValidationErrors.value[props.question.title]);
 </script>
 
 <template>

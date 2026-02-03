@@ -5,7 +5,7 @@ const props = defineProps<{ step: UiStepComponent }>();
 
 const store = useBuildProjectStore();
 
-const { formData } = storeToRefs(store);
+const { buildProjectFormData } = storeToRefs(store);
 
 const allItems = computed(() => [...(props.step.services || []), ...(props.step.subservices || [])]);
 
@@ -14,11 +14,11 @@ const isClickable = computed(() => props.step.clickable_relations);
 function onToggle(title: string) {
 	if (!isClickable.value) return;
 
-	store.toggleOption(props.step.title, title);
+	store.toggleQuestionOptionValue(props.step.title, title);
 }
 
 function isSelected(title: string) {
-	const val = formData.value[props.step.title];
+	const val = buildProjectFormData.value[props.step.title];
 
 	return Array.isArray(val) ? val.includes(title) : val === title;
 }

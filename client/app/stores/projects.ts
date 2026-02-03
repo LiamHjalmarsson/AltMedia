@@ -18,11 +18,11 @@ export const useProjectStore = defineStore("projects", () => {
 		loading.value = true;
 
 		try {
-			const res = await find<Project>("projects", params);
+			const { data } = await find<Project>("projects", params);
 
 			loaded.value = true;
 
-			projects.value = res?.data || [];
+			projects.value = data || [];
 
 			return projects.value;
 		} catch (err) {
@@ -40,9 +40,9 @@ export const useProjectStore = defineStore("projects", () => {
 		loading.value = true;
 
 		try {
-			const res = await findOne<Project>("projects", slug);
+			const { data } = await findOne<Project>("projects", slug);
 
-			currentProject.value = res.data;
+			currentProject.value = data;
 
 			return currentProject.value;
 		} catch (err) {

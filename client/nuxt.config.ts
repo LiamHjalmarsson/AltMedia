@@ -1,31 +1,50 @@
 import tailwindcss from "@tailwindcss/vite";
 import type { NuxtPage } from "@nuxt/schema";
 
-type PathRewriteRule = {
-	sourcePrefix: string;
-	targetPrefix: string;
+type RoutePathPrefixRewriteRule = {
+	fromPathPrefix: string;
+	toPathPrefix: string;
 };
 
-function forEachNuxtPage(pages: NuxtPage[], handlePage: (page: NuxtPage) => void): void {
-	for (const currentPage of pages) {
-		handlePage(currentPage);
+const ROUTE_PATH_PREFIX_REWRITE_RULES: RoutePathPrefixRewriteRule[] = [
+	{ fromPathPrefix: "/contact-us", toPathPrefix: "/kontakta-oss" },
+	{ fromPathPrefix: "/start-a-project", toPathPrefix: "/starta-projekt" },
+	{ fromPathPrefix: "/about", toPathPrefix: "/om-oss" },
+	{ fromPathPrefix: "/services", toPathPrefix: "/tjanster" },
+	{ fromPathPrefix: "/projects", toPathPrefix: "/projekt" },
+	{ fromPathPrefix: "/blog", toPathPrefix: "/blogg" },
+];
 
-		if (currentPage.children?.length) forEachNuxtPage(currentPage.children, handlePage);
+function traverseNuxtPagesDepthFirst(nuxtPages: NuxtPage[], handleNuxtPage: (nuxtPage: NuxtPage) => void): void {
+	for (const nuxtPage of nuxtPages) {
+		handleNuxtPage(nuxtPage);
+
+		const childPages = nuxtPage.children;
+
+		if (childPages?.length) {
+			traverseNuxtPagesDepthFirst(childPages, handleNuxtPage);
+		}
 	}
 }
 
-function rewritePagePath(originalPath: string, rewriteRules: PathRewriteRule[]): string {
-	for (const rule of rewriteRules) {
-		if (originalPath === rule.sourcePrefix) return rule.targetPrefix;
+function rewriteRoutePathByPrefixRules(routePath: string, prefixRewriteRules: RoutePathPrefixRewriteRule[]): string {
+	for (const prefixRewriteRule of prefixRewriteRules) {
+		const { fromPathPrefix, toPathPrefix } = prefixRewriteRule;
 
-		const sourcePrefixWithSlash = `${rule.sourcePrefix}/`;
+		if (routePath === fromPathPrefix) {
+			return toPathPrefix;
+		}
 
-		if (originalPath.startsWith(sourcePrefixWithSlash)) {
-			return originalPath.replace(rule.sourcePrefix, rule.targetPrefix);
+		const fromPathPrefixWithTrailingSlash = `${fromPathPrefix}/`;
+
+		if (routePath.startsWith(fromPathPrefixWithTrailingSlash)) {
+			const routePathWithoutPrefix = routePath.slice(fromPathPrefix.length);
+
+			return `${toPathPrefix}${routePathWithoutPrefix}`;
 		}
 	}
 
-	return originalPath;
+	return routePath;
 }
 
 export default defineNuxtConfig({
@@ -64,21 +83,20 @@ export default defineNuxtConfig({
 	},
 
 	hooks: {
-		"pages:extend"(scannedPages) {
-			const rewriteRules: PathRewriteRule[] = [
-				{ sourcePrefix: "/contact-us", targetPrefix: "/kontakta-oss" },
-				{ sourcePrefix: "/start-a-project", targetPrefix: "/starta-projekt" },
-				{ sourcePrefix: "/about", targetPrefix: "/om-oss" },
+		"pages:extend"(scannedNuxtPages) {
+			traverseNuxtPagesDepthFirst(scannedNuxtPages, (nuxtPage) => {
+				const currentRoutePath = nuxtPage.path;
 
-				{ sourcePrefix: "/services", targetPrefix: "/tjanster" },
-				{ sourcePrefix: "/projects", targetPrefix: "/projekt" },
-				{ sourcePrefix: "/blog", targetPrefix: "/blogg" },
-			];
+				if (!currentRoutePath) return;
 
-			forEachNuxtPage(scannedPages, (page) => {
-				if (!page.path) return;
+				const rewrittenRoutePath = rewriteRoutePathByPrefixRules(
+					currentRoutePath,
+					ROUTE_PATH_PREFIX_REWRITE_RULES,
+				);
 
-				page.path = rewritePagePath(page.path, rewriteRules);
+				if (rewrittenRoutePath !== currentRoutePath) {
+					nuxtPage.path = rewrittenRoutePath;
+				}
 			});
 		},
 	},

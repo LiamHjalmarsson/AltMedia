@@ -4,11 +4,9 @@ import type { Subservice } from "~/types/collectionTypes/subservice";
 export const useServiceStore = defineStore("services", () => {
 	const services = ref<Service[]>([]);
 
-	const subservices = ref<Subservice[]>([]);
-
 	const currentService = ref<Service | null>(null);
 
-	const currentSubService = ref<Subservice | null>(null);
+	const subService = ref<Subservice | null>(null);
 
 	const servicesLoaded = ref(false);
 
@@ -16,22 +14,20 @@ export const useServiceStore = defineStore("services", () => {
 
 	const { find, findOne } = useStrapi();
 
-	const servicesSorted = computed(() => services.value.slice().sort((a, b) => (a.order ?? 999) - (b.order ?? 999)));
-
 	async function fetchServices() {
-		if (servicesLoaded.value) return servicesSorted.value;
+		if (servicesLoaded.value) return services.value;
 
 		loading.value = true;
 		try {
-			const res = await find<Service>("services", {
+			const { data } = await find<Service>("services", {
 				sort: ["order:asc"],
 			});
 
-			services.value = res.data ?? [];
+			services.value = data ?? [];
 
 			servicesLoaded.value = true;
 
-			return servicesSorted.value;
+			return services.value;
 		} catch {
 			services.value = [];
 
@@ -47,9 +43,9 @@ export const useServiceStore = defineStore("services", () => {
 		loading.value = true;
 
 		try {
-			const res = await findOne<Service>("services", slug);
+			const { data } = await findOne<Service>("services", slug);
 
-			currentService.value = res.data ?? null;
+			currentService.value = data ?? null;
 
 			return currentService.value;
 		} catch {
@@ -62,17 +58,17 @@ export const useServiceStore = defineStore("services", () => {
 	}
 
 	async function fetchSubService(slug: string) {
-		if (currentSubService.value?.slug === slug) return currentSubService.value;
+		if (subService.value?.slug === slug) return subService.value;
 
 		loading.value = true;
 		try {
-			const res = await findOne<Subservice>("subservices", slug);
+			const { data } = await findOne<Subservice>("subservices", slug);
 
-			currentSubService.value = res.data ?? null;
+			subService.value = data ?? null;
 
-			return currentSubService.value;
+			return subService.value;
 		} catch {
-			currentSubService.value = null;
+			subService.value = null;
 
 			return null;
 		} finally {
@@ -82,9 +78,8 @@ export const useServiceStore = defineStore("services", () => {
 
 	return {
 		services,
-		subservices,
 		currentService,
-		currentSubService,
+		subService,
 		loading,
 		fetchServices,
 		fetchService,

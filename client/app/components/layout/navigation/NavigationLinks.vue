@@ -10,11 +10,13 @@ const { header } = storeToRefs(globalStore);
 			<MenuLink :link class="px-md py-2xs" />
 		</li>
 
-		<NuxtLink
-			v-if="header?.cta"
-			:to="header.cta.url"
-			class="font-semibold text-heading-xs leading-[1.8] px-lg py-xs bg-primary text-white font-headingtransition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
-			{{ header.cta.label }}
-		</NuxtLink>
+		<li>
+			<NuxtLink
+				v-if="header?.cta"
+				:to="header.cta.url"
+				class="font-semibold text-heading-xs leading-[1.8] px-lg py-xs bg-primary text-white font-headingtransition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+				{{ header.cta.label }}
+			</NuxtLink>
+		</li>
 	</ul>
 </template>

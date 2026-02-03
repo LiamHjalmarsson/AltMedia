@@ -1,165 +1,228 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, watchEffect } from "vue";
 import gsap from "gsap";
 
-const store = useBuildProjectStore();
+type StepTransitionDirection = "next" | "prev";
 
-const { steps, currentStepIndex, activeStep, progressPercent, isLastStep, page, loading, isSubmitted } =
-	storeToRefs(store);
+const buildProjectStore = useBuildProjectStore();
 
-await useAsyncData("build-project-page", () => store.fetchBuildProjectPage(), { server: true });
+const {
+	buildProjectSteps,
+	activeStepIndex,
+	activeStepDefinition,
+	progressPercentage,
+	isLastStepActive,
+	buildProjectPageContent,
+	hasSubmittedBuildProjectRequest,
+} = storeToRefs(buildProjectStore);
+
+await useAsyncData("build-project-page", () => buildProjectStore.fetchBuildProjectPageIfNeeded(), { server: true });
 
 definePageMeta({ layout: "minimal" });
 
-useAppHead(page.value?.seo);
+watchEffect(() => {
+	useAppHead(buildProjectPageContent.value?.seo);
+});
 
-const containerRef = ref<HTMLElement | null>(null);
+// -----------------------------
+// Animation refs (animate refs only)
+// -----------------------------
+const pageAnimationScopeElementRef = ref<HTMLElement | null>(null);
 
-// Animate refs only (no children / querySelector)
-const titleRef = ref<HTMLElement | null>(null);
-const descRef = ref<HTMLElement | null>(null);
-const stepWrapRef = ref<HTMLElement | null>(null);
-const navWrapRef = ref<HTMLElement | null>(null);
+const stepTitleElementRef = ref<HTMLElement | null>(null);
+const stepDescriptionElementRef = ref<HTMLElement | null>(null);
+const stepContentWrapperElementRef = ref<HTMLElement | null>(null);
+const navigationWrapperElementRef = ref<HTMLElement | null>(null);
 
-let ctx: gsap.Context | undefined;
+let gsapContext: gsap.Context | undefined;
 
+// -----------------------------
+// GSAP lifecycle
+// -----------------------------
 onMounted(() => {
 	if (!import.meta.client) return;
-	if (!containerRef.value) return;
 
-	// scope all tweens/timelines to this component instance
-	ctx = gsap.context(() => {}, containerRef);
+	const scopeElement = pageAnimationScopeElementRef.value;
+	if (!scopeElement) return;
+
+	gsapContext = gsap.context(() => {}, scopeElement);
 });
 
 onBeforeUnmount(() => {
-	ctx?.revert();
-	ctx = undefined;
+	gsapContext?.revert();
+	gsapContext = undefined;
 });
 
-function animateError() {
+// -----------------------------
+// Animation helpers
+// -----------------------------
+function shakeContainerOnValidationError(): void {
 	if (!import.meta.client) return;
 
-	const el = containerRef.value;
-	if (!el) return;
+	const scopeElement = pageAnimationScopeElementRef.value;
+	if (!scopeElement) return;
 
-	// keep it scoped
-	ctx?.add(() => {
-		gsap.fromTo(el, { x: -6 }, { x: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" });
+	gsapContext?.add(() => {
+		gsap.fromTo(scopeElement, { x: -6 }, { x: 0, duration: 0.45, ease: "elastic.out(1, 0.35)" });
 	});
 }
 
-function play(tl: gsap.core.Timeline) {
+function playTimelineAndWaitForCompletion(timeline: gsap.core.Timeline): Promise<void> {
 	return new Promise<void>((resolve) => {
-		tl.eventCallback("onComplete", () => resolve());
+		timeline.eventCallback("onComplete", () => resolve());
+		timeline.play();
 	});
 }
 
-function getEls() {
-	// filter nulls and keep stable order
+function getStepTransitionElements() {
 	return {
-		title: titleRef.value,
-		desc: descRef.value,
-		step: stepWrapRef.value,
-		nav: navWrapRef.value,
+		stepTitleElement: stepTitleElementRef.value,
+		stepDescriptionElement: stepDescriptionElementRef.value,
+		stepContentWrapperElement: stepContentWrapperElementRef.value,
+		navigationWrapperElement: navigationWrapperElementRef.value,
 	};
 }
 
-async function animateStep(direction: "next" | "prev", action: () => void) {
-	if (!import.meta.client) return action();
+function createStepTransitionTimeline(direction: StepTransitionDirection, phase: "out" | "in"): gsap.core.Timeline {
+	const { stepTitleElement, stepDescriptionElement, stepContentWrapperElement, navigationWrapperElement } =
+		getStepTransitionElements();
 
-	const scopeEl = containerRef.value;
-	if (!scopeEl) return action();
-
-	const { title, desc, step, nav } = getEls();
 	const yOut = direction === "next" ? -16 : 16;
 	const yIn = direction === "next" ? 16 : -16;
 
-	// OUT sequence (custom timing per element)
-	const outTl = gsap.timeline({ paused: true });
+	const elementTimelineEntries = [
+		{ element: stepTitleElement, offset: 0.0, duration: phase === "out" ? 0.18 : 0.26 },
+		{
+			element: stepDescriptionElement,
+			offset: phase === "out" ? 0.06 : 0.08,
+			duration: phase === "out" ? 0.18 : 0.26,
+		},
+		{
+			element: stepContentWrapperElement,
+			offset: phase === "out" ? 0.12 : 0.14,
+			duration: phase === "out" ? 0.18 : 0.28,
+		},
+		{
+			element: navigationWrapperElement,
+			offset: phase === "out" ? 0.14 : 0.18,
+			duration: phase === "out" ? 0.18 : 0.22,
+		},
+	];
 
-	ctx?.add(() => {
-		if (title) outTl.to(title, { y: yOut, opacity: 0, duration: 0.18, ease: "power2.out" }, 0);
-		if (desc) outTl.to(desc, { y: yOut, opacity: 0, duration: 0.18, ease: "power2.out" }, 0.06);
-		if (step) outTl.to(step, { y: yOut, opacity: 0, duration: 0.18, ease: "power2.out" }, 0.12);
-		if (nav) outTl.to(nav, { y: yOut, opacity: 0, duration: 0.18, ease: "power2.out" }, 0.14);
-	});
+	const timeline = gsap.timeline({ paused: true });
 
-	outTl.play();
-	await play(outTl);
+	for (const entry of elementTimelineEntries) {
+		if (!entry.element) continue;
 
-	action();
+		if (phase === "out") {
+			timeline.to(
+				entry.element,
+				{ y: yOut, opacity: 0, duration: entry.duration, ease: "power2.out" },
+				entry.offset,
+			);
+		} else {
+			timeline.fromTo(
+				entry.element,
+				{ y: yIn, opacity: 0 },
+				{ y: 0, opacity: 1, duration: entry.duration, ease: "power2.out" },
+				entry.offset,
+			);
+		}
+	}
+
+	return timeline;
+}
+
+async function animateStepTransition(direction: StepTransitionDirection, commitStepChange: () => void): Promise<void> {
+	if (!import.meta.client) {
+		commitStepChange();
+		return;
+	}
+
+	if (!pageAnimationScopeElementRef.value || !gsapContext) {
+		commitStepChange();
+		return;
+	}
+
+	const outTimeline = gsapContext.add(() => createStepTransitionTimeline(direction, "out")) as gsap.core.Timeline;
+	await playTimelineAndWaitForCompletion(outTimeline);
+
+	commitStepChange();
 	await nextTick();
 
-	// IN sequence (different timing per element)
-	const inTl = gsap.timeline({ paused: true });
-
-	ctx?.add(() => {
-		if (title)
-			inTl.fromTo(title, { y: yIn, opacity: 0 }, { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" }, 0);
-
-		if (desc)
-			inTl.fromTo(desc, { y: yIn, opacity: 0 }, { y: 0, opacity: 1, duration: 0.26, ease: "power2.out" }, 0.08);
-
-		if (step)
-			inTl.fromTo(step, { y: yIn, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease: "power2.out" }, 0.14);
-
-		if (nav)
-			inTl.fromTo(nav, { y: yIn, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power2.out" }, 0.18);
-	});
-
-	inTl.play();
-
-	await play(inTl);
+	const inTimeline = gsapContext.add(() => createStepTransitionTimeline(direction, "in")) as gsap.core.Timeline;
+	await playTimelineAndWaitForCompletion(inTimeline);
 }
 
-async function onNext() {
-	if (!store.validateCurrentStep()) return animateError();
-	await animateStep("next", store.nextStep);
+// -----------------------------
+// UI handlers (store API: refactored names)
+// -----------------------------
+async function handleNextStepRequest(): Promise<void> {
+	const isActiveStepValid = buildProjectStore.validateActiveStepFields();
+
+	if (!isActiveStepValid) {
+		shakeContainerOnValidationError();
+		return;
+	}
+
+	await animateStepTransition("next", () => buildProjectStore.goToNextStep());
 }
 
-async function handlePrev() {
-	await animateStep("prev", () => store.previousStep());
+async function handlePreviousStepRequest(): Promise<void> {
+	await animateStepTransition("prev", () => buildProjectStore.goToPreviousStep());
 }
 
-async function handleSubmit() {
-	if (!store.validateCurrentStep()) return animateError();
-	await store.submitProjectRequest();
+async function handleBuildProjectSubmissionRequest(): Promise<void> {
+	const isActiveStepValid = buildProjectStore.validateActiveStepFields();
+
+	if (!isActiveStepValid) {
+		shakeContainerOnValidationError();
+		return;
+	}
+
+	await buildProjectStore.submitBuildProjectRequest();
 }
 </script>
 
 <template>
 	<section class="relative pb-2xl lg:pb-4xl pt-3xl lg:pt-5xl min-h-screen">
-		<SuccessMessage v-if="isSubmitted" />
+		<SuccessMessage v-if="hasSubmittedBuildProjectRequest" />
 
 		<div
+			v-else
 			class="mx-auto w-full max-w-[1300px] px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl lg:mt-2xl">
 			<div class="flex-1 xl:min-w-[850px]">
-				<Progressbar :steps="steps" :active-step-index="currentStepIndex" :progress="progressPercent" />
+				<Progressbar
+					:steps="buildProjectSteps"
+					:active-step-index="activeStepIndex"
+					:progress="progressPercentage" />
 
-				<div ref="containerRef" class="mt-2xl xl:mt-4xl">
+				<div ref="pageAnimationScopeElementRef" class="mt-2xl xl:mt-4xl">
 					<div class="mb:xl xl:mb-3xl">
 						<h1
-							ref="titleRef"
+							ref="stepTitleElementRef"
 							class="text-heading-sm sm:text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl mb-lg font-extrabold max-w-[850px]">
-							{{ activeStep?.title }}
+							{{ activeStepDefinition?.title }}
 						</h1>
 
-						<p ref="descRef" class="text-black/80 mb-xl text-lg lg:text-2xl xl:text-3xl max-w-[850px]">
-							{{ activeStep?.description }}
+						<p
+							ref="stepDescriptionElementRef"
+							class="text-black/80 mb-xl text-lg lg:text-2xl xl:text-3xl max-w-[850px]">
+							{{ activeStepDefinition?.description }}
 						</p>
 					</div>
 
-					<div ref="stepWrapRef">
-						<StepRenderer :step="activeStep" :is-last-step="isLastStep" />
+					<div ref="stepContentWrapperElementRef">
+						<StepRenderer :step="activeStepDefinition" :is-last-step="isLastStepActive" />
 					</div>
 
-					<div ref="navWrapRef">
+					<div ref="navigationWrapperElementRef">
 						<BuildNavigation
-							:index="currentStepIndex"
-							:last="isLastStep"
-							@next="onNext"
-							@prev="handlePrev"
-							@submit="handleSubmit" />
+							:index="activeStepIndex"
+							:last="isLastStepActive"
+							@next="handleNextStepRequest"
+							@prev="handlePreviousStepRequest"
+							@submit="handleBuildProjectSubmissionRequest" />
 					</div>
 				</div>
 			</div>

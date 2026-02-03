@@ -3,14 +3,14 @@ const serviceStore = useServiceStore();
 
 const route = useRoute();
 
-const { currentSubService } = storeToRefs(serviceStore);
+const { subService } = storeToRefs(serviceStore);
 
 const subslug = computed(() => route.params.subslug as string);
 
 await useAsyncData(
 	() => `subservice:${subslug.value}`,
 	() => serviceStore.fetchSubService(subslug.value),
-	{ server: true, lazy: true, watch: [subslug] }
+	{ server: true, lazy: true, watch: [subslug] },
 );
 
 // watchEffect(() => {
@@ -19,9 +19,7 @@ await useAsyncData(
 </script>
 
 <template>
-	<Hero v-if="currentSubService?.hero" :block="currentSubService.hero" />
+	<Hero v-if="subService?.hero" :block="subService.hero" />
 
-	<SubserviceIntroduction v-if="currentSubService" :subservice="currentSubService" />
-
-	<BlockRenderer v-if="currentSubService?.blocks" :blocks="currentSubService.blocks" />
+	<BlockRenderer v-if="subService?.blocks" :blocks="subService.blocks" />
 </template>

@@ -20,9 +20,9 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const res = await find<Article>("articles", params);
+			const { data } = await find<Article>("articles", params);
 
-			articles.value = res.data || [];
+			articles.value = data || [];
 
 			articlesLoaded.value = true;
 
@@ -44,9 +44,9 @@ export const useArticleStore = defineStore("articles", () => {
 		loading.value = true;
 
 		try {
-			const res = await findOne<Article>("articles", slug);
+			const { data } = await findOne<Article>("articles", slug);
 
-			currentArticle.value = res.data;
+			currentArticle.value = data;
 
 			return currentArticle.value;
 		} catch (error) {
