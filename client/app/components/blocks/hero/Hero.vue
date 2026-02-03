@@ -50,7 +50,7 @@ const textColor = computed(() => {
 
 <template>
 	<section
-		class="hero overflow-hidden relative flex justify-center items-center px-lg md:px-xl py-4xl lg:px-lg xl:px-3xl lg:py-6xl min-h-screen"
+		class="hero overflow-hidden relative flex justify-center items-center px-lg md:px-xl xl:px-3xl py-4xl lg:py-6xl min-h-screen"
 		:class="!block.color?.hex ? heroBackground : ''"
 		:style="block.color?.hex ? heroBackground : ''"
 		:data-header-theme="headerTheme">
@@ -59,8 +59,7 @@ const textColor = computed(() => {
 		</div>
 
 		<div class="pt-xl relative z-10" :class="textColor">
-			<div
-				class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl lg:max-w-[1600px] xl:max-w-[1800px]">
+			<div class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl xl:max-w-[1800px]">
 				<div class="flex w-full items-center flex-1" :class="contentAlignment">
 					<HeroContent :content="block" :splitLayout />
 				</div>

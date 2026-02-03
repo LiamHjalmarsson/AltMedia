@@ -18,12 +18,15 @@ function onInput(event: Event) {
 }
 
 const inputClasses =
-	"w-full px-lg py-md border text-md bg-white shadow-sm transition-all duration-200 border-black/20 focus:border-primary focus:ring-2 focus:ring-primary";
+	"w-full px-lg py-sm xl:py-md border text-md bg-white shadow-lg transition-all duration-200 border-black/10  focus:border-primary focus:ring-2 focus:ring-primary rounded-xl placeholder:text-2xs";
 </script>
 
 <template>
 	<div class="space-y-xs w-full">
-		<label v-if="label" :for="name" class="text-sm font-medium select-none cursor-pointer inline-flex gap-1">
+		<label
+			v-if="label"
+			:for="name"
+			class="text-2xs lg:text-sm font-medium select-none cursor-pointer inline-flex gap-1">
 			{{ label }}
 			<span v-if="$attrs.required" class="text-primary">*</span>
 		</label>
@@ -45,7 +48,7 @@ const inputClasses =
 				@input="onInput"
 				:type="type"
 				:name="name"
-				:class="inputClasses" />
+				:class="[inputClasses]" />
 
 			<Icon
 				v-if="icon"

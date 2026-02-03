@@ -1,4 +1,4 @@
-import type { ColorType, Theme, Variant } from "~/types";
+import type { ColorType, Theme } from "~/types";
 
 type BlockColor =
 	| null

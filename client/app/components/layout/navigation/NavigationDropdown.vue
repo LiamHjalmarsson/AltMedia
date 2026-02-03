@@ -104,6 +104,15 @@ watch(
 						@click="emitCloseRequest"
 						class="px-md py-2xs block font-semibold text-lg text-center w-full" />
 				</li>
+
+				<li v-if="header?.cta" class="pt-sm">
+					<NuxtLink
+						:to="header.cta.url"
+						@click="emitCloseRequest"
+						class="block text-center font-semibold text-heading-xs leading-[1.8] px-lg py-xs bg-primary text-white font-heading transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary max-w-44 mx-auto">
+						{{ header.cta.label }}
+					</NuxtLink>
+				</li>
 			</ul>
 		</div>
 	</div>

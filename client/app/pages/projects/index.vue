@@ -24,7 +24,7 @@ useAppHead(page?.value?.seo || undefined);
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1400px] px-lg lg:px-2xl">
 			<Heading
 				tag="h1"
 				:title="page?.title"

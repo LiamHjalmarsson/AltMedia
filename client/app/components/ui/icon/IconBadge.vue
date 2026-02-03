@@ -26,7 +26,7 @@ const iconSize = computed(() => (props.size || 48) * 0.6);
 			quality="85"
 			placeholder
 			loading="lazy"
-			class="object-cover" />
+			class="object-contain absolute h-full w-full" />
 
 		<Icon v-else-if="icon.icon_name" :name="icon.icon_name" :size="iconSize" aria-hidden="true" />
 

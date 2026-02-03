@@ -33,13 +33,12 @@ const textAlignment = computed(() => {
 		<div class="flex-2 grow flex flex-col" :class="[textAlignment.content]">
 			<component
 				:is="props.tag"
-				class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-bold">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold">
 				{{ props.title }}
 			</component>
-
 			<p
 				v-if="props.description"
-				class="text-heading-xs md:text-heading-sm xl:text-heading-md mt-sm md:mt-md lg:mt-lg font-medium leading-[1.25] max-w-[850px]">
+				class="text-lg md:text-heading-sm xl:text-heading-md mt-sm md:mt-md lg:mt-lg font-medium max-w-[850px] leading-[1.6]">
 				{{ props.description }}
 			</p>
 		</div>

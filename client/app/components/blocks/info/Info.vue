@@ -57,11 +57,11 @@ const imageFadeOverlayClass = computed(() => {
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-5xl">
+	<section class="relative py-2xl md:py-3xl lg:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
 			<div class="flex flex-col gap-lg lg:gap-3xl md:flex-row md:items-stretch">
 				<div v-if="hasImage" :class="mediaColOrder" class="relative w-full md:w-1/2 md:flex-1">
-					<div class="relative h-full lg:min-h-[340px] overflow-hidden lg:scale-y-110">
+					<div class="relative h-full max-h-52 lg:min-h-[340px] overflow-hidden lg:scale-y-110">
 						<NuxtImg
 							:src="block.image!.url"
 							:alt="block.image!.alternativeText || ''"
@@ -84,11 +84,9 @@ const imageFadeOverlayClass = computed(() => {
 						hasImage ? textColOrder : '',
 						textAlign,
 						hasImage ? contentAlign : '',
-						'flex w-full md:w-1/2 md:flex-1',
+						'flex flex-col w-full md:w-1/2 md:flex-1 justify-center md:space-y-sm lg:space-y-md',
 					]">
-					<div class="flex w-full flex-col justify-center space-y-md">
-						<StrapiBlocksText v-if="content?.length" :nodes="content" />
-					</div>
+					<StrapiBlocksText v-if="content?.length" :nodes="content" />
 				</div>
 			</div>
 		</div>

@@ -30,8 +30,6 @@ export const useArticleStore = defineStore("articles", () => {
 		} catch (error) {
 			articles.value = [];
 
-			articlesLoaded.value = true;
-
 			return [];
 		} finally {
 			loading.value = false;

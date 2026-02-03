@@ -6,6 +6,6 @@ export interface UiButtonComponent {
 	variant: Variant;
 	type: ButtonType;
 	size: Size;
-	icon: string | null;
-	reversed: boolean;
+	icon?: string | null;
+	reversed?: boolean;
 }

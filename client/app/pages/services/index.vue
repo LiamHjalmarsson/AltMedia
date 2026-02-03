@@ -33,9 +33,9 @@ useAppHead(page?.value?.seo || undefined);
 				<article
 					v-for="(service, index) in services"
 					:key="service.id"
-					class="flex flex-col max-lg:items-center lg:flex-row gap-xl lg:gap-4xl max-md:min-h-screen max-md:justify-start max-md:items-center"
+					class="flex flex-col lg:flex-row gap-lg lg:gap-4xl justify-start"
 					:class="index % 2 === 1 ? 'lg:flex-row-reverse' : ''">
-					<figure class="lg:flex-1 flex max-lg:w-2/3 max-lg:h-36">
+					<figure class="lg:flex-1 flex max-lg:max-w-60 max-lg:h-36">
 						<NuxtImg
 							v-if="service.image?.url"
 							:src="service.image.url"
@@ -47,9 +47,8 @@ useAppHead(page?.value?.seo || undefined);
 					</figure>
 
 					<div
-						class="lg:flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg max-w-[750px] lg:max-w-[600px] max-md:text-center">
-						<h2
-							class="font-bold text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl leading-tight">
+						class="lg:flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg max-w-[750px] lg:max-w-[600px]">
+						<h2 class="font-bold text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl">
 							{{ service.title }}
 						</h2>
 

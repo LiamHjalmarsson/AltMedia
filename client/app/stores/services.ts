@@ -44,14 +44,6 @@ export const useServiceStore = defineStore("services", () => {
 	async function fetchService(slug: string) {
 		if (currentService.value?.slug === slug) return currentService.value;
 
-		const cached = services.value.find((service) => service.slug === slug);
-
-		if (cached) {
-			currentService.value = cached;
-
-			return cached;
-		}
-
 		loading.value = true;
 
 		try {
@@ -71,14 +63,6 @@ export const useServiceStore = defineStore("services", () => {
 
 	async function fetchSubService(slug: string) {
 		if (currentSubService.value?.slug === slug) return currentSubService.value;
-
-		const cached = subservices.value.find((s) => s.slug === slug);
-
-		if (cached) {
-			currentSubService.value = cached;
-
-			return cached;
-		}
 
 		loading.value = true;
 		try {

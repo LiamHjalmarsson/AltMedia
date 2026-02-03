@@ -25,14 +25,13 @@ function toggle() {
 			:id="`faq-title-${item.id}`"
 			:aria-expanded="isOpen"
 			:aria-controls="`faq-answer-${item.id}`"
-			class="flex items-center justify-between w-full">
-			<div class="flex items-center space-x-lg">
+			class="flex items-center justify-between w-full space-x-sm">
+			<div class="flex items-center gap-lg">
 				<span
 					class="max-lg:hidden text-heading-xs md:text-heading-sm lg:text-heading-md font-semibold font-heading text-primary">
 					{{ questionNumber }}
 				</span>
-				<div
-					class="text-heading-xs md:text-heading-sm lg:text-heading-md font-bold flex-1 text-start leading-[1.25]">
+				<div class="text-heading-xs md:text-heading-sm lg:text-heading-md font-bold flex-1 text-start">
 					{{ item.question }}
 				</div>
 			</div>
@@ -41,7 +40,7 @@ function toggle() {
 				name="heroicons:chevron-down"
 				size="20"
 				aria-hidden="true"
-				:class="['transition-transform duration-500', isOpen ? 'rotate-180' : '']" />
+				:class="['transition-transform duration-200', isOpen ? 'rotate-180' : '']" />
 		</button>
 
 		<Transition :css="false" @enter="expandAnimation" @leave="collapseAnimation">

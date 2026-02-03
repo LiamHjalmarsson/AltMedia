@@ -10,13 +10,13 @@ defineProps<{ service: Service }>();
 	<div
 		@mouseenter="animateBubbleToHoverState"
 		@mouseleave="animateBubbleToIdleState"
-		class="overflow-hidden border border-white/40 relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
+		class="overflow-hidden border border-white/20 relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
 		<NuxtLink
 			:to="buildServiceDetailsPath(service.slug)"
 			:aria-label="`Läs mer om ${service.title}`"
-			class="flex flex-col justify-between h-full p-lg lg:p-xl focus-visible:outline-primary">
+			class="flex flex-col justify-between h-full px-lg pb-lg pt-sm lg:p-xl focus-visible:outline-primary">
 			<div class="flex flex-col justify-between relative z-10 h-full">
-				<IconBadge v-if="service.icon" :icon="service.icon" :size="155" />
+				<IconBadge v-if="service.icon" :icon="service.icon" :size="145" />
 
 				<div class="flex-1">
 					<h3
@@ -24,7 +24,7 @@ defineProps<{ service: Service }>();
 						{{ service.title }}
 					</h3>
 
-					<p class="text-sm md:text-md lg:text-lg text-black/90 leading-relaxed mb-sm lg:mb-md">
+					<p class="text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 mb-sm lg:mb-md">
 						{{ service.description }}
 					</p>
 				</div>

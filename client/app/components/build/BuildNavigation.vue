@@ -12,13 +12,13 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<div class="flex justify-between items-center pt-xl space-x-xl">
+	<div class="flex max-lg:flex-col-reverse justify-between items-center pt-3xl lg:pt-4xl max-lg:gap-lg lg:space-x-xl">
 		<Button
 			v-if="index > 1"
 			type="button"
 			label="Tillbaka"
 			icon="lucide:arrow-left"
-			variant="outline"
+			variant="ghost"
 			size="md"
 			reversed
 			@click="emit('prev')" />

@@ -29,7 +29,7 @@ const errorMessage = computed(() => stepValidationErrors.value[props.question.ti
 				type="button"
 				@click="onToggle(option.label)"
 				:aria-pressed="isSelected(option.label)"
-				class="cursor-pointer border border-black/10 shadow-xl px-sm lg:px-3xl py-md text-xs lg:text-lg font-semibold transition select-none"
+				class="cursor-pointer border border-black/10 shadow-xl px-sm lg:px-3xl py-md text-xs lg:text-lg font-semibold transition select-none rounded-xl"
 				:class="
 					isSelected(option.label)
 						? 'bg-primary text-white border-primary'

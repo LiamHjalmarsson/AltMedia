@@ -16,10 +16,10 @@ await useAsyncData(
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1300px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1300px] px-lg lg:px-2xl">
 			<article
 				v-if="currentService"
-				class="flex flex-col items-center justify-center lg:flex-row gap-xl md:gap-2xl lg:gap-3xl mt-4xl">
+				class="flex flex-col items-center justify-center lg:flex-row gap-xl md:gap-2xl lg:gap-3xl mt-xl lg:mt-4xl">
 				<figure class="flex-1 flex justify-center lg:justify-start">
 					<NuxtImg
 						v-if="currentService.image?.url"
@@ -37,7 +37,9 @@ await useAsyncData(
 						{{ currentService.title }}
 					</h1>
 
-					<p v-if="currentService.description" class="max-lg:text-center text-lg lg:text-xl max-w-[600px]">
+					<p
+						v-if="currentService.description"
+						class="max-lg:text-center text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 max-w-[600px]">
 						{{ currentService.description }}
 					</p>
 				</div>

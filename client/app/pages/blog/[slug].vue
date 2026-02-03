@@ -41,17 +41,17 @@ function scrollToSection(anchor: string) {
 </script>
 <template>
 	<section class="relative overflow-hidden pt-6xl flex justify-center items-center lg:min-h-[80ch]">
-		<div class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
+		<div class="mx-auto w-full max-w-[1400px] px-lg lg:px-2xl">
 			<div class="flex max-lg:flex-col gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
 				<div class="order-2 xl:order-1 flex-1">
 					<h1
-						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-semibold leading-[1.05]">
+						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-semibold">
 						{{ currentArticle?.title }}
 					</h1>
 
 					<p
 						v-if="currentArticle?.description"
-						class="mt-lg text-sm md:text-md lg:text-lg text-black/80 leading-relaxed max-w-[62ch]">
+						class="mt-md lg:mt-lg text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 max-w-[62ch]">
 						{{ currentArticle.description }}
 					</p>
 
@@ -64,7 +64,7 @@ function scrollToSection(anchor: string) {
 
 				<div class="order-1 xl:order-2 flex-1 lg:min-w-[400px]">
 					<div
-						class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-xl:max-h-[300px]">
+						class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-lg:max-h-[250px]">
 						<NuxtImg
 							class="absolute inset-0 w-full h-full object-cover"
 							:src="currentArticle?.cover?.url"
@@ -79,7 +79,7 @@ function scrollToSection(anchor: string) {
 		</div>
 	</section>
 
-	<section class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl pb-5xl pt-2xl">
+	<section class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl pb-2xl lg:pb-5xl pt-2xl">
 		<div class="flex xl:gap-2xl xl:items-start">
 			<article
 				:class="[
@@ -109,7 +109,7 @@ function scrollToSection(anchor: string) {
 
 			<aside v-if="currentArticle?.display_table_of_contents" class="max-md:hidden sticky top-6xl max-w-72">
 				<div class="px-lg md:px-2xl">
-					<p class="text-lg font-semibold text-black/80">
+					<p class="text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 font-semibold">
 						{{ title || "I den här artikeln" }}
 					</p>
 
@@ -118,7 +118,7 @@ function scrollToSection(anchor: string) {
 							v-for="section in sections"
 							:key="section.anchor"
 							type="button"
-							class="block w-full text-left text-black/70 hover:text-black transition line-clamp-1 cursor-pointer"
+							class="block w-full text-left text-black/60 hover:text-black/80 transition line-clamp-1 cursor-pointer text-2xs md:text-xs lg:text-md"
 							@click="scrollToSection(section.anchor)">
 							{{ section.title }}
 						</button>

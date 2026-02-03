@@ -22,7 +22,7 @@ useAppHead(page?.value?.seo || undefined);
 
 <template>
 	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1400px] px-md md:px-lg lg:px-2xl">
+		<div class="w-full max-w-[1400px] px-lg lg:px-2xl">
 			<Heading
 				v-if="page?.title"
 				tag="h1"
@@ -42,7 +42,7 @@ useAppHead(page?.value?.seo || undefined);
 								format="webp,avif"
 								quality="85"
 								loading="lazy"
-								class="w-full h-40 lg:h-[250px] object-cover group-hover:scale-105 transition duration-300" />
+								class="w-full h-60 lg:h-[250px] object-cover group-hover:scale-105 transition duration-300" />
 						</figure>
 
 						<header class="mt-lg">
@@ -54,13 +54,14 @@ useAppHead(page?.value?.seo || undefined);
 								{{ article.title }}
 							</h2>
 
-							<p class="mt-sm lg:mt-md text-sm md:text-md lg:text-lg text-black/80 line-clamp-3">
+							<p
+								class="mt-sm lg:mt-md text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 line-clamp-3">
 								{{ article.description }}
 							</p>
 
 							<div
 								v-if="article.published_date"
-								class="flex justify-between items-center text-xs mt-sm lg:mt-md text-black/70">
+								class="flex justify-between items-center text-2xs md:text-xs mt-sm lg:mt-md text-black/70">
 								<span>{{ article.published_date }}</span>
 								<span>{{ article.reading_time_min || "10" }} min läsning</span>
 							</div>

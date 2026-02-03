@@ -25,18 +25,18 @@ function isSelected(title: string) {
 
 function relationClass(title: string) {
 	if (!isClickable.value) {
-		return "border-black/10 bg-gray/10 text-black/80 cursor-default select-none";
+		return "border-black/10 bg-gray/10 text-black/80 select-none cursor-default";
 	}
 
 	return isSelected(title)
-		? "bg-primary text-white border-primary"
-		: "hover:bg-primary/10 hover:border-primary hover:text-primary border-black/10";
+		? "bg-primary text-white border-primary cursor-pointer"
+		: "hover:bg-primary/10 hover:border-primary hover:text-primary border-black/10 cursor-pointer";
 }
 </script>
 
 <template>
 	<div>
-		<div class="grid grid-cols-2 md:grid-cols-3 gap-lg lg:gap-xl">
+		<div class="grid grid-cols-2 lg:grid-cols-3 gap-xl lg:gap-2xl">
 			<button
 				v-for="item in allItems"
 				:key="item.id"
@@ -45,7 +45,7 @@ function relationClass(title: string) {
 				:disabled="!isClickable"
 				:aria-pressed="isSelected(item.title)"
 				:aria-disabled="!isClickable"
-				class="border shadow-md px-sm lg:px-3xl py-sm text-center text-xs lg:text-lg font-semibold transition-all duration-150 select-none"
+				class="border shadow-md px-sm lg:px-´2xl py-md text-center text-2xs md:text-xs lg:text-md text-black/80 font-semibold transition-all duration-150 select-none lg:min-w-44 rounded-xl"
 				:class="relationClass(item.title)">
 				{{ item.title }}
 			</button>

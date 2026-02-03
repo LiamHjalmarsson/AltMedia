@@ -13,22 +13,22 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 </script>
 
 <template>
-	<section class="relative py-3xl lg:py-5xl">
+	<section class="relative py-2xl md:py-3xl xl:py-5xl">
 		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
-			<div class="flex flex-wrap items-center gap-lg">
+			<div class="flex items-center gap-lg">
 				<div :class="['flex-1', textOrder]">
 					<h2
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-semibold">
 						{{ block.title }}
 					</h2>
 
-					<div class="mt-lg space-y-md">
+					<div class="mt-md lg:mt-lg space-y-md">
 						<StrapiBlocksText v-if="block.content?.length" :nodes="block.content" />
 					</div>
 				</div>
 
 				<div :class="['flex-1', mediaOrder]">
-					<div class="relative mx-auto w-full min-w-[250px] max-w-[420px]">
+					<div class="relative mx-auto w-full lg:min-w-[250px] max-w-[420px]">
 						<div class="relative z-10 ml-auto w-[62%]">
 							<div class="overflow-hidden">
 								<NuxtImg

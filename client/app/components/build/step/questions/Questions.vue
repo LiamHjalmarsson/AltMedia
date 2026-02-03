@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-	<div :class="[isLastStep ? 'grid grid-cols-1 md:grid-cols-2 gap-xl' : 'space-y-xl']">
+	<div :class="[isLastStep ? 'grid grid-cols-1 md:grid-cols-2 gap-lg lg:gap-2xl' : ' space-y-lg lg:space-y-2xl']">
 		<div
 			v-for="question in step.questions"
 			:key="question.id"

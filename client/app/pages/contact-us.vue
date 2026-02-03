@@ -95,16 +95,15 @@ async function submitForm() {
 			class="absolute inset-0 w-full h-full object-cover opacity-20" />
 
 		<div
-			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl flex flex-col justify-center items-center md:grid md:grid-cols-2 gap-xl lg:gap-4xl">
-			<div
-				class="max-lg:pt-xl flex flex-col justify-center max-md:items-center max-md:text-center space-y-lg lg:space-y-2xl">
+			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl justify-center items-center grid lg:grid-cols-2 gap-2xl xl:gap-4xl">
+			<div class="max-lg:pt-xl flex flex-col justify-center space-y-lg lg:space-y-2xl max-w-[500px]">
 				<div>
 					<h1
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-extrabold mb-md drop-shadow-lg">
 						{{ contactPage?.data.title }}
 					</h1>
 
-					<p class="max-w-[450px] text-md lg:text-lg">
+					<p class="max-w-[450px] text-lg md:text-xl lg:text-heading-sm xl:text-heading-md leading-[1.8]">
 						{{ contactPage?.data.description }}
 					</p>
 				</div>
@@ -130,14 +129,14 @@ async function submitForm() {
 				</div>
 			</div>
 
-			<div class="flex md:justify-end justify-center w-full">
+			<div class="flex lg:justify-end justify-center w-full">
 				<div class="lg:p-2xl w-full max-w-[500px]">
 					<h2
 						class="font-semibold text-heading-sm md:text-heading-md lg:text-heading-lg tracking-tighter mb-lg lg:mb-xl">
 						{{ contactPage?.data.form.title }}
 					</h2>
 
-					<form @submit.prevent="submitForm" class="space-y-lg lg:space-y-xl">
+					<form @submit.prevent="submitForm" class="space-y-xl">
 						<FormField
 							v-for="input in contactPage?.data.form.inputs"
 							:key="input.name"

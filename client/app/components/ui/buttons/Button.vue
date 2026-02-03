@@ -11,13 +11,13 @@ const { element: button, backgroundColor } = useHoverAnimation(props.reversed ??
 		ref="button"
 		v-bind="$attrs"
 		:type="type"
-		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-12 lg:min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition"
-		:class="[textSizeClassBySize[size]]">
+		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-12 max-md:w-full lg:min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition text-xs md:text-md lg:text-lg"
+		:class="[textSizeClassBySize[size], variant === 'primary' ? 'max-lg:text-white' : '']">
 		<span class="relative flex items-center z-10 px-lg">
 			<Icon
 				v-if="icon"
 				:name="icon"
-				class="transition-all duration-200 leading-[1.8]"
+				class="transition-all duration-200"
 				:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
 			<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>
 		</span>

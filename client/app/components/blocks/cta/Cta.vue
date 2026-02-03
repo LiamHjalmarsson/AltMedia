@@ -13,8 +13,6 @@ const isCoverVideo = computed(() => {
 
 	return mime && mime.startsWith("video/");
 });
-
-console.log(block.background?.theme);
 </script>
 
 <template>
@@ -47,7 +45,7 @@ console.log(block.background?.theme);
 					aria-hidden="true" />
 			</template>
 
-			<div class="relative text-center lg:p-3xl w-full max-w-[1050px] mx-auto bg-bg-dark/0">
+			<div class="relative text-center lg:p-3xl w-full max-w-[1050px] mx-auto">
 				<p v-if="block.subtitle" class="text-sm font-semibold tracking-widest uppercase text-secondary mb-xl">
 					{{ block.subtitle }}
 				</p>
@@ -56,7 +54,7 @@ console.log(block.background?.theme);
 					{{ block.title }}
 				</h2>
 
-				<p v-if="block.description" class="mx-auto mt-lg lg:mt-xl text-lg lg:text-xl">
+				<p v-if="block.description" class="mx-auto mt-lg lg:mt-xl text-xs md:text-md lg:text-lg leading-[1.8]">
 					{{ block.description }}
 				</p>
 

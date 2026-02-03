@@ -15,12 +15,14 @@ const { element: linkWrapper, backgroundColor } = useHoverAnimation();
 		<div
 			ref="linkWrapper"
 			class="relative flex items-center justify-center font-bold px-xl max-lg:w-full cursor-pointer min-h-12 lg:min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition">
-			<span class="relative flex items-center z-10 px-lg max-lg:text-white" :class="[textSizeClassBySize[size]]">
+			<span
+				class="relative flex items-center z-10 px-lg max-lg:text-white text-xs md:text-md lg:text-lg"
+				:class="[textSizeClassBySize[size]]">
 				<Icon
 					v-if="icon"
 					:name="icon"
 					aria-hidden="true"
-					class="transition-all duration-200 leading-[1.8]"
+					class="transition-all duration-200"
 					:class="reversed ? 'mr-sm order-1' : 'ml-sm order-2'" />
 				<span :class="[reversed ? 'order-2' : 'order-1']">{{ label }}</span>
 			</span>

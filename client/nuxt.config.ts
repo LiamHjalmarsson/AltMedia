@@ -144,8 +144,4 @@ export default defineNuxtConfig({
 			global: true,
 		},
 	],
-
-	router: {
-		options: {},
-	},
 });
