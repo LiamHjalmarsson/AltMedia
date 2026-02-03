@@ -12,7 +12,7 @@ const emit = defineEmits<{
 </script>
 
 <template>
-	<div class="flex max-lg:flex-col-reverse justify-between items-center pt-3xl lg:pt-4xl max-lg:gap-lg lg:space-x-xl">
+	<div class="flex max-md:flex-col-reverse justify-between items-center pt-3xl lg:pt-4xl max-lg:gap-lg lg:space-x-xl">
 		<Button
 			v-if="index > 1"
 			type="button"

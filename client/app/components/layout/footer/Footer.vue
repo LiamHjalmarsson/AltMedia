@@ -37,7 +37,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-xl lg:mt-2xl" />
 				</div>
 
-				<div class="flex flex-col md:flex-row justify-between gap-lg md:gap-2xl lg:gap-3xl mb-2xl lg:mb-4xl">
+				<div class="flex flex-col lg:flex-row justify-between gap-lg md:gap-2xl lg:gap-3xl mb-2xl lg:mb-4xl">
 					<FooterColumn
 						v-for="column in footer?.footer_columns"
 						:key="column.title"

@@ -13,17 +13,17 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 </script>
 
 <template>
-	<li class="grid lg:grid-cols-5 gap-xl xl:gap-2xl items-center group">
-		<div :class="['hidden lg:block col-span-2', isEvenRow ? 'order-2' : 'order-1']">
+	<li class="grid md:grid-cols-5 gap-lg lg:gap-xl xl:gap-2xl items-center group">
+		<div :class="['hidden md:block col-span-2', isEvenRow ? 'order-2' : 'order-1']">
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" />
 		</div>
 
 		<div
 			class="relative flex flex-col justify-center h-full col-span-3 max-lg:gap-md"
-			:class="[isEvenRow ? 'lg:order-1' : 'lg:order-2']">
-			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="lg:hidden" />
+			:class="[isEvenRow ? 'md:order-1' : 'md:order-2']">
+			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="md:hidden" />
 
-			<div class="lg:p-md text-center lg:text-left">
+			<div class="lg:p-md text-center md:text-left">
 				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start lg:space-x-lg mb-sm lg:mb-md">
 					<span
 						v-if="showNumbers"

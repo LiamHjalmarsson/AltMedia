@@ -11,7 +11,7 @@ const { element: button, backgroundColor } = useHoverAnimation(props.reversed ??
 		ref="button"
 		v-bind="$attrs"
 		:type="type"
-		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-12 max-md:w-full lg:min-h-[64px] min-w-[84px] rounded-full focus-visible:outline-primary transition text-xs md:text-md lg:text-lg"
+		class="relative flex items-center justify-center font-bold px-2xl cursor-pointer min-h-12 lg:min-h-[64px] min-w-[84px] focus-visible:outline-primary transition text-xs md:text-md lg:text-lg max-sm:w-full"
 		:class="[textSizeClassBySize[size], variant === 'primary' ? 'max-lg:text-white' : '']">
 		<span class="relative flex items-center z-10 px-lg">
 			<Icon
@@ -27,8 +27,6 @@ const { element: button, backgroundColor } = useHoverAnimation(props.reversed ??
 			class="absolute top-0 left-0 h-16 w-16 border border-primary rounded-full transition-transform duration-300 ease-out max-lg:hidden"
 			:class="variantClassByVariant[variant]" />
 
-		<span
-			class="absolute top-0 left-0 h-12 w-full rounded-full lg:hidden"
-			:class="variantClassByVariant[variant]" />
+		<span class="absolute top-0 left-0 h-12 w-full rounded-xl lg:hidden" :class="variantClassByVariant[variant]" />
 	</button>
 </template>

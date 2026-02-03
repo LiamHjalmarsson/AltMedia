@@ -68,8 +68,7 @@ const isCoverVideo = computed(() => {
 						:url="link.url"
 						:reversed="link.reversed"
 						:icon="link.icon"
-						:size="link.size || 'md'"
-						class="max-lg:flex-1 max-lg:w-full" />
+						:size="link.size || 'md'" />
 				</div>
 			</div>
 		</div>
