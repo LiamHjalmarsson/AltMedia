@@ -24,21 +24,18 @@ watchEffect(() => {
 	useAppHead(buildProjectPageContent.value?.seo);
 });
 
-// -----------------------------
-// Animation refs (animate refs only)
-// -----------------------------
 const pageAnimationScopeElementRef = ref<HTMLElement | null>(null);
 
 const stepTitleElementRef = ref<HTMLElement | null>(null);
+
 const stepDescriptionElementRef = ref<HTMLElement | null>(null);
+
 const stepContentWrapperElementRef = ref<HTMLElement | null>(null);
+
 const navigationWrapperElementRef = ref<HTMLElement | null>(null);
 
 let gsapContext: gsap.Context | undefined;
 
-// -----------------------------
-// GSAP lifecycle
-// -----------------------------
 onMounted(() => {
 	if (!import.meta.client) return;
 
@@ -53,9 +50,6 @@ onBeforeUnmount(() => {
 	gsapContext = undefined;
 });
 
-// -----------------------------
-// Animation helpers
-// -----------------------------
 function shakeContainerOnValidationError(): void {
 	if (!import.meta.client) return;
 
@@ -88,6 +82,7 @@ function createStepTransitionTimeline(direction: StepTransitionDirection, phase:
 		getStepTransitionElements();
 
 	const yOut = direction === "next" ? -16 : 16;
+
 	const yIn = direction === "next" ? 16 : -16;
 
 	const elementTimelineEntries = [
@@ -154,9 +149,6 @@ async function animateStepTransition(direction: StepTransitionDirection, commitS
 	await playTimelineAndWaitForCompletion(inTimeline);
 }
 
-// -----------------------------
-// UI handlers (store API: refactored names)
-// -----------------------------
 async function handleNextStepRequest(): Promise<void> {
 	const isActiveStepValid = buildProjectStore.validateActiveStepFields();
 

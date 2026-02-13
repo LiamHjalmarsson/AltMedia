@@ -43,6 +43,7 @@ export default factories.createCoreController("api::analysis-request.analysis-re
 						Authorization: `Bearer ${webhookSecret}`,
 					},
 					body: JSON.stringify({
+						event: "create",
 						model: "analysis-request",
 						entry: { url, email },
 					}),

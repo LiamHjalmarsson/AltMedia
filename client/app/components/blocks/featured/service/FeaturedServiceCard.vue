@@ -12,7 +12,7 @@ defineProps<{ service: Service }>();
 		@mouseleave="animateBubbleToIdleState"
 		class="overflow-hidden border border-white/20 relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
 		<NuxtLink
-			:to="buildServiceDetailsPath(service.slug)"
+			:to="buildServicePath(service.slug)"
 			:aria-label="`Läs mer om ${service.title}`"
 			class="flex flex-col justify-between h-full px-lg pb-lg pt-sm lg:p-xl focus-visible:outline-primary">
 			<div class="flex flex-col justify-between relative z-10 h-full">

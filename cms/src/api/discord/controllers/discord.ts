@@ -49,6 +49,14 @@ export default {
 
 		const { event, model, entry } = ctx.request.body || {};
 
+		const webhookUrl = resolveWebhookUrl(model);
+
+		if (!webhookUrl) {
+			strapi.log.warn(`No Discord webhook URL configured for model: ${model}`);
+
+			return ctx.send({ ok: true, skipped: true });
+		}
+
 		if (!event || !model || !entry) {
 			strapi.log.warn("Webhook payload saknar event, model eller entry");
 
@@ -62,8 +70,6 @@ export default {
 
 			return ctx.send({ ok: true, ignored: true });
 		}
-
-		const webhookUrl = resolveWebhookUrl(model);
 
 		const fields = buildFields(entry);
 

@@ -7,7 +7,7 @@ defineProps<{ project: Project }>();
 <template>
 	<div
 		class="cursor-pointer overflow-hidden relative shadow-lg transition-all duration-300 focus-visible:outline-primary h-full flex flex-col group">
-		<NuxtLink :to="buildProjectDetailsPath(project?.slug)" class="block w-full h-full relative">
+		<NuxtLink :to="buildProjectPath(project?.slug)" class="block w-full h-full relative">
 			<NuxtImg
 				v-if="project.cover?.url"
 				:src="project.cover.url"

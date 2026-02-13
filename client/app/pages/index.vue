@@ -33,12 +33,19 @@ const errorMessage = ref("");
 
 const { create } = useStrapi();
 
-function resetAnalysisRequestErrors() {
+function resetErrors() {
+	fieldErrors.email = "";
+
+	fieldErrors.url = "";
+
+	errorMessage.value = "";
+}
+
+function resetForm() {
+	console.log("reset");
 	payload.email = "";
 
 	payload.url = "";
-
-	errorMessage.value = "";
 }
 
 function isStrapiValidationError(error: unknown): error is StrapiValidationError {
@@ -66,12 +73,14 @@ async function submitAnalysisRequest() {
 
 	success.value = false;
 
-	resetAnalysisRequestErrors();
+	resetErrors();
 
 	try {
 		await create("analysis-requests", payload);
 
 		success.value = true;
+
+		resetForm();
 	} catch (err: any) {
 		const strapiError = isStrapiValidationError(err) ? err : null;
 

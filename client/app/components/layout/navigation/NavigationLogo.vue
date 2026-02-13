@@ -8,13 +8,6 @@ const logoAltText = computed(() => props.logo?.alternativeText || "Alt Media");
 
 <template>
 	<NuxtLink to="/" aria-label="Till Alt Media startsida" class="flex items-center w-40 h-[30px]">
-		<NuxtImg
-			:src="logo?.url"
-			:alt="logoAltText"
-			width="40"
-			height="40"
-			format="webp,avif"
-			quality="85"
-			loading="eager" />
+		<NuxtImg :src="logo?.url" :alt="logoAltText" format="webp,avif" quality="85" loading="eager" />
 	</NuxtLink>
 </template>

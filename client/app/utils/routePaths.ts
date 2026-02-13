@@ -1,8 +1,8 @@
-export function buildServicesListPath(): string {
+export function buildServicesPath(): string {
 	return "/tjanster";
 }
 
-export function buildServiceDetailsPath(serviceSlug: string): string {
+export function buildServicePath(serviceSlug: string): string {
 	return `/tjanster/${serviceSlug}`;
 }
 
@@ -10,7 +10,7 @@ export function buildSubservicePath(serviceSlug: string, subserviceSlug: string)
 	return `/tjanster/${serviceSlug}/${subserviceSlug}`;
 }
 
-export function buildBlogListPath(): string {
+export function buildBlogPath(): string {
 	return "/blogg";
 }
 
@@ -18,10 +18,10 @@ export function buildBlogPostPath(postSlug: string): string {
 	return `/blogg/${postSlug}`;
 }
 
-export function buildProjectsListPath(): string {
+export function buildProjectsPath(): string {
 	return "/projekt";
 }
 
-export function buildProjectDetailsPath(projectSlug: string): string {
+export function buildProjectPath(projectSlug: string): string {
 	return `/projekt/${projectSlug}`;
 }

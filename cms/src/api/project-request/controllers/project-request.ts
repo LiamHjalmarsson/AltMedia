@@ -48,6 +48,7 @@ export default factories.createCoreController("api::project-request.project-requ
 						Authorization: `Bearer ${webhookSecret}`,
 					},
 					body: JSON.stringify({
+						event: "create",
 						model: "project-request",
 						entry: { name, email, phone, data, documentId: entity.documentId },
 					}),

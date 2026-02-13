@@ -2,6 +2,8 @@
 import type { StylesColorComponent } from "~/types/components/styles/color";
 import type { ContactPage } from "~/types/singelTypes/contactPage";
 
+type ContactPayload = { name: string; email: string; message: string };
+
 const globalStore = useGlobalStore();
 
 const { contact } = storeToRefs(globalStore);
@@ -16,25 +18,15 @@ definePageMeta({
 
 useAppHead(contactPage.value?.data?.seo || undefined);
 
-const payload = reactive<Record<string, string>>({
-	name: "",
-	email: "",
-	message: "",
-});
+const payload = reactive<ContactPayload>({ name: "", email: "", message: "" });
 
-const fieldErrors = reactive<Record<string, string>>({
-	name: "",
-	email: "",
-	message: "",
-});
+const fieldErrors = reactive<ContactPayload>({ name: "", email: "", message: "" });
 
 const { create } = useStrapi();
 
 const loading = ref(false);
 
 const success = ref(false);
-
-const errorMessage = ref("");
 
 const theme = computed(() => themeClasses(contactPage.value?.data.color as StylesColorComponent));
 
@@ -43,21 +35,19 @@ async function submitForm() {
 
 	success.value = false;
 
-	errorMessage.value = "";
-
 	fieldErrors.email = "";
 
 	fieldErrors.name = "";
 
 	fieldErrors.message = "";
 
+	console.log(payload);
+
 	try {
 		await create("contact-submissions", payload);
 
 		success.value = true;
 	} catch (err: any) {
-		errorMessage.value = err?.error?.message || "Ett oväntat fel uppstod.";
-
 		const missing = err?.error?.details?.missing;
 
 		if (missing) {
@@ -141,11 +131,11 @@ async function submitForm() {
 							v-for="input in contactPage?.data.form.inputs"
 							:key="input.name"
 							:name="input.name"
-							:error="fieldErrors[input.name]"
+							:error="fieldErrors[input.name as keyof ContactPayload]"
 							:label="input.label">
 							<Input
 								v-if="input.type === 'input'"
-								v-model="payload[input.name]"
+								v-model="payload[input.name as keyof ContactPayload]"
 								:id="input.name"
 								:name="input.name"
 								:placeholder="input.placeholder"
@@ -155,7 +145,7 @@ async function submitForm() {
 
 							<Textarea
 								v-else-if="input.type === 'textarea'"
-								v-model="payload[input.name]"
+								v-model="payload[input.name as keyof ContactPayload]"
 								:id="input.name"
 								:name="input.name"
 								:rows="input.rows || 4"
@@ -168,7 +158,7 @@ async function submitForm() {
 						</div>
 
 						<Button
-							:type="contactPage?.data.form.button.type"
+							type="submit"
 							:variant="contactPage?.data.form.button.variant"
 							:label="contactPage?.data.form.button.label"
 							:size="contactPage?.data.form.button.size || 'md'"
