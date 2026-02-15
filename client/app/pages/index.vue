@@ -97,11 +97,11 @@ async function submitAnalysisRequest() {
 		<div v-if="form" class="max-w-[450px] w-full hidden lg:flex justify-end">
 			<div class="w-full p-lg overflow-hidden">
 				<div class="border border-white/20 bg-white/20 p-xl shadow-2xl backdrop-blur-2xl h-full">
-					<h2 class="text-heading-lg font-bold mb-md">{{ form?.title }}</h2>
+					<h2 class="text-heading-lg font-bold mb-xl">{{ form?.title }}</h2>
 
-					<p class="mb-lg text-md xl:text-lg">{{ form?.description }}</p>
+					<p class="mb-xl text-md xl:text-lg">{{ form?.description }}</p>
 
-					<form @submit.prevent="submitAnalysisRequest" class="space-y-xl">
+					<form @submit.prevent="submitAnalysisRequest" class="space-y-2xl">
 						<FormField
 							v-for="input in form.inputs"
 							:key="input.name"

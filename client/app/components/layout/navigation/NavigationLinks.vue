@@ -14,7 +14,7 @@ const { header } = storeToRefs(globalStore);
 			<NuxtLink
 				v-if="header?.cta"
 				:to="header.cta.url"
-				class="font-semibold text-heading-xs leading-[1.8] px-lg py-md bg-primary text-white font-headingtransition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl">
+				class="font-semibold text-heading-xs leading-[1.8] px-lg py-md bg-primary text-white font-headingtransition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full">
 				{{ header.cta.label }}
 			</NuxtLink>
 		</li>

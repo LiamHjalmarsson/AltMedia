@@ -55,7 +55,7 @@ useAppHead(page?.value?.seo || undefined);
 							</h2>
 
 							<p
-								class="mt-sm lg:mt-md text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 line-clamp-3">
+								class="mt-sm lg:mt-md text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 line-clamp-3">
 								{{ article.description }}
 							</p>
 

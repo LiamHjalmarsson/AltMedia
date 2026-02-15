@@ -18,7 +18,7 @@ function onInput(event: Event) {
 }
 
 const inputClasses =
-	"w-full px-lg py-sm xl:py-md border text-md bg-white shadow-lg transition-all duration-200 border-black/10  focus:border-primary focus:ring-2 focus:ring-primary rounded-xl placeholder:text-2xs";
+	"w-full px-lg py-sm xl:py-md border text-md bg-white shadow-lg transition-all duration-200 border-black/10  focus:border-primary focus:ring-2 focus:ring-primary rounded-xl placeholder:text-2xs rounded-2xl";
 </script>
 
 <template>

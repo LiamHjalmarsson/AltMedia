@@ -14,7 +14,7 @@ const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.a
 
 <template>
 	<section class="relative py-3xl xl:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-lg lg:px-2xl">
+		<div class="mx-auto max-w-[1300px] px-sm md:px-lg xl:px-2xl">
 			<Heading v-bind="block.heading" class="mb-xl xl:mb-2xl" />
 
 			<div v-if="hasServices" class="grid grid-cols-1 sm:grid-cols-2 gap-lg xl:gap-xl">

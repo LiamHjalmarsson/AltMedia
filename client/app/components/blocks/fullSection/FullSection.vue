@@ -10,7 +10,7 @@ const theme = computed(() => themeClasses(props.block.color as StylesColorCompon
 
 <template>
 	<section
-		class="relative w-full min-h-[70vh] px-md md:px-lg py-2xl lg:p-2xl flex items-center justify-center overflow-hidden max-lg:h-screen"
+		class="relative w-full min-h-[70vh] px-sm md:px-lg xl:px-2xl py-2xl lg:p-2xl flex items-center justify-center overflow-hidden max-lg:h-screen"
 		:class="[theme.sectionClassName, theme.contentTextClass]"
 		:style="theme.sectionStyle">
 		<CoverBackground :media="block.cover" class="absolute inset-0 opacity-30" />

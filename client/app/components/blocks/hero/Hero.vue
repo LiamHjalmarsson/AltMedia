@@ -50,7 +50,7 @@ const textColor = computed(() => {
 
 <template>
 	<section
-		class="hero overflow-hidden relative flex justify-center items-center px-lg md:px-xl xl:px-3xl py-4xl lg:py-6xl min-h-screen"
+		class="hero overflow-hidden relative flex justify-center items-center px-sm md:px-lg xl:px-2xl 2xl:px-3xl py-4xl lg:py-6xl min-h-screen"
 		:class="!block.color?.hex ? heroBackground : ''"
 		:style="block.color?.hex ? heroBackground : ''"
 		:data-header-theme="headerTheme">

@@ -23,7 +23,7 @@ function setInlineBubbleStyles(bubbleEl: HTMLElement, scale: number, opacity: nu
 
 export function useBackgroundBubble(options: CardHoverBackgroundBubbleOptions = {}) {
 	const {
-		hoverScale = 100,
+		hoverScale = 110,
 		idleScale = 0,
 		hoverOpacity = 1,
 		idleOpacity = 0.3,
@@ -33,10 +33,6 @@ export function useBackgroundBubble(options: CardHoverBackgroundBubbleOptions = 
 		leaveEase = "power3.inOut",
 	} = options;
 
-	/**
-	 * Attach this ref to the bubble element inside the element.
-	 * Example: <div ref="hoverBubbleElementRef" />
-	 */
 	const hoverBubbleElementRef: Ref<HTMLElement | null> = ref(null);
 
 	function animateBubbleToHoverState(): void {

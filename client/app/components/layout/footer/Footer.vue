@@ -14,7 +14,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 <template>
 	<footer class="bg-black text-white py-3xl lg:py-5xl">
-		<div class="max-w-[1300px] mx-auto px-xl">
+		<div class="max-w-[1300px] mx-auto px-sm md:px-lg xl:px-2xl">
 			<div class="space-y-2xl lg:space-y-4xl">
 				<div class="flex flex-col items-center justify-center text-center">
 					<NuxtImg
@@ -30,11 +30,14 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 					<p
 						v-if="footer?.description"
-						class="text-white/80 text-xs md:text-md lg:text-lg font-body leading-[1.8] max-w-[950px] mt-xl lg:mt-3xl">
+						class="text-white/80 text-lg md:text-xl xl:text-2xl font-body leading-[1.8] max-w-[950px] mt-xl lg:mt-3xl">
 						{{ footer?.description }}
 					</p>
 
-					<SocialLinks :social-medias="socialMedias" class="mx-auto w-fit mt-xl lg:mt-2xl" />
+					<SocialLinks
+						v-if="socialMedias.length > 0"
+						:social-medias="socialMedias"
+						class="mx-auto w-fit mt-xl lg:mt-2xl" />
 				</div>
 
 				<div class="flex flex-col lg:flex-row justify-between gap-lg md:gap-2xl lg:gap-3xl mb-2xl lg:mb-4xl">
@@ -44,7 +47,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 						:column="column"
 						class="max-lg:text-center" />
 
-					<div class="space-y-sm lg:space-y-md max-lg:text-center">
+					<div v-if="contactEmail || contactPhone" class="space-y-sm lg:space-y-md max-lg:text-center">
 						<span class="block font-medium text-heading-sm lg:text-heading-md">Kontakt</span>
 
 						<address class="space-y-xs not-italic flex flex-col">
@@ -69,20 +72,6 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 			<div class="flex flex-col lg:flex-row justify-between items-center gap-xl lg:gap-lg mt-2xl lg:mt-4xl">
 				<p class="text-white/80 text-sm text-center">© {{ year }} Alt Media — Alla rättigheter förbehållna.</p>
-
-				<nav
-					aria-label="Legal navigation"
-					class="flex max-lg:flex-col items-center space-y-md lg:space-x-xl text-sm">
-					<NuxtLink to="/policy" class="text-white/80 hover:text-white transition font-medium"
-						>Integritetspolicy</NuxtLink
-					>
-					<NuxtLink to="/cookies" class="text-white/80 hover:text-white transition font-medium"
-						>Cookies</NuxtLink
-					>
-					<NuxtLink to="/contact" class="text-white/80 hover:text-white transition font-medium"
-						>Kontakt</NuxtLink
-					>
-				</nav>
 			</div>
 		</div>
 	</footer>

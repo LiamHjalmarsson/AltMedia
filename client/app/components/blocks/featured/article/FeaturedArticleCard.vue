@@ -26,7 +26,7 @@ defineProps<{ article: Article }>();
 					class="font-semibold text-heading-sm md:text-heading-md lg:text-heading-lg tracking-tighter duration-300 group-hover:text-primary">
 					{{ article.title }}
 				</h3>
-				<p class="mt-sm text-black/80 text-xs md:text-md lg:text-lg leading-[1.8] line-clamp-3">
+				<p class="mt-sm text-black/80 text-lg md:text-xl xl:text-2xl leading-[1.8] line-clamp-3">
 					{{ article.description }}
 				</p>
 			</div>

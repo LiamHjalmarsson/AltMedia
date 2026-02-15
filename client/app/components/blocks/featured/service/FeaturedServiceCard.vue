@@ -20,11 +20,11 @@ defineProps<{ service: Service }>();
 
 				<div class="flex-1">
 					<h3
-						class="font-semibold text-heading-md md:text-heading-lg lg:text-heading-xl tracking-tighter mb-sm lg:mb-md group-hover:text-primary transition break-words">
+						class="font-semibold text-heading-md md:text-heading-lg lg:text-heading-xl tracking-tighter mb-md lg:mb-lg group-hover:text-primary transition break-words">
 						{{ service.title }}
 					</h3>
 
-					<p class="text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 mb-sm lg:mb-md">
+					<p class="text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 mb-md lg:mb-lg">
 						{{ service.description }}
 					</p>
 				</div>

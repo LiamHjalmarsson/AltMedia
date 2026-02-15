@@ -65,7 +65,6 @@ function initializeArticlePageGsapAnimations(): void {
 	articlePageGsapScopedContext?.revert();
 
 	articlePageGsapScopedContext = gsap.context(() => {
-		// Kill triggers created in this context when re-initializing on slug changes
 		ScrollTrigger.getAll().forEach((scrollTriggerInstance) => scrollTriggerInstance.kill());
 
 		const articlePageIntroSequenceTimeline = gsap.timeline({
@@ -177,7 +176,7 @@ onBeforeUnmount(() => {
 
 						<p
 							v-if="currentArticle?.description"
-							class="mt-md lg:mt-lg xl:mt-2xl text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 max-w-[62ch]">
+							class="mt-md lg:mt-lg xl:mt-2xl text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 max-w-[62ch]">
 							{{ currentArticle.description }}
 						</p>
 

@@ -41,8 +41,6 @@ async function submitForm() {
 
 	fieldErrors.message = "";
 
-	console.log(payload);
-
 	try {
 		await create("contact-submissions", payload);
 
