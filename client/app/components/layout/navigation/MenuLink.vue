@@ -19,6 +19,6 @@ const isCurrentPage = computed(() => {
 
 		<span
 			aria-hidden="true"
-			class="absolute -bottom-1 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full group-hover:left-0" />
+			class="absolute -bottom-1 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 lg:group-hover:w-full lg:group-hover:left-0" />
 	</NuxtLink>
 </template>

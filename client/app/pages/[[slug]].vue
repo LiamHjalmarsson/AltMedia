@@ -35,7 +35,7 @@ useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>
-	<section v-if="page" class="pt-5xl">
+	<section v-if="page" class="pt-3xl md:pt-4xl lg:pt-5xl">
 		<BlockRenderer v-if="page.blocks?.length" :blocks="page.blocks" />
 	</section>
 </template>

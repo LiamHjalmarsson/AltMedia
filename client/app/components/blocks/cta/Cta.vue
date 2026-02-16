@@ -18,9 +18,9 @@ const isCoverVideo = computed(() => {
 <template>
 	<section
 		aria-labelledby="cta-title"
-		class="relative overflow-hidden max-md:h-screen h-[50vh] max-md:flex max-md:justify-center max-md:items-center"
-		:class="theme.sectionClassName"
 		:data-header-theme="block.background?.theme"
+		:class="theme.sectionClassName"
+		class="relative overflow-hidden max-md:h-screen h-[50vh] max-md:flex max-md:justify-center max-md:items-center"
 		:style="theme.sectionStyle">
 		<div class="relative p-lg px-sm md:px-lg xl:px-2xl py-3xl lg:p-3xl" :class="theme.contentTextClass">
 			<template v-if="hasCoverMedia">
@@ -50,11 +50,15 @@ const isCoverVideo = computed(() => {
 					{{ block.subtitle }}
 				</p>
 
-				<h2 id="cta-title" class="text-heading-lg md:text-heading-xl lg:text-heading-2xl font-semibold">
+				<h2
+					id="cta-title"
+					class="text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-semibold">
 					{{ block.title }}
 				</h2>
 
-				<p v-if="block.description" class="mx-auto mt-lg lg:mt-xl text-lg md:text-xl xl:text-2xl leading-[1.8]">
+				<p
+					v-if="block.description"
+					class="mx-auto mt-lg lg:mt-xl text-xl md:text-2xl lg:text-3xl leading-[1.6] font-medium">
 					{{ block.description }}
 				</p>
 

@@ -15,41 +15,52 @@ await useAsyncData(
 </script>
 
 <template>
-	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1300px] px-lg lg:px-2xl">
+	<section class="relative flex justify-center">
+		<div
+			class="w-full max-w-[1400px] px-sm md:px-lg xl:px-2xl min-h-screen flex justify-center items-center py-5xl">
 			<article
 				v-if="currentService"
-				class="flex flex-col items-center justify-center lg:flex-row gap-xl md:gap-2xl lg:gap-3xl mt-xl lg:mt-4xl">
-				<figure class="flex-1 flex justify-center lg:justify-start">
+				class="flex flex-col lg:flex-row gap-lg lg:gap-4xl justify-center transition-all duration-500">
+				<figure class="lg:flex-1 flex max-lg:max-w-60 max-lg:h-36">
 					<NuxtImg
 						v-if="currentService.image?.url"
 						:src="currentService.image.url"
 						:alt="currentService.image.alternativeText || currentService.title"
 						format="webp,avif"
 						quality="85"
-						class="w-full max-w-[520px] lg:max-w-none h-auto object-contain"
-						loading="lazy" />
+						loading="lazy"
+						class="w-full h-full object-contain" />
 				</figure>
 
-				<div class="flex-1 flex flex-col justify-center h-full">
-					<h1
-						class="font-bold max-lg:text-center text-heading-lg sm:text-heading-xl md:text-heading-2xl mb-lg">
+				<div class="lg:flex-1 flex flex-col justify-center h-full space-y-md lg:space-y-lg">
+					<h1 class="font-bold text-heading-lg sm:text-heading-xl md:text-heading-2xl mb-lg">
 						{{ currentService.title }}
 					</h1>
 
 					<p
 						v-if="currentService.description"
-						class="max-lg:text-center text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 max-w-[600px]">
+						class="text-xl md:text-2xl lg:text-3xl font-body leading-[1.6] font-medium text-black/80">
 						{{ currentService.description }}
 					</p>
+					<ul class="flex flex-col space-y-md mt-md">
+						<li
+							v-for="subservice in currentService.subservices"
+							:key="subservice.id"
+							class="lg:block font-semibold font-heading text-md md:text-lg lg:text-xl">
+							<NuxtLink
+								v-if="subservice.has_page"
+								:to="buildSubservicePath(currentService.slug, subservice.slug)"
+								class="hover:text-primary transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+								{{ subservice.title }}
+							</NuxtLink>
+
+							<span v-else>
+								{{ subservice.title }}
+							</span>
+						</li>
+					</ul>
 				</div>
 			</article>
-
-			<ul v-if="currentService?.subservices?.length" class="grid grid-cols-1 gap-3xl lg:gap-4xl mt-3xl">
-				<li v-for="(subservice, index) in currentService.subservices" :key="subservice.id" class="h-full">
-					<SubserviceCard :serviceSlug="currentService.slug" :subservice="subservice" :index="index" />
-				</li>
-			</ul>
 		</div>
 	</section>
 </template>

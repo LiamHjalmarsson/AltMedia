@@ -24,7 +24,7 @@ defineProps<{ service: Service }>();
 						{{ service.title }}
 					</h3>
 
-					<p class="text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 mb-md lg:mb-lg">
+					<p class="text-xl md:text-2xl lg:text-3xl font-medium leading-[1.6] text-black/80 mb-md lg:mb-lg">
 						{{ service.description }}
 					</p>
 				</div>

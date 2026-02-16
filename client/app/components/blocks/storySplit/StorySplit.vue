@@ -14,7 +14,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 
 <template>
 	<section class="relative py-2xl md:py-3xl xl:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
+		<div class="mx-auto max-w-[1300px] px-sm md:px-lg xl:px-2xl">
 			<div class="flex max-sm:flex-col items-center gap-lg">
 				<div :class="['flex-1', textOrder]">
 					<h2

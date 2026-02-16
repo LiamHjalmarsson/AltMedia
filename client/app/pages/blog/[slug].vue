@@ -162,11 +162,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<div ref="articlePageAnimationRootElementRef">
+	<div ref="articlePageAnimationRootElementRef" class="pt-2xl">
 		<section
 			ref="articlePageHeroSectionElementRef"
-			class="relative overflow-hidden pt-6xl flex justify-center items-center xl:min-h-[100ch]">
-			<div class="mx-auto w-full max-w-[1600px] px-lg lg:px-2xl">
+			class="relative overflow-hidden py-2xl md:py-3xl lg:py-5xl flex justify-center items-center xl:min-h-[100ch]">
+			<div class="mx-auto w-full max-w-[1600px] px-sm md:px-lg xl:px-2xl">
 				<div class="flex max-lg:flex-col gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
 					<div ref="articlePageHeroTextContainerElementRef" class="order-2 xl:order-1 flex-1">
 						<h1
@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
 
 						<p
 							v-if="currentArticle?.description"
-							class="mt-md lg:mt-lg xl:mt-2xl text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 max-w-[62ch]">
+							class="mt-md lg:mt-lg xl:mt-2xl text-lg md:text-xl lg:text-2xl leading-[1.6] text-black/80 max-w-[62ch]">
 							{{ currentArticle.description }}
 						</p>
 
@@ -236,7 +236,7 @@ onBeforeUnmount(() => {
 					</div>
 				</article>
 
-				<aside
+				<!-- <aside
 					v-if="currentArticle?.display_table_of_contents"
 					ref="articlePageTableOfContentsAsideElementRef"
 					class="max-md:hidden sticky top-6xl max-w-72">
@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
 							</button>
 						</nav>
 					</div>
-				</aside>
+				</aside> -->
 			</div>
 		</section>
 	</div>

@@ -5,7 +5,7 @@ defineProps<{ column: UiFooterColumnComponent }>();
 </script>
 
 <template>
-	<div class="space-y-sm lg:space-y-md">
+	<div class="space-y-sm lg:space-y-md flex-1">
 		<NuxtLink
 			:to="column.url"
 			class="block font-medium text-heading-sm lg:text-heading-md leading-[1.8] transition hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">

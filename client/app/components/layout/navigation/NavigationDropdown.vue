@@ -90,10 +90,10 @@ watch(
 </script>
 
 <template>
-	<div v-if="isRendered" id="mobile-menu" class="fixed top-28 left-0 w-full z-40 lg:hidden px-md">
+	<div v-if="isRendered" id="mobile-menu" class="fixed left-0 w-full top-12 z-40 lg:hidden">
 		<div
 			ref="dropdownWrapperRef"
-			class="overflow-hidden border border-white/20 bg-white/20 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-2xl">
+			class="overflow-hidden border border-white/20 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-2xl">
 			<ul class="flex flex-col space-y-md p-lg">
 				<li
 					v-for="link in header?.links"

@@ -57,7 +57,7 @@ const imageFadeOverlayClass = computed(() => {
 
 <template>
 	<section class="relative py-2xl md:py-3xl lg:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-xl lg:px-3xl">
+		<div class="mx-auto max-w-[1300px] px-sm md:px-lg xl:px-2xl">
 			<div class="flex max-sm:flex-col-reverse flex-col gap-lg lg:gap-3xl md:flex-row lg:items-stretch">
 				<div v-if="hasImage" :class="mediaColOrder" class="relative w-full md:w-1/2 md:flex-1">
 					<div class="relative h-full max-md:max-h-52 lg:min-h-[340px] overflow-hidden lg:scale-y-110">

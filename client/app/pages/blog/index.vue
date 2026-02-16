@@ -21,8 +21,8 @@ useAppHead(page?.value?.seo || undefined);
 </script>
 
 <template>
-	<section class="relative py-4xl lg:py-5xl flex justify-center">
-		<div class="w-full max-w-[1400px] px-lg lg:px-2xl">
+	<section class="relative py-2xl md:py-3xl lg:py-5xl flex justify-center">
+		<div class="w-full max-w-[1400px] px-sm md:px-lg xl:px-2xl">
 			<Heading
 				v-if="page?.title"
 				tag="h1"

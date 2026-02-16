@@ -30,7 +30,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 					<p
 						v-if="footer?.description"
-						class="text-white/80 text-lg md:text-xl xl:text-2xl font-body leading-[1.8] max-w-[950px] mt-xl lg:mt-3xl">
+						class="text-white/80 text-lg md:text-xl xl:text-2xl font-body leading-[1.8] max-w-[950px] mt-xl lg:mt-3xl font-medium">
 						{{ footer?.description }}
 					</p>
 
@@ -70,7 +70,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 			<div class="w-full h-px bg-white/10 my-2xl" />
 
-			<div class="flex flex-col lg:flex-row justify-between items-center gap-xl lg:gap-lg mt-2xl lg:mt-4xl">
+			<div class="flex flex-col lg:flex-row justify-center items-center gap-xl lg:gap-lg mt-2xl lg:mt-4xl">
 				<p class="text-white/80 text-sm text-center">© {{ year }} Alt Media — Alla rättigheter förbehållna.</p>
 			</div>
 		</div>
