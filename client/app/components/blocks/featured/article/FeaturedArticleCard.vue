@@ -8,7 +8,7 @@ defineProps<{ article: Article }>();
 	<NuxtLink
 		:to="buildBlogPostPath(article.slug)"
 		:aria-label="`Läs artikel: ${article.title}`"
-		class="overflow-hidden group cursor-pointer relative pb-lg lg:pb-2xl border-b flex max-md:flex-col md:items-stretch md:space-x-2xl">
+		class="overflow-hidden group cursor-pointer relative pb-lg lg:pb-2xl border-b border-black/20 flex max-md:flex-col md:items-stretch md:space-x-2xl">
 		<div class="relative overflow-hidden w-full md:w-2/5 rounded-4xl self-stretch min-h-40 lg:min-h-56">
 			<NuxtImg
 				v-if="article.cover.url"

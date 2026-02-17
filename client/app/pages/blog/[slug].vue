@@ -166,8 +166,8 @@ onBeforeUnmount(() => {
 		<section
 			ref="articlePageHeroSectionElementRef"
 			class="relative overflow-hidden py-2xl md:py-3xl lg:py-5xl flex justify-center items-center xl:min-h-[100ch]">
-			<div class="mx-auto w-full max-w-[1600px] px-sm md:px-lg xl:px-2xl">
-				<div class="flex max-lg:flex-col gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
+			<div class="mx-auto w-full max-w-[1400px] px-sm md:px-lg xl:px-2xl">
+				<div class="flex max-lg:flex-col gap-xl lg:gap-4xl lg:items-center max-h-[750px]">
 					<div ref="articlePageHeroTextContainerElementRef" class="order-2 xl:order-1 flex-1">
 						<h1 class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl">
 							{{ currentArticle?.title }}
@@ -207,8 +207,8 @@ onBeforeUnmount(() => {
 
 		<section
 			ref="articlePageBodyLayoutContainerElementRef"
-			class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl pb-2xl lg:pb-5xl pt-2xl">
-			<div class="flex xl:gap-2xl xl:items-start">
+			class="mx-auto w-full max-w-[1400px] px-md md:px-lg lg:px-2xl pb-2xl lg:pb-5xl lg:pt-2xl">
+			<div class="flex max-lg:flex-col-reverse gap-2xl lg:gap-4xl xl:items-start">
 				<article
 					:class="[
 						currentArticle?.display_table_of_contents
@@ -235,27 +235,25 @@ onBeforeUnmount(() => {
 					</div>
 				</article>
 
-				<!-- <aside
+				<aside
 					v-if="currentArticle?.display_table_of_contents"
 					ref="articlePageTableOfContentsAsideElementRef"
-					class="max-md:hidden sticky top-6xl max-w-72">
-					<div class="px-lg md:px-2xl">
-						<p class="text-xs md:text-md lg:text-lg text-black/80 font-semibold">
-							{{ title || "I den här artikeln" }}
-						</p>
+					class="lg:sticky top-6xl w-full lg:max-w-72 bg-black/5 p-xl rounded-4xl h-fit">
+					<p class="text-md lg:text-lg text-black/80 font-semibold">
+						{{ title || "I den här artikeln" }}
+					</p>
 
-						<nav class="mt-sm space-y-md text-xs">
-							<button
-								v-for="section in sections"
-								:key="section.anchor"
-								type="button"
-								class="block w-full text-left text-black/60 hover:text-black/80 transition line-clamp-1 cursor-pointer text-2xs md:text-xs lg:text-md"
-								@click="scrollToSection(section.anchor)">
-								{{ section.title }}
-							</button>
-						</nav>
-					</div>
-				</aside> -->
+					<nav class="mt-sm space-y-md text-xs">
+						<button
+							v-for="section in sections"
+							:key="section.anchor"
+							type="button"
+							class="block w-full text-left text-black/80 hover:text-black transition line-clamp-1 cursor-pointer text-xs lg:text-md"
+							@click="scrollToSection(section.anchor)">
+							{{ section.title }}
+						</button>
+					</nav>
+				</aside>
 			</div>
 		</section>
 	</div>

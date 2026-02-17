@@ -38,7 +38,7 @@ const textAlignment = computed(() => {
 			</component>
 			<p
 				v-if="props.description"
-				class="text-xl md:text-2xl lg:text-4xl max-w-[950px] font-normal mt-sm md:mt-md lg:mt-lg">
+				class="text-xl md:text-2xl lg:text-4xl max-w-[950px] font-normal mt-sm md:mt-md lg:mt-lg leading-[1.6]">
 				{{ props.description }}
 			</p>
 		</div>

@@ -31,7 +31,7 @@ const headerTheme = computed<"light" | "dark">(() => (props.block.background ? "
 <template>
 	<section class="min-h-screen lg:px-xl lg:pb-xl lg:pt-5xl flex">
 		<div
-			class="hero flex-1 overflow-hidden relative flex justify-center items-center px-sm md:px-lg xl:px-2xl 2xl:px-3xl py-4xl lg:py-6xl lg:rounded-4xl"
+			class="hero flex-1 overflow-hidden relative flex justify-center items-center px-sm md:px-lg lg:px-xl py-4xl lg:py-xl lg:rounded-4xl"
 			:class="theme.sectionClassName"
 			:style="theme.sectionStyle"
 			:data-header-theme="headerTheme">
