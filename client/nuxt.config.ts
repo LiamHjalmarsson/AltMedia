@@ -66,15 +66,6 @@ export default defineNuxtConfig({
 
 	css: ["~/assets/css/main.css"],
 
-	// nitro: {
-	// 	preset: "static",
-	// 	prerender: {
-	// 		crawlLinks: true,
-
-	// 		routes: ["/", "/__prerender"],
-	// 	},
-	// },
-
 	runtimeConfig: {
 		public: {
 			strapiUrl: process.env.NUXT_PUBLIC_STRAPI_URL ?? "http://localhost:1337",
@@ -100,22 +91,6 @@ export default defineNuxtConfig({
 			});
 		},
 	},
-
-	// app: {
-	// 	head: {
-	// 		link: [
-	// 			{
-	// 				rel: "preconnect",
-	// 				href: process.env.STRAPI_URL || "http://localhost:1337",
-	// 				crossorigin: "",
-	// 			},
-	// 			{
-	// 				rel: "dns-prefetch",
-	// 				href: process.env.STRAPI_URL || "http://localhost:1337",
-	// 			},
-	// 		],
-	// 	},
-	// },
 
 	fonts: {
 		provider: "google",

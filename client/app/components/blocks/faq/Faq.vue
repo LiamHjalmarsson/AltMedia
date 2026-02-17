@@ -3,17 +3,25 @@ import type { BlockFaqComponent } from "~/types/components/block/faq";
 
 const { block } = defineProps<{ block: BlockFaqComponent }>();
 
-const expandedQuestionId = ref<number | null>(null);
+const expandedQuestionIds = ref<Set<number>>(new Set());
 
 function toggleExpandedQuestion(questionId: number) {
-	expandedQuestionId.value = expandedQuestionId.value === questionId ? null : questionId;
+	const updated = new Set(expandedQuestionIds.value);
+
+	if (updated.has(questionId)) {
+		updated.delete(questionId);
+	} else {
+		updated.add(questionId);
+	}
+
+	expandedQuestionIds.value = updated;
 }
 </script>
 
 <template>
 	<section class="relative pt-3xl xl:pt-5xl">
 		<div class="mx-auto max-w-[1300px] px-sm md:px-lg xl:px-2xl">
-			<Heading v-bind="block.heading" class="mb-sm md:mb-lg lg:mb-xl" />
+			<Heading v-bind="block.heading" class="mb-sm md:mb-lg lg:mb-lg" />
 
 			<ul class="flex flex-col w-full">
 				<FaqItem
@@ -21,7 +29,7 @@ function toggleExpandedQuestion(questionId: number) {
 					:key="item.id"
 					:item="item"
 					:questionNumber="i + 1"
-					:expandedQuestionId
+					:expandedQuestionIds
 					@toggle="toggleExpandedQuestion" />
 			</ul>
 		</div>

@@ -39,7 +39,7 @@ await useAsyncData(
 
 					<p
 						v-if="currentService.description"
-						class="text-xl md:text-2xl lg:text-3xl font-body leading-[1.6] font-medium text-black/80">
+						class="text-xl md:text-2xl lg:text-3xl font-body font-medium text-black/80">
 						{{ currentService.description }}
 					</p>
 					<ul class="flex flex-col space-y-md mt-md">

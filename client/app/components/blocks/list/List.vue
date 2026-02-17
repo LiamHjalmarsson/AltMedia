@@ -27,7 +27,7 @@ const theme = computed(() => themeClasses(block.color as StylesColorComponent));
 				:title="block.heading.title"
 				:align_content="block.heading.align_content"
 				:description="block.heading.description"
-				class="mb-lg md:mb-xl lg:mb-2xl xl:mb-2xl"
+				class="mb-lg md:mb-xl lg:mb-2xl xl:mb-3xl"
 				:class="theme.contentTextClass" />
 
 			<ul class="grid grid-cols-1 gap-3xl md:gap-4xl lg:gap-5xl xl:gap-6xl pt-lg xl:pt-xl">

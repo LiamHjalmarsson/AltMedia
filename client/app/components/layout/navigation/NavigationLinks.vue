@@ -5,8 +5,8 @@ const { header } = storeToRefs(globalStore);
 </script>
 
 <template>
-	<ul class="flex items-center max-lg:hidden space-x-lg">
-		<li v-for="link in header?.links" :key="link.label" class="relative group">
+	<ul class="flex items-center space-x-lg max-lg:hidden">
+		<li v-for="link in header?.links" :key="link.label" class="group relative">
 			<MenuLink :link class="px-md py-2xs" />
 		</li>
 
@@ -14,7 +14,7 @@ const { header } = storeToRefs(globalStore);
 			<NuxtLink
 				v-if="header?.cta"
 				:to="header.cta.url"
-				class="font-semibold text-heading-xs leading-[1.8] px-lg py-md bg-primary text-white font-headingtransition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full">
+				class="font-semibold text-heading-xs px-lg py-md bg-primary text-white font-heading transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full">
 				{{ header.cta.label }}
 			</NuxtLink>
 		</li>

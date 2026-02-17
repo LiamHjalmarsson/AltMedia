@@ -8,20 +8,18 @@ const props = defineProps<{
 
 const emit = defineEmits(["toggle"]);
 
-const burgerColor = computed(() => {
-	return props.theme === "dark" ? "bg-white" : "bg-black";
-});
+const burgerColor = computed(() => (props.theme === "dark" ? "bg-white" : "bg-black"));
 
 const buttonAriaLabel = computed(() => (props.isMobileMenuOpen ? "Stäng meny" : "Öppna meny"));
 </script>
 
 <template>
 	<button
-		@click="emit('toggle')"
+		type="button"
 		:aria-label="buttonAriaLabel"
 		:aria-expanded="isMobileMenuOpen"
 		aria-controls="mobile-menu"
-		type="button"
+		@click="emit('toggle')"
 		class="p-xs space-y-2xs rounded-md z-50 cursor-pointer lg:hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
 		<span
 			v-for="number in 3"

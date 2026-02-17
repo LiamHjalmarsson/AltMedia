@@ -193,7 +193,7 @@ async function handleBuildProjectSubmissionRequest(): Promise<void> {
 					<div class="mb:xl xl:mb-3xl">
 						<h1
 							ref="stepTitleElementRef"
-							class="text-heading-sm sm:text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl mb-lg font-extrabold max-w-[850px]">
+							class="text-heading-sm sm:text-heading-md md:text-heading-lg lg:text-heading-xl xl:text-heading-2xl mb-lg max-w-[850px]">
 							{{ activeStepDefinition?.title }}
 						</h1>
 

@@ -23,12 +23,12 @@ function formatColoredWords(content: BlockHeroComponent): string {
 		class="flex flex-col space-y-xl lg:space-y-lg xl:space-y-2xl"
 		:class="splitLayout ? 'xl:pr-2xl max-lg:items-center max-lg:text-center' : ''">
 		<h1
-			class="text-heading-xl sm:text-heading-2xl md:text-heading-3xl lg:text-heading-3xl xl:text-heading-4xl 2xl:text-heading-6xl font-extrabold"
+			class="text-heading-xl sm:text-heading-2xl md:text-heading-3xl lg:text-heading-3xl xl:text-heading-4xl 2xl:text-heading-6xl"
 			v-html="formatColoredWords(content)" />
 
 		<p
 			v-if="content.description"
-			class="text-xl md:text-heading-sm lg:text-heading-md leading-[1.6] max-w-[1050px] font-medium">
+			class="text-heading-sm md:text-heading-md lg:text-heading-lg max-w-[1050px] font-medium">
 			{{ content.description }}
 		</p>
 

@@ -26,7 +26,7 @@ function handleDeclineClick(): void {
 					class="flex max-md:w-full md:max-w-[550px] flex-col space-y-md md:space-y-xs bg-white/85 backdrop-blur px-xl py-lg md:px-2xl md:py-xl shadow-lg max-md:rounded-t-2xl md:rounded-xl">
 					<div class="space-y-xs">
 						<p class="text-heading-sm font-semibold">Cookies</p>
-						<p class="text-sm text-black/80 leading-[1.8]">
+						<p class="text-sm text-black/80">
 							Vi använder cookies för att förbättra upplevelsen och (om du godkänner) analysera trafik. Du
 							kan när som helst ändra ditt val.
 						</p>

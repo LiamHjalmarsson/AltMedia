@@ -111,7 +111,7 @@ const { currentIndex, goToSection, isDesktop } = useSnapScroll({
 					@click="goToSection(index)"
 					:class="[
 						'w-3 h-3 rounded-full transition-all duration-300 cursor-pointer',
-						currentIndex === index ? 'bg-primary scale-125' : 'bg-black/40 hover:bg-black/60',
+						currentIndex === index ? 'bg-black scale-125' : 'bg-black/20 hover:bg-black/40',
 					]"
 					:aria-label="`Go to ${service.title}`" />
 			</div>

@@ -30,7 +30,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 				<div :class="['flex-1', mediaOrder]">
 					<div class="relative mx-auto w-full lg:min-w-[250px] max-w-[420px]">
 						<div class="relative z-10 ml-auto w-[62%]">
-							<div class="overflow-hidden">
+							<div class="overflow-hidden rounded-4xl">
 								<NuxtImg
 									v-if="primaryImage?.url"
 									:src="primaryImage.url"
@@ -45,7 +45,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 						</div>
 
 						<div class="relative z-0 -mt-lg w-[78%]">
-							<div class="overflow-hidden">
+							<div class="overflow-hidden rounded-4xl">
 								<NuxtImg
 									v-if="secondaryImage?.url"
 									:src="secondaryImage.url"

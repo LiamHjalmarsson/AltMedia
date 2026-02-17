@@ -34,7 +34,7 @@ useAppHead(page?.value?.seo || undefined);
 			<div class="grid md:grid-cols-2 gap-lg lg:gap-2xl xl:gap-4xl" :class="[page?.title ? '' : 'pt-2xl']">
 				<article v-for="article in articles" :key="article.id" class="group transition-transform duration-500">
 					<NuxtLink :to="`/blogg/${article.slug}`" :aria-label="`Läs artikel: ${article.title}`">
-						<figure class="overflow-hidden block shadow-lg">
+						<figure class="overflow-hidden block shadow-lg rounded-4xl">
 							<NuxtImg
 								v-if="article.cover?.url"
 								:src="article.cover.url"
@@ -54,8 +54,7 @@ useAppHead(page?.value?.seo || undefined);
 								{{ article.title }}
 							</h2>
 
-							<p
-								class="mt-sm lg:mt-md text-lg md:text-xl xl:text-2xl leading-[1.8] text-black/80 line-clamp-3">
+							<p class="mt-sm lg:mt-md text-lg md:text-xl xl:text-2xl text-black/80 line-clamp-3">
 								{{ article.description }}
 							</p>
 

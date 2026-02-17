@@ -45,7 +45,7 @@ const totalSteps = computed(() => props.steps.length);
 
 				<p
 					v-if="step.subtitle"
-					class="text-xs md:text-sm lg:text-md leading-tight max-w-[80px] mt-lg"
+					class="text-xs md:text-sm lg:text-md max-w-[80px] mt-lg"
 					:class="i + 1 === activeStepIndex ? 'text-primary font-semibold' : 'text-black/40'">
 					{{ step.subtitle }}
 				</p>

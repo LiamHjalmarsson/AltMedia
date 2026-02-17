@@ -96,7 +96,7 @@ async function submitAnalysisRequest() {
 	<Hero v-if="hero" :block="hero" :hasForm>
 		<div v-if="form" class="max-w-[450px] w-full hidden lg:flex justify-end">
 			<div class="w-full p-lg overflow-hidden">
-				<div class="border border-white/20 bg-white/20 p-xl shadow-2xl backdrop-blur-2xl h-full">
+				<div class="border border-white/20 bg-white/20 p-xl shadow-2xl backdrop-blur-2xl h-full rounded-lg">
 					<h2 class="text-heading-lg font-bold mb-xl">{{ form?.title }}</h2>
 
 					<p class="mb-xl text-md xl:text-lg">{{ form?.description }}</p>
@@ -117,7 +117,7 @@ async function submitAnalysisRequest() {
 								:placeholder="input.placeholder"
 								:required="input.required"
 								:type="input.input_type"
-								class="border-transparent" />
+								class="border-transparent rounded-lg" />
 						</FormField>
 
 						<div class="mt-lg">

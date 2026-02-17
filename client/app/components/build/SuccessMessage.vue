@@ -9,11 +9,7 @@ const { contact } = useGlobalStore();
 <template>
 	<section class="flex items-center justify-center px-md">
 		<div class="max-w-[800px] w-full p-3xl text-center animate-in-up">
-			<!-- <div class="mx-auto w-24 h-24 bg-primary rounded-full flex items-center justify-center mb-xl">
-				<Icon name="lucide:check" />
-			</div> -->
-
-			<h1 class="text-heading-xl font-extrabold mb-sm">Tack för din förfrågan</h1>
+			<h1 class="text-heading-xl mb-sm">Tack för din förfrågan</h1>
 
 			<p class="text-black/80 text-lg max-w-[600px] mx-auto mb-2xl">
 				Vi återkommer till dig så snart som möjligt. Här är din sammanställning:

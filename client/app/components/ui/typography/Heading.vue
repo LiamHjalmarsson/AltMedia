@@ -29,16 +29,16 @@ const textAlignment = computed(() => {
 </script>
 
 <template>
-	<div :class="[textAlignment.wrapper, has_link ? 'flex justify-between items-center w-full gap-lg' : '']">
+	<div :class="[textAlignment.wrapper, has_link ? 'flex justify-between items-center w-full space-x-lg' : '']">
 		<div class="flex-2 grow flex flex-col" :class="[textAlignment.content]">
 			<component
 				:is="props.tag"
-				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold">
+				class="text-heading-lg sm:text-heading-xl md:text-heading-2xl lg:text-heading-3xl xl:text-heading-4xl font-bold max-w-[850px]">
 				{{ props.title }}
 			</component>
 			<p
 				v-if="props.description"
-				class="text-xl md:text-3xl lg:text-4xl mt-sm md:mt-md lg:mt-lg font-medium max-w-[850px] leading-[1.6]">
+				class="text-xl md:text-2xl lg:text-4xl max-w-[950px] font-normal mt-sm md:mt-md lg:mt-lg">
 				{{ props.description }}
 			</p>
 		</div>

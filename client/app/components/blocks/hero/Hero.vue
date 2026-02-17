@@ -1,70 +1,53 @@
 <script setup lang="ts">
 import type { BlockHeroComponent } from "~/types/components/block/hero";
 
-const { block, hasForm } = defineProps<{ hasForm?: boolean; block: BlockHeroComponent }>();
+const props = defineProps<{
+	hasForm?: boolean;
+	block: BlockHeroComponent;
+}>();
 
-const splitLayout = computed(() => Boolean(hasForm));
+const splitLayout = computed<boolean>(() => Boolean(props.hasForm));
 
-const contentAlignment = computed(() => {
+const contentAlignment = computed<string>(() => {
 	if (splitLayout.value) {
 		return "gap-2xl max-xl:flex-col";
-	} else {
-		switch (block.align_content) {
-			case "center":
-				return "items-center text-center";
-			case "right":
-				return "items-end text-right";
-			default:
-				return "items-start text-left";
-		}
-	}
-});
-
-const heroBackground = computed(() => {
-	if (!block.color) {
-		return "bg-bg-dark";
 	}
 
-	if (block.color.hex) {
-		return { backgroundColor: block.color.hex };
-	}
-
-	switch (block.color.type) {
-		case "primary":
-			return "bg-primary";
-		case "secondary":
-			return "bg-secondary";
+	switch (props.block.align_content) {
+		case "center":
+			return "items-center text-center";
+		case "right":
+			return "items-end text-right";
 		default:
-			return "bg-bg-dark";
+			return "items-start text-left";
 	}
 });
 
-const headerTheme = computed<"light" | "dark">(() => {
-	return block.background ? "dark" : "light";
-});
+const theme = computed(() => themeClasses(props.block.color));
 
-const textColor = computed(() => {
-	return block.color?.theme === "dark" ? "text-white placeholder-white/80" : "text-black placeholder-black/80";
-});
+const headerTheme = computed<"light" | "dark">(() => (props.block.background ? "dark" : "light"));
 </script>
 
 <template>
-	<section
-		class="hero overflow-hidden relative flex justify-center items-center px-sm md:px-lg xl:px-2xl 2xl:px-3xl py-4xl lg:py-6xl min-h-screen"
-		:class="!block.color?.hex ? heroBackground : ''"
-		:style="block.color?.hex ? heroBackground : ''"
-		:data-header-theme="headerTheme">
-		<div class="absolute inset-0 w-full h-full opacity-40">
-			<CoverBackground :media="block.background" />
-		</div>
+	<section class="min-h-screen lg:px-xl lg:pb-xl lg:pt-5xl flex">
+		<div
+			class="hero flex-1 overflow-hidden relative flex justify-center items-center px-sm md:px-lg xl:px-2xl 2xl:px-3xl py-4xl lg:py-6xl lg:rounded-4xl"
+			:class="theme.sectionClassName"
+			:style="theme.sectionStyle"
+			:data-header-theme="headerTheme">
+			<div v-if="block.background" class="absolute inset-0 w-full h-full opacity-40">
+				<CoverBackground :media="block.background" />
+			</div>
 
-		<div class="pt-xl relative z-10" :class="textColor">
-			<div class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl xl:max-w-[1800px]">
-				<div class="flex w-full items-center flex-1" :class="contentAlignment">
-					<HeroContent :content="block" :splitLayout />
+			<div class="pt-xl relative z-10" :class="theme.contentTextClass">
+				<div
+					class="flex lg:space-x-xl items-center relative z-10 lg:px-lg lg:py-2xl xl:p-2xl xl:max-w-[1800px]">
+					<div class="flex w-full items-center flex-1" :class="contentAlignment">
+						<HeroContent :content="block" :split-layout="splitLayout" />
+					</div>
+
+					<slot />
 				</div>
-
-				<slot />
 			</div>
 		</div>
 	</section>

@@ -87,11 +87,11 @@ async function submitForm() {
 			<div class="max-lg:pt-xl flex flex-col justify-center space-y-lg lg:space-y-2xl max-w-[500px]">
 				<div>
 					<h1
-						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-extrabold mb-md drop-shadow-lg">
+						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl mb-md drop-shadow-lg">
 						{{ contactPage?.data.title }}
 					</h1>
 
-					<p class="max-w-[450px] text-lg md:text-xl lg:text-heading-sm xl:text-heading-md leading-[1.8]">
+					<p class="max-w-[450px] text-lg md:text-xl lg:text-heading-sm xl:text-heading-md">
 						{{ contactPage?.data.description }}
 					</p>
 				</div>
@@ -139,7 +139,7 @@ async function submitForm() {
 								:placeholder="input.placeholder"
 								:required="input.required"
 								:type="input.input_type"
-								class="border-transparent bg-white/20" />
+								class="border-transparent bg-white/20 rounded-lg" />
 
 							<Textarea
 								v-else-if="input.type === 'textarea'"
@@ -148,7 +148,7 @@ async function submitForm() {
 								:name="input.name"
 								:rows="input.rows || 4"
 								:placeholder="input.placeholder"
-								class="bg-white/20" />
+								class="bg-white/20 rounded-lg" />
 						</FormField>
 
 						<div aria-live="polite" class="sr-only">

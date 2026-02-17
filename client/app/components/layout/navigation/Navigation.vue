@@ -10,14 +10,12 @@ const { header } = storeToRefs(globalStore);
 const {
 	theme: headerTheme,
 	init: initializeHeaderContrast,
-	destroy,
+	destroy: destroyHeaderContrast,
 } = useAutoHeaderContrast(headerElementRef, {
 	baseSelector: ".hero",
 });
 
-const textTheme = computed(() => {
-	return headerTheme.value === "dark" ? "text-white" : "text-black";
-});
+const textTheme = computed(() => (headerTheme.value === "dark" ? "text-white" : "text-black"));
 
 function toggleMobileMenuVisibility() {
 	isMobileMenuOpen.value = !isMobileMenuOpen.value;
@@ -28,19 +26,15 @@ function closeMobileMenu(): void {
 }
 
 const route = useRoute();
-watch(
-	() => route.fullPath,
-	() => {
-		closeMobileMenu();
-	},
-);
+
+watch(() => route.fullPath, closeMobileMenu);
 
 onMounted(() => {
 	initializeHeaderContrast();
 });
 
 onBeforeUnmount(() => {
-	destroy();
+	destroyHeaderContrast();
 });
 </script>
 
@@ -48,13 +42,15 @@ onBeforeUnmount(() => {
 	<header v-if="header" ref="headerElementRef" class="fixed z-50 w-full flex justify-center items-center">
 		<nav
 			aria-label="main navigation"
-			class="flex items-center justify-between w-[100%] py-md px-lg lg:py-lg lg:px-2xl 2xl:px-4xl border border-white/20 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-2xl"
+			class="w-full py-lg px-lg lg:py-xl lg:px-2xl 2xl:px-4xl border border-white/20 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl"
 			:class="textTheme">
-			<NavigationLogo :logo="header.logo" />
+			<div class="flex items-center justify-between max-w-[1600px] mx-auto">
+				<NavigationLogo :logo="header.logo" />
 
-			<NavigationLinks />
+				<NavigationLinks />
 
-			<NavigationBurger :isMobileMenuOpen @toggle="toggleMobileMenuVisibility" :theme="headerTheme" />
+				<NavigationBurger :isMobileMenuOpen @toggle="toggleMobileMenuVisibility" :theme="headerTheme" />
+			</div>
 		</nav>
 	</header>
 

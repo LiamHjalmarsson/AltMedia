@@ -30,7 +30,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 					<p
 						v-if="footer?.description"
-						class="text-white/80 text-lg md:text-xl xl:text-2xl font-body leading-[1.8] max-w-[950px] mt-xl lg:mt-3xl font-medium">
+						class="text-white/80 text-lg md:text-xl xl:text-2xl font-body max-w-[950px] mt-xl lg:mt-3xl font-medium">
 						{{ footer?.description }}
 					</p>
 

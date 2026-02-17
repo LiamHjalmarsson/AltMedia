@@ -24,14 +24,15 @@ const isEvenRow = computed(() => (props.index + 1) % 2 === 0);
 			<ListItemImage v-if="item.image" :image="item.image" :title="item.title" class="md:hidden" />
 
 			<div class="lg:p-md text-center md:text-left">
-				<div class="lg:flex flex-col max-lg:flex-wrap lg:justify-start lg:space-x-lg mb-sm lg:mb-md">
+				<div
+					class="lg:flex flex-col max-lg:flex-wrap lg:justify-start max-lg:space-y-lg lg:space-x-lg mb-md lg:mb-lg">
 					<span
 						v-if="showNumbers"
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl font-extrabold font-heading">
 						{{ (index + 1).toString().padStart(2, "0") }}
 					</span>
 
-					<h3 class="text-heading-md md:text-heading-lg lg:text-heading-xl font-semibold tracking-tighter">
+					<h3 class="text-heading-md md:text-heading-lg lg:text-heading-xl font-bold tracking-tighter">
 						{{ item.title }}
 					</h3>
 				</div>

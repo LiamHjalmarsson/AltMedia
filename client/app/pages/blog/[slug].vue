@@ -169,14 +169,13 @@ onBeforeUnmount(() => {
 			<div class="mx-auto w-full max-w-[1600px] px-sm md:px-lg xl:px-2xl">
 				<div class="flex max-lg:flex-col gap-xl lg:gap-2xl lg:items-center max-h-[750px]">
 					<div ref="articlePageHeroTextContainerElementRef" class="order-2 xl:order-1 flex-1">
-						<h1
-							class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl font-semibold">
+						<h1 class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl">
 							{{ currentArticle?.title }}
 						</h1>
 
 						<p
 							v-if="currentArticle?.description"
-							class="mt-md lg:mt-lg xl:mt-2xl text-lg md:text-xl lg:text-2xl leading-[1.6] text-black/80 max-w-[62ch]">
+							class="mt-md lg:mt-lg xl:mt-2xl text-lg md:text-xl lg:text-2xl text-black/80 max-w-[62ch]">
 							{{ currentArticle.description }}
 						</p>
 
@@ -191,7 +190,7 @@ onBeforeUnmount(() => {
 					<div class="order-1 xl:order-2 flex-1 lg:min-w-[400px]">
 						<div
 							ref="articlePageHeroImageContainerElementRef"
-							class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-lg:max-h-[250px]">
+							class="relative w-full overflow-hidden bg-black/5 shadow-sm aspect-[16/10] sm:aspect-[16/9] lg:aspect-[4/3] max-lg:max-h-[250px] rounded-4xl">
 							<NuxtImg
 								class="absolute inset-0 w-full h-full object-cover"
 								:src="currentArticle?.cover?.url"
@@ -241,7 +240,7 @@ onBeforeUnmount(() => {
 					ref="articlePageTableOfContentsAsideElementRef"
 					class="max-md:hidden sticky top-6xl max-w-72">
 					<div class="px-lg md:px-2xl">
-						<p class="text-xs md:text-md lg:text-lg leading-[1.8] text-black/80 font-semibold">
+						<p class="text-xs md:text-md lg:text-lg text-black/80 font-semibold">
 							{{ title || "I den här artikeln" }}
 						</p>
 

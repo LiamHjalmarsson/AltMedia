@@ -15,21 +15,21 @@ const dropdownWrapperRef = ref<HTMLElement | null>(null);
 
 const isRendered = ref(false);
 
-const route = useRoute();
-
 function emitCloseRequest(): void {
 	emit("close");
 }
 
 function animateDropdownOpen() {
-	if (!dropdownWrapperRef.value) {
+	const element = dropdownWrapperRef.value;
+
+	if (!element) {
 		return;
 	}
 
-	gsap.killTweensOf(dropdownWrapperRef.value);
+	gsap.killTweensOf(element);
 
 	gsap.fromTo(
-		dropdownWrapperRef.value,
+		element,
 		{
 			height: 0,
 			opacity: 0,
@@ -45,13 +45,15 @@ function animateDropdownOpen() {
 
 function animateDropdownClose(): Promise<void> {
 	return new Promise((resolve) => {
-		if (!dropdownWrapperRef.value) {
+		const element = dropdownWrapperRef.value;
+
+		if (!element) {
 			return resolve();
 		}
 
-		gsap.killTweensOf(dropdownWrapperRef.value);
+		gsap.killTweensOf(element);
 
-		gsap.to(dropdownWrapperRef.value, {
+		gsap.to(element, {
 			height: 0,
 			opacity: 0,
 			duration: 0.3,
@@ -80,20 +82,13 @@ watch(
 	},
 	{ immediate: true },
 );
-
-watch(
-	() => route.fullPath,
-	() => {
-		if (props.isMobileMenuOpen) emitCloseRequest();
-	},
-);
 </script>
 
 <template>
 	<div v-if="isRendered" id="mobile-menu" class="fixed left-0 w-full top-12 z-40 lg:hidden">
 		<div
 			ref="dropdownWrapperRef"
-			class="overflow-hidden border border-white/20 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl shadow-2xl">
+			class="overflow-hidden border border-white/20 bg-white/40 bg-clip-padding backdrop-filter backdrop-blur-2xl">
 			<ul class="flex flex-col space-y-md p-lg">
 				<li
 					v-for="link in header?.links"
@@ -102,14 +97,14 @@ watch(
 					<MenuLink
 						:link
 						@click="emitCloseRequest"
-						class="px-md py-2xs block font-semibold text-lg text-center w-full" />
+						class="px-md py-2xs block font-semibold text-center w-full" />
 				</li>
 
 				<li v-if="header?.cta" class="pt-sm">
 					<NuxtLink
 						:to="header.cta.url"
 						@click="emitCloseRequest"
-						class="block text-center font-semibold text-heading-xs leading-[1.8] px-lg py-xs bg-primary text-white font-heading transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary max-w-44 mx-auto rounded-xl">
+						class="block text-center font-semibold text-heading-xs px-lg py-xs bg-primary text-white font-heading transition-colors duration-300 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary max-w-44 mx-auto rounded-xl">
 						{{ header.cta.label }}
 					</NuxtLink>
 				</li>
