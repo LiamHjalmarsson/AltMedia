@@ -14,7 +14,7 @@ const contactPhone = computed(() => contact.value?.phone?.trim() || "");
 
 <template>
 	<footer class="bg-black text-white py-3xl lg:py-5xl">
-		<div class="max-w-[1300px] mx-auto px-sm md:px-lg xl:px-2xl">
+		<div class="max-w-[1400px] mx-auto px-sm md:px-lg xl:px-2xl">
 			<div class="space-y-2xl lg:space-y-4xl">
 				<div class="flex flex-col items-center justify-center text-center">
 					<NuxtImg

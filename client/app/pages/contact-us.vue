@@ -83,7 +83,7 @@ async function submitForm() {
 			class="absolute inset-0 w-full h-full object-cover opacity-20" />
 
 		<div
-			class="relative z-10 mx-auto max-w-[1300px] w-full px-xl lg:px-3xl py-5xl justify-center items-center grid md:grid-cols-2 gap-2xl xl:gap-4xl">
+			class="relative z-10 mx-auto max-w-[1400px] w-full px-xl lg:px-3xl py-5xl justify-center items-center grid md:grid-cols-2 gap-2xl xl:gap-4xl">
 			<div class="max-lg:pt-xl flex flex-col justify-center space-y-lg lg:space-y-2xl max-w-[500px]">
 				<div>
 					<h1

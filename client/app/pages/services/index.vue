@@ -16,10 +16,6 @@ const { data: page } = await useAsyncData("servicesPage", async () => {
 });
 
 useAppHead(page?.value?.seo || undefined);
-
-definePageMeta({
-	layout: "minimal",
-});
 </script>
 
 <template>

@@ -182,7 +182,7 @@ async function handleBuildProjectSubmissionRequest(): Promise<void> {
 
 		<div
 			v-else
-			class="mx-auto w-full max-w-[1300px] px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl lg:mt-2xl">
+			class="mx-auto w-full max-w-[1400px] px-lg lg:px-2xl pt-3xl xl:flex max-xl:space-y-3xl xl:space-x-3xl lg:mt-2xl">
 			<div class="flex-1 xl:min-w-[850px]">
 				<Progressbar
 					:steps="buildProjectSteps"

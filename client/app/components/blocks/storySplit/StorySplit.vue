@@ -14,8 +14,8 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 
 <template>
 	<section class="relative py-2xl md:py-3xl xl:py-5xl">
-		<div class="mx-auto max-w-[1300px] px-sm md:px-lg xl:px-2xl">
-			<div class="flex max-sm:flex-col items-center gap-lg">
+		<div class="mx-auto max-w-[1400px] px-sm md:px-lg xl:px-2xl">
+			<div class="flex max-sm:flex-col items-center gap-xl lg:gap-4xl">
 				<div :class="['flex-1', textOrder]">
 					<h2
 						class="text-heading-lg md:text-heading-xl lg:text-heading-2xl xl:text-heading-3xl 2xl:text-heading-4xl font-semibold">
@@ -27,10 +27,10 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 					</div>
 				</div>
 
-				<div :class="['flex-1', mediaOrder]">
+				<div :class="['', mediaOrder]">
 					<div class="relative mx-auto w-full lg:min-w-[250px] max-w-[420px]">
-						<div class="relative z-10 ml-auto w-[62%]">
-							<div class="overflow-hidden rounded-4xl">
+						<div class="relative z-10 ml-auto w-[52%]">
+							<div class="overflow-hidden">
 								<NuxtImg
 									v-if="primaryImage?.url"
 									:src="primaryImage.url"
@@ -45,7 +45,7 @@ const textOrder = computed(() => (block.reverse ? "lg:order-2" : "lg:order-1"));
 						</div>
 
 						<div class="relative z-0 -mt-lg w-[78%]">
-							<div class="overflow-hidden rounded-4xl">
+							<div class="overflow-hidden">
 								<NuxtImg
 									v-if="secondaryImage?.url"
 									:src="secondaryImage.url"
