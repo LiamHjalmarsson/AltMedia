@@ -6,42 +6,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 const route = useRoute();
 
 const articleStore = useArticleStore();
+
 const { currentArticle } = storeToRefs(articleStore);
-
-const slug = computed(() => String(route.params.slug || ""));
-
-await useAsyncData(
-	() => `article:${slug.value}`,
-	() => articleStore.fetchArticleBySlug(slug.value),
-	{ server: true, lazy: true, watch: [slug] },
-);
-
-const blocks = computed(() => currentArticle.value?.blocks ?? []);
-console.log(blocks.value);
-
-const sections = computed(() => blocks.value.filter((b) => b.__component === "block.content-section"));
-
-const title = computed(() => currentArticle.value?.table_of_contents_title);
-
-const publishedDate = computed(() => {
-	const v = currentArticle.value?.published_date;
-	return typeof v === "string" ? v : "";
-});
-
-const readingTime = computed(() => {
-	const v = currentArticle.value?.reading_time_min;
-	return v ? `${v} min` : "";
-});
-
-function scrollToSection(anchor: string) {
-	const el = document.getElementById(anchor);
-	if (!el) return;
-
-	el.scrollIntoView({
-		behavior: "smooth",
-		block: "start",
-	});
-}
 
 const articlePageAnimationRootElementRef = ref<HTMLElement | null>(null);
 
@@ -54,6 +20,42 @@ const articlePageHeroImageContainerElementRef = ref<HTMLElement | null>(null);
 const articlePageBodyLayoutContainerElementRef = ref<HTMLElement | null>(null);
 
 const articlePageTableOfContentsAsideElementRef = ref<HTMLElement | null>(null);
+
+const slug = computed(() => String(route.params.slug || ""));
+
+await useAsyncData(
+	() => `article:${slug.value}`,
+	() => articleStore.fetchArticleBySlug(slug.value),
+	{ server: true, lazy: true, watch: [slug] },
+);
+
+const blocks = computed(() => currentArticle.value?.blocks ?? []);
+
+const sections = computed(() => blocks.value.filter((b) => b.__component === "block.content-section"));
+
+const title = computed(() => currentArticle.value?.table_of_contents_title);
+
+const publishedDate = computed(() => {
+	const published_date = currentArticle.value?.published_date;
+	return published_date || "";
+});
+
+const readingTime = computed(() => {
+	const reading_time_min = currentArticle.value?.reading_time_min;
+
+	return reading_time_min ? `${reading_time_min} min` : "";
+});
+
+function scrollToSection(anchor: string) {
+	const element = document.getElementById(anchor);
+
+	if (!element) return;
+
+	element.scrollIntoView({
+		behavior: "smooth",
+		block: "start",
+	});
+}
 
 let articlePageGsapScopedContext: gsap.Context | undefined;
 
@@ -238,7 +240,7 @@ onBeforeUnmount(() => {
 				<aside
 					v-if="currentArticle?.display_table_of_contents"
 					ref="articlePageTableOfContentsAsideElementRef"
-					class="lg:sticky top-6xl w-full lg:max-w-72 bg-black/5 p-xl rounded-4xl h-fit">
+					class="lg:sticky top-6xl w-full lg:max-w-72 p-md h-fit">
 					<p class="text-md lg:text-lg text-black/80 font-semibold">
 						{{ title || "I den här artikeln" }}
 					</p>
