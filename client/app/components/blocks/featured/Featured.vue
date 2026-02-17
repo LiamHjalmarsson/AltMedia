@@ -17,7 +17,7 @@ const hasArticles = computed(() => featuredMode.value === "artiklar" && (block.a
 		<div class="mx-auto max-w-[1400px] px-sm md:px-lg xl:px-2xl">
 			<Heading v-bind="block.heading" class="mb-xl md:mb-2xl xl:mb-3xl" />
 
-			<div v-if="hasServices" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-lg">
+			<div v-if="hasServices" class="grid grid-cols-1 sm:grid-cols-2 gap-lg">
 				<FeaturedServiceCard v-for="service in block.services" :key="service.id" :service="service" />
 			</div>
 
