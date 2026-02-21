@@ -1,9 +1,9 @@
-import { computed } from "vue";
-
 export type CookieConsentDecision = "accepted" | "declined";
+
 export type CookieConsentStatus = CookieConsentDecision | "unknown";
 
 const COOKIE_CONSENT_COOKIE_KEY = "cookie_consent_decision";
+
 const COOKIE_CONSENT_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
 
 export function useCookieConsent() {
@@ -14,24 +14,22 @@ export function useCookieConsent() {
 	});
 
 	const consentStatus = computed<CookieConsentStatus>(() => {
-		const decision = consentCookieRef.value;
-		if (decision === "accepted") return "accepted";
-		if (decision === "declined") return "declined";
-		return "unknown";
+		return consentCookieRef.value ?? "unknown";
 	});
 
-	const hasDecided = computed<boolean>(() => consentStatus.value !== "unknown");
-	const shouldShowBanner = computed<boolean>(() => consentStatus.value === "unknown");
+	const hasDecided = computed(() => consentStatus.value !== "unknown");
 
-	function acceptCookies(): void {
+	const shouldShowBanner = computed(() => consentStatus.value === "unknown");
+
+	function acceptCookies() {
 		consentCookieRef.value = "accepted";
 	}
 
-	function declineCookies(): void {
+	function declineCookies() {
 		consentCookieRef.value = "declined";
 	}
 
-	function resetDecision(): void {
+	function resetDecision() {
 		consentCookieRef.value = null;
 	}
 

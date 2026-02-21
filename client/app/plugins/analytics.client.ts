@@ -3,12 +3,9 @@ export default defineNuxtPlugin(() => {
 
 	watch(
 		() => consentStatus.value,
-		(currentConsentStatus) => {
-			if (currentConsentStatus !== "accepted") return;
-
-			// Initiera analytics här (GTM, Plausible, GA4, etc.)
-			// Exempel (pseudo):
-			// initializeAnalytics();
+		(status) => {
+			if (status === "accepted") {
+			}
 		},
 		{ immediate: true },
 	);
